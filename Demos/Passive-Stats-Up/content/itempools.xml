@@ -1,0 +1,7 @@
+<ItemPools>
+	<Pool Name="treasure">
+		<Item DecreaseBy="1" Id="511" RemoveOn="0.1" Weight="1" />
+	</Pool>
+	
+	<Pool Name="shop"></Pool>
+</ItemPools>
