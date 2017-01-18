@@ -95,7 +95,7 @@ function AfterBrasse:VarsInit() -- Variables who need initialisation/reinitialis
 end
 
 --[[
-Item: "Cricket's Paw" Type: "active item" Mod: "AfterBrasse"
+Item: "Cricket's Paw" Type: "active item"
 -Sliost-
 --]]
 function AfterBrasse:UseCricketsPaw()
@@ -135,7 +135,7 @@ function AfterBrasse:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
 end
 
 --[[
-Item: "Money = Luck"  Type: "passive item" Mod: "AfterBrasse"
+Item: "Money = Luck"  Type: "passive item"
 -Krayz-
 --]]
 function AfterBrasse:MoneyLuck_obj()
@@ -156,7 +156,7 @@ function AfterBrasse:MoneyLuck_UpdateStats(player, cacheFlag) --StatsUpdate Code
 end
 
 --[[
-Item: "Beer" Type: "active item" Mod: "AfterBrasse"
+Item: "Beer" Type: "active item"
 -Drazeb-
 --]]
 function AfterBrasse:use_beer()
@@ -178,7 +178,7 @@ function AfterBrasse:use_beer()
 end
 
 --[[
-Item: "Item" Type: "active Item, passive item, trinket, familiar, etc" Mod: "AfterBrasse"
+Item: "Item" Type: "active item, passive item, trinket, familllier, etc"
 -NomDuCodeur-
 --]]
 
