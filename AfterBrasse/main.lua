@@ -13,7 +13,7 @@ Items = {
 local _f = io.open("savedatapath.txt", "r")
 local _data = _f:read("*all"); _f:close()
 local _, _e = string.find(_data, "Modding Data Path: ")
-local _path = string.reverse(string.match(string.reverse(string.sub(_data, _e+1, string.len(_data))), '/.-$'))
+local _path = string.match(string.sub(_data, _e+1, _le),  "^@?(.+/)[^/]+$")
 local include = function(file) local _Npath = _path .."/"..AfterBrasse.Name.."/"..file dofile(_Npath) end
 
 include("srcs/test_debug") --[Krayz]comment this line to disable cheats
