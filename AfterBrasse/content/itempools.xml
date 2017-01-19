@@ -6,6 +6,8 @@
 		<Item Name=""Id="512" DecreaseBy="1" RemoveOn="0.1" Weight="1" />
 		<!--Beer-->
 		<Item Name=""Id="513" DecreaseBy="1" RemoveOn="0.1" Weight="1" />
+		<!--Brave Shoe-->
+		<Item Name=""Id="514" DecreaseBy="1" RemoveOn="0.1" Weight="1" />
 	</Pool>
 	<Pool Name="shop">
 		<!---->

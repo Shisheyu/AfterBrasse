@@ -11,4 +11,5 @@
    <active cache="damage" maxcharges="3" description="Cricket's Paw" gfx="cricketspaw.png" name="Cricket's Paw"/>
    <passive cache="luck" description="More money = more luck" gfx="moneyisluck.png" name="Money = Luck"/>
    <active maxcharges="3" description="Beer" gfx="beer.png" name="Beer"/>
+   <passive cache="speed" description="Brave Shoe" gfx="placeholder.png" name="Brave Shoe"/>
 </items>
