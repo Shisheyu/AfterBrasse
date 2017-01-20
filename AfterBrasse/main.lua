@@ -149,7 +149,7 @@ Item: "Money = Luck"  Type: "passive item"
 --]]
 function AfterBrasse:MoneyLuck_obj()
 	local player = Isaac.GetPlayer(0)
-	if ( player:HasCollectible( MoneyLuck_i ) and OldCoins ~= player:GetNumCoins() ) then
+	if ( player:HasCollectible( Items.MoneyLuck_i ) and OldCoins ~= player:GetNumCoins() ) then
 		player:AddCacheFlags(CacheFlag.CACHE_LUCK)
 		player:EvaluateItems(); OldCoins = player:GetNumCoins()
 	end
