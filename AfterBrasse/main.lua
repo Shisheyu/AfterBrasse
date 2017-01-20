@@ -93,10 +93,12 @@ AfterBrasse:AddCallback(ModCallbacks.MC_POST_RENDER, AfterBrasse.debug_text)
 --local global vars
 local cricketsPawUses = 0
 local hadCricketsPaw = false
+local OldCoins = 0
 
 function AfterBrasse:VarsInit() -- Variables who need initialisation/reinitialisation at every new game
 	cricketsPawUses = 0
 	hadCricketsPaw = false
+	OldCoins = 0
 end
 
 --[[
@@ -147,14 +149,13 @@ Item: "Money = Luck"  Type: "passive item"
 --]]
 function AfterBrasse:MoneyLuck_obj()
 	local player = Isaac.GetPlayer(0)
-	if ( player:HasCollectible( Items.MoneyLuck_i ) ) then
+	if ( player:HasCollectible( MoneyLuck_i ) and OldCoins ~= player:GetNumCoins() ) then
 		player:AddCacheFlags(CacheFlag.CACHE_LUCK)
-		player:EvaluateItems()
+		player:EvaluateItems(); OldCoins = player:GetNumCoins()
 	end
 end
 function AfterBrasse:MoneyLuck_UpdateStats(player, cacheFlag) --StatsUpdate Code
 	local player = Isaac.GetPlayer(0)
-
 	if ( player:HasCollectible( Items.MoneyLuck_i ) ) then
 		if cacheFlag == CacheFlag.CACHE_LUCK then
 			player.Luck  = player.Luck + (player:GetNumCoins()*0.05048)
