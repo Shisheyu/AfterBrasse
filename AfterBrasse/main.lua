@@ -162,7 +162,7 @@ function AfterBrasse:MoneyLuck_UpdateStats(player, cacheFlag) --StatsUpdate Code
 		end
 	end
 end
-AfterBrasse:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, AfterBrasse.MoneyLuck_obj);
+AfterBrasse:AddCallback(ModCallbacks.MC_POST_UPDATE, AfterBrasse.MoneyLuck_obj);
 AfterBrasse:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, AfterBrasse.MoneyLuck_UpdateStats);
 
 --[[
