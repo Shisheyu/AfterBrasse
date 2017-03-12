@@ -30,9 +30,6 @@ else
 	require("luafiles/helper_func.lua")
 
 	Items =	{
-							choranaptyxic_i = Isaac.GetItemIdByName("Choranaptyxic")
-							blankTissues_i = Isaac.GetItemIdByName("Blank Tissues")
-							electron_i = Isaac.GetItemIdByName("Electron")
 							moneyLuck_i = Isaac.GetItemIdByName( "Money = Luck" ),
 							Beer_i = Isaac.GetItemIdByName( "Dad's Beer" ),
 							brave_shoe_i = Isaac.GetItemIdByName( "Brave Shoe" ),
@@ -47,27 +44,35 @@ else
 							BubblesHead_i = Isaac.GetItemIdByName( "Bubble's Head" ),
 							SunWukong_i = Isaac.GetItemIdByName("SunWukong"),
 							FAM_BombBum_i = Isaac.GetItemIdByName("fam_BombBum_I"),
-							first_blood_i = Isaac.GetItemIdByName("First Blood")
+							first_blood_i = Isaac.GetItemIdByName("First Blood"),
+							choranaptyxic_i = Isaac.GetItemIdByName("Choranaptyxic"),
+							blankTissues_i = Isaac.GetItemIdByName("Blank Tissues"),
+							electron_i = Isaac.GetItemIdByName("Electron"),
+							magic_mirror_i = Isaac.GetItemIdByName("Magic Mirror"),
+							encyclopedia_i = Isaac.GetItemIdByName("Encyclopedia"),
+							ExBanana_i = Isaac.GetItemIdByName( "Explosive Banana" ),
 							--mizaru_i = Isaac.GetItemIdByName("Mizaru")
+							oddit_i = 1 -- TEMPORARY PLACEHOLDER FOR ODDIT
 						}
 
 	Familiars =	{
 							SunWukong_Familiar_Variant = Isaac.GetEntityVariantByName("SunWukong"),
 							FAM_BombBumFamiliar = Isaac.GetEntityTypeByName("fam_BombBum"),
-							FAM_BombBumFamiliarVariant = Isaac.GetEntityVariantByName("fam_BombBum")
-							electronFamiliar = Isaac.GetEntityTypeByName("fam_electron")
+							FAM_BombBumFamiliarVariant = Isaac.GetEntityVariantByName("fam_BombBum"),
+							electronFamiliar = Isaac.GetEntityTypeByName("fam_electron"),
 							electronFamiliarVariant = Isaac.GetEntityVariantByName("fam_electron")
-							
+
 						}
 
 	CustomEntities =	{
-									TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" )
+									TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" ),
+									BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" )
 								}
 	Trinkets = {
-							chainmail_t = Isaac.GetTrinketIdByName("Chainmail")
-							greenCross_t = Isaac.GetTrinketIdByName("Green Cross")
+							chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
+							greenCross_t = Isaac.GetTrinketIdByName("Green Cross"),
 							kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth")
-		
+
 	}
 
 	--[[
@@ -97,7 +102,7 @@ else
 
 	function initial_data_init()
 	local g_vars = [[
-		local g_vars =	{ 	-- Here goes the global variables(that will be saved)
+		local g_vars =	{ 	-- Here goes the global variables( that will be saved )
 									-- prefix variables with "PERMANENT_" to keep thos variables out of the 'newgame vars reset' (for challenge or anything you want to be permanently saved)
 									PERMANENT_test01 = nil,
 									PERMANENT_test02 = nil,
@@ -122,13 +127,15 @@ else
 									FAM_BombBumExists = false,
 									FAM_BombCounter = 0,
 									FAM_nBombBeforDrop = 10,
-									FirstBlood_Done = false
-									hasElectronSpawned = false
-									numberOfElectrons = 0
-									transcricket_hasTransfo = false
-									transcricket_hasCostume = false
-									translaser_hasTransfo = false
-									translaser_hasCostume = false
+									FirstBlood_Done = false,
+									hasElectronSpawned = false,
+									numberOfElectrons = 0,
+									transcricket_hasTransfo = false,
+									transcricket_hasCostume = false,
+									translaser_hasTransfo = false,
+									translaser_hasCostume = false,
+									greencross_lastRoom = nil,
+									chora_hasCostume = true
 								}
 		return g_vars
 	]]
@@ -142,13 +149,14 @@ else
 	 -- If save found and correct size then restore it else reset
 	if s and table._getn(g_vars) == table._getn(s) then data_init_load(s); Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
 
+	require("luafiles/characters/character_init.lua")
 	require("luafiles/init.lua")
-	require("luafiles/debugtext.lua")
+	--require("luafiles/debugtext.lua")
 
 	require("luafiles/items/collectibles.lua")
 
 	require("luafiles/items/familiars.lua")
 
-	-- require("luafiles/items/trinkets.lua")
-	-- require("luafiles/transformations/transfo.lua")
+	require("luafiles/items/trinkets.lua")
+	require("luafiles/transformations/transfo.lua")
 end

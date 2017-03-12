@@ -40,11 +40,11 @@ function _Stillbirth:transcricket_hasTransformUpdate()
 	local player = Isaac.GetPlayer(0)
 	local entities = Isaac.GetRoomEntities()
 	local room = Game():GetRoom()
-	local cricketPool = {4, 224}--, crickets_paw, crickets_leash, crickets_toys, crickets_tail}
+	local cricketPool = {4, 224}--, Items.crickets_paw, Items.crickets_leash, Items.crickets_toys, Items.crickets_tail}
 	if hasTransfo(cricketPool) or g_vars.transcricket_hasTransfo then
         g_vars.transcricket_hasTransfo = true
         if not g_vars.transcricket_hasCostume then
-        	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation.anm2"))
+        	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/cricket.anm2"))
         	g_vars.transcricket_hasCostume = true
         end
 		player:AddCacheFlags(CacheFlag.CACHE_FLYING)
@@ -72,7 +72,7 @@ function _Stillbirth:transcricket_hasTransformDamage(entity, dmg_amount, dmg_fla
 	local player = Isaac.GetPlayer(0)
 	local MaxSpiderSpawned = 40
         local roomType = Game():GetRoom():GetType()
-	local cricketPool = {4, 224}--, crickets_paw, crickets_leash, crickets_toys, crickets_tail}
+	local cricketPool = {4, 224}--, Items.crickets_paw, Items.crickets_leash, Items.crickets_toys, Items.crickets_tail}
 	if hasTransfo(cricketPool) or transcricket_hasTransfo then
         g_vars.transcricket_hasTransfo = true
 		if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) or dmg_flag == DamageFlag.DAMAGE_POOP or dmg_flag == DamageFlag.DAMAGE_ACID then
@@ -90,7 +90,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.transcricke
 
 function _Stillbirth:transcricket_hasTransformCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)
-    local cricketPool = {4, 224}--, crickets_paw, crickets_leash, crickets_toys, crickets_tail}
+    local cricketPool = {4, 224}--, Items.crickets_paw, Items.crickets_leash, Items.crickets_toys, Items.crickets_tail}
     if hasTransfo(cricketPool) or transcricket_hasTransfo then
         g_vars.transcricket_hasTransfo = true
         if cacheFlag == CacheFlag.CACHE_FLYING then
@@ -116,7 +116,7 @@ function _Stillbirth:LaserUpdate()
 	local blue = Color(0, 0, 0, 1, 0, 200, 255)
 	local red = Color(0, 0, 0, 1, 255, 0, 0)
 	local yellow = Color(0, 0, 0, 1, 255, 238, 0)
-        local laserPool = {CollectibleType.COLLECTIBLE_TECHNOLOGY, CollectibleType.COLLECTIBLE_TECHNOLOGY_2, CollectibleType.COLLECTIBLE_TECH_5, CollectibleType.COLLECTIBLE_TECH_X, CollectibleType.COLLECTIBLE_ROBO_BABY, CollectibleType.COLLECTIBLE_ROBO_BABY_2} --technology0_i}
+        local laserPool = {CollectibleType.COLLECTIBLE_TECHNOLOGY, CollectibleType.COLLECTIBLE_TECHNOLOGY_2, CollectibleType.COLLECTIBLE_TECH_5, CollectibleType.COLLECTIBLE_TECH_X, CollectibleType.COLLECTIBLE_ROBO_BABY, CollectibleType.COLLECTIBLE_ROBO_BABY_2} --Items.technology0_i}
 	if (hasTransfo(laserPool) or g_vars.translaser_hasTransfo) then
         g_vars.translaser_hasTransfo = true
         if not g_vars.translaser_hasCostume then

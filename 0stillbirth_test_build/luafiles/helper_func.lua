@@ -21,6 +21,29 @@ function GetRange(player) -- Multby 12.5 for the InGame effective range (return 
     return -math.abs( range )
 end
 
+--~ t = elapsed time; b = begin; c = change == ending - beginning; d = duration (total time)
+function outBounce(t, b, c, d)
+  t = t / d
+  if t < 1 / 2.75 then
+    return c * (7.5625 * t * t) + b
+  elseif t < 2 / 2.75 then
+    t = t - (1.5 / 2.75)
+    return c * (7.5625 * t * t + 0.75) + b
+  elseif t < 2.5 / 2.75 then
+    t = t - (2.25 / 2.75)
+    return c * (7.5625 * t * t + 0.9375) + b
+  else
+    t = t - (2.625 / 2.75)
+    return c * (7.5625 * t * t + 0.984375) + b
+  end
+end
+
+--~ VectorLerp: a = vector pos1 ; b = vector pos2 ; p = float percent 0.0 - 1.0
+function vLerp(a, b, p) return a:__add( ( (b:__sub(a)) * p ) ) end
+
+--~ t = elapsed time; b = begin; c = change == ending - beginning; d = duration (total time)
+function inQuad(t, b, c, d) return c * ((t / d) ^ 2) + b end
+
 --::ShootCustomTear( TearVariant(Int), ShooterEntity(Entity), Player(Entity), DmgMult(float), VelMult(Positive Vector(n, n)), Bool_AddPlayerVel(Bool))
 --::Return EntityTear
 function ShootCustomTear( TearVariant, ShooterEntity, Player, DmgMult, VelMult, Bool_AddEntityVel ) -- Custom Tears Shooting Function.
@@ -82,13 +105,13 @@ function PlayFamiliarShootAnimation( playerDir, Familiar )  -- Custom Familiar S
 	end
 end
 
-local function hasTransfo(pool, trigger) -- check if the player transforms with items from pool. Triggers at trigger items
+function hasTransfo(pool, trigger) -- check if the player transforms with items from pool. Triggers at trigger items
 	local cnt = 0
 	local player = Isaac.GetPlayer(0)
-	if trigger == nil
+--~ 	if trigger == nil then
 		local trigger = 3
-	end
-	if player:HasCollectible(oddit) then
+--~ 	end
+	if player:HasCollectible(Items.oddit_i) then
 		trigger = trigger - 1
 	end
 	for i=1, #pool do
@@ -103,7 +126,7 @@ local function hasTransfo(pool, trigger) -- check if the player transforms with 
 	end
 end
 
-local function getGrid() -- get all grid entities in the current room, returns a table with all grid entities from left to right, up to dwn
+function getGrid() -- get all grid entities in the current room, returns a table with all grid entities from left to right, up to dwn
 	local room = Game():GetRoom()
 	local grid = {}
 	for i=1, room:GetGridWidth()*room:GetGridHeight() do
@@ -116,7 +139,7 @@ local function getGrid() -- get all grid entities in the current room, returns a
 	return grid
 end
 
-local function boolToInt(bool) --cast a boolean to an integer
+function boolToInt(bool) --cast a boolean to an integer
 	if bool then
 		return 1
 	else
@@ -137,9 +160,10 @@ Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end
 Secondes30fps = function(a) return a*30 end
---no need manually use SetRandomSeed(), it's already set by default in the code
+--no need to manually use SetRandomSeed(), it's already set by default in the code
 SetRandomSeed = function () local r = math.random(time()) if g_vars.GlobalSeed ~= r then g_vars.GlobalSeed = r math.randomseed(g_vars.GlobalSeed) math.random();math.random();math.random(); end end
 
 devilPoolPassive = {8, 51, 67, 79, 80, 81, 82, 113, 114, 118, 122, 134, 159, 163, 172, 187, 212, 215, 216, 225, 230, 237, 241, 259, 262, 268, 269, 275, 278, 311, 412, 408, 399, 391, 360, 409, 433, 431, 420, 417, 498, 462, 442, 468}
+libraryPool = {33, 34, 35, 58, 65, 78, 97, 192, 282, 287, 292}
 
 --	###################################################################################

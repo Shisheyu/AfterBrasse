@@ -1,7 +1,7 @@
 --[[
 Trinket : Chainmail pas de dégat sur les curse rooms
 --Dogeek
-]]--
+--]]
 
 function _Stillbirth:curseRoomUpdate(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
   player = Isaac.GetPlayer(0)
@@ -12,7 +12,6 @@ function _Stillbirth:curseRoomUpdate(entity, dmg_amount, dmg_flag, dmg_src, dmg_
         end
   end
 end
-
 _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.curseRoomUpdate, EntityType.ENTITY_PLAYER)
 
 --[[
@@ -21,40 +20,31 @@ Trinket : Krampus's Tooth
 --]]
 
 function _Stillbirth:krampusToothUpdate()
-
    local game = Game()
    local player = Isaac.GetPlayer(0)
 
-   -- Si trinket alors Krampus est set à "rencontré"
+   -- Si trinket alors Krampus est set a� "rencontre"
    if player:HasTrinket(Trinkets.kramp_tooth_t) then
         game:SetStateFlag(GameStateFlag.STATE_KRAMPUS_SPAWNED, true)
-
-   -- Sinon verifier qu'on a rencontré krampus
+   -- Sinon verifier qu'on a rencontre krampus
    else
         local status_kramp = game:HasEncounteredBoss(EntityType.ENTITY_FALLEN, 1)
         game:SetStateFlag(GameStateFlag.STATE_KRAMPUS_SPAWNED, status_kramp)
    end
-
-
 end
-
-
 _Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.krampusToothUpdate)
 
 --[[
 Trinket Green Cross : Challenge Down
 --Dogeek
-]]--
-
-local lastRoom = nil
-
+--]]
 function _Stillbirth:GreenCrossUpdate()
     local player = Isaac.GetPlayer(0)
     local entities = Isaac.GetRoomEntities()
     local room = Game():GetRoom()
-    
+
     if player:HasTrinket(Trinkets.greenCross_t) then
-    	if lastRoom ~= room:GetDecorationSeed() then
+    	if g_vars.greencross_lastRoom ~= room:GetDecorationSeed() then
     		for i=1, #entities do
     			local e = entities[i]
     			if e:IsVulnerableEnemy() then
@@ -65,9 +55,8 @@ function _Stillbirth:GreenCrossUpdate()
     				end
     			end
     		end
-    		lastRoom = room:GetDecorationSeed()
+    		g_vars.greencross_lastRoom = room:GetDecorationSeed()
     	end
     end
 end
-
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GreenCrossUpdate)

@@ -4,6 +4,7 @@ local function Stillbirth_Player_Init() -- player ini
 	if not g_vars then
 		g_vars = data_Init()
 	end
+	REBALANCE_InitKeeper()
 	--force evaluation of every cacheFlags
 	player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 	player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
@@ -52,6 +53,11 @@ function _Stillbirth:FamiliarProtectedSpawn()
 			g_vars.legacy_spawned = true;
 		end
 --]]
+		if not g_vars.hasElectronSpawned and player:HasCollectible(Items.electron_i) then -- Electron
+			Isaac.Spawn(Familiars.electronFamiliar, Familiars.electronFamiliarVariant, 0, player.Position, Vector(0, 0), player)
+			g_vars.numberOfElectrons = g_vars.numberOfElectrons + 1
+			g_vars.hasElectronSpawned = true
+		end
 		if not g_vars.FAM_BombBumExists and player:HasCollectible(Items.FAM_BombBum_i) then -- BombBum
 			local e = Isaac.Spawn(Familiars.FAM_BombBumFamiliar, Familiars.FAM_BombBumFamiliarVariant, 0, player.Position, Vector(0, 0), player)
 			e:AddEntityFlags(1<<21) -- FLAG_DONT_OVERWRITE
