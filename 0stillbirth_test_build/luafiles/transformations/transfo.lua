@@ -7,49 +7,18 @@ Date : 2017-03-06
 
 local transcricket_hasTransfo = false
 local transcricket_hasCostume = false
+local translaser_hasTransfo = false
+local translaser_hasCostume = false
+
 ----------------------------
 -- GAME VARIABLES
 ----------------------------
 
-local oddit = 1
+local oddit = 1 --TODO do oddit so that is not necessary
 
 -----------------------------
 -- USEFUL FUNCTIONS
 -----------------------------
-
-local function hasTransfo(pool, trigger)
-	local cnt = 0
-	local player = Isaac.GetPlayer(0)
-	if trigger == nil
-		local trigger = 3
-	end
-	if player:HasCollectible(oddit) then
-		trigger = trigger - 1
-	end
-	for i=1, #pool do
-		if player:HasCollectible(pool[i]) then
-			cnt = cnt + 1
-		end
-	end
-	if cnt >= trigger then
-		return true
-	else
-		return false
-	end
-end
-
-local function getGrid()
-	local room = Game():GetRoom()
-	local grid = {}
-	for i=1, room:GetGridWidth()*room:GetGridHeight() do
-		if room:GetGridEntity(i) == nil then
-			table.insert(grid, false)
-		else
-			table.insert(grid, room:GetGridEntity(i))
-		end
-	end
-	return grid
-end
 
 local function MakeBridge(grid, rock_index, player, room)
 	local direction = player:GetHeadDirection()
@@ -146,25 +115,6 @@ Effet : Tous les lasers possédés gagnent un effet supplémentaire qui peut cha
 
 --Dogeek
 ]]--
-
-local translaser_hasTransfo = false
-local translaser_hasCostume = false
-
-local function IsShooting(player)
-	if player:GetFireDirection() == -1 then
-		return false
-	else
-		return true
-	end
-end
-
-local function boolToInt(bool)
-	if bool then
-		return 1
-	else
-		return 0
-	end
-end
 
 function _Stillbirth:LaserUpdate()
 	local player = Isaac.GetPlayer(0)
