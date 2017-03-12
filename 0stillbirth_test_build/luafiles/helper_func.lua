@@ -82,6 +82,48 @@ function PlayFamiliarShootAnimation( playerDir, Familiar )  -- Custom Familiar S
 	end
 end
 
+local function hasTransfo(pool, trigger)
+	local cnt = 0
+	local player = Isaac.GetPlayer(0)
+	if trigger == nil
+		local trigger = 3
+	end
+	if player:HasCollectible(oddit) then
+		trigger = trigger - 1
+	end
+	for i=1, #pool do
+		if player:HasCollectible(pool[i]) then
+			cnt = cnt + 1
+		end
+	end
+	if cnt >= trigger then
+		return true
+	else
+		return false
+	end
+end
+
+local function getGrid()
+	local room = Game():GetRoom()
+	local grid = {}
+	for i=1, room:GetGridWidth()*room:GetGridHeight() do
+		if room:GetGridEntity(i) == nil then
+			table.insert(grid, false)
+		else
+			table.insert(grid, room:GetGridEntity(i))
+		end
+	end
+	return grid
+end
+
+local function boolToInt(bool)
+	if bool then
+		return 1
+	else
+		return 0
+	end
+end
+
 Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end
