@@ -1,0 +1,5 @@
+<items gfxroot="gfx/items/" version="1">
+
+	<familiar description="He wants your bombs!" gfx="fam_BombBum.png" name="fam_BombBum_I" />
+  
+</items>
