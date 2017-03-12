@@ -88,18 +88,18 @@ _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_beer, Items.B
 Passive item: "Brave Shoe"
 -xahos-
 --]]
-function _Stillbirth:take_damage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
+function _Stillbirth:braveShoeDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
     local player = Isaac.GetPlayer(0)
-
+	local roomType = Game():GetRoom():GetType()
     if player:HasCollectible(Items.brave_shoe_i) then
-        if (dmg_flag == DamageFlag.DAMAGE_SPIKES) then
+        if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) then
             return false
         end
     end
     return
 end
 
-function _Stillbirth:cacheUpdate(player, cacheFlag)
+function _Stillbirth:braveShoeCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)
 
     if player:HasCollectible(Items.brave_shoe_i) then
@@ -108,8 +108,8 @@ function _Stillbirth:cacheUpdate(player, cacheFlag)
         end
     end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.take_damage, EntityType.ENTITY_PLAYER)
-_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.cacheUpdate)
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.braveShoeDamage, EntityType.ENTITY_PLAYER)
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.braveShoeCache)
 
 --[[
 Passive item : Technology 0 : un cercle qui s'agrandit quand on tire et qui suit isaac un peu comme tech X
