@@ -4,4 +4,8 @@
 	<!--costume type="passive" id="512" anm2path="costume_braveshoe.anm2" priority="99"/-->
 	<costume type="passive" id="513" anm2path="costume_techzero.anm2" priority="99"/> 
 	<costume type="passive" id="514" anm2path="costume_hotpizzaslice.anm2" priority="99"/> 
+	<costume type="passive" id="Choranaptyxic" anm2path="costume_choranaptyxic.anm2"/>
+	<costume type="none" id="Cataract" anm2path="costume_cataract.anm2"/> 
+	<costume type="none" id="Cricket" anm2path="transformation_cricket.anm2"/>
+	<costume type="none" id="L.A.S.E.R" anm2path="transformation_laser.anm2"/> 
 </costumes>

@@ -82,7 +82,7 @@ function PlayFamiliarShootAnimation( playerDir, Familiar )  -- Custom Familiar S
 	end
 end
 
-local function hasTransfo(pool, trigger)
+local function hasTransfo(pool, trigger) -- check if the player transforms with items from pool. Triggers at trigger items
 	local cnt = 0
 	local player = Isaac.GetPlayer(0)
 	if trigger == nil
@@ -103,7 +103,7 @@ local function hasTransfo(pool, trigger)
 	end
 end
 
-local function getGrid()
+local function getGrid() -- get all grid entities in the current room, returns a table with all grid entities from left to right, up to dwn
 	local room = Game():GetRoom()
 	local grid = {}
 	for i=1, room:GetGridWidth()*room:GetGridHeight() do
@@ -116,12 +116,21 @@ local function getGrid()
 	return grid
 end
 
-local function boolToInt(bool)
+local function boolToInt(bool) --cast a boolean to an integer
 	if bool then
 		return 1
 	else
 		return 0
 	end
+end
+
+function has_value (tab, val) -- checks if tab has val inside it
+  for index, value in ipairs (tab) do
+    if value == val then
+      return true
+    end
+  end
+  return false
 end
 
 Minutes60fps = function(a) return a*60*60 end
