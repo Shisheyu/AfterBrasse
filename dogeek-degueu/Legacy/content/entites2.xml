@@ -1,5 +1,0 @@
-<entities anm2root="gfx/" version="5">
-	<entity anm2path="legacy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="3" name="Legacy" numGridCollisionPoints="10" shadowSize="10" stageHP="0" variant="250" subtype="0">
-        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
-    </entity>
-</entities>
