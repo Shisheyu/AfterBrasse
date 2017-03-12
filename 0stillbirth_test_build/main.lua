@@ -30,6 +30,9 @@ else
 	require("luafiles/helper_func.lua")
 
 	Items =	{
+							choranaptyxic_i = Isaac.GetItemIdByName("Choranaptyxic")
+							blankTissues_i = Isaac.GetItemIdByName("Blank Tissues")
+							electron_i = Isaac.GetItemIdByName("Electron")
 							moneyLuck_i = Isaac.GetItemIdByName( "Money = Luck" ),
 							Beer_i = Isaac.GetItemIdByName( "Dad's Beer" ),
 							brave_shoe_i = Isaac.GetItemIdByName( "Brave Shoe" ),
@@ -52,11 +55,18 @@ else
 							SunWukong_Familiar_Variant = Isaac.GetEntityVariantByName("SunWukong"),
 							FAM_BombBumFamiliar = Isaac.GetEntityTypeByName("fam_BombBum"),
 							FAM_BombBumFamiliarVariant = Isaac.GetEntityVariantByName("fam_BombBum")
+							electronFamiliar = Isaac.GetEntityTypeByName("fam_electron")
+							electronFamiliarVariant = Isaac.GetEntityVariantByName("fam_electron")
+							
 						}
 
 	CustomEntities =	{
 									TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" )
 								}
+	Trinkets = {
+							chainmail_t = Isaac.GetTrinketIdByName("Chainmail")
+		
+	}
 
 	--[[
 					/!\	EXEMPLES OF VARIABLES WHO CAN BE SAVED WITH THE ACTUAL SYSTEM:
@@ -111,6 +121,12 @@ else
 									FAM_BombCounter = 0,
 									FAM_nBombBeforDrop = 10,
 									FirstBlood_Done = false
+									hasElectronSpawned = false
+									numberOfElectrons = 0
+									transcricket_hasTransfo = false
+									transcricket_hasCostume = false
+									translaser_hasTransfo = false
+									translaser_hasCostume = false
 								}
 		return g_vars
 	]]

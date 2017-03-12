@@ -122,3 +122,99 @@ function _Stillbirth:FAM_BombBum_Update(Familiar) -- Familiar AI
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.FAM_BombBum_init, Familiars.FAM_BombBumFamiliarVariant )
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.FAM_BombBum_Update, Familiars.FAM_BombBumFamiliarVariant )
+
+
+--[[
+Item : Electron
+Type : Familiar (orbital)
+By : Dogeek & Krayz because Dogeek is REALLY BAD
+Date : 2017-03-08
+]]--
+
+----------------------------
+-- GAME VARIABLES
+----------------------------
+
+local electron_index = 0
+local MAX_electron_index = 64
+local INCREMENT = 4
+local BASE_DAMAGE = MAX_electron_index * 2
+local increase = true
+
+-----------------------------
+-- CODE
+-----------------------------
+
+function _Stillbirth:electronCache() -- If player has the item, spawns Familiar::(Opti)In a CACHEUPDATE so it's not Verified every frames
+    local player = Isaac.GetPlayer(0)
+    if player:HasCollectible(Items.electron_i) and not g_vars.hasElectronSpawned then
+        Isaac.Spawn(Familiars.electronFamiliar, Familiars.electronFamiliarVariant, 0, player.Position, Vector(0, 0), player)
+        g_vars.numberOfElectrons = g_vars.numberOfElectrons + 1
+        g_vars.hasElectronSpawned = true
+    end
+end
+
+local function Q(t, b, c, d)	return c * ((t / d) ^ 2) + b end  -- accelerating / decelerating
+
+function _Stillbirth:electronInit(fam) -- init Familiar variables
+    local electronSprite = fam:GetSprite()
+    fam.OrbitDistance = Vector(44,44)
+	fam.OrbitLayer = 1
+	fam.OrbitSpeed = 0.1
+	fam.Friction = 1
+    fam.GridCollisionClass = GridCollisionClass.COLLISION_NONE
+    electronSprite:Play("FloatDown", true); -- Plays his float anim
+end
+local orbSpeed = 0.0
+function _Stillbirth:electronUpdate(fam)
+	local player = Isaac.GetPlayer(0)
+	orbSpeed = Q(electron_index, 1, 500-electron_index, 500)/50
+	fam.Velocity = fam:GetOrbitPosition(player.Position:__sub(fam.Position))
+	fam.OrbitDistance = Vector(44+electron_index*1.8,44+electron_index*1.8)
+	fam.CollisionDamage = BASE_DAMAGE/electron_index
+	fam:MultiplyFriction( 0.2 + orbSpeed ) -- MultiplyFriction for a better control over speed
+	fam.OrbitSpeed = 0.1 -- this is pretty not very actually maybe isnt super uper dupper good but can't really change it
+end
+
+function _Stillbirth:updateelectron_index()
+	local player = Isaac.GetPlayer(0)
+	local entities = Isaac.GetRoomEntities()
+	local battery_spawned = false
+	local battery = nil
+	BASE_DAMAGE = MAX_electron_index *2/3.5*player.Damage
+	if player:HasCollectible(Items.electron_i) then
+		for i=1, #entities do
+			e = entities[i]
+			if e.Type == 5 and e.Variant == 90 then
+				battery_spawned = true
+				battery = e:ToPickup()
+			end
+		end
+		if battery_spawned and player:NeedsCharge() and math.abs((player.Position-battery.Position):Length()) <= 28 then
+				Isaac.Spawn(Familiars.electronFamiliar, Familiars.electronFamiliarVariant, 0, player.Position, Vector(0, 0), player)
+				g_vars.numberOfElectrons = g_vars.numberOfElectrons + 1
+				battery:PlayPickupSound()
+				battery:Remove()
+				player:FullCharge()
+		end
+
+		if player.FrameCount&3 == 0 then
+			if electron_index < MAX_electron_index  and increase then
+				electron_index = electron_index + INCREMENT
+				if electron_index == MAX_electron_index then
+					increase = false
+				end
+			elseif electron_index >= INCREMENT and not increase then
+				electron_index = electron_index - INCREMENT
+				if electron_index == 0 then
+					increase = true
+				end
+			end
+		end
+	end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.electronCache)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.electronInit, Familiars.electronFamiliarVariant )
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.electronUpdate, Familiars.electronFamiliarVariant )
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.updateelectron_index)
