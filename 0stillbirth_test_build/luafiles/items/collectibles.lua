@@ -633,7 +633,7 @@ end
 function _Stillbirth:ExBanana_use()
     local player = Isaac.GetPlayer(0)
 
-    if player:HasCollectible(ExBanana_i) and not BanaV.Ready and not BanaV.ExBananaSpawned then
+    if player:HasCollectible(Items.ExBanana_i) and not BanaV.Ready and not BanaV.ExBananaSpawned then
         BanaV.Ready = true
         player:AddNullCostume(BanaV.costume)
         return false
