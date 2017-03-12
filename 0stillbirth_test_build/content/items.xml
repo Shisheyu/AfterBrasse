@@ -35,8 +35,9 @@
 		<trinket cache="" id="529" description="100% Mithril" gfx="chainmail.png" name="Chainmail"/>
 		<active cache="" id="530" maxcharges="2" description="CTRL + SHIFT + DEL" gfx="blanktissues.png" name="Blank Tissues"/>
 		<passive cache="" id="531" description="A random particle appears..." gfx="electron.png" name="Electron"/>
-		<active cache="" id="532" maxcharges="2" description="magicmirror" gfx="magicmirror.png" name="Magic Mirror"/>
+		<active cache="" id="532" maxcharges="2" description="magicmirror." gfx="magicmirror.png" name="Magic Mirror"/>
 		<active cache="" id="533" maxcharges="2" description="encyclopedia." gfx="encyclopedia.png" name="Encyclopedia"/>
+		<active cache="" id="534" maxcharges="2" description="Fruity Claymores" gfx="ExplosiveBanana.png" name="Explosive Banana" />
 		<!--passive cache="" id ="" description="Who knows yours?" gfx="Mizaru.png" name="Mizaru"/-->
 		<!--familiar cache="" id ="" description="Who knows yours?" gfx="legacy.png" name="Legacy"/-->
 </items>

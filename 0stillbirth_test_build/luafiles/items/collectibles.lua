@@ -596,3 +596,151 @@ function _Stillbirth:use_encyclopedia()
     player:UseActiveItem(libraryPool[rng],true,false,false,false)
 end
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_encyclopedia, Items.encyclopedia_i );
+
+--[[
+Active Item: "ExplosiveBanana"
+-Krayz-
+https://www.youtube.com/watch?v=LH5ay10RTGY
+Lance une banane de type mine explosive, laisse du creep jaune qui ralentit
+Slow only apply to ground enemy
+--]]
+--~ this item don't need save
+local BanaV = 	{
+                            ExBanana = nil,
+                            ExBananaCreep = nil,
+                            ExBananaCreep2 = nil,
+                            ExBananaSprite  = 0,
+                            ExBanana_frame = 0,
+                            ExBananaSpawned = false,
+                            ExBananaActive = false,
+                            CreepSpawn = false,
+                            Ready = false,
+                            costume = Isaac.GetCostumeIdByPath("gfx/characters/costume_exbanana.anm2")
+                        }
+
+local function resetVars()
+    BanaV.ExBanana = nil
+    BanaV.ExBananaCreep = nil
+    BanaV.ExBananaCreep2 = nil
+    BanaV.ExBanana_frame = 0
+    BanaV.ExBananaSpawned = false
+    BanaV.ExBananaActive = false
+    BanaV.CreepSpawn = false
+    BanaV.Ready = false
+    Isaac.GetPlayer(0):TryRemoveNullCostume(BanaV.costume)
+end
+
+function _Stillbirth:ExBanana_use()
+    local player = Isaac.GetPlayer(0)
+
+    if player:HasCollectible(ExBanana_i) and not BanaV.Ready and not BanaV.ExBananaSpawned then
+        BanaV.Ready = true
+        player:AddNullCostume(BanaV.costume)
+        return false
+    elseif BanaV.Ready  then
+        BanaV.Ready = false
+        player:TryRemoveNullCostume(BanaV.costume)
+        return false
+    end
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.ExBanana_use, Items.ExBanana_i );
+
+function _Stillbirth:ExBanana_Mine()
+    local player = Isaac.GetPlayer(0)
+
+    if ( player:HasCollectible(Items.ExBanana_i) ) then
+        local entities = Isaac.GetRoomEntities()
+        local room = Game():GetRoom()
+        if room:GetFrameCount() == 1 then resetVars() end -- reset vars every room
+        if BanaV.Ready and IsShooting(player) then
+            player:TryRemoveNullCostume(BanaV.costume)
+            Velocity = Vector( ((player:GetLastDirection().X*8) + (player:GetVelocityBeforeUpdate().X*1.1)), (( player:GetLastDirection().Y*8 ) + (player:GetVelocityBeforeUpdate().Y*1.1)) )
+            BanaV.ExBanana = Game():Spawn(CustomEntities.BananaEntity, 0, player.Position:__sub( Vector(0, -5) ), Vector(0,0), player, 0, 0) -- Explosive Banana
+            BanaV.ExBanana.Friction = 1
+            BanaV.ExBanana:ClearEntityFlags( 1<<2 )
+            BanaV.ExBanana:AddEntityFlags( 1<<5 )
+            BanaV.ExBanana:AddVelocity( Velocity:__mul(1.15) )
+            BanaV.ExBanana:ClearEntityFlags( 1<<5 )
+            BanaV.ExBanana:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
+            BanaV.ExBananaSprite = BanaV.ExBanana:GetSprite();
+            BanaV.ExBanana.EntityCollisionClass = EntityCollisionClass.ENTCOLL_ENEMIES
+            BanaV.ExBanana.GridCollisionClass = 5 -- 5 = allgrid ent 6 = nopits ; 3 = wall only
+            BanaV.ExBananaSprite:Play("Idle", true);
+            BanaV.ExBanana.RenderZOffset  = 5
+            BanaV.ExBananaSpawned = true
+            BanaV.ExBananaActive = false
+            BanaV.Ready = false
+        elseif BanaV.ExBananaSpawned and not BanaV.ExBananaActive then
+            BanaV.ExBanana_frame = BanaV.ExBanana_frame + 1
+            if BanaV.ExBanana:CollidesWithGrid() then
+                BanaV.ExBanana:MultiplyFriction( 0.3 )
+            end
+            if BanaV.ExBanana_frame < 18 then
+                local amp = inQuad( BanaV.ExBanana_frame * 0.60, 1, 9-1, 9 )
+                db_a = amp
+                BanaV.ExBanana.PositionOffset = Vector( 0, amp ) -- Zou
+            elseif BanaV.ExBanana_frame < 40 then
+                BanaV.ExBanana.PositionOffset = Vector( 0,14 ) -- EndCourseOnTheFloor
+                BanaV.ExBanana:MultiplyFriction( 0.05 ) -- StopMoving
+                if not BanaV.CreepSpawn then
+                    BanaV.ExBananaCreep2 = Isaac.Spawn( 1000, 24, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep2 Yl
+                    BanaV.ExBananaCreep2:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
+                    BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, 0.0, 255, 255, 0 ) , 9999, 9999, false, false )
+                    BanaV.ExBananaCreep2.SpriteScale = BanaV.ExBananaCreep2.SpriteScale * 6.0
+                    BanaV.ExBananaCreep2:ToEffect():SetTimeout(9999)
+                    SFXManager():Play(445, 0.9, 0, false, 0.45)
+                    BanaV.CreepSpawn = true
+                end
+            elseif BanaV.ExBanana_frame <= 70 then
+                local a = (BanaV.ExBanana_frame - 40)
+                BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, a/100 , 255, 255, 0 ) , 9999, 9999, false, false ) -- creep
+                BanaV.ExBanana:SetColor( Color( (a/200)+0.15, 0.15, 0.0, 1.0, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
+                if a == 20 then
+                    BanaV.ExBananaCreep = Isaac.Spawn( 1000, 44, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep Sl -- Add Delay befor slow
+                    BanaV.ExBananaCreep:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
+                    BanaV.ExBananaCreep:SetColor( Color( 0.0, 0.0, 0.0, 0.0, 0, 0, 0 ) , 9999, 9999, false, false )
+                    BanaV.ExBananaCreep.SpriteScale = BanaV.ExBananaCreep.SpriteScale * 5.0
+                    BanaV.ExBananaCreep:ToEffect():SetTimeout(9999)
+                end
+            else
+                if not BanaV.ExBananaSprite:IsPlaying( "Float" ) then
+                    BanaV.ExBananaSprite:Play( "Float", true )
+                    SFXManager():Play(229, 0.4, 0, false, 2.5)
+                end
+                BanaV.ExBananaCreep.Position = BanaV.ExBanana.Position
+                BanaV.ExBananaCreep2.Position = BanaV.ExBanana.Position
+                BanaV.ExBananaActive = true -- Start damage/effect
+            end
+        elseif BanaV.ExBananaSpawned and BanaV.ExBananaActive then
+            local f = player.FrameCount
+            local rg = (function() if f&3==0 then return math.abs(math.sin(f)) end end )() -- blink
+            if rg then
+                BanaV.ExBanana:SetColor( Color( rg , rg, 0.0, 1.0, 55, 0, 0 ) , 9999, 9999, false, false ) -- banana blink
+            end
+            BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, 0.38 , 255, 255, 0 ) , 9999, 9999, false, false ) -- creep
+            local DmgRad = 0
+            for i = 1, #entities do
+                if (player.FrameCount&7 == 0 and BanaV.ExBanana and entities[i]:IsVulnerableEnemy() ) then
+                    if ( entities[i]:ToNPC():IsBoss() ) then
+                        DmgRad = 100
+                    elseif ( entities[i]:ToNPC():IsChampion() ) then
+                        DmgRad = 80
+                    else
+                        DmgRad = 68
+                    end
+                    local bval =  math.abs( entities[i].Position.X - BanaV.ExBanana.Position.X ) + math.abs( entities[i].Position.Y - BanaV.ExBanana.Position.Y )
+                    if bval <= DmgRad  then
+                        Game():BombExplosionEffects( BanaV.ExBanana.Position, 30.0, player:GetBombFlags(), Color( 0.4, 0.4, 0.4, 1.0 , 100, 100, 0 ), entities[i], 1.5, false, true)
+                        entities[i]:AddConfusion( EntityRef(player), 60, true )
+                        BanaV.ExBananaCreep:ToEffect():SetTimeout(1)
+                        BanaV.ExBananaCreep2:ToEffect():SetTimeout(1)
+                        BanaV.ExBanana:Remove()
+                        resetVars()
+                    end
+                end
+            end
+        end
+    end
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.ExBanana_Mine )
+--[[--END--]]

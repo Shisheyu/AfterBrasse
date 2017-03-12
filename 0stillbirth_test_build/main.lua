@@ -50,6 +50,7 @@ else
 							electron_i = Isaac.GetItemIdByName("Electron"),
 							magic_mirror_i = Isaac.GetItemIdByName("Magic Mirror"),
 							encyclopedia_i = Isaac.GetItemIdByName("Encyclopedia"),
+							ExBanana_i = Isaac.GetItemIdByName( "Explosive Banana" ),
 							--mizaru_i = Isaac.GetItemIdByName("Mizaru")
 							oddit_i = 1 -- TEMPORARY PLACEHOLDER FOR ODDIT
 						}
@@ -64,7 +65,8 @@ else
 						}
 
 	CustomEntities =	{
-									TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" )
+									TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" ),
+									BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" )
 								}
 	Trinkets = {
 							chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
