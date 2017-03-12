@@ -1,4 +1,0 @@
-<items gfxroot="gfx/items/" version="1">
-	<passive description="Illuday Test Item"
-			 cache="tearflag" gfx="illuday.png"  id="511" name="illuday"/>
-</items>
