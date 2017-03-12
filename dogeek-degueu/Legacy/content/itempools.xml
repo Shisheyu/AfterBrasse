@@ -1,0 +1,9 @@
+<ItemPools>
+	<Pool Name="treasure">
+		<Item Name="Legacy" Weight="1" DecreaseBy="1" RemoveOn="0.1">
+	</Pool>
+
+	<Pool Name="devil">
+		<Item Name="Legacy" Weight="1" DecreaseBy="1" RemoveOn="0.1">
+	</Pool>
+</ItemPools>
