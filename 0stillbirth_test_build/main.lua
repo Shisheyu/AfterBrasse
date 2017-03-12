@@ -65,6 +65,8 @@ else
 								}
 	Trinkets = {
 							chainmail_t = Isaac.GetTrinketIdByName("Chainmail")
+							greenCross_t = Isaac.GetTrinketIdByName("Green Cross")
+							kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth")
 		
 	}
 
