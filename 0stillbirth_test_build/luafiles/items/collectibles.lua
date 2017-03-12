@@ -1,4 +1,3 @@
-
 --[[
 Active Item: "Cricket's Paw"
 -Sliost-
@@ -496,3 +495,104 @@ function _Stillbirth:FirstBloodEffect() -- Only one tear Version (event with qua
     end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.FirstBloodEffect)
+
+--[[
+Blank Tissue : supprime toute les larmes de la salle
+--Dogeek
+--]]
+function _Stillbirth:OnBlankTissueUse()
+    local player = Isaac.GetPlayer(0)
+    local entities = Isaac.GetRoomEntities()
+    for i=1, #entities do
+    	if entities[i].Type == EntityType.ENTITY_TEAR or entities[i].Type == EntityType.ENTITY_PROJECTILE then
+    		entities[i]:Remove()
+    	end
+    end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.OnBlankTissueUse, Items.blankTissues_i)
+
+--[[
+Item Passive : Choranaptyxic : Stats basées sur grande ou petite salle. Salle neutre ne modifie pas
+--Dogeek
+Tear rate + speed petite
+Range + damage dans les grandes
+--]]
+
+local chora_bdmg = 0
+local chora_brange = 0
+local chora_bspeed = 0
+local chora_btears = 1
+local chora_lastShape = 0
+
+function _Stillbirth:ChoranaptyxicCache(player, cacheFlag)
+    local player = Isaac.GetPlayer(0)
+    if player:HasCollectible(Items.choranaptyxic_i) then
+        if cacheFlag==CacheFlag.CACHE_DAMAGE then
+                player.Damage = player.Damage + bdmg
+        end
+           if cacheFlag==CacheFlag.CACHE_RANGE then
+            player.TearHeight = player.TearHeight + brange
+        end
+        if cacheFlag==CacheFlag.CACHE_SPEED then
+            player.MoveSpeed = player.MoveSpeed + bspeed
+        end
+        if cacheFlag==CacheFlag.CACHE_FIREDELAY then
+            player.MaxFireDelay = player.MaxFireDelay*btears
+        end
+    end
+end
+
+function _Stillbirth:ChoranaptyxicUpdate()
+    local player = Isaac.GetPlayer(0)
+    local entities = Isaac.GetRoomEntities()
+    local roomShape = Game():GetRoom():GetRoomShape()
+    if player:HasCollectible(Items.choranaptyxic_i) then
+		if roomShape ~= chora_lastShape then
+			if roomShape == RoomShape.ROOMSHAPE_IH or roomShape == RoomShape.ROOMSHAPE_IV or roomShape == RoomShape.ROOMSHAPE_IIV or roomShape == RoomShape.ROOMSHAPE_IIH then
+				chora_bdmg = 0
+				chora_brange = 0
+				chora_bspeed = 1
+				chora_btears = 0.5
+			elseif roomShape == RoomShape.ROOMSHAPE_1x2 or roomShape == RoomShape.ROOMSHAPE_2x1 or roomShape == RoomShape.ROOMSHAPE_2x2 or roomShape == RoomShape.ROOMSHAPE_LTL or roomShape == RoomShape.ROOMSHAPE_LTR or roomShape == RoomShape.ROOMSHAPE_LBL or roomShape == RoomShape.ROOMSHAPE_LBR then
+				chora_bdmg = 2
+				chora_brange = -10
+				chora_bspeed = 0
+				chora_btears = 1
+			else
+				chora_bdmg = 0
+				chora_brange = 0
+				chora_bspeed = 0
+				chora_btears = 1
+			end
+			player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+			player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
+			player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
+			player:AddCacheFlags(CacheFlag.CACHE_RANGE)
+			player:EvaluateItems()
+		end
+		chora_lastShape = roomShape
+    end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.ChoranaptyxicUpdate)
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.ChoranaptyxicCache)
+
+--[[
+Active item : Magic Mirror
+-Azqswx-
+--]]
+function _Stillbirth:use_magic_mirror()
+    local player = Isaac.GetPlayer(0);
+    player:UseCard(1);
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_magic_mirror, Items.magic_mirror_i );
+
+--[[
+Active item : Magic Mirror
+-Azqswx-
+--]]
+function _Stillbirth:use_encyclopedia()
+    local player = Isaac.GetPlayer(0);
+    local rng = math.ceil(math.random(1,#libraryPool));
+    player:UseActiveItem(libraryPool[rng],true,false,false,false)
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_encyclopedia, Items.encyclopedia_i );
