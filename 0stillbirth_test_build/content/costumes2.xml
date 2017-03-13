@@ -13,4 +13,5 @@
 	<costume type="none" id="536" anm2path="3+3=33.anm2" priority="99"/>
 	<costume type="none" id="537" anm2path="spidershoot.anm2" priority="99"/>
 	<costume type="none" id="538" anm2path="kikazaru.anm2" priority="99"/>
+	<costume type="none" id="539" anm2path="oddit.anm2" priority="99"/>
 </costumes>

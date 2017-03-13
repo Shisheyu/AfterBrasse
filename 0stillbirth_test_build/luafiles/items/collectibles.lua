@@ -952,4 +952,105 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, _Stillbirth.SpidershotUpdateTears)
 _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SpidershotEffectOnGridandCreep)
+
+--[[
+Item : Oddit -Ottid en fait
+Type : Passive
+By : Dogeek
+Date : 2017-03-06
+TODO : superbum ?
+]]--
+
+local function addMissingItem(pool)
+	local player = Isaac.GetPlayer(0)
+	local choice = {}
+	for i=1, #pool do
+		if not player:HasCollectible(pool[i]) and pool[i] ~= 81 then
+			table.insert(choice, pool[i])
+		end
+		for i=1, #activeList do
+			if not has_value(activeList, pool[i]) then
+				table.insert(choice, pool[i])
+			end
+		end
+	end
+	local currentActive = player:GetActiveItem()
+	if currentActive ~= nil then
+		local currentCharge = player:GetActiveCharge()
+	end
+	player:AddCollectible(choice[1], 0, false)
+	player:RemoveCollectible(choice[1])
+	if currentActive ~= nil then 
+		if currentCharge ~= nil then
+			player:AddCollectible(currentActive, currentCharge, false)
+		else
+			player:AddCollectible(currentActive, 6, false)
+		end
+	end
+end
+
+function _Stillbirth:OttidUpdate()
+	local player = Isaac.GetPlayer(0)
+	if player:GetActiveItem() ~= nil then
+		table.insert( activeList, player:GetActiveItem())
+	end
+	if player:HasCollectible(Items.ottid_i) then
+		local guppyPool = {145, 133, 81, 212, 134, 187}
+		local beezlebubPool = {320, 272, 274, 279, 57, 128, 10, 248, 9, 264, 151, 148, 364, 365, 430, 426}
+		local funGuyPool = {398, 71, 12, 120, 121, 11, 342}
+		local seraphimPool = {33 , 185, 112, 184, 313, 173, 72 , 363, 101}
+		local bobPool = {273, 42,  140, 149}
+		local spunPool = {493, 496, 240, 70, 14, 143, 13, 345}
+		local momPool = {102, 39, 41, 217, 55, 139, 110, 114, 30, 200, 228, 199, 31, 29, 195, 355, 508}
+		local conjoinedPool = {8, 167, 169, 100, 322, 268, 67}
+		local leviathanPool = {83, 79, 262, 80, 51, 159, 399 , 230, 118}
+		local poopPool = {36 ,291, 236}
+		local bookWormPool = {35, 65, 78, 34, 33, 97, 287, 58, 282, 292, 192}
+		local spiderBabyPool = {288, 153, 211, 89, 171, 403}
+		if not g_vars.ottid_pillGiven then
+			player:UsePill(PillEffect.PILLEFFECT_PUBERTY, PillColor.PILL_NULL)
+			g_vars.ottid_pillGiven = true
+		end
+		if hasTransfo(guppyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_GUPPY) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_GUPPY)
+			addMissingItem(guppyPool)
+		elseif hasTransfo(beezlebubPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES)
+			addMissingItem(beezlebubPool)
+		elseif hasTransfo(funGuyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MUSHROOM) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MUSHROOM)
+			addMissingItem(funGuyPool)
+		elseif hasTransfo(seraphimPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_ANGEL) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_ANGEL)
+			addMissingItem(seraphimPool)
+		elseif hasTransfo(bobPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOB) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOB)
+			addMissingItem(bobPool)
+		elseif hasTransfo(spunPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_DRUGS) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_DRUGS)
+			addMissingItem(spunPool)
+		elseif hasTransfo(momPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MOM) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MOM)
+			addMissingItem(momPool)
+		elseif hasTransfo(conjoinedPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BABY) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BABY)
+			addMissingItem(conjoinedPool)
+		elseif hasTransfo(leviathanPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_EVIL_ANGEL) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_EVIL_ANGEL)
+			addMissingItem(leviathanPool)
+		elseif hasTransfo(poopPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_POOP) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_POOP)
+			addMissingItem(poopPool)
+		elseif hasTransfo(bookWormPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOOK_WORM) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOOK_WORM)
+			addMissingItem(bookWormPool)
+		elseif hasTransfo(spiderBabyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_SPIDERBABY) then
+			player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_SPIDERBABY)
+			addMissingItem(spiderBabyPool)
+		end
+	end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.OttidUpdate)
+
 --[[--END--]]

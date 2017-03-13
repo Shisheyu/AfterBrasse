@@ -108,13 +108,18 @@ end
 function hasTransfo(pool, trigger) -- check if the player transforms with items from pool. Triggers at trigger items
 	local cnt = 0
 	local player = Isaac.GetPlayer(0)
---~ 	if trigger == nil then
-		local trigger = 3
---~ 	end
 	if player:HasCollectible(Items.oddit_i) then
 		trigger = trigger - 1
 	end
+	if activeList == nil then
+		local activeList = {}
+	end
 	for i=1, #pool do
+		for j=1, #activeList do
+			if pool[i] == activeList[j] then
+				cnt = cnt + 1
+			end
+		end
 		if player:HasCollectible(pool[i]) then
 			cnt = cnt + 1
 		end

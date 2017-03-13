@@ -42,6 +42,7 @@
 		<passive cache="" id="536" description="Soul Extension" gfx="3+3=33.png" name="<3+<3=<3<3"/>
 		<passive cache="" id="537" description="It comes with great responsability" gfx="spidershoot.png" name="Spidershot"/>
 		<passive cache="" id="538" description="Hear no Evil" gfx="kikazaru.png" name="Kikazaru"/>
+		<passive cache="" id="539" description="It's Morphin' Time" gfx="oddit.png" name="Ottid"/>
 		<!--passive cache="" id ="" description="Who knows yours?" gfx="Mizaru.png" name="Mizaru"/-->
 		<!--familiar cache="" id ="" description="Who knows yours?" gfx="legacy.png" name="Legacy"/-->
 </items>
