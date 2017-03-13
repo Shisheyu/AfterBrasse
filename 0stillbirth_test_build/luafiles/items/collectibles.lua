@@ -756,4 +756,53 @@ function _Stillbirth:ExBanana_Mine()
     end
 end
 _Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.ExBanana_Mine )
+
+--[[
+Item : cricket's tail
+Type : augmente les chances de coffres à piques
+By : Dogeek (Drazeb & Krayz)
+Date : 2017-03-10
+]]--
+
+local crickets_tail_SPAWN_CHANCE = 25
+local cricketstail_spawn_delay = 0
+
+function _Stillbirth:cricketsTailUpdate()
+	local player = Isaac.GetPlayer(0)
+	local entities = Isaac.GetRoomEntities()
+	local room = Game():GetRoom()
+	local availablePosition = nil
+	if player:HasCollectible(Items.crickets_tail_i) then
+		if room:GetFrameCount() == 1 then
+			for i=1, #entities do
+				local e = entities[i]
+				if e:IsActiveEnemy(false) then
+					g_vars.crickets_tail_hadEnemies = true
+				end
+			end
+		end
+		if room:IsClear() and room:IsFirstVisit() then
+			local center = GetRoomCenter()
+			availablePosition = room:FindFreePickupSpawnPosition(center,1.0,false)
+			cricketstail_spawn_delay = cricketstail_spawn_delay + 1
+			local rand = math.random(100)
+			if cricketstail_spawn_delay >= 10 and rand <= crickets_tail_SPAWN_CHANCE and g_vars.crickets_tail_hadEnemies then
+				cricketstail_spawn_delay = 0
+				g_vars.crickets_tail_hadEnemies = false
+				for i=1, #entities do
+					local e = entities[i]
+					if e and avalaiblePosition ~= nil then
+						if e.Type == 5 and getDistance(e.Postion, availablePosition) <= 32 and not e.Variant==52 then
+							e:Remove()
+						end
+					end
+				end
+				Isaac.Spawn(5, PickupVariant.PICKUP_SPIKEDCHEST, 0, availablePosition, Vector(0,0), player)
+			end
+		end
+	end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpdate) 
+
 --[[--END--]]

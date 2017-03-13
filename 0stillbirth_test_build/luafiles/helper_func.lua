@@ -156,6 +156,47 @@ function has_value (tab, val) -- checks if tab has val inside it
   return false
 end
 
+function GetRoomCenter()
+    local room = Game():GetRoom()
+    local roomshape = room:GetRoomShape()
+    local center =room:GetCenterPos()
+	local roomcenter = nil
+	
+    if not room:IsLShapedRoom() then
+        roomcenter = Vector( center.X, center.Y )
+    elseif roomshape == 9 then
+        roomcenter = Vector( center.X + 260, center.Y + 140 )
+    elseif roomshape == 10 then
+        roomcenter = Vector( center.X - 260, center.Y + 140 )
+    elseif roomshape == 11 then
+        roomcenter = Vector( center.X + 260, center.Y - 140 )
+    elseif roomshape == 12 then
+        roomcenter = Vector( center.X - 260, center.Y - 140 )
+    end
+    return roomcenter
+end
+
+function print(...)
+	local str, sep = "", ""
+	for i=1, select('#', ...) do
+		str = str .. sep .. tostring(select(i, ...))
+		sep = '\t'
+	end
+	return Isaac.DebugString(str)
+end
+
+function getDistance(Vector1, Vector2)
+	return math.abs((Vector1-Vector2):Length())
+end
+
+function isColinear(Vector1, Vector2, angle) --check si Vector1 et Vector2 sont colineaires à un angle près
+	if math.abs(Vector1:Normalized():Dot(Vector2:Normalized())) <= 1+angle and math.abs(Vector1:Normalized():Dot(Vector2:Normalized())) >= 1-angle then
+		return true
+	else
+		return false
+	end
+end
+
 Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end
