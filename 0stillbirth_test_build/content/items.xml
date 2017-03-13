@@ -38,6 +38,7 @@
 		<active cache="" id="532" maxcharges="2" description="magicmirror." gfx="magicmirror.png" name="Magic Mirror"/>
 		<active cache="" id="533" maxcharges="2" description="encyclopedia." gfx="encyclopedia.png" name="Encyclopedia"/>
 		<active cache="" id="534" maxcharges="2" description="Fruity Claymores" gfx="ExplosiveBanana.png" name="Explosive Banana" />
+		<passive cache="" id="535" description="Belief?" gfx="cricketstail.png" name="Cricket's Tail"/>
 		<!--passive cache="" id ="" description="Who knows yours?" gfx="Mizaru.png" name="Mizaru"/-->
 		<!--familiar cache="" id ="" description="Who knows yours?" gfx="legacy.png" name="Legacy"/-->
 </items>

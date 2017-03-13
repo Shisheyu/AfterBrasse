@@ -9,4 +9,5 @@
 	<costume type="none" id="" anm2path="cricket.anm2" priority="99"/>
 	<costume type="none" id="" anm2path="laser.anm2" priority="99"/>
 	<costume anm2path="costume_exbanana.anm2" hasSkinAlt="true" id="550" priority="200" type="none" />
+	<costume type="none" id="535" anm2path="cricketstail_body.anm2" priority="99"/>
 </costumes>
