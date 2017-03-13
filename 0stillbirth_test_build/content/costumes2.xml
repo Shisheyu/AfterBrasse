@@ -10,4 +10,7 @@
 	<costume type="none" id="" anm2path="laser.anm2" priority="99"/>
 	<costume anm2path="costume_exbanana.anm2" hasSkinAlt="true" id="550" priority="200" type="none" />
 	<costume type="none" id="535" anm2path="cricketstail_body.anm2" priority="99"/>
+	<costume type="none" id="536" anm2path="3+3=33.anm2" priority="99"/>
+	<costume type="none" id="537" anm2path="spidershoot.anm2" priority="99"/>
+	<costume type="none" id="538" anm2path="kikazaru.anm2" priority="99"/>
 </costumes>

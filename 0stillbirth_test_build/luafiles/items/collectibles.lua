@@ -805,4 +805,151 @@ end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpdate) 
 
+
+--[[
+Passive Item : Kikazaru : Supprime Curse of the Maze & Labyrinth. Larmes de sang bonus sortant des oreilles avec un tear rate de moitié.
+-Sliost-
+]]--
+
+local counterKikazaru = true -- counter to spawn a tear every 2*MaxFireDelay
+
+function _Stillbirth:HasKikazaru()
+  local player = Isaac.GetPlayer(0)    
+  if player:HasCollectible(Items.kikazaru_i) then
+    local tearRate = 2*player.MaxFireDelay
+    local aimDirection = player:GetAimDirection()
+    if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
+      local angle = aimDirection:GetAngleDegrees()
+      local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
+      local vectorRight = Vector.FromAngle(angle - 90)*(10*player.ShotSpeed) + player.Velocity
+      if counterKikazaru and player.FireDelay == 0 then
+        local tearLeft = player:FireTear(player.Position, vectorLeft, false, false, false)
+        local tearRight = player:FireTear(player.Position, vectorRight, false, false, false)
+        tearLeft:ChangeVariant(1)
+        tearRight:ChangeVariant(1)
+        counterKikazaru = false
+      elseif not counterKikazaru and player.FireDelay == 0 then
+        counterKikazaru = true
+      end
+    else
+      counterKikazaru = true
+    end
+  end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.HasKikazaru);
+
+
+--[[
+<3+<3 = <3<3
+remplace les coeurs bleus / noirs par des doubles coeurs
+Azqswx
+]]--
+
+function _Stillbirth:heartPlusHeartUpdate()
+
+	local player = Isaac.GetPlayer(0);
+	local bHeart = player:GetSoulHearts();
+	local Heart = player:GetMaxHearts();
+
+	if player:HasCollectible(Items.double_heart_i) then
+
+		local coeur = Isaac.GetRoomEntities();
+		local vec = player.Position;
+
+		for i = 1, #coeur do 					-- VERIFIER SI ORDRE DES COEURS CHANGE : Ordre change :'(
+
+			if (coeur[i].Type == 5) and (coeur[i].Variant == 10) then	--Test si de type: pickup + coeur
+				local sprite = coeur[i]:GetSprite();					-- Récupération sprite coeur
+				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative à Isaac
+				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
+					coeur[i]:AddEntityFlags(1<<25);
+					sprite:Load("resources/gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
+					sprite:Update();
+					coeur[i].SubType = HeartSubType.HEART_SOUL;
+				end
+
+				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
+					sprite:Load("resources/gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
+					sprite:Update()
+					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
+						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+						player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
+						coeur[i]:Remove()
+					end
+				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
+					sprite:Load("resources/gfx/items/pickups/doubleblackheart.anm2" , true);
+					sprite:Update();
+					if bval < 40 and player:CanPickBlackHearts() and bleu == 0 then
+						SFXManager():Play(185,1.0,1,false,1.0)
+						player:AddBlackHearts(4)
+						coeur[i]:Remove()
+					end
+				end
+			end
+		end
+	end
+end
+
+_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.heartPlusHeartUpdate);
+
+--[[
+Spidershot
+Azqswx
+]]--
+
+function _Stillbirth:SpidershotUpdateTears()
+  local player = Isaac.GetPlayer(0)
+  local entities = Isaac.GetRoomEntities();
+  if player:HasCollectible(Items.spidershot_i) then
+    for i = 1, #entities do
+      if entities[i].Type == EntityType.ENTITY_TEAR then
+        local entity = entities[i]:ToTear();
+        local lifetime = entity.FrameCount;
+        local rng = math.random(5)
+        local Luck = player.Luck
+        if rng <= Luck and lifetime == 1 then
+          entity:AddEntityFlags(1);
+        end
+        if entity:HasEntityFlags(1) and lifetime == 1 and entity.Variant ~= 27 then
+          entity:ChangeVariant(27)
+          
+        end
+      end
+    end
+  end
+end
+
+function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags, DamageSource, DamageCountdown)
+  local player = Isaac.GetPlayer(0)
+  if player:HasCollectible(Items.spidershot_i) then
+    if DamageSource.Type == EntityType.ENTITY_TEAR and DamageSource.Variant == 27 then
+      local posE = DmgEntity.Position;
+      index = Game():GetRoom():GetGridIndex(posE);
+      Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+    end
+  end
+end
+
+function _Stillbirth:SpidershotEffectOnGridandCreep()
+  local player = Isaac.GetPlayer(0)
+  if player:HasCollectible(Items.spidershot_i) then
+    local entities = Isaac.GetRoomEntities();
+    for i,entity in ipairs(entities) do
+      if entity.Type == EntityType.ENTITY_TEAR and entity.Variant == 27 then
+        local posTear = entity.Position;
+        local oldVeloc = entity.Velocity;
+        Isaac.Spawn(1000,44,0,posTear,Vector(0,0),player):ToEffect():SetTimeout(60)
+        if entity:CollidesWithGrid() then
+          local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
+          Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+        end
+      end
+    end
+  end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, _Stillbirth.SpidershotUpdateTears)
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SpidershotEffectOnGridandCreep)
 --[[--END--]]
