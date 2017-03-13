@@ -25,15 +25,4 @@ function REBALANCE_InitKeeper()
 	end
 end
 
---~ _Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,_Stillbirth.REBALANCE_InitKeeper)
-
---[[
-Item : Ottid
-Init to give a puberty pill for adulthood transfo
-]]--
-
-function _Stillbirth:InitOttid(player)
-	g_vars.ottid_pillGiven = false
-end
-
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,afterbrasse.InitOttid)
+--~ _Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,_Stillbirth.InitKeeper)

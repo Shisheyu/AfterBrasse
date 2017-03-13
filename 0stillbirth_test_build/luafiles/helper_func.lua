@@ -108,18 +108,13 @@ end
 function hasTransfo(pool, trigger) -- check if the player transforms with items from pool. Triggers at trigger items
 	local cnt = 0
 	local player = Isaac.GetPlayer(0)
+--~ 	if trigger == nil then
+		local trigger = 3
+--~ 	end
 	if player:HasCollectible(Items.oddit_i) then
 		trigger = trigger - 1
 	end
-	if activeList == nil then
-		local activeList = {}
-	end
 	for i=1, #pool do
-		for j=1, #activeList do
-			if pool[i] == activeList[j] then
-				cnt = cnt + 1
-			end
-		end
 		if player:HasCollectible(pool[i]) then
 			cnt = cnt + 1
 		end
@@ -159,47 +154,6 @@ function has_value (tab, val) -- checks if tab has val inside it
     end
   end
   return false
-end
-
-function GetRoomCenter()
-    local room = Game():GetRoom()
-    local roomshape = room:GetRoomShape()
-    local center =room:GetCenterPos()
-	local roomcenter = nil
-	
-    if not room:IsLShapedRoom() then
-        roomcenter = Vector( center.X, center.Y )
-    elseif roomshape == 9 then
-        roomcenter = Vector( center.X + 260, center.Y + 140 )
-    elseif roomshape == 10 then
-        roomcenter = Vector( center.X - 260, center.Y + 140 )
-    elseif roomshape == 11 then
-        roomcenter = Vector( center.X + 260, center.Y - 140 )
-    elseif roomshape == 12 then
-        roomcenter = Vector( center.X - 260, center.Y - 140 )
-    end
-    return roomcenter
-end
-
-function print(...)
-	local str, sep = "", ""
-	for i=1, select('#', ...) do
-		str = str .. sep .. tostring(select(i, ...))
-		sep = '\t'
-	end
-	return Isaac.DebugString(str)
-end
-
-function getDistance(Vector1, Vector2)
-	return math.abs((Vector1-Vector2):Length())
-end
-
-function isColinear(Vector1, Vector2, angle) --check si Vector1 et Vector2 sont colineaires à un angle près
-	if math.abs(Vector1:Normalized():Dot(Vector2:Normalized())) <= 1+angle and math.abs(Vector1:Normalized():Dot(Vector2:Normalized())) >= 1-angle then
-		return true
-	else
-		return false
-	end
 end
 
 Minutes60fps = function(a) return a*60*60 end
