@@ -23,8 +23,8 @@
 		<active cache="" id="517" description="You Look Stonning" gfx="medusashead.png" name="Medusa's Head" maxcharges="6"/>
 		<passive cache="" id="518" description="Now It's Too Late" gfx="missingnodd.png" name="Blind Pact"/>
 		<active cache="damage" id="519" description="Power Generator" gfx="cricketpaw.png" name="Cricket's Paw" maxcharges="0"/>
-		<passive cache="damage firedelay shotspeed luck speed" id ="520" description="Who knows yours?" gfx="salomon.png" name="salomon"/>
-		<passive cache="damage shotspeed" id ="521" description="txt" gfx="cataract.png" name="cataracte"/>
+		<passive cache="damage firedelay shotspeed luck speed" id ="520" description="Command Demons" gfx="salomon.png" name="salomon"/>
+		<passive cache="damage shotspeed" id ="521" description="Frantic Tears" gfx="cataract.png" name="cataracte"/>
 		<passive cache="" id="522" description="Midas Shot" gfx="bubbleshead.png" name="Bubble's Head"/>
 		<familiar cache="" id="523" description="King of Monkeys" gfx="sunwukong.png" name="SunWukong"/>
 		<familiar cache="" id="524" description="He wants your bombs!" gfx="fam_BombBum.png" name="fam_BombBum_I"/>
@@ -35,8 +35,8 @@
 		<trinket cache="" id="529" description="100% Mithril" gfx="chainmail.png" name="Chainmail"/>
 		<active cache="" id="530" maxcharges="2" description="CTRL + SHIFT + DEL" gfx="blanktissues.png" name="Blank Tissues"/>
 		<passive cache="" id="531" description="A random particle appears..." gfx="electron.png" name="Electron"/>
-		<active cache="" id="532" maxcharges="2" description="magicmirror." gfx="magicmirror.png" name="Magic Mirror"/>
-		<active cache="" id="533" maxcharges="2" description="encyclopedia." gfx="encyclopedia.png" name="Encyclopedia"/>
+		<active cache="" id="532" maxcharges="2" description="Blue, Clear and Beautiful" gfx="magicmirror.png" name="Magic Mirror"/>
+		<active cache="" id="533" maxcharges="2" description="Alpha Omega" gfx="encyclopedia.png" name="Encyclopedia"/>
 		<active cache="" id="534" maxcharges="2" description="Fruity Claymores" gfx="ExplosiveBanana.png" name="Explosive Banana" />
 		<passive cache="" id="535" description="Belief?" gfx="cricketstail.png" name="Cricket's Tail"/>
 		<!--passive cache="" id ="" description="Who knows yours?" gfx="Mizaru.png" name="Mizaru"/-->
