@@ -52,7 +52,7 @@ else
 							encyclopedia_i = Isaac.GetItemIdByName("Encyclopedia"),
 							ExBanana_i = Isaac.GetItemIdByName( "Explosive Banana" ),
 							--mizaru_i = Isaac.GetItemIdByName("Mizaru")
-							oddit_i = 1 -- TEMPORARY PLACEHOLDER FOR ODDIT
+							ottid_i = Isaac.GetItemIdByName( "Ottid" ) -- TEMPORARY PLACEHOLDER FOR ODDIT
 						}
 
 	Familiars =	{
@@ -135,7 +135,8 @@ else
 									translaser_hasTransfo = false,
 									translaser_hasCostume = false,
 									greencross_lastRoom = nil,
-									chora_hasCostume = true
+									chora_hasCostume = true,
+									ottid_pillGiven = false
 								}
 		return g_vars
 	]]
