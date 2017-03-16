@@ -3,6 +3,10 @@
 # AfterBrasse
 Mod Communautaire du jeu The Binding of Isaac : Afterbirth +
 
+http://www.twitch.tv/shisheyu_mayamoto
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
+
 # Membres de la team de Developpement
 
 ## Chef de projet
