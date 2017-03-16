@@ -940,13 +940,15 @@ Date : 2017-03-10
 function _Stillbirth:PepperSprayCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.pepper_spray_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 6 then
+		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
+			player.MaxFireDelay = player.MaxFireDelay - 3
+		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
 			player.MaxFireDelay = player.MaxFireDelay - 2
 		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
 			player.MaxFireDelay = player.MaxFireDelay - 1
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
-			player.ShotSpeed = Player.ShotSpeed - 0.2
+			player.ShotSpeed = player.ShotSpeed - 0.2
 		end
 	end
 end
@@ -956,7 +958,9 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.PepperSprayC
 function _Stillbirth:RattleCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.rattle_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 5 then
+		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 6 then
+			player.MaxFireDelay = player.MaxFireDelay - 2
+		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
 			player.MaxFireDelay = player.MaxFireDelay - 1
 		end
 	end
@@ -974,7 +978,7 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 5
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage + 1
+			player.Damage = player.Damage + 1.42
 		end
 	end
 end
@@ -984,7 +988,9 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.SpinachCache
 function _Stillbirth:AppetizerCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.appetizer_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 6 then
+		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
+			player.MaxFireDelay = player.MaxFireDelay - 3
+		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
 			player.MaxFireDelay = player.MaxFireDelay - 2
 		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
 			player.MaxFireDelay = player.MaxFireDelay - 1
@@ -1063,7 +1069,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.OffalCache)
 function _Stillbirth:TarotBoosterUpdate()
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.tarotbooster_i) and not g_vars.tarotbooster_hasSpawnedCards then
-		for i=-2, 2 do
+		for i=-2, 0 do
 			local x = i%2
 			local y = math.floor(i/2)
 			local rand = math.random(1, 22)
@@ -1076,6 +1082,9 @@ function _Stillbirth:TarotBoosterUpdate()
 			local pos = player.Position + Vector(x, y)
 			Isaac.Spawn(5, 300, rand, pos, Vector(0,0), player)
 		end
+		local rand = math.random(23, 31)
+		local pos = player.Position + Vector(-32, 32)
+		Isaac.Spawn(5, 300, rand, pos, Vector(0,0), player)
 		g_vars.tarotbooster_hasSpawnedCards = true
 	end
 end
@@ -1249,13 +1258,13 @@ function _Stillbirth:HeartPlusHeartUpdate()
 				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative à Isaac
 				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
 					coeur[i]:AddEntityFlags(1<<25);
-					sprite:Load("resources/gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
+					sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
 					sprite:Update();
 					coeur[i].SubType = HeartSubType.HEART_SOUL;
 				end
 
 				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
-					sprite:Load("resources/gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
+					sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
 					sprite:Update()
 					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
@@ -1263,7 +1272,7 @@ function _Stillbirth:HeartPlusHeartUpdate()
 						coeur[i]:Remove()
 					end
 				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
-					sprite:Load("resources/gfx/items/pickups/doubleblackheart.anm2" , true);
+					sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
 					sprite:Update();
 					if bval < 40 and player:CanPickBlackHearts() and bleu == 0 then
 						SFXManager():Play(185,1.0,1,false,1.0)

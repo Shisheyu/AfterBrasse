@@ -2,7 +2,7 @@
      <entity anm2path="002.150_tear_Leaf.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="12" friction="1" id="2" name="Tear leaf" numGridCollisionPoints="12" shadowSize="8" stageHP="0" variant="150">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
-     <entity anm2path="003.987_legacy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Legacy" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="987">
+     <entity anm2path="003.987_legacy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="4" name="Legacy" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="987">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
      <entity anm2path="003.988_sunwukong.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="SunWukong" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="988">
@@ -27,6 +27,9 @@
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
 	<entity anm2path="root.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="1" friction="1" id="3" name="Root" numGridCollisionPoints="0" shadowSize="10" stageHP="0" variant="669">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="gemini.anm2" baseHP="0" boss="0" champion="0" collisionDamage="5" collisionMass="3" collisionRadius="15" friction="1" id="5" name="fam_Gemini" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="670" subtype="0">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
 </entities>

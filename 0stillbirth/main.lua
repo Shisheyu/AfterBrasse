@@ -77,7 +77,9 @@ else
 						DioneaFamVariantL1 = Isaac.GetEntityVariantByName("DioneaFamiliar L1"),
 						DioneaFamVariantL2 = Isaac.GetEntityVariantByName("DioneaFamiliar L2"),
 						DioneaFamVariantL3 = Isaac.GetEntityVariantByName("DioneaFamiliar L3"),
-						DioneaFamVariantR = Isaac.GetEntityVariantByName("Root")
+						DioneaFamVariantR = Isaac.GetEntityVariantByName("Root"),
+						GeminiFam = Isaac.GetEntityTypeByName("fam_Gemini"),
+						GeminiFamVariant = Isaac.GetEntityVariantByName("fam_Gemini")
 						--electronFamiliar = Isaac.GetEntityTypeByName("fam_electron"),
 						--electronFamiliarVariant = Isaac.GetEntityVariantByName("fam_electron")
 					}

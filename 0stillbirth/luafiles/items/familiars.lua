@@ -275,14 +275,14 @@ end
 		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true then
 			local distance = ((g_vars.dionea_L1.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L1.Position.Y-entities[i].Position.Y)^2)^(1/2);
 			if distance <= 18 then
-				g_vars.dionea_tearsCount = tearsCount+1;
+				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
 				entities[i]:Kill();
 			end
 		end
 		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L2exists == true then
 			local distance = ((g_vars.dionea_L2.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L2.Position.Y-entities[i].Position.Y)^2)^(1/2);
 			if distance <= 20 then
-				g_vars.dionea_tearsCount = tearsCount+1;
+				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
 				entities[i]:Kill();
 			end
 		end
