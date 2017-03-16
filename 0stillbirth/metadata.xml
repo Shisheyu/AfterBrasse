@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>0Stillbirth</name>
+    <directory>0stillbirth</directory>
+    <id>864472370</id>
+    <description>The Bindind of Isaac : Stillbirth will be a mod/expansion containing new items, trinkets, pickups, floors, enemies, bosses, characters, challenges, original soundtrack.
+
+Stillbirth is a Community mod developed by Shisheyu's Twitch community.
+
+Current Version : 0.01 (testing Mod Uploader with little content)
+
+4 Passive Items :
+
+* Money = Luck
+* Brave Shoe
+* Technology 0
+* Hot Pizza Slice
+
+3 Active Items : 
+
+* Dad's Beer
+* Golden Idol
+* Medusa's Head</description>
+    <version>1.1</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Items"/>
+    <tag id="Active Items"/>
+    <tag id="Trinkets"/>
+    <tag id="Pills"/>
+    <tag id="Cards"/>
+    <tag id="Pickups"/>
+    <tag id="Player Characters"/>
+    <tag id="Familiars"/>
+    <tag id="Babies"/>
+    <tag id="Rooms"/>
+    <tag id="Floors"/>
+    <tag id="Enemies"/>
+    <tag id="Bosses"/>
+    <tag id="Challenges"/>
+    <tag id="Tweaks"/>
+    <tag id="Graphics"/>
+    <tag id="Sound Effects"/>
+    <tag id="Music"/>
+</metadata>
