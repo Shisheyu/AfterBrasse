@@ -354,111 +354,87 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SolomonUpdate)
 --[[
 Cataract : Epiphora pour le dommage et le tear delay
 --Dogeek
--krayz
+-k
 --]]
-local cataract_numberOfTearsShot = 0
-local cataract_previousDirection = -1
-local cataract_baseDamage = 0
-local cataract_baseShotSpeed = 0
-local cataract_restored_values = -999
-local cataract_oldFrame = -1
-local cataract_reset_flag = false
-local cataract_init_flag = true
-local cataract_previousAction = nil
-local cataract_changedDirection = false
+local cataracte_numberOfTearsShot = 0
+local cataracte_previousDirection = -1
+local cataracte_baseDamage = 0
+local cataracte_baseShotSpeed = 0
+local cataracte_restored_values = -999
+local cataracte_oldFrame = -1
 
 function _Stillbirth:cataract_EvCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(Items.cataract_i) then
+    if player:HasCollectible(Items.cataracte_i) then
         if IsShooting(player) then
-            cataract_restored_values = -99
-            if cacheFlag == CacheFlag.CACHE_DAMAGE then
-                player.Damage = player.Damage + (player.Damage*0.05+cataract_numberOfTearsShot*0.5) * cataract_numberOfTearsShot
-            end
-            if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
-                player.ShotSpeed = player.ShotSpeed - (player.ShotSpeed*0.12) * cataract_numberOfTearsShot
-            end
+			if not cataracte_restored_values then
+				cataracte_numberOfTearsShot = 0
+				player.Damage = cataracte_baseDamage
+				player.ShotSpeed = cataracte_baseShotSpeed
+				cataracte_restored_values = true
+				cataracte_previousDirection = player:GetFireDirection()
+			else
+				cataracte_restored_values = -99
+				if cacheFlag == CacheFlag.CACHE_DAMAGE then
+					player.Damage = player.Damage + (player.Damage*0.05+cataracte_numberOfTearsShot*0.5) * cataracte_numberOfTearsShot
+				end
+				if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
+					player.ShotSpeed = player.ShotSpeed - (player.ShotSpeed*0.12) * cataracte_numberOfTearsShot
+				end
+			end
         end
-        if not cataract_restored_values then
-            cataract_numberOfTearsShot = 0
-            player.Damage = cataract_baseDamage
-            player.ShotSpeed = cataract_baseShotSpeed
-            cataract_restored_values = true
+        if not cataracte_restored_values then
+            cataracte_numberOfTearsShot = 0
+            player.Damage = cataracte_baseDamage
+            player.ShotSpeed = cataracte_baseShotSpeed
+            cataracte_restored_values = true
         end
     end
 end
 
-function _Stillbirth:cataract_ResetCache(player, cacheFlag)
-	local player = Isaac.GetPlayer(0)
-	if player:HasCollectible(Items.cataract_i) and cataract_reset_flag then
-		cataract_numberOfTearsShot = 0
-		player.Damage = cataract_baseDamage
-		player.ShotSpeed = cataract_baseShotSpeed
-	end
+local function cataract_restore_val(player)
+	cataracte_oldFrame = player.FrameCount
+	cataracte_restored_values = false
+	player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
+	player:AddCacheFlags(CacheFlag.CACHE_SHOTSPEED)
+	player:EvaluateItems()
 end
 
 function _Stillbirth:cataract_PostUpdate()
     local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(Items.cataract_i) then
-        dbz = cataract_numberOfTearsShot
-        if cataract_restored_values == -999 then
-            cataract_baseDamage = player.Damage
-            cataract_baseShotSpeed = player.ShotSpeed
-            cataract_restored_values = -99
+    if player:HasCollectible(Items.cataracte_i) then
+        dbz = cataracte_numberOfTearsShot
+        if cataracte_restored_values == -999 then
+            cataracte_baseDamage = player.Damage
+            cataracte_baseShotSpeed = player.ShotSpeed
+            cataracte_restored_values = -99
         end
         if IsShooting(player) then
-            if (player.FrameCount - cataract_oldFrame) < 0 then
-                cataract_oldFrame = player.FrameCount
+            if (player.FrameCount - cataracte_oldFrame) < 0 then
+                cataracte_oldFrame = player.FrameCount
             end
-            if (player:GetFireDirection() ~= cataract_previousDirection or cataract_changedDirection) and not cataract_init_flag then
-            	cataract_reset_flag = true
-            else
-            	cataract_reset_flag = false
-            	cataract_init_flag = false
-            end
-            if (player.FrameCount - cataract_oldFrame) >= Secondes30fps(3.2-(cataract_numberOfTearsShot*0.3)) then
-                if cataract_numberOfTearsShot < 3 then
-                    cataract_numberOfTearsShot = cataract_numberOfTearsShot + 1
+            if player:GetFireDirection() ~= cataracte_previousDirection then
+				cataract_restore_val(player)
+            elseif (player.FrameCount - cataracte_oldFrame) >= Secondes30fps(3.2-(cataracte_numberOfTearsShot*0.3)) then
+                if cataracte_numberOfTearsShot < 3 then
+                    cataracte_numberOfTearsShot = cataracte_numberOfTearsShot + 1
                     player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
                     player:AddCacheFlags(CacheFlag.CACHE_SHOTSPEED)
                     player:EvaluateItems()
                 end
-                cataract_oldFrame = player.FrameCount
+                cataracte_oldFrame = player.FrameCount
             end
         else
-            if cataract_restored_values == -99 then
-                cataract_restored_values = false
-                player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
-                player:AddCacheFlags(CacheFlag.CACHE_SHOTSPEED)
-                player:EvaluateItems()
+            if cataracte_restored_values == -99 then
+				cataract_restore_val(player)
             end
-            cataract_oldFrame = player.FrameCount
-            cataract_baseDamage = player.Damage
-            cataract_baseShotSpeed = player.ShotSpeed
+            cataracte_oldFrame = player.FrameCount
+            cataracte_baseDamage = player.Damage
+            cataracte_baseShotSpeed = player.ShotSpeed
         end
-        cataract_previousDirection = player:GetFireDirection()
     end
 end
-
-function _Stillbirth:cataract_Input(player, hook, action)
-	local shoot = {ButtonAction.SHOOTLEFT, ButtonAction.SHOOTRIGHT, ButtonAction.SHOOTUP, ButtonAction.SHOOTDOWN}
-	if hook == InputHook.IS_ACTION_TRIGGERED then
-		if not cataract_previousAction and has_value(shoot, action) then
-			cataract_previousAction = action
-		end
-		if has_value(shoot, action) then
-			if cataract_previousAction ~= action then
-				cataract_changedDirection = true
-			end
-			cataract_previousAction = action
-		end
-	end
-	return nil
-end
-
-_Stillbirth:AddCallback(ModCallbacks.MC_INPUT_ACTION, _Stillbirth.cataract_Input)
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.cataract_EvCache)
-_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.cataract_ResetCache)
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cataract_PostUpdate)
 
 --[[
