@@ -72,6 +72,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Download the git repository as a zip file
 - Extract the downloaded zip on your computer
 - Copy the "0stillbirth" folder into your binding of isaac afterbirth + mods folder
+
     -Windows : C:\\Users\\\<username>\\Documents\\My Games\\binding of isaac afterbirth + mods\\
+    
     -Linux : ~/.local/share/binding of isaac afterbirth + mods/
+    
     -Mac OS : ~/Library/Application Support/Binding of Isaac Afterbirth+ Mods
