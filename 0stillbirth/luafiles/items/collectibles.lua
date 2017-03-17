@@ -558,6 +558,9 @@ Blank Tissue : supprime toute les larmes de la salle
 function _Stillbirth:OnBlankTissueUse()
     local player = Isaac.GetPlayer(0)
     local entities = Isaac.GetRoomEntities()
+    if not SFXManager():IsPlaying(6) then
+    	SFXManager():Play(6, 1.0, 1, false, 1.0)
+    end
     for i=1, #entities do
     	if entities[i].Type == EntityType.ENTITY_PROJECTILE then
     		entities[i]:Remove()
@@ -619,7 +622,7 @@ function _Stillbirth:ChoranaptyxicUpdate()
 				chora_bspeed = 0
 				chora_btears = 1
 				if not g_vars.chora_hasCostume then
-					player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicblue.anm2"))
+					player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicred.anm2"))
 					g_vars.chora_hasCostume = true
 				end
 			else
@@ -629,6 +632,7 @@ function _Stillbirth:ChoranaptyxicUpdate()
 				chora_btears = 1
 				if g_vars.chora_hasCostume then
 					player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicblue.anm2"))
+					player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicred.anm2"))
 					g_vars.chora_hasCostume = false
 				end
 			end
@@ -659,7 +663,7 @@ _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_magic_mirror,
 
 function _Stillbirth:removeTheFoolSound()
 	local player = Isaac.GetPlayer(0)
-	if player:HasCollectible(Items.magic_mirror_i) and player:NeedsCharge() and SFXManager():IsPlaying(SoundEffect.SOUND_FOOL) then
+	if player:HasCollectible(Items.magic_mirror_i) and player:NeedsCharge() then--and SFXManager():IsPlaying(SoundEffect.SOUND_FOOL) then
 		SFXManager():Stop(SoundEffect.SOUND_FOOL)
 	end
 end
@@ -1113,10 +1117,14 @@ function _Stillbirth:DGlasses_add_tear()
             local tearPosition = entities[i].Position;
             local tearVeloc = entities[i].Velocity;
             for j = 1, used do
-            	if player:GetFireDirection() == 0 or player:GetFireDirection() == 2 then 
-                	player:FireTear(Vector(tearPosition.X+j,tearPosition.Y),tearVeloc,true,true,true)
+            	local offset = j * 16
+            	local u = used * 16
+            	if player:GetFireDirection() == 0 or player:GetFireDirection() == 2 then
+            		entities[i].Position = entities[i].Position - Vector(u, -2)
+                	player:FireTear(Vector(tearPosition.X,tearPosition.Y+offset-u/2),tearVeloc,true,true,true)
             	elseif player:GetFireDirection() == 1 or player:GetFireDirection() == 3 then 
-                	player:FireTear(Vector(tearPosition.X,tearPosition.Y+j),tearVeloc,true,true,true)
+            		entities[i].Position = entities[i].Position - Vector(-2, u)
+                	player:FireTear(Vector(tearPosition.X+offset-u/2,tearPosition.Y),tearVeloc,true,true,true)
                 end
             end
         end

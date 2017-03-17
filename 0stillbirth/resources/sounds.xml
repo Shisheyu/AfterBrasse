@@ -1066,4 +1066,7 @@
 		<sample weight="1" path="nom-a-02.wav" />
 		<sample weight="1" path="nom-a-03.wav" />
 	</sound>
+	<sound id="6">
+		<sample weight="1" path="splotch.wav" />
+	</sound>
 </sounds>
