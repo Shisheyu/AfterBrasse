@@ -528,12 +528,12 @@ function _Stillbirth:FirstBloodEffect() -- Only one tear Version (event with qua
     local player = Isaac.GetPlayer(0);
     local roomframe = Game():GetRoom():GetFrameCount();
     local entities = Isaac.GetRoomEntities();
-
+	local room = Game():GetRoom()
     if roomframe == 1 then
         g_vars.FirstBlood_Done = false
     end
     if player:HasCollectible(Items.first_blood_i) then
-        if not g_vars.FirstBlood_Done then
+        if not g_vars.FirstBlood_Done and not room:IsClear() then
             for i = 1, #entities do
                 if (entities[i].Type == EntityType.ENTITY_TEAR) and (entities[i]:GetLastParent().Type == player.Type) then --[Alt:] add "and  g_vars.FirstBlood_Done" so it trigger for 1 tear only
                     local e = entities[i]:ToTear()
@@ -650,6 +650,8 @@ Active item : Magic Mirror
 --]]
 function _Stillbirth:use_magic_mirror()
     local player = Isaac.GetPlayer(0);
+    --local level = Game():GetLevel()
+    --Game():StartRoomTransition(level:GetStartingRoomIndex, Direction.RIGHT, animation)
     player:UseCard(1);
 	return true
 end
