@@ -20,7 +20,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Illuday
 - Lucyna
 - Mathbou
-- Greninja_San
 - Aero_Kansaki
 - Asenith
 
@@ -29,18 +28,22 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Krayz
 - Illuday
 - Azqswx
-- xahos
 - Sliost
-- SlyHawks
 - Dogeek
-- Drazeb
-- Nagachi
 
 ## Animateurs
 
 - Aktraiser
 - Magikwhite
 - Azqswx
+
+## A titre honorifique
+
+- Greninja_San - Sprite Green Cross
+- xahos - Brave Shoe Code
+- SlyHawks - Torn Gloves Code
+- Nagachi - Zodiac Transformation Code
+- Drazeb - Dad's Beer, Krampus' Tooth
 
 # TO DO
 
