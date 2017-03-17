@@ -202,7 +202,7 @@ function _Stillbirth:GoldenIdol_onUse()
     			y = 1
     		end
     		local pos = player.Position + Vector(x*32, y*32)
-    		Isaac.Spawn(5, 20, rand, pos, Vector(0,0) player)
+    		Isaac.Spawn(5, 20, rand, pos, Vector(0,0), player)
     	end
     end
     return true

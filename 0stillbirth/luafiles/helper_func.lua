@@ -217,6 +217,7 @@ function isRoomOver(room)
 		return true
 	else
 		return false
+	end
 end
 
 Minutes60fps = function(a) return a*60*60 end
