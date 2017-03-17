@@ -1,8 +1,7 @@
-local NUM_BLESSINGS = 2 --6
+local NUM_BLESSINGS = 4 --6
 local currentBlessing = ""
 require("luafiles/libs/luabit/bit")
 
-local roomNotClear = true
 local collectibleHasSpawned = false
 local wealth_pickup_spawned = false
 
@@ -18,12 +17,13 @@ function _Stillbirth:useBlessing(curse)
 		elseif rand == 2 then
 			currentBlessing = "Blessing of the ".."light"
 			return bit.bor(Curses.blessing_light, curse)
-		--[[elseif rand == 3 then
-			currentBlessing = "Blessing of the ".."acceptance"
-			return bit.bor(blessing_acceptance, curse)
-		elseif rand == 4 then
+		elseif rand == 3 then
 			currentBlessing = "Blessing of the ".."miracle"
 			return bit.bor(blessing_miracle, curse)
+		elseif rand == 4 then
+			currentBlessing = "Blessing of the ".."acceptance"
+			return bit.bor(blessing_acceptance, curse)
+		--[[
 		elseif rand == 5 then
 			currentBlessing = "Blessing of the ".."wealth"
 			return bit.bor(blessing_wealth, curse)
@@ -50,19 +50,19 @@ function _Stillbirth:blessingGuide()
 	Game():GetLevel():ApplyCompassEffect()
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingGuide)
---[[
+
+local blessing_miracle_heal = false
 function _Stillbirth:blessingMiracle()
 	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_miracle) ~= Curses.blessing_miracle) then return end
 	local player = Isaac.GetPlayer(0)
 	local room = Game():GetRoom()
-	if room:IsClear() and not roomNotClear then
-		roomNotClear = true
+	if room:GetFrameCount() == 1 then blessing_miracle_heal = false end
+	if isRoomOver(room) and room:IsFirstVisit() and not blessing_miracle_heal then
 		local rand = math.random(10) --1/10 de heal 1/2 coeur rouge
+		blessing_miracle_heal = true
 		if rand == 1 then
 			player:AddHearts(1)
 		end
-	else
-		noomNotClear = false
 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingMiracle)
@@ -72,20 +72,20 @@ function _Stillbirth:blessingAcceptance()
 	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_acceptance) ~= Curses.blessing_acceptance or player:HasCollectible(CollectibleType.COLLECTIBLE_CHAMPIONS_BELT) or player:HasTrinket(TrinketType.TRINKET_PURPLE_HEART)) then return end
     local entities = Isaac.GetRoomEntities()
     local room = Game():GetRoom()
-    if lastRoom ~= room:GetDecorationSeed() then
+    if room:GetFrameCount() == 1 then
     	for i=1, #entities do
     		local e = entities[i]
     		if e:IsVulnerableEnemy() then
-    			if e:ToNPC():IsChampion() then
-    				Game():RerollEnnemy(e:ToNPC())
+    			if e:ToNPC():IsChampion() and not e:IsBoss() then
+    				--Game():RerollEnnemy(e:ToNPC())
+    				e:Remove()
     			end
     		end
     	end
-    	lastRoom = room:GetDecorationSeed()
     end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingGuide)
-
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingAcceptance)
+--[[
 function _Stillbirth:blessingWealth()
 	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_wealth) ~= Curses.blessing_wealth) then return end
 	local player = Isaac.GetPlayer(0)
@@ -161,3 +161,19 @@ function _Stillbirth:displayBlessing()
 	Isaac.RenderText(currentBlessing, 50, 20, 255, 255, 255, 255)
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.displayBlessing)
+
+--monkey items curse negation
+
+function _Stillbirth:MonkeyCurseUpdate(curse)
+	local player = Isaac.GetPlayer(0)
+	if player:HasCollectible(Items.mizaru_i) and (curse == 1 or curse == 1<<2) then
+		return
+	end
+	if player:HasCollectible(Items.kikazaru_i) and (curse == 1<<1 or curse == 1<<5) then
+		return
+	end
+	if player:HasCollectible(Items.iwazaru_i) and (curse == 1<<6 or curse == 1<<3) then
+		return
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_CURSE_EVAL, _Stillbirth.MonkeyCurseUpdate)

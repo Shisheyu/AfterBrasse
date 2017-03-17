@@ -202,6 +202,23 @@ function isColinear(Vector1, Vector2, angle) --check si Vector1 et Vector2 sont 
 	end
 end
 
+function isRoomOver(room)
+	local slots = {}
+	local doorState = {}
+	for i=0, 7 do
+		if room:IsDoorSlotAllowed(i) then
+			table.insert(i)
+		end
+	end
+	for i = 1, #slots do
+		table.append(doorState, room:GetDoor(slots[i]).State == DoorState.DOOR_CLOSED)
+	end
+	if not has_value(doorState, true) then
+		return true
+	else
+		return false
+end
+
 Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end

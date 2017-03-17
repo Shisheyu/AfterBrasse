@@ -10,28 +10,28 @@
 		<Item Name="Choranaptyxic" Id="521" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Cricket's Collar" Id="522" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<Item Name="Cricket's Paw" Id="523" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
-		<!--<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> > <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<!--<Item Name="Cricket's Toys" Id="525" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<Item Name="Dad's Beer" Id="526" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Dad's Whip" Id="527" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Dionaeamuscipula" Id="530" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dionaea Muscipula" Id="530" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> 
 		<Item Name="Explosive Banana" Id="532" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="First Blood" Id="533" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Hazmat Suit" Id="536" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Heart Transplant" Id="537" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Ionizing Radiation" Id="539" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Iwazaru" Id="540" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Kikazaru" Id="541" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Kikazaru" Id="541" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Magic Mirror" Id="544" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Medusa's Head" Id="545" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
-		<!--<Item Name="Mizaru" Id="546" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Mizaru" Id="546" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="RNG Baby" Id="554" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Spider Shot" Id="556" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Spidershot" Id="556" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Sun Wukong" Id="559" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Technology 0" Id="561" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="shop">
-		<!--<Item Name="<3+<3=<3<3" Id="511" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="<3+<3=<3<3" Id="511" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Diamond Icky Card" Id="529" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Money = Luck" Id="548" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" Id="558" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
@@ -58,7 +58,7 @@
 		<Item Name="Cricket's Body" Id="224" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans les coffres à piques également-->
 		<!--<Item Name="Cricket's Collar" Id="522" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Cricket's Paw" Id="523" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
-		<!--<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Cricket's Toys" Id="525" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Dad's Whip" Id="527" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="God Sale" Id="534" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
@@ -110,23 +110,23 @@
 		<Item Name="Choranaptyxic" Id="521" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Cricket's Collar" Id="522" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<Item Name="Cricket's Paw" Id="523" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
-		<!--<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<!--<Item Name="Cricket's Toys" Id="525" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
 		<Item Name="Dad's Beer" Id="526" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Dad's Whip" Id="527" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Dionaeamuscipula" Id="530" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dionaea Muscipula" Id="530" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Explosive Banana" Id="532" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="First Blood" Id="533" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Hazmat Suit" Id="536" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Heart Transplant" Id="537" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Ionizing Radiation" Id="539" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Iwazaru" Id="540" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Kikazaru" Id="541" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Kikazaru" Id="541" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Magic Mirror" Id="544" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Medusa's Head" Id="545" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
-		<!--<Item Name="Mizaru" Id="546" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Mizaru" Id="546" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="RNG Baby" Id="554" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Spider Shot" Id="556" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Spidershot" Id="556" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Sun Wukong" Id="559" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Technology 0" Id="561" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
@@ -143,7 +143,7 @@
 		<!--<Item Name="Toxic Mushroom" Id="562" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 	</Pool>
 	<Pool Name="greedShop">
-		<!--<Item Name="<3+<3=<3<3" Id="511" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="<3+<3=<3<3" Id="511" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Diamond Icky Card" Id="529" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Money = Luck" Id="548" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" Id="558" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
@@ -161,7 +161,7 @@
 		<Item Name="Cricket's Body" Id="224" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans les coffres à piques également-->
 		<!--<Item Name="Cricket's Collar" Id="522" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Cricket's Paw" Id="523" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
-		<!--<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Cricket's Tail" Id="524" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Cricket's Toys" Id="525" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Dad's Whip" Id="527" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="God Sale" Id="534" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->

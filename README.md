@@ -53,17 +53,11 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 
 - Add mom's cake to moms transfo pool
 
-- Solomon + golden idol fix so that it doesn't spawn coins
-
-- sun wukong + box of friends synergy
+- familiers customs + box of friends synergy
 
 - Sun Wukong : Chaîne familier à travailler, déplacement peu être non fluide pour l'instant maybe je suis bourré ?
 
-- Blank Tissues : Animation à add
-
 - Tous les Items de boss font leur effet qu'une seule fois.
-
-- Golden Idol : condition de pop direct des pièces à rework : Pièces au sol ne doivent pop que quand le joueur a full coeur jaune
 
 - Mizaru : Devrait pouvoir varier seulement quand on tire et moins fréquemment
 

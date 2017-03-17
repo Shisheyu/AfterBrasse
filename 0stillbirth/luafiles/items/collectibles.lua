@@ -176,8 +176,35 @@ Active item : Golden Idol : Donne un coeur bleugoldé
 --]]
 function _Stillbirth:GoldenIdol_onUse()
     local player = Isaac.GetPlayer(0)
+    if (not player:HasCollectible(Items.solomon_i)) or ((player:GetHearts()+player:GetSoulHearts())<12) then
     player:AddSoulHearts(2);
-    player:AddGoldenHearts(1);
+    if player:CanPickGoldenHearts() then
+    	player:AddGoldenHearts(1);
+    else --spawns 5 to 8 random coins around the player pennies 80%, nickel 10%, dimes 5%, lucky 5%
+    	local rand = math.random(5, 8)
+    	local lower = -math.floor(rand/2)
+    	local upper = lower + rand
+    	for i=lower, upper do
+    		local rand = math.random(100)
+    		if rand<80 then
+    			rand = 1
+    		elseif rand>=80 and rand <90 then
+    			rand = 2
+    		elseif rand>=90 and rand <95 then
+    			rand = 3
+    		else
+    			rand = 5
+    		end
+    		local x = i%2
+    		local y = math.floor(i/2)
+    		if x==0 and y == 0 then
+    			x = 1
+    			y = 1
+    		end
+    		local pos = player.Position + Vector(x*32, y*32)
+    		Isaac.Spawn(5, 20, rand, pos, Vector(0,0) player)
+    	end
+    end
     return true
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.GoldenIdol_onUse, Items.golden_idol_i);
