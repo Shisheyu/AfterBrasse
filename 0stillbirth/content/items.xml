@@ -21,7 +21,7 @@
 	<passive cache="speed" id="518" description="It sticks" gfx="braveshoes.png" name="Brave Shoe"/>
 	<passive cache="" id="519" description="Stopping power" gfx="bubbleshead.png" name="Bubble's Head"/>
 	<passive cache="damage" id="520" description="Frantic tears" gfx="cataract.png" name="Cataract"/>
-	<passive cache="damage, range, speed" id="521" description="Size does matter!" gfx="choranaptyxic.png" name="Choranaptyxic"/>
+	<passive cache="damage range speed" id="521" description="Size does matter!" gfx="choranaptyxic.png" name="Choranaptyxic"/>
 	<passive cache="" id="522" description="WORK IN PROGRESS -- Only threes" gfx="cricketscollar.png" name="Cricket's Collar"/>
 	<active id="523" description="Power generator" gfx="cricketspaw.png" name="Cricket's Paw"/>
 	<passive cache="" id="524" description="Belief?" gfx="cricketstail.png" name="Cricket's Tail"/>
