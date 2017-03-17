@@ -1069,4 +1069,10 @@
 	<sound id="6">
 		<sample weight="1" path="splotch.wav" />
 	</sound>
+	<sound id="10">
+		<sample weight="1" path="whip-hit.wav" />
+	</sound>
+	<sound id="17">
+		<sample weight="1" path="whip-miss.wav" />
+	</sound>
 </sounds>
