@@ -100,9 +100,9 @@ else
 					blessing_light = 2^(Isaac.GetCurseIdByName("Blessing of the Light")-1),
 					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1), 
 					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1), 
-					blessing_acceptance = 2^(Isaac.GetCurseIdByName("Blessing of the Acceptance")-1)--,
-					--blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealth")-1),
-					--blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
+					blessing_acceptance = 2^(Isaac.GetCurseIdByName("Blessing of the Acceptance")-1),
+					blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealth")-1),
+					blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
 				}
 
 	--[[

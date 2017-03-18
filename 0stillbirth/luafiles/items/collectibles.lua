@@ -1337,7 +1337,7 @@ Dogeek
 function _Stillbirth:whiteCandleUpdate()
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.white_candle_i) and not g_vars.whiteCandle_EternalHeartAdded then
-		BLESSING_CHANCE = 1
+		g_vars.BLESSING_CHANCE = 1
 		player:AddEternalHearts(1)
 		g_vars.whiteCandle_EternalHeartAdded = true
 	end
