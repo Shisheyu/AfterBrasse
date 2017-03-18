@@ -7,7 +7,8 @@
 	<costume type="passive" id="518" anm2path="braveshoes.anm2" priority="99"/> 
 	<costume type="passive" id="519" anm2path="bubblehead.anm2" priority="99"/>
 	<costume type="passive" id="520" anm2path="cataract.anm2" priority="99"/> 
-	<costume type="none" id="521" anm2path="choranaptyxicblue.anm2" priority="99"/>
+	<costume type="none" id="521blue" anm2path="choranaptyxicblue.anm2" priority="99"/>
+	<costume type="none" id="521red" anm2path="choranaptyxicred.anm2" priority="99"/>
 	<costume type="passive" id="522" anm2path="cricketscollar.anm2" priority="99"/> 
 	<costume type="passive" id="524" anm2path="cricketstail.anm2" priority="99"/>
 	<costume type="passive" id="528" anm2path="devilsale.anm2" priority="99"/> 
@@ -37,5 +38,5 @@
 	<costume type="none" id="" anm2path="cricket.anm2" priority="99"/>
 	<costume type="none" id="" anm2path="laser.anm2" priority="99"/>
 	<costume anm2path="costume_exbanana.anm2" hasSkinAlt="true" id="550" priority="200" type="none" />
-	<costume type="none" id="563" anm2path="choranaptyxicred.anm2" priority="99"/>
+	<costume type="passive" id="564" anm2path="whitecandle.anm2" priority="99"/>
 </costumes>

@@ -35,6 +35,7 @@
 		<!--<Item Name="Diamond Icky Card" Id="529" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Money = Luck" Id="548" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" Id="558" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="White Candle" Id="564" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="boss">
 		<Item Name="Appetizer" Id="513" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -147,6 +148,7 @@
 		<!--<Item Name="Diamond Icky Card" Id="529" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="Money = Luck" Id="548" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" Id="558" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="White Candle" Id="564" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="greedCurse">
 		<!---->

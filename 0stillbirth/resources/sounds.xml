@@ -1078,4 +1078,7 @@
 	<sound id="18">
 		<sample weight="1" path="medusa-snake.wav" />
 	</sound>
+	<sound id="19">
+		<sample weight="1" path="dads-beer.wav" />
+	</sound>
 </sounds>

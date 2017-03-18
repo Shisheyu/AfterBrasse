@@ -31,9 +31,7 @@ end
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
     if g_vars.cricketsPaw_had then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            for i=1, g_vars.cricketsPaw_Uses do
-                player.Damage = player.Damage * 1.2 -- TO BALANCE
-            end
+        	player.Damage = player.Damage * (1+g_vars.cricketsPaw_Uses*0.2) -- TO BALANCE
         end
     end
 end
@@ -71,6 +69,7 @@ function _Stillbirth:use_beer()
     local entities = Isaac.GetRoomEntities( )
     local game = Game()
 	local duration_infinite = 0xFFFFFF
+	SFXManager():Play(19, 1.0, 1, false, 1)
     for i = 1, #entities do
         if entities[i]:IsVulnerableEnemy( ) then
         	if entities[i]:IsBoss() then
@@ -299,7 +298,7 @@ function BounceHearts(heart)
 	local velmul = 3
 	local velocity = player.Velocity * velmul
 	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-	if getDistance(player.Position, heart.Position) <= 20 then
+	if getDistance(player.Position, heart.Position) <= 16 then
 		heart.Velocity = velocity
 	end
 	BounceHeartHeart(heart)
@@ -314,6 +313,7 @@ function BounceHeartHeart(heart1)
 			local velocity = heart1.Velocity * velmul
 			if getDistance(heart1.Position, e2.Position) <= 20 then
 				e2.Velocity = velocity
+				heart1.Velocity = Vector(0,0)
 			end
 		end
 	end
@@ -1042,11 +1042,7 @@ function _Stillbirth:AppetizerCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.appetizer_i) then
 		for i=1, g_vars.appetizer_cnt do
-			if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
-				player.MaxFireDelay = player.MaxFireDelay - 3
-			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
-				player.MaxFireDelay = player.MaxFireDelay - 2
-			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
+			if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 5 then
 				player.MaxFireDelay = player.MaxFireDelay - 1
 			end
 		end
@@ -1270,7 +1266,7 @@ function _Stillbirth:cricketsTailUpdate()
 				end
 			end
 		end
-		if room:IsClear() and room:IsFirstVisit() then
+		if isRoomOver(room) and room:IsFirstVisit() then
 			local center = GetRoomCenter()
 			availablePosition = room:FindFreePickupSpawnPosition(center,1.0,false)
 			cricketstail_spawn_delay = cricketstail_spawn_delay + 1

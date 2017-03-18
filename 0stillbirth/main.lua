@@ -194,7 +194,7 @@ else
 								dionea_L3exists = false,
 								mizaru_n = nil,
 								kikazaru_counterKikazaru = true,
-								offat_cnt = 1,
+								offal_cnt = 1,
 								appetizer_cnt = 1,
 								momscake_cnt = 1,
 								rabbitsfoot_cnt = 1,
