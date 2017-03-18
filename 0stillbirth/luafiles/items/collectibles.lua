@@ -296,11 +296,26 @@ Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
 --]]
 function BounceHearts(heart)
 	local player = Isaac.GetPlayer(0)
-	local velmul = 4
+	local velmul = 3
 	local velocity = player.Velocity * velmul
 	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-	if getDistance(player.Position, heart.Position) <= 28 then
+	if getDistance(player.Position, heart.Position) <= 20 then
 		heart.Velocity = velocity
+	end
+	BounceHeartHeart(heart)
+end
+
+function BounceHeartHeart(heart1)
+	local entities = Isaac.GetRoomEntities()
+	for j=1, #entities do
+		local e2 = entities[j]
+		if e2.Type == 5 and e2.Variant == 10 then
+			local velmul = 2
+			local velocity = heart1.Velocity * velmul
+			if getDistance(heart1.Position, e2.Position) <= 20 then
+				e2.Velocity = velocity
+			end
+		end
 	end
 end
 
@@ -309,8 +324,8 @@ function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
 
     if player:HasCollectible(Items.solomon_i) then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + 2
-            player.Damage = player.Damage * 1.5
+            player.Damage = player.Damage + 1.5
+            player.Damage = player.Damage * 1.2
         end
         if cacheFlag == CacheFlag.CACHE_FIREDELAY then
             player.MaxFireDelay = player.MaxFireDelay - 3
@@ -325,7 +340,7 @@ function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.SolomonCacheUp)
 
-function _Stillbirth:SolomonUpdate() -- ToDo: Séparer la désactivation de la hitBox coeur noir / bleu
+function _Stillbirth:SolomonUpdate()
     local player = Isaac.GetPlayer(0)
 
     if player:HasCollectible(Items.solomon_i) then
@@ -974,15 +989,17 @@ Date : 2017-03-10
 function _Stillbirth:PepperSprayCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.pepper_spray_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
-			player.MaxFireDelay = player.MaxFireDelay - 3
-		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
-			player.MaxFireDelay = player.MaxFireDelay - 2
-		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
-			player.MaxFireDelay = player.MaxFireDelay - 1
+		for i=1, g_vars.pepper_spray_cnt do
+			if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
+				player.MaxFireDelay = player.MaxFireDelay - 3
+			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
+				player.MaxFireDelay = player.MaxFireDelay - 2
+			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
+				player.MaxFireDelay = player.MaxFireDelay - 1
+			end
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
-			player.ShotSpeed = player.ShotSpeed - 0.2
+			player.ShotSpeed = player.ShotSpeed - 0.2 * g_vars.pepper_spray_cnt
 		end
 	end
 end
@@ -992,10 +1009,12 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.PepperSprayC
 function _Stillbirth:RattleCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.rattle_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 6 then
-			player.MaxFireDelay = player.MaxFireDelay - 2
-		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
-			player.MaxFireDelay = player.MaxFireDelay - 1
+		for i=1, g_vars.rattle_cnt do
+			if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 6 then
+				player.MaxFireDelay = player.MaxFireDelay - 2
+			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
+				player.MaxFireDelay = player.MaxFireDelay - 1
+			end
 		end
 	end
 end
@@ -1006,13 +1025,13 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.spinach_i) then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
-			player.MoveSpeed = player.MoveSpeed - 0.2
+			player.MoveSpeed = player.MoveSpeed - 0.2*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_RANGE then
-			player.TearHeight = player.TearHeight + 5
+			player.TearHeight = player.TearHeight + 5*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage + 1.42
+			player.Damage = player.Damage + 1.42*g_vars.spinach_cnt
 		end
 	end
 end
@@ -1022,12 +1041,14 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.SpinachCache
 function _Stillbirth:AppetizerCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.appetizer_i) then
-		if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
-			player.MaxFireDelay = player.MaxFireDelay - 3
-		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
-			player.MaxFireDelay = player.MaxFireDelay - 2
-		elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
-			player.MaxFireDelay = player.MaxFireDelay - 1
+		for i=1, g_vars.appetizer_cnt do
+			if cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay > 7 then
+				player.MaxFireDelay = player.MaxFireDelay - 3
+			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 7 then
+				player.MaxFireDelay = player.MaxFireDelay - 2
+			elseif cacheFlag == CacheFlag.CACHE_FIREDELAY and player.MaxFireDelay == 6 then
+				player.MaxFireDelay = player.MaxFireDelay - 1
+			end
 		end
 		if not g_vars.appetizer_HP_UP_GIVEN then
 			player:AddMaxHearts(2)
@@ -1043,7 +1064,7 @@ function _Stillbirth:MomsCakeCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.momscake_i) then
 		if cacheFlag == CacheFlag.CACHE_RANGE then
-			player.TearHeight = player.TearHeight - 5.25
+			player.TearHeight = player.TearHeight - 5.25*g_vars.momscake_cnt
 		end
 		if not g_vars.momscake_HP_UP_GIVEN then
 			player:AddMaxHearts(2)
@@ -1059,10 +1080,10 @@ function _Stillbirth:RabbitsFootCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.rabbitsFoot_i) then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
-			player.MoveSpeed = player.MoveSpeed + 0.2
+			player.MoveSpeed = player.MoveSpeed + 0.2*g_vars.rabbitsfoot_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_LUCK then
-			player.Luck = player.Luck + 1
+			player.Luck = player.Luck + 1*g_vars.rabbitsfoot_cnt
 		end
 	end
 end
@@ -1073,22 +1094,22 @@ function _Stillbirth:OffalCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.offal_i) then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
-			player.MoveSpeed = player.MoveSpeed - 0.1
+			player.MoveSpeed = player.MoveSpeed - 0.1*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_LUCK then
-			player.Luck = player.Luck - 0.2
+			player.Luck = player.Luck - 0.2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_FIREDELAY then
-			player.MaxFireDelay = player.MaxFireDelay + 1
+			player.MaxFireDelay = player.MaxFireDelay + 1*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_RANGE then
-			player.TearHeight = player.TearHeight + 2
+			player.TearHeight = player.TearHeight + 2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage - 0.2
+			player.Damage = player.Damage - 0.2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
-			player.ShotSpeed = player.ShotSpeed - 0.1
+			player.ShotSpeed = player.ShotSpeed - 0.1*g_vars.offal_cnt
 		end
 		if not g_vars.offal_HP_UP_GIVEN then
 			player:AddMaxHearts(6)

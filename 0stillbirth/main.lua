@@ -68,7 +68,8 @@ else
 					white_candle_i = Isaac.GetItemIdByName("White Candle"),
 					DioneaFamIdL1_i = Isaac.GetItemIdByName("Dionaea Muscipula"),
 					kikazaru_i = Isaac.GetItemIdByName("Kikazaru"),
-					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")
+					iwazaru_i = Isaac.GetItemIdByName("Iwazaru"),
+					toxic_mushroom_i = Isaac.GetItemIdByName("Toxic Mushroom")
 				}
 
 	Familiars =	{
@@ -87,7 +88,8 @@ else
 
 	CustomEntities =	{
 								TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" ),
-								BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" )
+								BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" ),
+								--ToxicHeartEntity = Isaac.GetEntityTypeByName("Toxic Heart")
 							}
 	Trinkets = {
 						chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
@@ -191,7 +193,16 @@ else
 								dionea_L2dead = false,
 								dionea_L3exists = false,
 								mizaru_n = nil,
-								kikazaru_counterKikazaru = true
+								kikazaru_counterKikazaru = true,
+								offat_cnt = 1,
+								appetizer_cnt = 1,
+								momscake_cnt = 1,
+								rabbitsfoot_cnt = 1,
+								rattle_cnt = 1,
+								pepper_spray_cnt = 1,
+								spinach_cnt = 1,
+								toxicmush_cnt = 1,
+								tarotbooster_cnt = 1
 							}
 		return g_vars
 	]]

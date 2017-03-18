@@ -61,8 +61,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 
 - Mizaru : Devrait pouvoir varier seulement quand on tire et moins fréquemment
 
-- Solomon : Ejection à peaufiner
-
 - Transfo cricket : make bridge
 
 - Kikazaru : Développer la même chose que pour Tech 0. Il est pour l'instant trop facile de ne pas provoquer les larmes qui devraient sortir par les oreilles

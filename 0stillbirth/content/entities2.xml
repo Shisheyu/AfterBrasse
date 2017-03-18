@@ -32,4 +32,7 @@
     <entity anm2path="gemini.anm2" baseHP="0" boss="0" champion="0" collisionDamage="5" collisionMass="3" collisionRadius="15" friction="1" id="5" name="fam_Gemini" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="670" subtype="0">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
+    <!--entity anm2path="ToxicHeart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="671" name="Toxic Heart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity-->
 </entities>
