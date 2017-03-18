@@ -69,7 +69,8 @@ else
 					DioneaFamIdL1_i = Isaac.GetItemIdByName("Dionaea Muscipula"),
 					kikazaru_i = Isaac.GetItemIdByName("Kikazaru"),
 					iwazaru_i = Isaac.GetItemIdByName("Iwazaru"),
-					toxic_mushroom_i = Isaac.GetItemIdByName("Toxic Mushroom")
+					toxic_mushroom_i = Isaac.GetItemIdByName("Toxic Mushroom"),
+					debug_i = Isaac.GetItemIdByName("Debug")
 				}
 
 	Familiars =	{

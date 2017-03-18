@@ -1,4 +1,16 @@
 --[[
+Debug item to spawn every custom item we have
+--Dogeek
+]]--
+function _Stillbirth:onUseDebugItem()
+	local center = Game():GetRoom():GetCenterPos()
+	for i=1, #Items do
+		Isaac.Spawn(5, 100, Items[i], Isaac.GetFreeNearPosition(center, 32.0), Vector(0,0), player)
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
+
+--[[
 Active Item: "Cricket's Paw"
 -Sliost-
 --]]

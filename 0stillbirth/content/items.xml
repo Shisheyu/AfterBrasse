@@ -65,7 +65,7 @@
 	<passive cache="speed" id="562" description="WORK IN PROGRESS -- Blasting flavours" gfx="toxicmushroom.png" name="Toxic Mushroom"/>
 	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
 	<passive cache="" id="564" description="You feel blessed" gfx="whitecandle.png" name="White Candle"/>
-	
+	<active cache="" id="565" description="Debug Item" gfx="whitecandle.png" name="Debug" maxcharges="0"/>
 	
 	<!--familiar cache="" id="insert ID" description="A random particle appears..." gfx="electron.png" name="Electron"/-->
 	<trinket cache="" id="120" description="Challenge down" gfx="greencross.png" name="Green Cross"/>
