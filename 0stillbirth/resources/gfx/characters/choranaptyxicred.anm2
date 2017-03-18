@@ -2,8 +2,8 @@
 	<Info CreatedBy="robot" CreatedOn="12/03/2017 20:44:23" Version="118" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="..\..\..\..\..\..\..\Desktop\stillbirth\resources\gfx\characters\costumes\choronaptyxic_headred.png" Id="0"/>
-			<Spritesheet Path="..\..\..\..\..\..\..\Desktop\stillbirth\resources\gfx\characters\costumes\chroronaptyxic_bodyred.png" Id="1"/>
+			<Spritesheet Path="costumes\choranaptyxic_headred.png" Id="0"/>
+			<Spritesheet Path="costumes\choranaptyxic_bodyred.png" Id="1"/>
 		</Spritesheets>
 		<Layers>
 			<Layer Name="body" Id="0" SpritesheetId="1"/>

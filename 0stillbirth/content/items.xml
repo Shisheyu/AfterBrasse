@@ -63,11 +63,12 @@
 	<passive cache="" id="560" description="One reverse per booster" gfx="tarrotbooster.png" name="Tarot Booster"/>
 	<passive cache="" id="561" description="Wave theory" gfx="techzero.png" name="Technology 0"/>
 	<passive cache="speed" id="562" description="WORK IN PROGRESS -- Blasting flavours" gfx="toxicmushroom.png" name="Toxic Mushroom"/>
-	<trinket cache="" id="563" description="Challenge Down" gfx="greencross.png" name="Green Cross"/>
-	<trinket cache="" id="564" description="You've been a good child" gfx="krampustooth.png" name="Krampus's Tooth"/>
-	<trinket cache="" id="565" description="100% Mithril" gfx="chainmail.png" name="Chainmail"/>
+	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
+	<passive cache="" id="564" description="You feel Blessed" gfx="whitecandle.png" name="White Candle"/>
 	<!--familiar cache="" id="566" description="A random particle appears..." gfx="electron.png" name="Electron"/-->
-	<familiar cache="" id="567" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
-	<passive cache="" id="568" description="You feel Blessed" gfx="whitecandle.png" name="White Candle"/>
-	<trinket cache="" id="569" description="Strong Touch" gfx="torngloves.png" name="Torn Gloves"/>
+	
+	<trinket cache="" id="120" description="Challenge Down" gfx="greencross.png" name="Green Cross"/>
+	<trinket cache="" id="121" description="You've been a good child" gfx="krampustooth.png" name="Krampus's Tooth"/>
+	<trinket cache="" id="122" description="100% Mithril" gfx="chainmail.png" name="Chainmail"/>
+	<trinket cache="" id="123" description="Strong Touch" gfx="torngloves.png" name="Torn Gloves"/>
 </items>

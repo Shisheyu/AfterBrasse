@@ -89,7 +89,7 @@ else
 	CustomEntities =	{
 								TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" ),
 								BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" ),
-								--ToxicHeartEntity = Isaac.GetEntityTypeByName("Toxic Heart")
+								ToxicHeartEntity = Isaac.GetEntityTypeByName("Toxic Heart")
 							}
 	Trinkets = {
 						chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
