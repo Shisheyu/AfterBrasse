@@ -1075,4 +1075,7 @@
 	<sound id="17">
 		<sample weight="1" path="whip-miss.wav" />
 	</sound>
+	<sound id="18">
+		<sample weight="1" path="medusa-snake.wav" />
+	</sound>
 </sounds>

@@ -4,10 +4,12 @@ require("luafiles/libs/luabit/bit")
 
 local collectibleHasSpawned = false
 local wealth_pickup_spawned = false
+local blessing_miracle_heal = false
 
 function _Stillbirth:useBlessing(curse)
 	local player = Isaac.GetPlayer(0)
 	if curse == LevelCurse.CURSE_NONE and not player:HasCollectible(Items.white_candle_i) then
+		currentBlessing = ""
 		return curse
 	else
 		local rand = math.random(g_vars.BLESSING_CHANCE*NUM_BLESSINGS) --1/3 d'avoir une blessing
@@ -19,17 +21,17 @@ function _Stillbirth:useBlessing(curse)
 			return bit.bor(Curses.blessing_light, curse)
 		elseif rand == 3 then
 			currentBlessing = "Blessing of the ".."miracle"
-			return bit.bor(blessing_miracle, curse)
+			return bit.bor(Curses.blessing_miracle, curse)
 		elseif rand == 4 then
 			currentBlessing = "Blessing of the ".."acceptance"
-			return bit.bor(blessing_acceptance, curse)
+			return bit.bor(Curses.blessing_acceptance, curse)
 		--[[
 		elseif rand == 5 then
 			currentBlessing = "Blessing of the ".."wealth"
-			return bit.bor(blessing_wealth, curse)
+			return bit.bor(Curses.blessing_wealth, curse)
 		elseif rand == 6 then
 			currentBlessing = "Blessing of the ".."doubtful"
-			return bit.bor(blessing_doubtful, curse)]]--
+			return bit.bor(Curses.blessing_doubtful, curse)]]--
 		else
 			currentBlessing = ""
 			return curse
@@ -51,7 +53,6 @@ function _Stillbirth:blessingGuide()
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingGuide)
 
-local blessing_miracle_heal = false
 function _Stillbirth:blessingMiracle()
 	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_miracle) ~= Curses.blessing_miracle) then return end
 	local player = Isaac.GetPlayer(0)
@@ -69,7 +70,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingMiracle
 
 function _Stillbirth:blessingAcceptance()
 	local player = Isaac.GetPlayer(0)
-	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_acceptance) ~= Curses.blessing_acceptance or player:HasCollectible(CollectibleType.COLLECTIBLE_CHAMPIONS_BELT) or player:HasTrinket(TrinketType.TRINKET_PURPLE_HEART)) then return end
+	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_acceptance) ~= Curses.blessing_acceptance) or player:HasCollectible(CollectibleType.COLLECTIBLE_CHAMPION_BELT) or player:HasTrinket(TrinketType.TRINKET_PURPLE_HEART) then return end
     local entities = Isaac.GetRoomEntities()
     local room = Game():GetRoom()
     if room:GetFrameCount() == 1 then

@@ -203,17 +203,7 @@ function isColinear(Vector1, Vector2, angle) --check si Vector1 et Vector2 sont 
 end
 
 function isRoomOver(room)
-	local slots = {}
-	local doorState = {}
-	for i=0, 7 do
-		if room:IsDoorSlotAllowed(i) then
-			table.insert(i)
-		end
-	end
-	for i = 1, #slots do
-		table.append(doorState, room:GetDoor(slots[i]).State == DoorState.DOOR_CLOSED)
-	end
-	if not has_value(doorState, true) then
+	if room:GetAliveEnemiesCount() == 0 and room:GetAliveBossesCount() == 0 and room:IsClear() then
 		return true
 	else
 		return false

@@ -1,3 +1,14 @@
+function _Stillbirth:AddPillsToPool()
+	Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Shot Speed Up"))
+	Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Shot Speed Down"))
+	Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Damage Up"))
+	Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Damage Down"))
+	Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Discharge !"))
+	--Isaac.AddPillEffectToPool(Isaac.GetPillEffectByName("Morning After Pill"))
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, _Stillbirth.AddPillsToPool)
+
+
 --shotspeed up
 
 function _Stillbirth:shotSpeedUpPill(pillId)
@@ -142,4 +153,6 @@ function afterbrasse:removeLastPillPill(pillId)
 			player:UsePill(PillEffect.PILLEFFECT_LARGER, PillColor.PILL_NULL)
 		end
 	end
-end]]--
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_USE_PILL, _Stillbirth.shotSpeedUpPill, Isaac.GetPillEffectByName("Morning After Pill"))
+]]--

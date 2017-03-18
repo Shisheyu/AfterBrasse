@@ -15,7 +15,7 @@ if not ok then
 	Isaac.DebugString(err)
 	function _Stillbirth:FatalError()
 		Isaac.RenderText("MOD LOADING FAILED:", 5, 213, 255, 0, 0, 255)
-		Isaac.RenderText("IF YOU HAVE --luadebug ACTIVE, PLEASE DESACTIVE IT", 5, 225, 255, 0, 0, 255)
+		Isaac.RenderText("IF YOU HAVE --luadebug ACTIVE, PLEASE DISABLE IT", 5, 225, 255, 0, 0, 255)
 		Isaac.RenderText("IF YOU DO NOT HAVE --luadebug ACTIVE,", 5, 238, 255, 0, 0, 255)
 		Isaac.RenderText("PLEASE REPORT THE BUG(please add your log.txt)", 5, 250, 255, 0, 0, 255)
 	end
@@ -67,7 +67,8 @@ else
 					double_heart_i = Isaac.GetItemIdByName("<3+<3=<3<3"),
 					white_candle_i = Isaac.GetItemIdByName("White Candle"),
 					DioneaFamIdL1_i = Isaac.GetItemIdByName("Dionaea Muscipula"),
-					kikazaru_i = Isaac.GetItemIdByName("Kikazaru")
+					kikazaru_i = Isaac.GetItemIdByName("Kikazaru"),
+					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")
 				}
 
 	Familiars =	{
@@ -97,11 +98,11 @@ else
 
 	Curses = {
 					blessing_light = 2^(Isaac.GetCurseIdByName("Blessing of the Light")-1),
-					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1),
-					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1),
-					blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealth")-1),
-					blessing_acceptance = 2^(Isaac.GetCurseIdByName("Blessing of the Acceptance")-1),
-					blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1),
+					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1), 
+					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1), 
+					blessing_acceptance = 2^(Isaac.GetCurseIdByName("Blessing of the Acceptance")-1)--,
+					--blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealth")-1),
+					--blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
 				}
 
 	--[[

@@ -177,7 +177,8 @@ Active item : Golden Idol : Donne un coeur bleugoldé
 function _Stillbirth:GoldenIdol_onUse()
     local player = Isaac.GetPlayer(0)
     if (not player:HasCollectible(Items.solomon_i)) or ((player:GetHearts()+player:GetSoulHearts())<12) then
-    player:AddSoulHearts(2);
+    	player:AddSoulHearts(2);
+    end
     if player:CanPickGoldenHearts() then
     	player:AddGoldenHearts(1);
     else --spawns 5 to 8 random coins around the player pennies 80%, nickel 10%, dimes 5%, lucky 5%
@@ -220,7 +221,7 @@ function _Stillbirth:medusaHead_use()
     local range = math.abs(GetRange(player) * 12.5);
     local vec = player.Position;
     local dir = player:GetHeadDirection();
-
+	SFXManager():Play(18, 1.0, 1, false, 1.0)
     for i = 1, #enemies do
         if enemies[i]:IsVulnerableEnemy(enemies[i]) then        --Test si entité = ennemi
             local vecE = enemies[i].Position;
