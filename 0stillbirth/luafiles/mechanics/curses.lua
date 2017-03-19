@@ -1,6 +1,5 @@
 local NUM_BLESSINGS = 6 --6
 local currentBlessing = ""
-require("luafiles/libs/luabit/bit")
 
 local collectibleHasSpawned = false
 local wealth_pickup_spawned = false
