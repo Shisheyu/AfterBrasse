@@ -183,8 +183,8 @@ function _Stillbirth:MonkeyCurseUpdate(curse)
 	if player:HasCollectible(Items.kikazaru_i) and (curse == 1<<1 or curse == 1<<5) then
 		return
 	end
-	if player:HasCollectible(Items.iwazaru_i) and (curse == 1<<6 or curse == 1<<3) then
-		return
-	end
+--~ 	if player:HasCollectible(Items.iwazaru_i) and (curse == 1<<6 or curse == 1<<3) then
+--~ 		return
+--~ 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_CURSE_EVAL, _Stillbirth.MonkeyCurseUpdate)

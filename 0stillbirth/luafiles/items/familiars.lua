@@ -1,12 +1,14 @@
 
 --[[
 Krayz
-Item : SunWukong (famillier) -- TODO?: Maybe make a Realign Familiars Function(annoying)
+Item : SunWukong (famillier)
+TODO?: Maybe make a Realign Familiars Function(annoying)
 Tire de temps à autres une larme feuille qui stopwatch les ennemis
 --]]
 function _Stillbirth:FAM_SunWukong_init(Familiar) -- init Familiar variables
 	local FAM_SunWukongSprite = Familiar:GetSprite()
 	Familiar.GridCollisionClass = GridCollisionClass.COLLISION_WALL
+	Familiar.IsFollower = true
 	FAM_SunWukongSprite:Play("FloatDown", true);
 end
 
@@ -35,17 +37,7 @@ function _Stillbirth:FAM_SunWukong_Update(Familiar) -- Familiar 'AI'
 			g_vars.FAM_SunWukongCounter = 0
 		end
 	end
-	local bval =  math.abs( player.Position.X - Familiar.Position.X ) + math.abs( player.Position.Y - Familiar.Position.Y )
-	if bval > 100 then
-		Familiar:MultiplyFriction(0.8) -- normal
-		Familiar:FollowParent() -- follow player
-	elseif bval > 50 then
-		Familiar:MultiplyFriction(bval*0.01) -- SlowDown
-		Familiar:FollowParent()
-	else
-		Familiar:MultiplyFriction(0.2) -- Stop
-	end
-	--Familiar.Velocity =  Familiar.Velocity:Clamped(-6.0, -6.0, 6.0, 6.0) -- Speed Limiter when follow player
+	Familiar:FollowParent() -- follow player
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.FAM_SunWukong_init, Familiars.SunWukong_Familiar_Variant )
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.FAM_SunWukong_Update, Familiars.SunWukong_Familiar_Variant )
@@ -125,25 +117,10 @@ _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.FAM_BombBum
 
 --[[
 Dionea Muscipula
-
 Azqswx
 ]]--
-
-
-local Root = {};
-local eating = false;
-
-function _Stillbirth:Dionea_onPlayerInit()
-	g_vars.dionea_tearsCount = 0;
-	g_vars.dionea_L1 = nil;
-	g_vars.dionea_L2 = nil;
-	g_vars.dionea_L1exists = false;
-	g_vars.dionea_L1dead = false;
-	g_vars.dionea_L2exists = false;
-	g_vars.dionea_L2dead = false;
-	g_vars.dionea_L3exists = false;
-end
-
+local Dionea_Root = {};
+local Dionea_eating = false;
 function _Stillbirth:Dionea_onEvaluateCacheL1()
 	local player = Isaac.GetPlayer(0);
 	if player:HasCollectible(Items.DioneaFamIdL1_i) and g_vars.dionea_L1exists == false and g_vars.dionea_L1dead == false then
@@ -203,10 +180,10 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
 	local L3Sprite = DioneaFam:GetSprite();
 	local FamiliarFrameCount = L3Sprite:GetFrame();
 	L3Sprite.PlaybackSpeed = 0.50;
-	
-	for i = 1,#Root do
-		Root[i]:FollowPosition(player.Position:__mul( #Root+1-i ):__add(g_vars.dionea_L3.Position:__mul(i)):__div(#Root+1));
-		Root[i]:MultiplyFriction(10.0);
+
+	for i = 1,#Dionea_Root do
+		Dionea_Root[i]:FollowPosition(player.Position:__mul( #Dionea_Root+1-i ):__add(g_vars.dionea_L3.Position:__mul(i)):__div(#Dionea_Root+1));
+		Dionea_Root[i]:MultiplyFriction(10.0);
 	end
 
 	local bval =  math.abs( player.Position.X - DioneaFam.Position.X ) + math.abs( player.Position.Y - DioneaFam.Position.Y );
@@ -222,7 +199,7 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
     if ClosestB ~= nil then
     	bvalE = math.abs( entities[ClosestB].Position.X - player.Position.X ) + math.abs( entities[ClosestB].Position.Y - player.Position.Y );
     end
-    if eating then
+    if Dionea_eating then
     	eatingDist = 300;
     else
     	eatingDist = 200;
@@ -234,12 +211,12 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
 		end
 		if not SFXManager():IsPlaying(100) and L3Sprite:IsEventTriggered("Eating") then
 			SFXManager():Play(100,1.0,1,false,1.0)			--Joue son Carnivore
-		end      
+		end
 		local bval =  math.abs( entities[ClosestB].Position.X - DioneaFam.Position.X ) + math.abs( entities[ClosestB].Position.Y - DioneaFam.Position.Y )
-        DioneaFam:FollowPosition( entities[ClosestB].Position );  
-        eating = true; 
-        if bval >= 5 then 
-        	eating = false;
+        DioneaFam:FollowPosition( entities[ClosestB].Position );
+        Dionea_eating = true;
+        if bval >= 5 then
+        	Dionea_eating = false;
         end
     else
     	if FamiliarFrameCount >= 9 and L3Sprite:IsPlaying("Eat") then
@@ -255,7 +232,7 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
         else
             DioneaFam:MultiplyFriction(0.2); -- Stop
         end
-    end    
+    end
 end
 
  function _Stillbirth:Dionea_onInitL3(DioneaFam)
@@ -297,7 +274,7 @@ end
 	if g_vars.dionea_tearsCount >= 50 and g_vars.dionea_tearsCount <= 60 and g_vars.dionea_L3exists == false then
 		g_vars.dionea_L3 = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantL3, 0, player.Position, Vector(0,0),player);
 		for i = 1, Nbr do
-			Root[i] = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantR, 0, player.Position, Vector(0,0), player):ToFamiliar();
+			Dionea_Root[i] = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantR, 0, player.Position, Vector(0,0), player):ToFamiliar();
 		end
 		g_vars.dionea_L3exists = true;
 		local L3Sprite = L3:GetSprite()
@@ -308,7 +285,6 @@ end
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.Dionea_onGameUpdate)
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, _Stillbirth.Dionea_onPlayerInit);
 
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.Dionea_onFamiliarUpdateL1, Familiars.DioneaFamVariantL1)
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.Dionea_onEvaluateCacheL1)
@@ -319,6 +295,71 @@ _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.Dionea_onInit
 
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.Dionea_onFamiliarUpdateL3, Familiars.DioneaFamVariantL3)
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.Dionea_onInitL3, Familiars.DioneaFamVariantL3)
+
+--~ --[[ -- WAITING TO FINISH RE IMPLEMENTING THE NEW ANM2 + TEST
+--~ Item: "RNG Baby" -- Glitched qui clignotte skin original / skin custom
+--~ -Krayz-
+--~ --]]
+--~ --no need to save
+--~ local RNGBabyVars = {
+--~ 								RNGBaby_Familiar = nil,
+--~ 								seed = nil
+--~ 							}
+--~ -- TODO: SAVE and RESTORE THE LAST FAMILIAR after a game continu
+--~ -- TODO: full Aimation / anm2 with all look direction
+
+--~ local RNGBaby_FamiliarSprite  = nil -- local
+--~ local RNGBaby_saveOldFam = nil --local
+
+--~ local RNGBaby_FamRevealCounter = math.random(10)+5
+--~ local RNGBaby_default = false
+
+--~ function RNGBaby:RNGBaby_()
+--~ 	local player = Isaac.GetPlayer(0)
+--~ 	local room = Game():GetRoom()
+--~ 	local AtkfamiliarPool = 	{
+--~ 										1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,30,
+--~ 										31,48,53,54,59,61,63,74,76,77,80,81,84,
+--~ 										85,87,92,97,98,99,101,104,106,108
+--~ 									}
+
+--~ 	if ( player:HasCollectible(Items.rngbaby_i) ) then
+--~ 		if room:GetFrameCount() == 1 and room:IsFirstVisit() then
+--~ 			g_vars.FAM_LastRNGBabyExists = true
+--~ 			if RNGBabyVars.RNGBaby_Familiar then
+--~ 				RNGBabyVars.RNGBaby_Familiar:Remove()
+--~ 				RNGBabyVars.RNGBaby_Familiar = nil
+--~ 			end
+--~ 			local seed = Game():GetLevel():GetDungeonPlacementSeed()
+--~ 			local rand = (math.random(seed) % #AtkfamiliarPool) + 1
+--~ 			RNGBabyVars.RNGBaby_Familiar = Isaac.Spawn(3, AtkfamiliarPool[rand], 0, player.Position, Vector(0, 0), player)
+--~ 			g_vars.FAM_LastRNGBabyExists = RNGBaby_Familiar
+--~ 			RNGBabyVars.RNGBaby_Familiar.IsFollower = true
+--~ 			RNGBaby_FamiliarSprite = RNGBabyVars.RNGBaby_Familiar:GetSprite()
+--~ 			saveOldFam = RNGBaby_FamiliarSprite:GetFilename()
+--~ 		end
+--~ 		if not IsShooting(player) then
+--~ 			if FamRevealCounter > 0 then
+--~ 				FamRevealCounter = FamRevealCounter - 1
+--~ 			end
+--~ 			if FamRevealCounter <= 0 then
+--~ 				default = false
+--~ 				RNGBaby_FamiliarSprite:Load("gfx/rngbaby.anm2", true)
+--~ 				RNGBaby_FamiliarSprite:Play("Float", true)
+--~ 				RNGBaby_FamiliarSprite:PlayOverlay("Float", true)
+--~ 				RNGBaby_FamiliarSprite:Reload()
+--~ 				FamRevealCounter = math.random(10)+5
+--~ 			end
+--~ 		end
+--~ 		if not default and saveOldFam and player.FrameCount%(math.random(10)+5) == 0 then
+--~ 			RNGBaby_FamiliarSprite:Load(saveOldFam, true)
+--~ 			RNGBaby_FamiliarSprite:Play(RNGBaby_FamiliarSprite:GetDefaultAnimationName(), true)
+--~ 			RNGBaby_FamiliarSprite:Reload()
+--~ 			default = true
+--~ 		end
+--~ 	end
+--~ end
+--~ RNGBaby:AddCallback( ModCallbacks.MC_POST_UPDATE , RNGBaby.RNGBaby_ );
 
 --[[
 Item : Electron

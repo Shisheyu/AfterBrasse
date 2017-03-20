@@ -11,9 +11,7 @@ function ResetSave() -- Reset saved data :: Not used anymore
 end
 local function _save_(dataTable) -- Save Sys
 	if dataTable then
-		local dataString = ""
-		for k,v in pairs(dataTable) do dataString = tostring(k) .. " " .. tostring(v) .. ";" .. dataString end
-		Isaac.SaveModData( _Stillbirth, dataString )
+		Isaac.SaveModData( _Stillbirth, json.encode(dataTable) )
 		return true
 	end
 	return false
@@ -21,13 +19,7 @@ end
 function _load_() -- Load Sys
 	local dataTable = {}
 	if Isaac.HasModData(_Stillbirth) then
-		local dataString = Isaac.LoadModData(_Stillbirth)
-		for k,v in string.gmatch( dataString, "(%w+[_%w+]+)%s([.,%?-_!^%w+%s+]+)" ) do
-			if v == "false" then dataTable[k] = false
-			elseif v == "true" then dataTable[k] = true
-			elseif tonumber(v) ~= nil then dataTable[k] = tonumber(v)
-			else dataTable[k] = v end
-		end
+		dataTable = json.decode(Isaac.LoadModData(_Stillbirth))
 		return dataTable
 	end
 	return nil
@@ -43,7 +35,7 @@ local db = [[
 ---------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------
 -- K: SAVE related: You shall pass your way
--- TODO: Make a ForceSave() function [en cour]
+-- TODO: Make a ForceSave() function [en cours]
 -- TODO: ??? i can't remember u_u
 
 local Sv_CollectibleSave = 0
@@ -54,13 +46,6 @@ local Sv_Triggered_Key = false
 local Sv_Trigger_Force = false
 local NOFSAVE = 0 -- can recycle as emergency stop?
 
-function data_init_load(data)
-	for k,v in pairs(data) do
-		if k:find("PERMANENT_") then
-			g_vars[k] = v
-		end
-	end
-end
 local function data_init_save(base_data)
 	for k,v in pairs(base_data) do
 		if not k:find("PERMANENT_") then
@@ -68,7 +53,6 @@ local function data_init_save(base_data)
 		end
 	end
 end
-
 function ForceSave()
 	NOFSAVE = NOFSAVE + 1
 	if not Sv_Trigger_Force then
@@ -135,7 +119,10 @@ function _Stillbirth:Mod_SaveIt_Minutes()
 end
 function _Stillbirth:Mod_SaveIt_Level(Curses) -- Save at Level start
 	local level = Game():GetLevel()
-	SetRandomSeed() -- Re-seed the random .. because why not.
+--~ 	if g_vars.GlobalSeed == 0 then
+--~ 		SetRandomSeed() -- Re-seed the random .. because why not.
+--~ 		Isaac.DebugString("Seed Generated")
+--~ 	end
 	if level:GetAbsoluteStage() ~= 1 then
 		db_c = _save_(g_vars)
 		Isaac.DebugString("Save by Level")

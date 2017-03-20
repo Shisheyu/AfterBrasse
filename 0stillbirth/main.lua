@@ -2,18 +2,19 @@
 Stillbirth
 "100% IMPOSSIBLE TO CODE" -dogeek
 --]]
-_Stillbirth = RegisterMod("Stillbirth", 1)
+
+_Stillbirth = RegisterMod( "Stillbirth", 1 )
 
 --/!\ actually, dosen't work with --luadebug /!\
 -- "--luadebug"//require check
 local function try()
 -- "--luadebug" fix
 	local ok1, err1 = pcall( (function()
-		local debug = require('debug');
-		local path = ""
-		debug.getinfo(1).source:gsub("^@(.+)main%.lua$", function(s) path = s end)
-		Isaac.DebugString(">>> path: " .. tostring(path))
-		package.path = package.path .. ";" .. path .. "?.lua"
+			local debug = require( 'debug' )
+			local path = ""
+			debug.getinfo(1).source:gsub( "^@(.+)main%.lua$", function(s) path = s end )
+			Isaac.DebugString( ">>> path: " .. tostring(path) )
+			package.path = package.path .. ";" .. path .. "?.lua"
 		end) )
 --~ 	Isaac.DebugString(">>> --luadebug fix?: " .. tostring(ok1) .. " -- " .. tostring(err1))
 -- require check
@@ -38,6 +39,7 @@ else
 	table._getn = function(t) local n = 0 if type(t) ~= type({}) then return -1 end for k,v in pairs(t) do n = n + 1 end return n end
 
 	require("luafiles/helper_func")
+	json = require("luafiles/json")
 
 	Items =	{
 					moneyLuck_i = Isaac.GetItemIdByName("Money = Luck"),

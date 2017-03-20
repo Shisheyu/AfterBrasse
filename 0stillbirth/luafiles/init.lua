@@ -38,8 +38,10 @@ function _Stillbirth:FamiliarProtectedSpawn()
 	if player.FrameCount  == 1 then
 		Stillbirth_Player_Init()
 	elseif player.FrameCount == 5 then -- Anti Multi familiar spawn at game restart: May still have some use
+		if g_vars.GlobalSeed == 0 then
 			SetRandomSeed()
-			Isaac.DebugString(tostring(g_vars.GlobalSeed))
+		end
+		Isaac.DebugString(tostring(g_vars.GlobalSeed))
 			--g_vars.legacy_spawned = IsFamiliarExists(Familiar.legacy_variant)
 			g_vars.FAM_SunWukongExists = IsFamiliarExists(Familiars.SunWukong_Familiar_Variant)
 			g_vars.FAM_BombBumExists = IsFamiliarExists(Familiars.FAM_BombBumFamiliarVariant)
@@ -53,16 +55,24 @@ function _Stillbirth:FamiliarProtectedSpawn()
 			g_vars.legacy_spawned = true;
 		end
 --]]
-		--[[if not g_vars.hasElectronSpawned and player:HasCollectible(Items.electron_i) then -- Electron
+--[[
+		if not g_vars.hasElectronSpawned and player:HasCollectible(Items.electron_i) then -- Electron
 			Isaac.Spawn(Familiars.electronFamiliar, Familiars.electronFamiliarVariant, 0, player.Position, Vector(0, 0), player)
 			g_vars.numberOfElectrons = g_vars.numberOfElectrons + 1
 			g_vars.hasElectronSpawned = true
-		end]]--
+		end
+--]]
 		if not g_vars.FAM_BombBumExists and player:HasCollectible(Items.FAM_BombBum_i) then -- BombBum
 			local e = Isaac.Spawn(Familiars.FAM_BombBumFamiliar, Familiars.FAM_BombBumFamiliarVariant, 0, player.Position, Vector(0, 0), player)
 			e:AddEntityFlags(1<<21) -- FLAG_DONT_OVERWRITE
 			g_vars.FAM_BombBumExists = true
 		end
+--~ 		if not g_vars.FAM_LastRNGBabyExists and player:HasCollectible(Items.rngbaby_i) then -- RNGBaby
+--~ 			local rand = (math.random(seed) % #AtkfamiliarPool) + 1
+--~ 			local e = Isaac.Spawn(3, AtkfamiliarPool[rand], 0, player.Position, Vector(0, 0), player)
+--~ 			e:AddEntityFlags(1<<21) -- FLAG_DONT_OVERWRITE
+--~ 			g_vars.FAM_RNGBabyExists = true
+--~ 		end
 		if not g_vars.FAM_SunWukongExists  and player:HasCollectible(Items.SunWukong_i) then -- SunWukong
 			local e = Isaac.Spawn(3, Familiars.SunWukong_Familiar_Variant, 0, player.Position, Vector(0, 0), player)
 			e:AddEntityFlags(1<<21) -- FLAG_DONT_OVERWRITE

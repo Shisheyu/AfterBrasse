@@ -21,7 +21,7 @@
 	<passive cache="speed" id="518" description="It sticks" gfx="braveshoes.png" name="Brave Shoe"/>
 	<passive cache="" id="519" description="Stopping power" gfx="bubbleshead.png" name="Bubble's Head"/>
 	<passive cache="damage" id="520" description="Frantic tears" gfx="cataract.png" name="Cataract"/>
-	<passive cache="damage, range, speed" id="521" description="Size does matter!" gfx="choranaptyxic.png" name="Choranaptyxic"/>
+	<passive cache="damage range speed" id="521" description="Size does matter!" gfx="choranaptyxic.png" name="Choranaptyxic"/>
 	<passive cache="" id="522" description="WORK IN PROGRESS -- Only threes" gfx="cricketscollar.png" name="Cricket's Collar"/>
 	<active id="523" description="Power generator" gfx="cricketspaw.png" name="Cricket's Paw"/>
 	<passive cache="" id="524" description="Belief?" gfx="cricketstail.png" name="Cricket's Tail"/>
@@ -66,6 +66,7 @@
 	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
 	<passive cache="" id="564" description="You feel blessed" gfx="whitecandle.png" name="White Candle"/>
 	<active cache="" id="565" description="Debug Item" gfx="whitecandle.png" name="Debug" maxcharges="0"/>
+	<passive cache="" id="566"description="RNG Baby" gfx="rngbaby.png" name="Rng Baby"/>
 	
 	<!--familiar cache="" id="insert ID" description="A random particle appears..." gfx="electron.png" name="Electron"/-->
 	<trinket cache="" id="120" description="Challenge down" gfx="greencross.png" name="Green Cross"/>
