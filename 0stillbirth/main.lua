@@ -83,6 +83,7 @@ else
 					iwazaru_i = Isaac.GetItemIdByName("Iwazaru"),
 					toxic_mushroom_i = Isaac.GetItemIdByName("Toxic Mushroom"),
 					debug_i = Isaac.GetItemIdByName("Debug")
+					rngbaby_i= Isaac.GetItemIdByName("Rng Baby")
 				}
 
 	Familiars =	{
