@@ -214,7 +214,7 @@ else
 
 	require("luafiles/characters/character_init")
 	require("luafiles/init")
-	require("luafiles/debugtext")
+	--require("luafiles/debugtext")
 
 	require("luafiles/items/collectibles")
 	require("luafiles/items/familiars")
