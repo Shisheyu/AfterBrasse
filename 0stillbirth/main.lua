@@ -121,32 +121,11 @@ else
 					blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
 				}
 
-	--[[
-					/!\	EXEMPLES OF VARIABLES WHO CAN BE SAVED WITH THE ACTUAL SYSTEM:
-							Variables Only start with a letter.
-							If you have a NIL value it Will and May be turn to FALSE automatically to properly save
-							(as long as condition are not in the form "if variable ~= nil" but "not nil", "not nil" and "not false" behaving the same way, it may not introduce bugs)
-							-k
-								g_vars =	{
-									foo =1,
-									foo2= 2,
-									bar_=3,
-									bar1_1 = 4,
-									NEG_Fus1=-9,
-									False_Ro_2= false,
-									True_Dah_3= true,
-									Tou_tan__kha___mon____="Simple text",
-									text="TEXTtext 0123456789_",
-									text2 = "TEXTtext abc,deFG.Hij!? Klm^-^  01234789_", -- this is all the characters that can be saved as string
-									PERMANENT_test01 = false,
-									testnil = nil 		--### This Will be turn to "testnil = false"
-									foo_nil = "somethin" -- THIS IS NOT VALID
-									nil_ = "somethin" -- THIS IS NOT VALID
-									anil_ = "somethin" -- THIS IS OK but not recomended
-									nila_ = "somethin" -- THIS IS OK but not recomended
-								}
-	--]]
-
+--[[
+	If you have a NIL value it Will and May be turn to FALSE automatically to properly save
+	(as long as condition are not in the form "if variable ~= nil" but "not nil", "not nil" and "not false" behaving the same way, it may not introduce bugs)
+	-k
+--]]
 	function initial_data_init()
 	local g_vars = [[
 		local g_vars =	{ 	-- Here goes the global variables( that will be saved )
@@ -216,7 +195,8 @@ else
 								pepper_spray_cnt = 1,
 								spinach_cnt = 1,
 								toxicmush_cnt = 1,
-								tarotbooster_cnt = 1
+								tarotbooster_cnt = 1,
+								FAM_LastRNGBabyExists = false
 							}
 		return g_vars
 	]]
@@ -228,7 +208,7 @@ else
 	local s = _load_() -- Load
 	Isaac.DebugString(">>> Save Normal Size:" .. tostring(table._getn(g_vars)) .. " || Current Size:" .. tostring(table._getn(s)))
 	-- If save found and correct size then restore it else reset
-	if s and table._getn(g_vars) == table._getn(s) then data_init_load(s); Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
+	if s and table._getn(g_vars) == table._getn(s) then g_vars = s; Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
 
 	require("luafiles/libs/luabit/bit")
 
