@@ -287,7 +287,13 @@ function _Stillbirth:blindPactUpdate()
             g_vars.blindPact_previousStage = currentStage
             local rand = math.random(#devilPoolPassive)
             g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
+            while player:HasCollectible(g_vars.blindPact_pickedItem) do
+            	local rand = math.random(#devilPoolPassive)
+            	g_vars.blindPact_pickedItem = devilPoolPassive[rand]
+            	if not player:HasCollectible(g_vars.blindPact_pickedItem) then
+            		player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
+            	end
+            end
             if (g_vars.blindPact_previousItem ~= 0) and player:HasCollectible( g_vars.blindPact_previousItem ) then
                 player:RemoveCollectible( g_vars.blindPact_previousItem )
             end
@@ -1204,17 +1210,16 @@ function _Stillbirth:SpidershotUpdateTears()
   local entities = Isaac.GetRoomEntities();
   if player:HasCollectible(Items.spidershot_i) then
     for i = 1, #entities do
-      if entities[i].Type == EntityType.ENTITY_TEAR then
+      if entities[i].Type == EntityType.ENTITY_TEAR and entities[i].Parent == player then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(5)
+        local rng = math.random(-10, 30)
         local Luck = player.Luck
         if rng <= Luck and lifetime == 1 then
           entity:AddEntityFlags(1);
         end
         if entity:HasEntityFlags(1) and lifetime == 1 and entity.Variant ~= 27 then
           entity:ChangeVariant(27)
-
         end
       end
     end
