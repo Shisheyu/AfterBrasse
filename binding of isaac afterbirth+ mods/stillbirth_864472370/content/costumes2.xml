@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<costumes anm2root="gfx/characters/">
-	<costume type="passive" id="511" anm2path="moneyequalsluck.anm2" priority="99"/> 
-	<costume type="passive" id="512" anm2path="braveshoe.anm2" priority="99"/>
-	<costume type="passive" id="513" anm2path="techzero.anm2" priority="99"/> 
-	<costume type="passive" id="514" anm2path="pizza.anm2" priority="99"/> 
-</costumes>
