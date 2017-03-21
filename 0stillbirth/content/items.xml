@@ -16,7 +16,7 @@
 	<passive cache="firedelay" id="513" description="It's salty" gfx="appetizer.png" name="Appetizer"/>
 	<active id="514" description="WORK IN PROGRESS -- Protein shake" gfx="babyblender.png" name="Baby Blender" maxcharges="0"/>
 	<active id="515" description="ctrl + shift + del" gfx="blanktissues.png" name="Blank Tissues" maxcharges="2"/>
-	<passive cache="" id="516" description="Now it's too late" gfx="blindpact.png" name="Blind Pact"/>
+	<passive cache="" id="516" description="Now it's too late" devilprice="2" gfx="blindpact.png" name="Blind Pact"/>
 	<passive cache="" id="517" description="WORK IN PROGRESS -- Anorexia nervosa best friend" gfx="bobsbitrex.png" name="Bob's Bitrex"/>
 	<passive cache="speed" id="518" description="It sticks" gfx="braveshoes.png" name="Brave Shoe"/>
 	<passive cache="" id="519" description="Stopping power" gfx="bubbleshead.png" name="Bubble's Head"/>
@@ -55,7 +55,7 @@
 	<passive cache="speed luck" id="552" description="Who's lucky now?" gfx="rabbitsfoot.png" name="Rabbit's Foot"/>
 	<passive cache="firedelay" id="553" description="Confiscated..." gfx="rattle.png" name="Rattle"/>
 	<familiar cache="" id="554" description="WORK IN PROGRESS -- He can't choose your family" gfx="fam_rngbaby.png" name="RNG Baby"/>
-	<passive cache="all" id="555" description="Command demons" gfx="solomon.png" name="Solomon"/>
+	<passive cache="all" id="555" description="Command demons" devilprice="2" gfx="solomon.png" name="Solomon"/>
 	<passive cache="" id="556" description="It comes with great responsibility" gfx="spidershot.png" name="Spidershot"/>
 	<passive cache="damage speed range" id="557" description="I yam what I yam" gfx="spinach.png" name="Spinach"/>
 	<passive cache="" id="558" description="WORK IN PROGRESS -- Land ahoy!" gfx="spyglass.png" name="Spyglass"/>
