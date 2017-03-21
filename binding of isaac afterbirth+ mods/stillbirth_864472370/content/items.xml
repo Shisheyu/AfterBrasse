@@ -1,0 +1,33 @@
+<items version="1" gfxroot="gfx/items/">
+   <!-- REF FOR ITEMS.XML
+   Possible Cacheflags:	all damage familiars firedelay flying luck range tearcolor tearflag shotspeed speed weapon
+
+   Possibilités d'ajout:	special="true false" hearts="n"(heal) maxhearts="n"(maxhp) devilprice="n" bombs="n" coins="n" keys="n" blackhearts="n" soulhearts="" cooldown="" id=""
+
+	v-items template-v
+
+	<active cache="" id="" maxcharges="1" description="Desc" gfx="sprite.png" name="Name"/>
+	<passive cache="" id="" description="Desc" gfx="sprite.png" name="Name"/>
+	<familiar cache="" id="" description="Desc" gfx="sprite.png" name="Name"/>
+	<trinket cache="" id="" description="Desc" gfx="sprite.png" name="Name"/> 
+	
+	-Krayz
+
+   -->
+   <!--PASSIVE-->
+   <passive cache="luck" id="511" description="$$$ = LCK" gfx="moneyequalsluck.png" name="Money = Luck"/>
+   <passive cache="speed" id="512" description="It Sticks" gfx="braveshoe.png" name="Brave Shoe"/>
+   <passive cache="" id="513" description="Wave Theory" gfx="techzero.png" name="Technology 0"/>
+   <passive cache="damage" id="514" description="Jalapeñoooos" gfx="pizza.png" name="Hot Pizza Slice"/>
+
+	<!--ACTIVE-->
+   <active id="515" description="Mass Confusion" gfx="beer.png" name="Dad's Beer" maxcharges="3" />
+   <!--MAXCHARGES À AJUSTER--> 
+   <active id="516" description="Quick Trade" gfx="goldenidol.png" name="Golden Idol" maxcharges="6" />
+   <active id="517" description="You Look Stonning" gfx="medusashead.png" name="Medusa's Head" maxcharges="6" />
+
+   <!--FAMILIAR-->
+   
+   <!--TRINKET-->
+   
+</items>
