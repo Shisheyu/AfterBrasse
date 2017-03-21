@@ -1169,36 +1169,19 @@ local used = 0
 
 function _Stillbirth:use_3D_glasses()
     used = used + 1;
-    g_vars.DGlasses_actual_room = Game():GetLevel():GetCurrentRoomIndex()
-end
-
-function _Stillbirth:DGlasses_add_tear()
-    local entities = Isaac.GetRoomEntities();
-    local player = Isaac.GetPlayer(0);
-    for i = 1, #entities do
-        if used ~= 0 and entities[i].FrameCount == 0 and entities[i].Type == EntityType.ENTITY_TEAR then
-            local tearPosition = entities[i].Position;
-            local tearVeloc = entities[i].Velocity;
-            for j = 1, used do
-            	local offset = j * 16
-            	local u = used * 16
-            	if player:GetFireDirection() == 0 or player:GetFireDirection() == 2 then
-            		entities[i].Position = entities[i].Position - Vector(u, -2)
-                	player:FireTear(Vector(tearPosition.X,tearPosition.Y+offset-u/2),tearVeloc,true,true,true)
-            	elseif player:GetFireDirection() == 1 or player:GetFireDirection() == 3 then 
-            		entities[i].Position = entities[i].Position - Vector(-2, u)
-                	player:FireTear(Vector(tearPosition.X+offset-u/2,tearPosition.Y),tearVeloc,true,true,true)
-                end
-            end
-        end
-        if g_vars.DGlasses_actual_room ~= Game():GetLevel():GetCurrentRoomIndex() then
-            used = 0;
-        end
+    local player = Isaac.GetPlayer(0)
+    local room = Game():GetRoom()
+    if room:GetFrameCount() == 1 then
+    	for i=1, #used do
+    		player:RemoveCollectible(245)
+    	end
+    	used = 0
     end
+    player:AddCollectible(245, 0, false)
+    player:TryRemoveCollectibleCostume(245, false)
 end
 
-_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_3D_glasses, Items.D_glasses_i );
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.DGlasses_add_tear)
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_3D_glasses, Items.D_glasses_i);
 
 --[[
 Spidershot
