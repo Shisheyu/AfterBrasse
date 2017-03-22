@@ -111,12 +111,9 @@ function hasTransfo(pool, trigger) -- check if the player transforms with items 
 	if player:HasCollectible(Items.ottid_i) then
 		trigger = trigger - 1
 	end
-	if activeList == nil then
-		local activeList = {}
-	end
 	for i=1, #pool do
-		for j=1, #activeList do
-			if pool[i] == activeList[j] then
+		for j=1, #g_vars.PICKED_ACTIVE_COLLECTIBLES do
+			if pool[i] == g_vars.PICKED_ACTIVE_COLLECTIBLES then
 				cnt = cnt + 1
 			end
 		end
@@ -289,7 +286,7 @@ momPool = {102, 39, 41, 217, 55, 139, 110, 114, 30, 200, 228, 199, 31, 29, 195, 
 conjoinedPool = {8, 167, 169, 100, 322, 268, 67}
 leviathanPool = {83, 79, 262, 80, 51, 159, 399 , 230, 118}
 poopPool = {36 ,291, 236}
-bookWormPool = {35, 65, 78, 34, 33, 97, 287, 58, 282, 292, 192}
-spiderBabyPool = {288, 153, 211, 89, 171, 403}
+bookWormPool = {35, 65, 78, 34, 33, 97, 287, 58, 282, 292, 192, 531}
+spiderBabyPool = {288, 153, 211, 89, 171, 403, 556}
 
 --	###################################################################################
