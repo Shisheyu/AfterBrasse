@@ -43,7 +43,7 @@ end
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
     if g_vars.cricketsPaw_had then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-        	player.Damage = player.Damage * (1+g_vars.cricketsPaw_Uses*0.2) -- TO BALANCE
+        	player.Damage = player.Damage * (1+(g_vars.cricketsPaw_Uses+1)*0.2)/(1+g_vars.cricketsPaw_Uses*0.2) -- TO BALANCE
         end
     end
 end
@@ -80,16 +80,15 @@ function _Stillbirth:use_beer()
     local p = Isaac.GetPlayer(0);
     local entities = Isaac.GetRoomEntities( )
     local game = Game()
-	local duration_infinite = 0xFFFFFF
 	SFXManager():Play(19, 1.0, 1, false, 1)
     for i = 1, #entities do
-        if entities[i]:IsVulnerableEnemy( ) then
+        if entities[i]:IsActiveEnemy() then
         	if entities[i]:IsBoss() then
 		        -- Ajout confusion et dmg aux ennemis --
 		        entities[i]:AddConfusion( EntityRef(p), 100, false )
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		    else
-		    	entities[i]:AddConfusion( EntityRef(p), duration_infinite, false )
+		    	entities[i]:AddConfusion( EntityRef(p), 99999, false )
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		   	end
         end
