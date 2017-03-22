@@ -1258,6 +1258,7 @@ function _Stillbirth:cricketsTailUpdate()
 						end
 					end
 					Isaac.Spawn(5,PickupVariant.PICKUP_SPIKEDCHEST,0,availablePosition,Vector(0,0),player)
+				end
 			end
 		end
 	end
