@@ -43,7 +43,7 @@ end
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
     if g_vars.cricketsPaw_had then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-        	player.Damage = player.Damage * (1+(g_vars.cricketsPaw_Uses+1)*0.2)/(1+g_vars.cricketsPaw_Uses*0.2) -- TO BALANCE
+        	player.Damage = player.Damage * (1+g_vars.cricketsPaw_Uses*0.2)/(1+(g_vars.cricketsPaw_Uses-1)*0.2) -- TO BALANCE
         end
     end
 end
