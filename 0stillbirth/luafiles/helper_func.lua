@@ -233,7 +233,7 @@ function GetNumberOfDmgUps(player)
 	return total_dmg_ups
 end
 
-function DamageToSet(player, damageup)
+function DamageToSet(player, damageup, damage_multiplier)
 	local base_damage = 3.5
 	local flat_dmg = 0
 	if player:GetPlayerType() == PlayerType.PLAYER_EVE then
@@ -251,7 +251,7 @@ function DamageToSet(player, damageup)
 	end
 	local mabite = base_damage*math.sqrt(GetNumberOfDmgUps(player)*1.2+1)
 	flat_dmg = player.Damage - mabite
-	return base_damage*math.sqrt((GetNumberOfDmgUps(player)+damageup)*1.2+1)+flat_dmg
+	return base_damage*damage_multiplier*math.sqrt((GetNumberOfDmgUps(player)+damageup)*1.2+1)+flat_dmg
 end
 
 function GetClosestTear(entities, player, TType, TVariant)

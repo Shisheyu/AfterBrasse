@@ -207,7 +207,8 @@ else
 								godsale_freeitems = {},
 								iwazaru_fired = false,
 								bubblesCostume = false,
-								DGlasses_lastRoom = nil
+								DGlasses_lastRoom = nil,
+								cricketspaw_multiplier = 1
 							}
 		return g_vars
 	]]

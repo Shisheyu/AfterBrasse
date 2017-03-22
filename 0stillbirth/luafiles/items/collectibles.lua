@@ -43,7 +43,8 @@ end
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
     if g_vars.cricketsPaw_had then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-        	player.Damage = player.Damage * (1+g_vars.cricketsPaw_Uses*0.2)/(1+(g_vars.cricketsPaw_Uses-1)*0.2) -- TO BALANCE
+        	g_vars.cricketspaw_multiplier = (1+g_vars.cricketsPaw_Uses*0.2)
+        	player.Damage = DamageToSet(player, 0, g_vars.cricketspaw_multiplier)
         end
     end
 end
@@ -168,7 +169,7 @@ function _Stillbirth:hot_pizza_slice_cacheUpdate(player, cacheFlag)
 
     if player:HasCollectible(Items.hot_pizza_slice_i) then
         if (cacheFlag == CacheFlag.CACHE_DAMAGE) then
-            player.Damage = DamageToSet(player, 1);
+            player.Damage = DamageToSet(player, 1, g_vars.cricketspaw_multiplier);
             if not g_vars.hot_pizza_slice_HpUp_Done then
                 player.SpriteScale = player.SpriteScale * 1.2;
                 player:AddSoulHearts(2);
@@ -1013,7 +1014,7 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 5*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt)
+			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt, g_vars.cricketspaw_multiplier)
 		end
 	end
 end
@@ -1084,7 +1085,7 @@ function _Stillbirth:OffalCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = DamageToSet(player, -0.2*g_vars.offal_cnt)
+			player.Damage = DamageToSet(player, -0.2*g_vars.offal_cnt, g_vars.cricketspaw_multiplier)
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
 			player.ShotSpeed = player.ShotSpeed - 0.1*g_vars.offal_cnt
