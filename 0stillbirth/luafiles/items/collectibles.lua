@@ -1162,7 +1162,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TarotBoosterUpd
 
 --[[
 3D Glasses
-Azqswx
+Azqswx + Dogeek
 ]]--
 
 local used = 0
@@ -1453,7 +1453,7 @@ Passive Item : Moitié du shop gratos mais aléatoire à chaque shop. Rajout de sho
 Dogeek
 ]]--
 
-_Stillbirth:GodSaleUpdate()
+function _Stillbirth:GodSaleUpdate()
 	local player = Isaac.GetPlayer(0)
 	local room = Game():GetRoom()
 	local entities = Isaac.GetRoomEntities()
@@ -1490,6 +1490,7 @@ Sliost & Dogeek(pour finir l'item)
 
 function _Stillbirth:IwazaruFiredReset()
 	local room = Game():GetRoom()
+	local player = Isaac.GetPlayer(0)
 	if g_vars.iwazaru_fired and player:HasCollectible(Items.iwazaru_i) then
 		if room:GetFrameCount() == 1 then
 			g_vars.iwazaru_fired = false

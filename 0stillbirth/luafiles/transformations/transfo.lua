@@ -164,17 +164,18 @@ Transfo Bubbles
 
 Sliost & Dogeek & krayz(for leaf tears and code to shoot them)
 ]]--
+--[[
 local uiStreak = Sprite()
 uiStreak:Load("gfx/ui/ui_transformation_bubbles.anm2",true) -- Preloading the sprite used for the transformation name animation (in order not to load it every frame)
 local transformTimer = 0
 local bubblesTransformed = false
 local hasSpawn = false
 
-function _Stillbirth:InitVariable(player)
+function _Stillbirth:BubblesInitVariable(player)
 	bubblesTransformed = false
 	hasSpawn = false
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,_Stillbirth.InitVariable)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, _Stillbirth.BubblesInitVariable)
 
 function bubbles_lerp(a, b, t)
     return a + (b - a) * (math.atan(t*0.19467)/2 + 1)
@@ -182,7 +183,9 @@ end
 
 function _Stillbirth:BubblesJumpAnimation()
   local player = Isaac.GetPlayer(0)
-  if timer ~= nil then
+  local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
+  local bubbles_transfo = hasTransfo(bubblesPool, 3)
+  if timer ~= nil and bubbles_transfo then
     if timer < 9 then
         player.Position = bubbles_lerp(player.Position, landingVector,timer)
         timer = timer + 1 
@@ -196,6 +199,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesJumpAnim
 
 function _Stillbirth:BubblesBehavior()
   local player = Isaac.GetPlayer(0)
+  local level = Game():GetLevel()
   local room = level:GetCurrentRoom()
   local direction = player:GetMovementDirection()
   local pos = player.Position 
@@ -210,9 +214,9 @@ function _Stillbirth:BubblesBehavior()
     -----------------------------------
     if bubbles_transfo then
       -- Transform if available
-      player:AddCacheFlags(CacheFlags.CACHE_DAMAGE)
-      player:AddCacheFlags(CacheFlags.CACHE_SPEED)
-      player:EvaluateItems()
+      --player:AddCacheFlags(CacheFlags.CACHE_DAMAGE)
+      --player:AddCacheFlags(CacheFlags.CACHE_SPEED)
+      --player:EvaluateItems()
       if (player.FrameCount - g_vars.BubblesHead_oldFrame) <= 0 then
             g_vars.BubblesHead_oldFrame = player.FrameCount
         end
@@ -284,7 +288,7 @@ function _Stillbirth:BubblesBehavior()
   end
 end
 
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE,_Stillbirth.BubblesBehavior);
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesBehavior);
 
 function BubblesCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
@@ -299,8 +303,8 @@ function BubblesCache(player, cacheFlag)
 		end
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_CACHE_UPDATE,_Stillbirth.BubblesCache);
-
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.BubblesCache);
+--]]
 
 --[[Transfo Zodiac
 Nagachi

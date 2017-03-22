@@ -203,7 +203,7 @@ else
 								tarotbooster_cnt = 1,
 								FAM_LastRNGBabyExists = false,
 								godsale_previousStage = 0,
-								godsale_rand = bit.tobits(0),
+								godsale_rand = 0,
 								godsale_freeitems = {},
 								iwazaru_fired = false
 							}
