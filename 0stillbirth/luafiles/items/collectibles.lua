@@ -169,7 +169,7 @@ function _Stillbirth:hot_pizza_slice_cacheUpdate(player, cacheFlag)
 
     if player:HasCollectible(Items.hot_pizza_slice_i) then
         if (cacheFlag == CacheFlag.CACHE_DAMAGE) then
-            player.Damage = player.Damage + 1;
+            player.Damage = DamageToSet(player, 1);
             if not g_vars.hot_pizza_slice_HpUp_Done then
                 player.SpriteScale = player.SpriteScale * 1.2;
                 player:AddSoulHearts(2);
