@@ -159,7 +159,152 @@ function _Stillbirth:LaserUpdate()
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.LaserUpdate)
+--[[
+Transfo Bubbles
 
+Sliost & Dogeek & krayz(for leaf tears and code to shoot them)
+]]--
+--[[
+local uiStreak = Sprite()
+uiStreak:Load("gfx/ui/ui_transformation_bubbles.anm2",true) -- Preloading the sprite used for the transformation name animation (in order not to load it every frame)
+local transformTimer = 0
+local bubblesTransformed = false
+local hasSpawn = false
+
+function _Stillbirth:BubblesInitVariable(player)
+	bubblesTransformed = false
+	hasSpawn = false
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, _Stillbirth.BubblesInitVariable)
+
+function bubbles_lerp(a, b, t)
+    return a + (b - a) * (math.atan(t*0.19467)/2 + 1)
+end
+
+function _Stillbirth:BubblesJumpAnimation()
+  local player = Isaac.GetPlayer(0)
+  local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
+  local bubbles_transfo = hasTransfo(bubblesPool, 3)
+  if timer ~= nil and bubbles_transfo then
+    if timer < 9 then
+        player.Position = bubbles_lerp(player.Position, landingVector,timer)
+        timer = timer + 1 
+    else
+      player.ControlsEnabled = true
+    end
+  end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesJumpAnimation);
+
+function _Stillbirth:BubblesBehavior()
+  local player = Isaac.GetPlayer(0)
+  local level = Game():GetLevel()
+  local room = level:GetCurrentRoom()
+  local direction = player:GetMovementDirection()
+  local pos = player.Position 
+  local idx = room:GetGridIndex(pos)
+  local nextGridEntity = -1
+  local landing = 0
+  local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
+  local bubbles_transfo = hasTransfo(bubblesPool, 3)
+
+    -----------------------------------
+    -- Bubbles transformation behavior
+    -----------------------------------
+    if bubbles_transfo then
+      -- Transform if available
+      --player:AddCacheFlags(CacheFlags.CACHE_DAMAGE)
+      --player:AddCacheFlags(CacheFlags.CACHE_SPEED)
+      --player:EvaluateItems()
+      if (player.FrameCount - g_vars.BubblesHead_oldFrame) <= 0 then
+            g_vars.BubblesHead_oldFrame = player.FrameCount
+        end
+        if IsShooting( player ) and (player.FrameCount - g_vars.BubblesHead_oldFrame) > player.MaxFireDelay then --bubbles head code with 100% chance of firing leaf tears
+            local LuckModifier = ( player.Luck * 1000 )
+            local rand = math.random() + LuckModifier
+            local v = Vector( math.abs( player:GetLastDirection().X ), math.abs( player:GetLastDirection().Y ) )
+            g_vars.BubblesHead_oldFrame = player.FrameCount
+            g_vars.BubblesHead_ShootedTears = g_vars.BubblesHead_ShootedTears + 1
+            if ( v.X == 1 or v.X == 0 ) and ( v.Y == 1 or v.Y == 0 ) and rand > 0.923 and g_vars.BubblesHead_ShootedTears > 4 then
+                local tear = GetClosestTear( entities, player, 2, CustomEntities.TearLeaf_Variant )
+                local vel = Vector(7.5*player.ShotSpeed,7.5*player.ShotSpeed)
+                if tear then
+                    vel = tear.Velocity
+                    tear:Remove()
+                end
+                g_vars.BubblesHead_ShootedTears = 0
+                ShootCustomTear( CustomEntities.TearLeaf_Variant, player, player, 1.0, vel:__mul(1.2), true )
+            end
+      end
+      if not bubblesTransformed then
+        if transformTimer == 30 then
+          bubblesTransformed = true
+          transformTimer = 0 -- Timer to transform after 30 frames
+          
+          -- Transformation sound
+          local sound_entity = Isaac.Spawn(EntityType.ENTITY_FLY, 0, 0, Vector(0,0), Vector(0,0), nil):ToNPC() -- HACK: The only way to play a sound is through a NPC so we craft a entity that we remove right away
+          sound_entity:PlaySound(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
+          sound_entity:Remove()
+          
+          -- Transformation name animation
+          uiStreak:Play("Text",true)
+          player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
+        else
+          transformTimer = transformTimer + 1 
+        end 
+      end
+      
+      
+      -- Can jump over pit
+      if direction == 0 and math.abs(player.Velocity.X) < 1 then
+        nextGridEntity = idx - 1
+        landing = idx - 2
+      elseif direction == 1 and math.abs(player.Velocity.Y) < 1 then
+        nextGridEntity = idx - 15
+        landing = idx - 30
+      elseif direction == 2 and math.abs(player.Velocity.X) < 1 then
+        nextGridEntity = idx + 1
+        landing = idx + 2
+      elseif direction == 3 and math.abs(player.Velocity.Y) < 1 then
+        nextGridEntity = idx + 15
+        landing = idx + 30
+      else
+        nextGridEntity = -1
+      end
+    if nextGridEntity ~= -1 then
+      local gridEntity = room:GetGridEntity(nextGridEntity)
+      local landingGridEntity = room:GetGridEntity(landing)
+      if gridEntity ~= nil then
+        local toPit = gridEntity:ToPit()
+          if toPit ~= nil and landingGridEntity == nil then -- Waiting for GetType() to work
+            landingVector = room:GetGridPosition(landing)
+            timer = -8
+            player.ControlsEnabled = false
+            player:PlayExtraAnimation("Jump")
+          end
+      end
+    end
+  end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesBehavior);
+
+function BubblesCache(player, cacheFlag)
+	local player = Isaac.GetPlayer(0)
+	local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
+	local bubbles_transfo = hasTransfo(bubblesPool, 3)
+	if bubbles_transfo then
+		if cacheFlag == CacheFlags.CACHE_SPEED then
+			player.MoveSpeed = player.MoveSpeed + 0.3
+		end
+		if cacheFlag == CacheFlags.CACHE_DAMAGE then
+			player.Damage = player.Damage + 2.5
+		end
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.BubblesCache);
+--]]
 
 --[[Transfo Zodiac
 Nagachi
