@@ -22,3 +22,44 @@ function _Stillbirth:TrackItems()
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TrackItems)
+
+function _Stillbirth:CheckTransformations()
+	if hasTransfo(guppyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_GUPPY) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_GUPPY)
+		addMissingItem(guppyPool)
+	elseif hasTransfo(beezlebubPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES)
+		addMissingItem(beezlebubPool)
+	elseif hasTransfo(funGuyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MUSHROOM) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MUSHROOM)
+		addMissingItem(funGuyPool)
+	elseif hasTransfo(seraphimPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_ANGEL) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_ANGEL)
+		addMissingItem(seraphimPool)
+	elseif hasTransfo(bobPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOB) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOB)
+		addMissingItem(bobPool)
+	elseif hasTransfo(spunPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_DRUGS) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_DRUGS)
+		addMissingItem(spunPool)
+	elseif hasTransfo(momPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MOM) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MOM)
+		addMissingItem(momPool)
+	elseif hasTransfo(conjoinedPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BABY) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BABY)
+		addMissingItem(conjoinedPool)
+	elseif hasTransfo(leviathanPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_EVIL_ANGEL) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_EVIL_ANGEL)
+		addMissingItem(leviathanPool)
+	elseif hasTransfo(poopPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_POOP) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_POOP)
+		addMissingItem(poopPool)
+	elseif hasTransfo(bookWormPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOOK_WORM) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOOK_WORM)
+		addMissingItem(bookWormPool)
+	elseif hasTransfo(spiderBabyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_SPIDERBABY) then
+		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_SPIDERBABY)
+		addMissingItem(spiderBabyPool)
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.CheckTransformations)

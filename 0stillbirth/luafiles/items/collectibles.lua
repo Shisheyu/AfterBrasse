@@ -879,20 +879,6 @@ Date : 2017-03-06
 TODO : superbum ?
 ]]--
 
-activeList = {}
-local guppyPool = {145, 133, 81, 212, 134, 187}
-local beezlebubPool = {320, 272, 274, 279, 57, 128, 10, 248, 9, 264, 151, 148, 364, 365, 430, 426}
-local funGuyPool = {398, 71, 12, 120, 121, 11, 342}
-local seraphimPool = {33 , 185, 112, 184, 313, 173, 72 , 363, 101}
-local bobPool = {273, 42,  140, 149}
-local spunPool = {493, 496, 240, 70, 14, 143, 13, 345}
-local momPool = {102, 39, 41, 217, 55, 139, 110, 114, 30, 200, 228, 199, 31, 29, 195, 355, 508}
-local conjoinedPool = {8, 167, 169, 100, 322, 268, 67}
-local leviathanPool = {83, 79, 262, 80, 51, 159, 399 , 230, 118}
-local poopPool = {36 ,291, 236}
-local bookWormPool = {35, 65, 78, 34, 33, 97, 287, 58, 282, 292, 192}
-local spiderBabyPool = {288, 153, 211, 89, 171, 403}
-
 local function addMissingItem(pool)
 	local player = Isaac.GetPlayer(0)
 	local choice = {}
@@ -923,9 +909,6 @@ end
 
 function _Stillbirth:OttidUpdate()
 	local player = Isaac.GetPlayer(0)
-	if player:GetActiveItem() ~= nil and not has_value(activeList, player:GetActiveItem()) then
-		table.insert( activeList, player:GetActiveItem())
-	end
 	if player:HasCollectible(Items.ottid_i) and (g_vars.ottid_init_check or  player:GetCollectibleCount()>g_vars.ottid_collectible_count)then
 		if not g_vars.ottid_pillGiven then
 			--player:UsePill(PillEffect.PILLEFFECT_PUBERTY, PillColor.PILL_NULL)
