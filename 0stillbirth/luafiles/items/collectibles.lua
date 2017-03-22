@@ -284,16 +284,12 @@ function _Stillbirth:blindPactUpdate()
     if player:HasCollectible(Items.blind_Pact_i) then
         local currentStage = Game():GetLevel():GetStage()
         if g_vars.blindPact_previousStage ~= currentStage then
-            g_vars.blindPact_previousStage = currentStage
             local rand = math.random(#devilPoolPassive)
             g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            while player:HasCollectible(g_vars.blindPact_pickedItem) do
-            	local rand = math.random(#devilPoolPassive)
-            	g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            	if not player:HasCollectible(g_vars.blindPact_pickedItem) then
-            		player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
-            	end
-            end
+            if not player:HasCollectible(g_vars.blindPact_pickedItem) then
+            	player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
+            	g_vars.blindPact_previousStage = currentStage
+			end
             if (g_vars.blindPact_previousItem ~= 0) and player:HasCollectible( g_vars.blindPact_previousItem ) then
                 player:RemoveCollectible( g_vars.blindPact_previousItem )
             end
@@ -313,13 +309,13 @@ Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
 --]]
 function BounceHearts(heart)
 	local player = Isaac.GetPlayer(0)
-	local velmul = 3
-	local velocity = player.Velocity * velmul
+	--local velmul = 2
+	local velocity = player.Velocity --* velmul
 	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
 	if getDistance(player.Position, heart.Position) <= 16 then
-		heart.Velocity = velocity
+		heart:AddVelocity(velocity)
 	end
-	BounceHeartHeart(heart)
+	--BounceHeartHeart(heart)
 end
 
 function BounceHeartHeart(heart1)
@@ -327,10 +323,9 @@ function BounceHeartHeart(heart1)
 	for j=1, #entities do
 		local e2 = entities[j]
 		if e2.Type == 5 and e2.Variant == 10 then
-			local velmul = 2
-			local velocity = heart1.Velocity * velmul
+			local velocity = heart1.Velocity
 			if getDistance(heart1.Position, e2.Position) <= 20 then
-				e2.Velocity = velocity
+				e2:AddVelocity(velocity)
 				heart1.Velocity = Vector(0,0)
 			end
 		end
@@ -339,7 +334,6 @@ end
 
 function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
     local player = Isaac.GetPlayer(0)
-
     if player:HasCollectible(Items.solomon_i) then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
             player.Damage = player.Damage + 1.5
@@ -1191,7 +1185,7 @@ function _Stillbirth:SpidershotUpdateTears()
       if entities[i].Type == EntityType.ENTITY_TEAR and entities[i].Parent == player then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(-10, 30)
+        local rng = math.random(-10, 20)
         local Luck = player.Luck
         if rng <= Luck and lifetime == 1 then
           entity:AddEntityFlags(1);
@@ -1220,11 +1214,11 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
   local room = Game():GetRoom()
   if room:GetFrameCount() == 1 then weblist = {} end
-  for i=1, #weblist do
+  --[[for i=1, #weblist do
   	if getDistance(player.Position, weblist[i])<32 then
   		player:ClearEntityFlags(1<<7)
   	end
-  end
+  end]]--
   if player:HasCollectible(Items.spidershot_i) then
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
