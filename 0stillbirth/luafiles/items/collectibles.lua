@@ -1220,8 +1220,16 @@ function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags,
   end
 end
 
+local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
+  local room = Game():GetRoom()
+  if room:GetFrameCount() == 1 then weblist = {} end
+  for i=1, #weblist do
+  	if getDistance(player.Position, weblist[i])<32 then
+  		player:ClearEntityFlags(1<<7)
+  	end
+  end
   if player:HasCollectible(Items.spidershot_i) then
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
@@ -1231,7 +1239,8 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
         Isaac.Spawn(1000,44,0,posTear,Vector(0,0),player):ToEffect():SetTimeout(60)
         if entity:CollidesWithGrid() then
           local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
-          Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+          local web = Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+          table.insert(weblist, web.Position)
         end
       end
     end
