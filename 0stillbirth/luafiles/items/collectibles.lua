@@ -1014,7 +1014,7 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 5*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage + 1.42*g_vars.spinach_cnt
+			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt)
 		end
 	end
 end
@@ -1085,7 +1085,7 @@ function _Stillbirth:OffalCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage - 0.2*g_vars.offal_cnt
+			player.Damage = DamageToSet(player, -0.2*g_vars.offal_cnt)
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
 			player.ShotSpeed = player.ShotSpeed - 0.1*g_vars.offal_cnt

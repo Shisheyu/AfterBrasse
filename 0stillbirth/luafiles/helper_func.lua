@@ -210,6 +210,53 @@ function isRoomOver(room)
 	end
 end
 
+function GetNumberOfDmgUps(player)
+	local base_damage = 3.5
+	local flat_dmg = 0
+	if player:GetPlayerType() == PlayerType.PLAYER_EVE then
+		base_damage = base_damage * 0.75
+	elseif player:GetPlayerType() == PlayerType.PLAYER_XXX then
+		base_damage = base_damage * 1.05
+	elseif player:GetPlayerType() == PlayerType.PLAYER_KEEPER or player:GetPlayerType() == PlayerType.PLAYER_CAIN or player:GetPlayerType() == PlayerType.PLAYER_LAZARUS2 then
+		base_damage = base_damage * 1.2
+	elseif player:GetPlayerType() == PlayerType.PLAYER_JUDAS then
+		base_damage = base_damage * 1.35
+	elseif player:GetPlayerType() == PlayerType.PLAYER_AZAZEL then
+		base_damage = base_damage * 1.5
+	elseif player:GetPlayerType() == PlayerType.PLAYER_BLACKJUDAS then
+		base_damage = base_damage * 2
+	end
+	if player:HasCollectible(149) then
+		flat_dmg = flat_dmg + 40
+	end
+	if player:HasTrinket(35) then
+		flat_dmg = flat_dmg + 2
+	end
+	local total_dmg_ups = ((((player.Damage - flat_dmg)/base_damage)^2)-1)/1.2
+	return total_dmg_ups
+end
+
+function DamageToSet(player, damageup)
+	local base_damage = 3.5
+	local flat_dmg = 0
+	if player:GetPlayerType() == PlayerType.PLAYER_EVE then
+		base_damage = base_damage * 0.75
+	elseif player:GetPlayerType() == PlayerType.PLAYER_XXX then
+		base_damage = base_damage * 1.05
+	elseif player:GetPlayerType() == PlayerType.PLAYER_KEEPER or player:GetPlayerType() == PlayerType.PLAYER_CAIN or player:GetPlayerType() == PlayerType.PLAYER_LAZARUS2 then
+		base_damage = base_damage * 1.2
+	elseif player:GetPlayerType() == PlayerType.PLAYER_JUDAS then
+		base_damage = base_damage * 1.35
+	elseif player:GetPlayerType() == PlayerType.PLAYER_AZAZEL then
+		base_damage = base_damage * 1.5
+	elseif player:GetPlayerType() == PlayerType.PLAYER_BLACKJUDAS then
+		base_damage = base_damage * 2
+	end
+	local mabite = base_damage*math.sqrt(GetNumberOfDmgUps(player)*1.2+1)
+	flat_dmg = player.Damage - mabite
+	return base_damage*math.sqrt((GetNumberOfDmgUps(player)+damageup)*1.2+1)+flat_dmg
+end
+
 function GetClosestTear(entities, player, TType, TVariant)
     local e, tmp = nil, 0xFFFFFF
     local entities = Isaac.GetRoomEntities()
