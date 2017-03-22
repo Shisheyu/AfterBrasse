@@ -205,7 +205,8 @@ else
 								godsale_previousStage = 0,
 								godsale_rand = 0,
 								godsale_freeitems = {},
-								iwazaru_fired = false
+								iwazaru_fired = false,
+								bubblesCostume = false
 							}
 		return g_vars
 	]]

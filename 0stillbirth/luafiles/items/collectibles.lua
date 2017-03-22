@@ -503,17 +503,6 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cataract_PostUp
 Item Passif : Bubble's Head
 Tire de temps à autres une larme feuille qui stopwatch les ennemis
 --]]
-local function GetClosestTear(entities, player, TType, TVariant)
-    local e, tmp = nil, 0xFFFFFF
-    for i=1, #entities do
-        local bval =  entities[i].Position:Distance(player.Position)
-        if entities[i].Parent and entities[i].Type == TType and entities[i].Variant ~= TVariant and entities[i].Parent.Type == 1 and bval < tmp then
-            tmp = bval
-            e = entities[i]
-        end
-    end
-    return e
-end
 
 function _Stillbirth:BubblesHead_Update()
     local player = Isaac.GetPlayer(0)
@@ -1167,16 +1156,22 @@ Azqswx + Dogeek
 
 local used = 0
 
-function _Stillbirth:use_3D_glasses()
-    used = used + 1;
-    local player = Isaac.GetPlayer(0)
-    local room = Game():GetRoom()
-    if room:GetFrameCount() == 1 then
-    	for i=1, #used do
+function _Stillbirth:Remove3DGlasses()
+	local player = Isaac.GetPlayer(0)
+	local room = Game():GetRoom()
+	if room:GetFrameCount() == 1 then
+    	for i=1, used do
     		player:RemoveCollectible(245)
     	end
     	used = 0
     end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.Remove3DGlasses)
+
+function _Stillbirth:use_3D_glasses()
+    used = used + 1;
+    local player = Isaac.GetPlayer(0)
+    local room = Game():GetRoom()
     player:AddCollectible(245, 0, false)
     player:TryRemoveCollectibleCostume(245, false)
 end

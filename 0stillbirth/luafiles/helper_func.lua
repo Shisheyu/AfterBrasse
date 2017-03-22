@@ -210,6 +210,19 @@ function isRoomOver(room)
 	end
 end
 
+function GetClosestTear(entities, player, TType, TVariant)
+    local e, tmp = nil, 0xFFFFFF
+    local entities = Isaac.GetRoomEntities()
+    for i=1, #entities do
+        local bval =  entities[i].Position:Distance(player.Position)
+        if entities[i].Parent and entities[i].Type == TType and entities[i].Variant ~= TVariant and entities[i].Parent.Type == 1 and bval < tmp then
+            tmp = bval
+            e = entities[i]
+        end
+    end
+    return e
+end
+
 Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end
