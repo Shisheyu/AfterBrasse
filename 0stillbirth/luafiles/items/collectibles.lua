@@ -284,16 +284,12 @@ function _Stillbirth:blindPactUpdate()
     if player:HasCollectible(Items.blind_Pact_i) then
         local currentStage = Game():GetLevel():GetStage()
         if g_vars.blindPact_previousStage ~= currentStage then
-            g_vars.blindPact_previousStage = currentStage
             local rand = math.random(#devilPoolPassive)
             g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            while player:HasCollectible(g_vars.blindPact_pickedItem) do
-            	local rand = math.random(#devilPoolPassive)
-            	g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            	if not player:HasCollectible(g_vars.blindPact_pickedItem) then
-            		player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
-            	end
-            end
+            if not player:HasCollectible(g_vars.blindPact_pickedItem) then
+            	player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
+            	g_vars.blindPact_previousStage = currentStage
+			end
             if (g_vars.blindPact_previousItem ~= 0) and player:HasCollectible( g_vars.blindPact_previousItem ) then
                 player:RemoveCollectible( g_vars.blindPact_previousItem )
             end
@@ -313,13 +309,13 @@ Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
 --]]
 function BounceHearts(heart)
 	local player = Isaac.GetPlayer(0)
-	local velmul = 3
-	local velocity = player.Velocity * velmul
+	--local velmul = 2
+	local velocity = player.Velocity --* velmul
 	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
 	if getDistance(player.Position, heart.Position) <= 16 then
-		heart.Velocity = velocity
+		heart:AddVelocity(velocity)
 	end
-	BounceHeartHeart(heart)
+	--BounceHeartHeart(heart)
 end
 
 function BounceHeartHeart(heart1)
@@ -327,10 +323,9 @@ function BounceHeartHeart(heart1)
 	for j=1, #entities do
 		local e2 = entities[j]
 		if e2.Type == 5 and e2.Variant == 10 then
-			local velmul = 2
-			local velocity = heart1.Velocity * velmul
+			local velocity = heart1.Velocity
 			if getDistance(heart1.Position, e2.Position) <= 20 then
-				e2.Velocity = velocity
+				e2:AddVelocity(velocity)
 				heart1.Velocity = Vector(0,0)
 			end
 		end
@@ -339,7 +334,6 @@ end
 
 function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
     local player = Isaac.GetPlayer(0)
-
     if player:HasCollectible(Items.solomon_i) then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
             player.Damage = player.Damage + 1.5
@@ -538,7 +532,6 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesHead_Upd
 --------------------------------------------------------------------------------------------------
 local tearLeaf_t = nil
 local tearLeaf_boss = nil
-local tearLeaf_BossColor = nil
 
 function _Stillbirth:TearLeaf_MobSlowing( entity, damage, flag, source, countdown ) -- CustomTearEffect
     if entity and entity:IsVulnerableEnemy() then
@@ -546,10 +539,12 @@ function _Stillbirth:TearLeaf_MobSlowing( entity, damage, flag, source, countdow
 		    if entity:IsBoss() then --boss differenciation
 		    	tearLeaf_t = Isaac.GetFrameCount()
 		    	tearLeaf_boss = entity
-		    	tearLeaf_BossColor = entity:GetColor()
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 180, 50, false, false ) -- StopWatch like color
+		    else
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
 		    end
-		    entity:AddEntityFlags( 1 << 7 ) -- Slow flag
-		    entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
         end
     end
     return
@@ -560,10 +555,8 @@ function _Stillbirth:TearLeaf_BossTimer()
 	if tearLeaf_t then
 		if Isaac.GetFrameCount() - tearLeaf_t >= 6*60 then
 			tearLeaf_boss:ClearEntityFlags(1<<7)
-			tearLeaf_boss:SetColor(tearLeaf_BossColor, 9999, 50, false, false)
 			tearLeaf_t = nil
 			tearLeaf_boss = nil
-			tearLeaf_BossColor = nil
 		end
 	end
 end
@@ -1191,7 +1184,7 @@ function _Stillbirth:SpidershotUpdateTears()
       if entities[i].Type == EntityType.ENTITY_TEAR and entities[i].Parent == player then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(-10, 30)
+        local rng = math.random(-10, 20)
         local Luck = player.Luck
         if rng <= Luck and lifetime == 1 then
           entity:AddEntityFlags(1);
@@ -1220,11 +1213,11 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
   local room = Game():GetRoom()
   if room:GetFrameCount() == 1 then weblist = {} end
-  for i=1, #weblist do
+  --[[for i=1, #weblist do
   	if getDistance(player.Position, weblist[i])<32 then
   		player:ClearEntityFlags(1<<7)
   	end
-  end
+  end]]--
   if player:HasCollectible(Items.spidershot_i) then
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
@@ -1318,12 +1311,16 @@ function _Stillbirth:HeartPlusHeartUpdate()
 				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
 					coeur[i]:AddEntityFlags(1<<25);
 					sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
-					sprite:Update();
+					sprite:Reload();
+					sprite:LoadGraphics()
+					sprite:Update()
 					coeur[i].SubType = HeartSubType.HEART_SOUL;
 				end
 
 				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
 					sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
+					sprite:Reload();
+					sprite:LoadGraphics()
 					sprite:Update()
 					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
@@ -1332,7 +1329,9 @@ function _Stillbirth:HeartPlusHeartUpdate()
 					end
 				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
 					sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
-					sprite:Update();
+					sprite:Reload();
+					sprite:LoadGraphics()
+					sprite:Update()
 					if bval < 40 and player:CanPickBlackHearts() and bleu == 0 then
 						SFXManager():Play(185,1.0,1,false,1.0)
 						player:AddBlackHearts(4)
