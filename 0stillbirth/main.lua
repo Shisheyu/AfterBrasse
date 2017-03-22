@@ -206,7 +206,8 @@ else
 								godsale_rand = 0,
 								godsale_freeitems = {},
 								iwazaru_fired = false,
-								bubblesCostume = false
+								bubblesCostume = false,
+								DGlasses_lastRoom = nil
 							}
 		return g_vars
 	]]

@@ -1152,7 +1152,8 @@ local used = 0
 function _Stillbirth:Remove3DGlasses()
 	local player = Isaac.GetPlayer(0)
 	local room = Game():GetRoom()
-	if room:GetFrameCount() == 1 then
+	if room:GetDecorationSeed() ~= g_vars.DGlasses_lastRoom then
+		g_vars.DGlasses_lastRoom = room:GetDecorationSeed()
     	for i=1, used do
     		player:RemoveCollectible(245)
     	end
@@ -1176,21 +1177,23 @@ Spidershot
 Azqswx
 ]]--
 
+
 function _Stillbirth:SpidershotUpdateTears()
   local player = Isaac.GetPlayer(0)
   local entities = Isaac.GetRoomEntities();
   if player:HasCollectible(Items.spidershot_i) then
     for i = 1, #entities do
-      if entities[i].Type == EntityType.ENTITY_TEAR and entities[i].Parent == player then
+      if entities[i].Type == EntityType.ENTITY_TEAR then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(-10, 20)
+        local rng = math.random(5)
         local Luck = player.Luck
         if rng <= Luck and lifetime == 1 then
           entity:AddEntityFlags(1);
         end
         if entity:HasEntityFlags(1) and lifetime == 1 and entity.Variant ~= 27 then
           entity:ChangeVariant(27)
+          
         end
       end
     end
@@ -1208,16 +1211,8 @@ function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags,
   end
 end
 
-local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
-  local room = Game():GetRoom()
-  if room:GetFrameCount() == 1 then weblist = {} end
-  --[[for i=1, #weblist do
-  	if getDistance(player.Position, weblist[i])<32 then
-  		player:ClearEntityFlags(1<<7)
-  	end
-  end]]--
   if player:HasCollectible(Items.spidershot_i) then
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
@@ -1227,8 +1222,7 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
         Isaac.Spawn(1000,44,0,posTear,Vector(0,0),player):ToEffect():SetTimeout(60)
         if entity:CollidesWithGrid() then
           local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
-          local web = Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
-          table.insert(weblist, web.Position)
+          Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
         end
       end
     end
@@ -1256,6 +1250,7 @@ function _Stillbirth:cricketsTailUpdate()
 	local availablePosition = nil
 	if player:HasCollectible(Items.crickets_tail_i) then
 		if room:GetFrameCount() == 1 then
+			cricketstail_spawn_delay = 0
 			for i=1, #entities do
 				local e = entities[i]
 				if e:IsActiveEnemy(false) then
@@ -1265,21 +1260,21 @@ function _Stillbirth:cricketsTailUpdate()
 		end
 		if isRoomOver(room) and room:IsFirstVisit() then
 			local center = GetRoomCenter()
-			availablePosition = room:FindFreePickupSpawnPosition(center,1.0,false)
+			availablePosition = room:FindFreePickupSpawnPosition(center,32.0,false)
 			cricketstail_spawn_delay = cricketstail_spawn_delay + 1
-			local rand = math.random(100)
-			if cricketstail_spawn_delay >= 10 and rand <= crickets_tail_SPAWN_CHANCE and g_vars.cricketsTail_hadEnemies then
-				cricketstail_spawn_delay = 0
-				g_vars.cricketsTail_hadEnemies = false
-				for i=1, #entities do
-					local e = entities[i]
-					if e and avalaiblePosition ~= nil then
-						if e.Type == 5 and getDistance(e.Postion, availablePosition) <= 32 and not e.Variant==52 then
-							e:Remove()
+			if cricketstail_spawn_delay == 10 then
+				local rand = math.random(100)
+				if rand <= crickets_tail_SPAWN_CHANCE and g_vars.cricketsTail_hadEnemies then
+					g_vars.cricketsTail_hadEnemies = false
+					for i=1, #entities do
+						local e = entities[i]
+						if e and avalaiblePosition ~= nil then
+							if e.Type == 5 and getDistance(e.Postion, availablePosition) <= 32 and not e.Variant==52 then
+								e:Remove()
+							end
 						end
 					end
-				end
-				Isaac.Spawn(5,PickupVariant.PICKUP_SPIKEDCHEST,0,availablePosition,Vector(0,0),player)
+					Isaac.Spawn(5,PickupVariant.PICKUP_SPIKEDCHEST,0,availablePosition,Vector(0,0),player)
 			end
 		end
 	end
@@ -1453,21 +1448,23 @@ function _Stillbirth:GodSaleUpdate()
 	local entities = Isaac.GetRoomEntities()
 	local currentStage = Game():GetLevel():GetStage()
 	if player:HasCollectible(Items.godsale_i) then
-		if room.GetType() == RoomType.ROOM_SHOP then
+		if room:GetType() == RoomType.ROOM_SHOP then
 			for i=1, #entities do
 				local e = entities[i]
 				if e.Type == 5 and e.Variant == PickupVariant.PICKUP_SHOPITEM then
-					table.insert(g_vars.godsale_freeitems, e:ToPickup())
+					table.insert(g_vars.godsale_freeitems, e)
 				end
 			end
 		    if g_vars.godsale_previousStage ~= currentStage then
 		        g_vars.godsale_previousStage = currentStage
-				g_vars.godsale_rand = math.random(2^#GodSale_freeitems)
-				g_vars.godsale_rand = bit.tobits(rand)
+				g_vars.godsale_rand = math.random(2^(#g_vars.godsale_freeitems))
+				g_vars.godsale_rand = bit.tobits(g_vars.godsale_rand)
+				print(g_vars.godsale_rand)
 			end
 			for i=1, #g_vars.godsale_freeitems do
 				if g_vars.godsale_rand[i] == 1 then
-					g_vars.godsale_freeitems[i].Price = 0
+					local e = g_vars.godsale_freeitems[i]:ToPickup()
+					e.Price = 0
 				end
 			end
 		end
