@@ -222,15 +222,11 @@ else
 	if s and table._getn(g_vars) == table._getn(s) then g_vars = s; Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
 
 	require("luafiles/libs/luabit/bit")
-
-	require("luafiles/characters/character_init")
 	require("luafiles/init")
 	--require("luafiles/debugtext")
 
 	require("luafiles/items/collectibles")
 	require("luafiles/items/familiars")
 	require("luafiles/items/trinkets")
-
-	require("luafiles/transformations/transfo")
 	require("luafiles/mechanics/mechanics")
 end

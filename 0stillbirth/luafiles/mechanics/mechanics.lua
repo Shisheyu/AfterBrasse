@@ -1,5 +1,7 @@
 require("luafiles/mechanics/curses")
 require("luafiles/mechanics/pills")
+require("luafiles/mechanics/transformations")
+require("luafiles/mechanics/character_init")
 --require("luafiles/mechanics/devil_boss")
 --require("luafiles/mechanics/cards")
 
