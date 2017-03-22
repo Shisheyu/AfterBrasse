@@ -1446,4 +1446,67 @@ function _Stillbirth:HasKikazaru()
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.HasKikazaru);
+
+--[[
+God Sale
+Passive Item : Moitié du shop gratos mais aléatoire à chaque shop. Rajout de shops dans Womb
+Dogeek
+]]--
+
+_Stillbirth:GodSaleUpdate()
+	local player = Isaac.GetPlayer(0)
+	local room = Game():GetRoom()
+	local entities = Isaac.GetRoomEntities()
+	local currentStage = Game():GetLevel():GetStage()
+	if player:HasCollectible(Items.godsale_i) then
+		if room.GetType() == RoomType.ROOM_SHOP then
+			for i=1, #entities do
+				local e = entities[i]
+				if e.Type == 5 and e.Variant == PickupVariant.PICKUP_SHOPITEM then
+					table.insert(g_vars.godsale_freeitems, e:ToPickup())
+				end
+			end
+		    if g_vars.godsale_previousStage ~= currentStage then
+		        g_vars.godsale_previousStage = currentStage
+				g_vars.godsale_rand = math.random(2^#GodSale_freeitems)
+				g_vars.godsale_rand = bit.tobits(rand)
+			end
+			for i=1, #g_vars.godsale_freeitems do
+				if g_vars.godsale_rand[i] == 1 then
+					g_vars.godsale_freeitems[i].Price = 0
+				end
+			end
+		end
+		player:GetEffects():AddTrinketEffect(TrinketType.TRINKET_SILVER_DOLLAR, false);
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate)
+
+--[[ 
+Iwazaru
+-- "Baillon qui se met sur la bouche. Quand le joueur se fait toucher, le baillon active un shoop dawoop (1 fois par salle)"
+Sliost & Dogeek(pour finir l'item)
+]]--
+
+function _Stillbirth:IwazaruFiredReset()
+	local room = Game():GetRoom()
+	if g_vars.iwazaru_fired and player:HasCollectible(Items.iwazaru_i) then
+		if room:GetFrameCount() == 1 then
+			g_vars.iwazaru_fired = false
+		end
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.IwazaruFiredReset)
+
+function _Stillbirth:HasIwazaru(entity,dmg_amount, dmg_flag, dmg_src, dmg_countdown)
+  local player = Isaac.GetPlayer(0)
+  if player:HasCollectible(Items.iwazaru_i) and not g_vars.iwazaru_fired then
+  	g_vars.iwazaru_fired = true
+    local angle = player:GetAimDirection():GetAngleDegrees()
+    local shoop = EntityLaser.ShootAngle(3,player.Position,angle,30,Vector(0,-20),player)
+    shoop.CollisionDamage = 2 -- TODO : Adjust value?
+  end
+  return true
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.HasIwazaru,EntityType.ENTITY_PLAYER);
 --[[--END--]]

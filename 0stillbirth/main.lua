@@ -83,7 +83,9 @@ else
 					iwazaru_i = Isaac.GetItemIdByName("Iwazaru"),
 					toxic_mushroom_i = Isaac.GetItemIdByName("Toxic Mushroom"),
 					debug_i = Isaac.GetItemIdByName("Debug"),
-					rngbaby_i= Isaac.GetItemIdByName("Rng Baby")
+					rngbaby_i= Isaac.GetItemIdByName("Rng Baby"),
+					godsale_i = Isaac.GetItemIdByName("God Sale"),
+					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")
 				}
 
 	Familiars =	{
@@ -199,7 +201,11 @@ else
 								spinach_cnt = 1,
 								toxicmush_cnt = 1,
 								tarotbooster_cnt = 1,
-								FAM_LastRNGBabyExists = false
+								FAM_LastRNGBabyExists = false,
+								godsale_previousStage = 0,
+								godsale_rand = bit.tobits(0),
+								godsale_freeitems = {},
+								iwazaru_fired = false
 							}
 		return g_vars
 	]]
