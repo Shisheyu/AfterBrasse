@@ -1127,7 +1127,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TarotBoosterUpd
 
 --[[
 3D Glasses
-Azqswx + Dogeek
+Dogeek
 ]]--
 
 local used = 0
@@ -1136,6 +1136,9 @@ function _Stillbirth:Remove3DGlasses()
 	local player = Isaac.GetPlayer(0)
 	for i=1, used do
 		player:RemoveCollectible(245)
+	end
+	if player:HasCollectible(245) then
+		--player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/2020.anm2"))
 	end
 	used = 0
 end
@@ -1451,7 +1454,7 @@ function _Stillbirth:GodSaleUpdate()
 		player:GetEffects():AddTrinketEffect(TrinketType.TRINKET_SILVER_DOLLAR, false);
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate)
+--_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate) --error bit.tobits() bitwise on non integer
 
 --[[ 
 Iwazaru
