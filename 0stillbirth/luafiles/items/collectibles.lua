@@ -1134,16 +1134,12 @@ local used = 0
 
 function _Stillbirth:Remove3DGlasses()
 	local player = Isaac.GetPlayer(0)
-	local room = Game():GetRoom()
-	if room:GetDecorationSeed() ~= g_vars.DGlasses_lastRoom then
-		g_vars.DGlasses_lastRoom = room:GetDecorationSeed()
-    	for i=1, used do
-    		player:RemoveCollectible(245)
-    	end
-    	used = 0
-    end
+	for i=1, used do
+		player:RemoveCollectible(245)
+	end
+	used = 0
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.Remove3DGlasses)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.Remove3DGlasses)
 
 function _Stillbirth:use_3D_glasses()
     used = used + 1;
