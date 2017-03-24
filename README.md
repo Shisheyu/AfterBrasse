@@ -15,12 +15,12 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 
 ## Artistes
 
-- Aktraiser
+- Aktraizer
 - Magikwhite
 - Illuday
 - Lucyna
 - Mathbou
-- Aero_Kansaki
+- AeroKansaki
 - Asenith
 
 ## Développeurs

@@ -209,7 +209,8 @@ else
 								iwazaru_fired = false,
 								bubblesCostume = false,
 								DGlasses_lastRoom = nil,
-								cricketspaw_multiplier = 1
+								cricketspaw_multiplier = 1,
+								zodiacTransformed = false
 							}
 		return g_vars
 	]]
