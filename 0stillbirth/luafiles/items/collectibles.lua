@@ -1353,11 +1353,11 @@ Azqswx
 function _Stillbirth:MizaruUpdateCache()
     local frame = Game():GetFrameCount();
     local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(Items.mizaru_i) then
+    if player:HasCollectible(Items.mizaru_i) and IsShooting(player) then
 		if not g_vars.mizaru_n then
 			g_vars.mizaru_n = player.MaxFireDelay
 		end
-		if frame % 15 == 0 then
+		if frame % 30 == 0 then
 		    player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY) 
 		    player:EvaluateItems()     
 		end

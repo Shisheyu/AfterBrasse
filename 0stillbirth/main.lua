@@ -85,7 +85,8 @@ else
 					debug_i = Isaac.GetItemIdByName("Debug"),
 					rngbaby_i= Isaac.GetItemIdByName("Rng Baby"),
 					godsale_i = Isaac.GetItemIdByName("God Sale"),
-					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")
+					iwazaru_i = Isaac.GetItemIdByName("Iwazaru"),
+					babyBlender_i = Isaac.GetItemIdByName("Baby Blender")
 				}
 
 	Familiars =	{
