@@ -108,21 +108,29 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingWealth)
 
 local doubtful_level_id = nil
+local added_items_doubtful = false
+local removed_items_doubtful = false
 
 function _Stillbirth:blessingDoubtful()
 	local player = Isaac.GetPlayer(0)
 	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_doubtful) ~= Curses.blessing_doubtful) then return end
-	player:AddCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS, 0, false)
-	player:AddCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS, 0, false)
+	if not added_items_doubtful then
+		player:AddCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS, 0, false)
+		player:AddCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS, 0, false)
+		added_items_doubtful = true
+		removed_items_doubtful = false
+	end
 	doubtful_level_id = Game():GetLevel():GetStage()
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingDoubtful)
 
 function _Stillbirth:removeBlessingDoubtful()
 	local player = Isaac.GetPlayer(0)
-	if Game():GetLevel():GetStage() ~= doubtful_level_id then
+	if Game():GetLevel():GetStage() ~= doubtful_level_id and added_items_doubtful and not removed_items_doubtful then
 		player:RemoveCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS)
 		player:RemoveCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS)
+		removed_items_doubtful = true
+		added_items_doubtful = false
 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.removeBlessingDoubtful)
