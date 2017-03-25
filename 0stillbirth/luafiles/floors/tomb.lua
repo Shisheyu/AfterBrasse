@@ -1,6 +1,6 @@
 function _Stillbirth:GenerateTomb()
 	local level = Game():GetLevel()
-	local player = ISaac.GetPlayer(0)
+	local player = Isaac.GetPlayer(0)
 	if isNextFloorTomb then
 		overlay = Sprite()
 		--overlay:Load("/gfx/backdrop/tomb_backdrop.anm2", true)
@@ -40,8 +40,10 @@ function _Stillbirth:AddRope()
 		e.GridCollisionClass = GridCollisionClass.COLLISION_WALL
 		ropeHasSpawned = true
 	end
-	if getDistance(player.Position, ropePos) and ropeHasSpawned then
-		isNextFloorTomb = true
+	if ropePos then
+		if getDistance(player.Position, ropePos) and ropeHasSpawned then
+			isNextFloorTomb = true
+		end
 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.AddRope)

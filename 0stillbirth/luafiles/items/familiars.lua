@@ -119,17 +119,17 @@ _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.FAM_BombBum
 Dionea Muscipula
 Azqswx
 ]]--
-local Dionea_Root = {};
-local Dionea_eating = false;
-function _Stillbirth:Dionea_onEvaluateCacheL1()
+local dionea_Root = {};
+
+function _Stillbirth:dionea_onEvaluateCacheL1()
 	local player = Isaac.GetPlayer(0);
 	if player:HasCollectible(Items.DioneaFamIdL1_i) and g_vars.dionea_L1exists == false and g_vars.dionea_L1dead == false then
-		L1 = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantL1, 0, player.Position, Vector(0,0),player);
+		g_vars.dionea_L1 = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantL1, 0, player.Position, Vector(0,0),player);
 		g_vars.dionea_L1exists = true;
 	end
 end
 
-function _Stillbirth:Dionea_onFamiliarUpdateL1(DioneaFam)
+function _Stillbirth:dionea_onFamiliarUpdateL1(DioneaFam)
 	local player = Isaac.GetPlayer(0);
 	DioneaFam.OrbitDistance = Vector(25,25);
 	DioneaFam.OrbitLayer = 10;
@@ -140,7 +140,7 @@ function _Stillbirth:Dionea_onFamiliarUpdateL1(DioneaFam)
 	L1Sprite:Update()
 end
 
-function _Stillbirth:Dionea_onInitL1(DioneaFam)
+function _Stillbirth:dionea_onInitL1(DioneaFam)
 	local player = Isaac.GetPlayer(0)
 	DioneaFam.OrbitDistance = Vector(25,25);
 	DioneaFam.OrbitLayer = 10;
@@ -150,7 +150,7 @@ function _Stillbirth:Dionea_onInitL1(DioneaFam)
 	L1Sprite:Update()
 end
 
-function _Stillbirth:Dionea_onFamiliarUpdateL2(DioneaFam)
+function _Stillbirth:dionea_onFamiliarUpdateL2(DioneaFam)
 	local player = Isaac.GetPlayer(0);
 	DioneaFam.OrbitDistance = Vector(25,25);
 	DioneaFam.OrbitLayer = 10;
@@ -161,7 +161,7 @@ function _Stillbirth:Dionea_onFamiliarUpdateL2(DioneaFam)
 	L2Sprite:Update();
 end
 
- function _Stillbirth:Dionea_onInitL2(DioneaFam)
+ function _Stillbirth:dionea_onInitL2(DioneaFam)
 	local player = Isaac.GetPlayer(0)
 	DioneaFam.OrbitDistance = Vector(25,25);
 	DioneaFam.OrbitLayer = 10;
@@ -171,7 +171,7 @@ end
 	L2Sprite:Update()
 end
 
-function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
+function _Stillbirth:dionea_onFamiliarUpdateL3(DioneaFam)
 	local player = Isaac.GetPlayer(0);
 	local ClosestB = nil;
 	local bvalE = nil;
@@ -180,10 +180,10 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
 	local L3Sprite = DioneaFam:GetSprite();
 	local FamiliarFrameCount = L3Sprite:GetFrame();
 	L3Sprite.PlaybackSpeed = 0.50;
-
-	for i = 1,#Dionea_Root do
-		Dionea_Root[i]:FollowPosition(player.Position:__mul( #Dionea_Root+1-i ):__add(g_vars.dionea_L3.Position:__mul(i)):__div(#Dionea_Root+1));
-		Dionea_Root[i]:MultiplyFriction(10.0);
+	
+	for i = 1,#dionea_Root do
+		dionea_Root[i]:FollowPosition(player.Position:__mul( #dionea_Root+1-i ):__add(g_vars.L3.Position:__mul(i)):__div(#dionea_Root+1));
+		dionea_Root[i]:MultiplyFriction(10.0);
 	end
 
 	local bval =  math.abs( player.Position.X - DioneaFam.Position.X ) + math.abs( player.Position.Y - DioneaFam.Position.Y );
@@ -199,7 +199,7 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
     if ClosestB ~= nil then
     	bvalE = math.abs( entities[ClosestB].Position.X - player.Position.X ) + math.abs( entities[ClosestB].Position.Y - player.Position.Y );
     end
-    if Dionea_eating then
+    if g_vars.dionea_eating then
     	eatingDist = 300;
     else
     	eatingDist = 200;
@@ -211,12 +211,12 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
 		end
 		if not SFXManager():IsPlaying(100) and L3Sprite:IsEventTriggered("Eating") then
 			SFXManager():Play(100,1.0,1,false,1.0)			--Joue son Carnivore
-		end
+		end      
 		local bval =  math.abs( entities[ClosestB].Position.X - DioneaFam.Position.X ) + math.abs( entities[ClosestB].Position.Y - DioneaFam.Position.Y )
-        DioneaFam:FollowPosition( entities[ClosestB].Position );
-        Dionea_eating = true;
-        if bval >= 5 then
-        	Dionea_eating = false;
+        DioneaFam:FollowPosition( entities[ClosestB].Position );  
+        g_vars.dionea_eating = true; 
+        if bval >= 5 then 
+        	g_vars.dionea_eating = false;
         end
     else
     	if FamiliarFrameCount >= 9 and L3Sprite:IsPlaying("Eat") then
@@ -232,10 +232,10 @@ function _Stillbirth:Dionea_onFamiliarUpdateL3(DioneaFam)
         else
             DioneaFam:MultiplyFriction(0.2); -- Stop
         end
-    end
+    end    
 end
 
- function _Stillbirth:Dionea_onInitL3(DioneaFam)
+ function _Stillbirth:dionea_onInitL3(DioneaFam)
 	local player = Isaac.GetPlayer(0)
 	DioneaFam:FollowParent();
 	DioneaFam.Velocity = DioneaFam.Velocity:Clamped(-5.5, -5.5, 5.5, 5.5)
@@ -244,21 +244,21 @@ end
 	L3Sprite:Update()
 end
 
- function _Stillbirth:Dionea_onGameUpdate()
+ function _Stillbirth:dionea_onGameUpdate()
 	local entities = Isaac.GetRoomEntities();
 	local player = Isaac.GetPlayer(0);
 	local Nbr = 10;
 	for i = 1, #entities do
 		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true then
 			local distance = ((g_vars.dionea_L1.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L1.Position.Y-entities[i].Position.Y)^2)^(1/2);
-			if distance <= 24 then
+			if distance <= 35 then
 				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
 				entities[i]:Kill();
 			end
 		end
 		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L2exists == true then
 			local distance = ((g_vars.dionea_L2.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L2.Position.Y-entities[i].Position.Y)^2)^(1/2);
-			if distance <= 28 then
+			if distance <= 35 then
 				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
 				entities[i]:Kill();
 			end
@@ -274,27 +274,27 @@ end
 	if g_vars.dionea_tearsCount >= 50 and g_vars.dionea_tearsCount <= 60 and g_vars.dionea_L3exists == false then
 		g_vars.dionea_L3 = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantL3, 0, player.Position, Vector(0,0),player);
 		for i = 1, Nbr do
-			Dionea_Root[i] = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantR, 0, player.Position, Vector(0,0), player):ToFamiliar();
+			dionea_Root[i] = Isaac.Spawn(EntityType.ENTITY_FAMILIAR, Familiars.DioneaFamVariantR, 0, player.Position, Vector(0,0), player):ToFamiliar();
 		end
 		g_vars.dionea_L3exists = true;
-		local L3Sprite = L3:GetSprite()
+		local L3Sprite = g_vars.dionea_L3:GetSprite()
 		g_vars.dionea_L2:Remove();
 		g_vars.dionea_L2exists = false;
 		g_vars.dionea_L2dead = true;
 	end
 end
 
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.Dionea_onGameUpdate)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.dionea_onGameUpdate)
 
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.Dionea_onFamiliarUpdateL1, Familiars.DioneaFamVariantL1)
-_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.Dionea_onEvaluateCacheL1)
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.Dionea_onInitL1, Familiars.DioneaFamVariantL1)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.dionea_onFamiliarUpdateL1, Familiars.DioneaFamVariantL1)
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.dionea_onEvaluateCacheL1)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.dionea_onInitL1, Familiars.DioneaFamVariantL1)
 
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.Dionea_onFamiliarUpdateL2, Familiars.DioneaFamVariantL2)
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.Dionea_onInitL2, Familiars.DioneaFamVariantL2)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.dionea_onFamiliarUpdateL2, Familiars.DioneaFamVariantL2)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.dionea_onInitL2, Familiars.DioneaFamVariantL2)
 
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.Dionea_onFamiliarUpdateL3, Familiars.DioneaFamVariantL3)
-_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.Dionea_onInitL3, Familiars.DioneaFamVariantL3)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.dionea_onFamiliarUpdateL3, Familiars.DioneaFamVariantL3)
+_Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.dionea_onInitL3, Familiars.DioneaFamVariantL3)
 
 --~ --[[ -- WAITING TO FINISH RE IMPLEMENTING THE NEW ANM2 + TEST
 --~ Item: "RNG Baby" -- Glitched qui clignotte skin original / skin custom
