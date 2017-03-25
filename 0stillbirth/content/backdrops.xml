@@ -1,0 +1,3 @@
+<backdrops gfxroot="gfx/backdrop/">
+	<backdrop id="29" gfx="tomb.png" walls="1" wallvariants="3" floors="1" floorvariants="6" lfloorgfx="LTomb_floor.png" nfloorgfx="nTomb_floor.png" />
+</backdrops>

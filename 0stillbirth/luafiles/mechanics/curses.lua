@@ -1,3 +1,5 @@
+--bug bit avec miracle???? doubtful ne s'enlève pas et wealth fait spawn des piedestaux en plus
+
 local NUM_BLESSINGS = 6 --6
 local currentBlessing = ""
 
@@ -95,26 +97,35 @@ function _Stillbirth:blessingWealth()
 	end
 	for i=1, #entities do
 		local e = entities[i]
-		if e.Type == 5 and (e.Variant ~= 100 or e.Variant ~= 150 or e.Variant ~= 380 or e.Variant ~= 350 or e.Variant ~= 370 or e.Variant ~= 340) and not wealth_pickup_spawned and isRoomOver(room) and room:IsFirstVisit() then
-			Isaac.Spawn(e.Type, e.Variant, 0, Isaac.GetFreeNearPosition(room:GetCenterPos(), 1.0), Vector(0, 0), player)
-			wealth_pickup_spawned = true
+		if e.Type == 5 and not wealth_pickup_spawned and isRoomOver(room) and room:IsFirstVisit() then
+			if e.Variant == 10 or e.Variant == 20 or e.Variant == 30 or e.Variant == 40 or e.Variant == 50 or e.Variant == 51 or e.Variant == 52 or e.Variant == 53 or e.Variant == 60 or e.Variant == 69 or e.Variant == 70 or e.Variant == 90 or e.Variant == 300 or e.Variant == 360 then
+				Isaac.Spawn(e.Type, e.Variant, 0, Isaac.GetFreeNearPosition(room:GetCenterPos(), 1.0), Vector(0, 0), player)
+				wealth_pickup_spawned = true
+			end
 		end
 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingWealth)
 
+local doubtful_level_id = nil
+
 function _Stillbirth:blessingDoubtful()
 	local player = Isaac.GetPlayer(0)
-	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_doubtful) ~= Curses.blessing_doubtful) then 
-		player:RemoveCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS)
-		player:RemoveCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS)
-		return
-	end
-	local player = Isaac.GetPlayer(0)
+	if (bit.band(Game():GetLevel():GetCurses(), Curses.blessing_doubtful) ~= Curses.blessing_doubtful) then return end
 	player:AddCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS, 0, false)
 	player:AddCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS, 0, false)
+	doubtful_level_id = Game():GetLevel():GetStage()
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.blessingDoubtful)
+
+function _Stillbirth:removeBlessingDoubtful()
+	local player = Isaac.GetPlayer(0)
+	if Game():GetLevel():GetStage() ~= doubtful_level_id then
+		player:RemoveCollectible(CollectibleType.COLLECTIBLE_THERES_OPTIONS)
+		player:RemoveCollectible(CollectibleType.COLLECTIBLE_MORE_OPTIONS)
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.removeBlessingDoubtful)
 
 --DISPLAY BLESSING NAME
 

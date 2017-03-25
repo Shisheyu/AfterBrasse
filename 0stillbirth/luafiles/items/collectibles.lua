@@ -1289,29 +1289,45 @@ function _Stillbirth:HeartPlusHeartUpdate()
 				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
 					coeur[i]:AddEntityFlags(1<<25);
 					sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
-					sprite:Reload();
-					sprite:LoadGraphics()
-					sprite:Update()
-					coeur[i].SubType = HeartSubType.HEART_SOUL;
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					--if not sprite:WasEventTriggered("Appear") or sprite:isFinished("Appear") then
+					--	sprite:Play("Appear", true)
+					--	sprite:Update()
+					--else
+						sprite:Play("Idle", true)
+					--	sprite:Update()
+					--end
+					if bval < 40 then
+						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+						sprite:Play("Collect", true)
+						player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
+						coeur[i]:Remove()
+					end
 				end
 
 				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
 					sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
-					sprite:Reload();
-					sprite:LoadGraphics()
-					sprite:Update()
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					sprite:Play("Idle", true)
 					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+						sprite:Play("Collect", true)
 						player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
 						coeur[i]:Remove()
 					end
 				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
 					sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
-					sprite:Reload();
-					sprite:LoadGraphics()
-					sprite:Update()
-					if bval < 40 and player:CanPickBlackHearts() and bleu == 0 then
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					sprite:Play("Idle", true)
+					if bval < 40 and player:CanPickBlackHearts() then
 						SFXManager():Play(185,1.0,1,false,1.0)
+						sprite:Play("Collect", true)
 						player:AddBlackHearts(4)
 						coeur[i]:Remove()
 					end
