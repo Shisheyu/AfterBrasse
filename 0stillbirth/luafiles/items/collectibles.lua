@@ -42,10 +42,13 @@ function _Stillbirth:UseCricketsPaw()
 end
 
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
+	local dmg = 0
     if g_vars.cricketsPaw_had then
+    	if player:HasCollectible(Items.spinach_i) then dmg = dmg+1 end
+    	if player:HasCollectible(Items.hot_pizza_slice_i) then dmg = dmg+1 end
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
         	g_vars.cricketspaw_multiplier = (1+g_vars.cricketsPaw_Uses*0.2)
-        	player.Damage = DamageToSet(player, 0, g_vars.cricketspaw_multiplier)
+        	player.Damage = DamageToSet(player, dmg, g_vars.cricketspaw_multiplier)
         end
     end
 end
