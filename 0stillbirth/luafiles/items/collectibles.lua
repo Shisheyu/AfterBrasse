@@ -431,7 +431,7 @@ function _Stillbirth:cataract_EvCache(player, cacheFlag)
 			else
 				cataract_restored_values = -99
 				if cacheFlag == CacheFlag.CACHE_DAMAGE then
-					player.Damage = player.Damage + (player.Damage*0.05+cataract_numberOfTearsShot*0.5) * cataract_numberOfTearsShot
+					player.Damage = player.Damage + cataract_numberOfTearsShot
 				end
 				if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
 					player.ShotSpeed = player.ShotSpeed - (player.ShotSpeed*0.12) * cataract_numberOfTearsShot
