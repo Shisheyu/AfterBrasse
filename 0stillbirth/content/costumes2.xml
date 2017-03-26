@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<costumes anm2root="gfx/characters/">
+	<costume type="passive" id="511" anm2path="3+3=33.anm2" priority="99"/> 
+	<costume type="active" id="512" anm2path="3dglasses.anm2" priority="99"/>
+	<costume type="passive" id="513" anm2path="appetizer.anm2" priority="99"/> 
+	<costume type="passive" id="517" anm2path="bobsbitrex.anm2" priority="99"/>
+	<costume type="passive" id="518" anm2path="braveshoes.anm2" priority="99"/> 
+	<costume type="passive" id="519" anm2path="bubblehead.anm2" priority="99"/>
+	<costume type="passive" id="520" anm2path="cataract.anm2" priority="99"/> 
+	<costume type="none" id="521blue" anm2path="choranaptyxicblue.anm2" priority="99"/>
+	<costume type="none" id="521red" anm2path="choranaptyxicred.anm2" priority="99"/>
+	<costume type="passive" id="522" anm2path="cricketscollar.anm2" priority="99"/> 
+	<costume type="passive" id="524" anm2path="cricketstail.anm2" priority="99"/>
+	<costume type="passive" id="528" anm2path="devilsale.anm2" priority="99"/> 
+	<costume type="passive" id="533" anm2path="firstblood.anm2" priority="99"/>
+	<costume type="passive" id="534" anm2path="godsale.anm2" priority="99"/> 
+	<costume type="passive" id="536" anm2path="hazmatsuit.anm2" priority="99"/>
+	<costume type="passive" id="538" anm2path="hotpizzaslice.anm2" priority="99"/> 
+	<costume type="passive" id="539" anm2path="ionizingradiation.anm2" priority="99"/> 
+	<costume type="passive" id="540" anm2path="iwazaru.anm2" priority="99"/> 
+	<costume type="passive" id="541" anm2path="kikazaru.anm2" priority="99"/>
+	<costume type="passive" id="543" anm2path="lemniscate.anm2" priority="99"/> 
+	<costume type="passive" id="546" anm2path="mizaru.anm2" priority="99"/>
+	<costume type="passive" id="547" anm2path="momscake.anm2" priority="99"/> 
+	<costume type="passive" id="548" anm2path="moneyequalsluck.anm2" priority="99"/>
+	<costume type="passive" id="549" anm2path="oddit.anm2" priority="99"/> 
+	<costume type="passive" id="550" anm2path="offal.anm2" priority="99"/> 
+	<costume type="passive" id="551" anm2path="pepperspray.anm2" priority="99"/> 
+	<costume type="passive" id="552" anm2path="rabbitsfoot.anm2" priority="99"/>
+	<costume type="passive" id="553" anm2path="rattle.anm2" priority="99"/> 
+	<costume type="passive" id="555" anm2path="solomon.anm2" priority="99"/>
+	<costume type="passive" id="556" anm2path="spidershoot.anm2" priority="99"/> 
+	<costume type="passive" id="557" anm2path="spinach.anm2" priority="99"/>
+	<costume type="passive" id="558" anm2path="spyglass.anm2" priority="99"/> 
+	<costume type="passive" id="560" anm2path="boosterpack.anm2" priority="99"/> 
+	<costume type="passive" id="561" anm2path="techzero.anm2" priority="99"/> 
+	<costume type="passive" id="562" anm2path="toxicshoot.anm2" priority="99"/>
+	<costume type="none" id="" anm2path="cricket.anm2" priority="99"/>
+	<costume type="none" id="" anm2path="laser.anm2" priority="99"/>
+	<costume anm2path="costume_exbanana.anm2" hasSkinAlt="true" id="550" priority="200" type="none" />
+	<costume type="passive" id="564" anm2path="whitecandle.anm2" priority="99"/>
+</costumes>
