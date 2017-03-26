@@ -212,7 +212,8 @@ else
 								DGlasses_lastRoom = nil,
 								cricketspaw_multiplier = 1,
 								zodiacTransformed = false,
-								box_friends_used = false
+								box_friends_used = false,
+								Kikazaru_oldFrame = 0
 							}
 		return g_vars
 	]]

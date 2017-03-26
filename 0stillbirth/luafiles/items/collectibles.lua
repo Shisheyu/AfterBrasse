@@ -7,6 +7,7 @@ function _Stillbirth:onUseDebugItem()
 	for i=1, #Items do
 		Isaac.Spawn(5, 100, Items[i], Isaac.GetFreeNearPosition(center, 32.0), Vector(0,0), player)
 	end
+	return true
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
@@ -609,6 +610,7 @@ function _Stillbirth:OnBlankTissueUse()
     		entities[i]:Remove()
     	end
     end
+    return true
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.OnBlankTissueUse, Items.blankTissues_i)
 
@@ -1150,6 +1152,7 @@ function _Stillbirth:use_3D_glasses()
     local room = Game():GetRoom()
     player:AddCollectible(245, 0, false)
     player:TryRemoveCollectibleCostume(245, false)
+    return true
 end
 
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_3D_glasses, Items.D_glasses_i);
@@ -1423,25 +1426,24 @@ Passive Item : Kikazaru : Supprime Curse of the Maze & Labyrinth. Larmes de sang
 --counterKikazaru : counter to spawn a tear every 2*MaxFireDelay
 
 function _Stillbirth:HasKikazaru()
-  local player = Isaac.GetPlayer(0)    
+  local player = Isaac.GetPlayer(0)
   if player:HasCollectible(Items.kikazaru_i) then
+    if g_vars.Kikazaru_oldFrame <= 0 then
+      g_vars.Kikazaru_oldFrame = player.FrameCount
+    end
     local tearRate = 2*player.MaxFireDelay
     local aimDirection = player:GetAimDirection()
-    if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
-      local angle = aimDirection:GetAngleDegrees()
-      local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
-      local vectorRight = Vector.FromAngle(angle - 90)*(10*player.ShotSpeed) + player.Velocity
-      if g_vars.kikazaru_counterKikazaru and player.FireDelay == 0 then
+	if IsShooting(player) and (player.FrameCount - g_vars.Kikazaru_oldFrame) > tearRate then 
+      if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
+        local angle = aimDirection:GetAngleDegrees()
+        local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
+        local vectorRight = Vector.FromAngle(angle - 90)*(10*player.ShotSpeed) + player.Velocity
         local tearLeft = player:FireTear(player.Position, vectorLeft, false, false, false)
         local tearRight = player:FireTear(player.Position, vectorRight, false, false, false)
         tearLeft:ChangeVariant(1)
         tearRight:ChangeVariant(1)
-        g_vars.kikazaru_counterKikazaru = false
-      elseif not counterKikazaru and player.FireDelay == 0 then
-        g_vars.kikazaru_counterKikazaru = true
       end
-    else
-      g_vars.kikazaru_counterKikazaru = true
+	  g_vars.Kikazaru_oldFrame = player.FrameCount
     end
   end
 end
