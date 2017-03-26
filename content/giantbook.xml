@@ -1,0 +1,8 @@
+<giantbook anm2root="gfx/ui/giantbook/">
+	<entry id="41" anm2="blender_giant.anm2" anim="Shake" gfx="blender_giant.png" />
+	<entry id="42" anm2="crucifix_giant.anm2" anim="Swing" gfx="crucifix_giant.png" />
+	<entry id="43" anm2="medusa_giant.anm2" anim="Shake" gfx="medusa_giant.png" />
+	<entry id="44" anm2="transplant_giant.anm2" anim="Shake" gfx="transplant_giant.png" />
+	<entry id="45" anm2="dadsbeer_giant.anm2" anim="Shake" gfx="dadsbeer_giant.png" />
+	<entry id="46" anm2="encyclopedia_giant.anm2" anim="Shake" gfx="encyclopedia_giant.png" />
+</giantbook>
