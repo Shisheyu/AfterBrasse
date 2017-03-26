@@ -7,6 +7,7 @@ function _Stillbirth:onUseDebugItem()
 	for i=1, #Items do
 		Isaac.Spawn(5, 100, Items[i], Isaac.GetFreeNearPosition(center, 32.0), Vector(0,0), player)
 	end
+	return true
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
@@ -41,9 +42,13 @@ function _Stillbirth:UseCricketsPaw()
 end
 
 function _Stillbirth:HasCricketsPawUsesCacheUpdate(player, cacheFlag)
+	local dmg = 0
     if g_vars.cricketsPaw_had then
+    	if player:HasCollectible(Items.spinach_i) then dmg = dmg+1 end
+    	if player:HasCollectible(Items.hot_pizza_slice_i) then dmg = dmg+1 end
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
-        	player.Damage = player.Damage * (1+g_vars.cricketsPaw_Uses*0.2) -- TO BALANCE
+        	g_vars.cricketspaw_multiplier = (1+g_vars.cricketsPaw_Uses*0.2)
+        	player.Damage = DamageToSet(player, dmg, g_vars.cricketspaw_multiplier)
         end
     end
 end
@@ -80,16 +85,15 @@ function _Stillbirth:use_beer()
     local p = Isaac.GetPlayer(0);
     local entities = Isaac.GetRoomEntities( )
     local game = Game()
-	local duration_infinite = 0xFFFFFF
 	SFXManager():Play(19, 1.0, 1, false, 1)
     for i = 1, #entities do
-        if entities[i]:IsVulnerableEnemy( ) then
+        if entities[i]:IsActiveEnemy() then
         	if entities[i]:IsBoss() then
 		        -- Ajout confusion et dmg aux ennemis --
 		        entities[i]:AddConfusion( EntityRef(p), 100, false )
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		    else
-		    	entities[i]:AddConfusion( EntityRef(p), duration_infinite, false )
+		    	entities[i]:AddEntityFlags(1<<9)
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		   	end
         end
@@ -169,7 +173,7 @@ function _Stillbirth:hot_pizza_slice_cacheUpdate(player, cacheFlag)
 
     if player:HasCollectible(Items.hot_pizza_slice_i) then
         if (cacheFlag == CacheFlag.CACHE_DAMAGE) then
-            player.Damage = player.Damage + 1;
+            player.Damage = DamageToSet(player, 1, 1);
             if not g_vars.hot_pizza_slice_HpUp_Done then
                 player.SpriteScale = player.SpriteScale * 1.2;
                 player:AddSoulHearts(2);
@@ -284,16 +288,12 @@ function _Stillbirth:blindPactUpdate()
     if player:HasCollectible(Items.blind_Pact_i) then
         local currentStage = Game():GetLevel():GetStage()
         if g_vars.blindPact_previousStage ~= currentStage then
-            g_vars.blindPact_previousStage = currentStage
             local rand = math.random(#devilPoolPassive)
             g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            while player:HasCollectible(g_vars.blindPact_pickedItem) do
-            	local rand = math.random(#devilPoolPassive)
-            	g_vars.blindPact_pickedItem = devilPoolPassive[rand]
-            	if not player:HasCollectible(g_vars.blindPact_pickedItem) then
-            		player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
-            	end
-            end
+            if not player:HasCollectible(g_vars.blindPact_pickedItem) then
+            	player:AddCollectible(g_vars.blindPact_pickedItem, 0, true)
+            	g_vars.blindPact_previousStage = currentStage
+			end
             if (g_vars.blindPact_previousItem ~= 0) and player:HasCollectible( g_vars.blindPact_previousItem ) then
                 player:RemoveCollectible( g_vars.blindPact_previousItem )
             end
@@ -313,13 +313,13 @@ Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
 --]]
 function BounceHearts(heart)
 	local player = Isaac.GetPlayer(0)
-	local velmul = 3
-	local velocity = player.Velocity * velmul
+	--local velmul = 2
+	local velocity = player.Velocity --* velmul
 	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
 	if getDistance(player.Position, heart.Position) <= 16 then
-		heart.Velocity = velocity
+		heart:AddVelocity(velocity)
 	end
-	BounceHeartHeart(heart)
+	--BounceHeartHeart(heart)
 end
 
 function BounceHeartHeart(heart1)
@@ -327,10 +327,9 @@ function BounceHeartHeart(heart1)
 	for j=1, #entities do
 		local e2 = entities[j]
 		if e2.Type == 5 and e2.Variant == 10 then
-			local velmul = 2
-			local velocity = heart1.Velocity * velmul
+			local velocity = heart1.Velocity
 			if getDistance(heart1.Position, e2.Position) <= 20 then
-				e2.Velocity = velocity
+				e2:AddVelocity(velocity)
 				heart1.Velocity = Vector(0,0)
 			end
 		end
@@ -339,7 +338,6 @@ end
 
 function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
     local player = Isaac.GetPlayer(0)
-
     if player:HasCollectible(Items.solomon_i) then
         if cacheFlag == CacheFlag.CACHE_DAMAGE then
             player.Damage = player.Damage + 1.5
@@ -437,7 +435,7 @@ function _Stillbirth:cataract_EvCache(player, cacheFlag)
 			else
 				cataract_restored_values = -99
 				if cacheFlag == CacheFlag.CACHE_DAMAGE then
-					player.Damage = player.Damage + (player.Damage*0.05+cataract_numberOfTearsShot*0.5) * cataract_numberOfTearsShot
+					player.Damage = player.Damage + cataract_numberOfTearsShot
 				end
 				if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
 					player.ShotSpeed = player.ShotSpeed - (player.ShotSpeed*0.12) * cataract_numberOfTearsShot
@@ -503,17 +501,6 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cataract_PostUp
 Item Passif : Bubble's Head
 Tire de temps à autres une larme feuille qui stopwatch les ennemis
 --]]
-local function GetClosestTear(entities, player, TType, TVariant)
-    local e, tmp = nil, 0xFFFFFF
-    for i=1, #entities do
-        local bval =  entities[i].Position:Distance(player.Position)
-        if entities[i].Parent and entities[i].Type == TType and entities[i].Variant ~= TVariant and entities[i].Parent.Type == 1 and bval < tmp then
-            tmp = bval
-            e = entities[i]
-        end
-    end
-    return e
-end
 
 function _Stillbirth:BubblesHead_Update()
     local player = Isaac.GetPlayer(0)
@@ -549,7 +536,6 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesHead_Upd
 --------------------------------------------------------------------------------------------------
 local tearLeaf_t = nil
 local tearLeaf_boss = nil
-local tearLeaf_BossColor = nil
 
 function _Stillbirth:TearLeaf_MobSlowing( entity, damage, flag, source, countdown ) -- CustomTearEffect
     if entity and entity:IsVulnerableEnemy() then
@@ -557,10 +543,12 @@ function _Stillbirth:TearLeaf_MobSlowing( entity, damage, flag, source, countdow
 		    if entity:IsBoss() then --boss differenciation
 		    	tearLeaf_t = Isaac.GetFrameCount()
 		    	tearLeaf_boss = entity
-		    	tearLeaf_BossColor = entity:GetColor()
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 180, 50, false, false ) -- StopWatch like color
+		    else
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
 		    end
-		    entity:AddEntityFlags( 1 << 7 ) -- Slow flag
-		    entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
         end
     end
     return
@@ -571,10 +559,8 @@ function _Stillbirth:TearLeaf_BossTimer()
 	if tearLeaf_t then
 		if Isaac.GetFrameCount() - tearLeaf_t >= 6*60 then
 			tearLeaf_boss:ClearEntityFlags(1<<7)
-			tearLeaf_boss:SetColor(tearLeaf_BossColor, 9999, 50, false, false)
 			tearLeaf_t = nil
 			tearLeaf_boss = nil
-			tearLeaf_BossColor = nil
 		end
 	end
 end
@@ -627,6 +613,7 @@ function _Stillbirth:OnBlankTissueUse()
     		entities[i]:Remove()
     	end
     end
+    return true
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.OnBlankTissueUse, Items.blankTissues_i)
 
@@ -897,20 +884,6 @@ Date : 2017-03-06
 TODO : superbum ?
 ]]--
 
-activeList = {}
-local guppyPool = {145, 133, 81, 212, 134, 187}
-local beezlebubPool = {320, 272, 274, 279, 57, 128, 10, 248, 9, 264, 151, 148, 364, 365, 430, 426}
-local funGuyPool = {398, 71, 12, 120, 121, 11, 342}
-local seraphimPool = {33 , 185, 112, 184, 313, 173, 72 , 363, 101}
-local bobPool = {273, 42,  140, 149}
-local spunPool = {493, 496, 240, 70, 14, 143, 13, 345}
-local momPool = {102, 39, 41, 217, 55, 139, 110, 114, 30, 200, 228, 199, 31, 29, 195, 355, 508}
-local conjoinedPool = {8, 167, 169, 100, 322, 268, 67}
-local leviathanPool = {83, 79, 262, 80, 51, 159, 399 , 230, 118}
-local poopPool = {36 ,291, 236}
-local bookWormPool = {35, 65, 78, 34, 33, 97, 287, 58, 282, 292, 192}
-local spiderBabyPool = {288, 153, 211, 89, 171, 403}
-
 local function addMissingItem(pool)
 	local player = Isaac.GetPlayer(0)
 	local choice = {}
@@ -941,9 +914,6 @@ end
 
 function _Stillbirth:OttidUpdate()
 	local player = Isaac.GetPlayer(0)
-	if player:GetActiveItem() ~= nil and not has_value(activeList, player:GetActiveItem()) then
-		table.insert( activeList, player:GetActiveItem())
-	end
 	if player:HasCollectible(Items.ottid_i) and (g_vars.ottid_init_check or  player:GetCollectibleCount()>g_vars.ottid_collectible_count)then
 		if not g_vars.ottid_pillGiven then
 			--player:UsePill(PillEffect.PILLEFFECT_PUBERTY, PillColor.PILL_NULL)
@@ -1049,7 +1019,7 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 5*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage + 1.42*g_vars.spinach_cnt
+			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt, 1)
 		end
 	end
 end
@@ -1120,7 +1090,7 @@ function _Stillbirth:OffalCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 2*g_vars.offal_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = player.Damage - 0.2*g_vars.offal_cnt
+			player.Damage = DamageToSet(player, -0.2*g_vars.offal_cnt, g_vars.cricketspaw_multiplier)
 		end
 		if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
 			player.ShotSpeed = player.ShotSpeed - 0.1*g_vars.offal_cnt
@@ -1162,23 +1132,30 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TarotBoosterUpd
 
 --[[
 3D Glasses
-Azqswx + Dogeek
+Dogeek
 ]]--
 
 local used = 0
+
+function _Stillbirth:Remove3DGlasses()
+	local player = Isaac.GetPlayer(0)
+	for i=1, used do
+		player:RemoveCollectible(245)
+	end
+	if player:HasCollectible(245) then
+		--player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/2020.anm2"))
+	end
+	used = 0
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.Remove3DGlasses)
 
 function _Stillbirth:use_3D_glasses()
     used = used + 1;
     local player = Isaac.GetPlayer(0)
     local room = Game():GetRoom()
-    if room:GetFrameCount() == 1 then
-    	for i=1, #used do
-    		player:RemoveCollectible(245)
-    	end
-    	used = 0
-    end
     player:AddCollectible(245, 0, false)
     player:TryRemoveCollectibleCostume(245, false)
+    return true
 end
 
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_3D_glasses, Items.D_glasses_i);
@@ -1188,21 +1165,23 @@ Spidershot
 Azqswx
 ]]--
 
+
 function _Stillbirth:SpidershotUpdateTears()
   local player = Isaac.GetPlayer(0)
   local entities = Isaac.GetRoomEntities();
   if player:HasCollectible(Items.spidershot_i) then
     for i = 1, #entities do
-      if entities[i].Type == EntityType.ENTITY_TEAR and entities[i].Parent == player then
+      if entities[i].Type == EntityType.ENTITY_TEAR then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(-10, 30)
+        local rng = math.random(20)
         local Luck = player.Luck
-        if rng <= Luck and lifetime == 1 then
+        if rng <= Luck and lifetime == 1 and entity.SpawnerType == EntityType.ENTITY_PLAYER then
           entity:AddEntityFlags(1);
         end
         if entity:HasEntityFlags(1) and lifetime == 1 and entity.Variant ~= 27 then
           entity:ChangeVariant(27)
+          entity.CollisionDamage = entity.CollisionDamage * 2
         end
       end
     end
@@ -1216,6 +1195,7 @@ function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags,
       local posE = DmgEntity.Position;
       index = Game():GetRoom():GetGridIndex(posE);
       Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+      DmgEntity:AddEntityFlags(1<<7)
     end
   end
 end
@@ -1223,14 +1203,8 @@ end
 local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
-  local room = Game():GetRoom()
-  if room:GetFrameCount() == 1 then weblist = {} end
-  for i=1, #weblist do
-  	if getDistance(player.Position, weblist[i])<32 then
-  		player:ClearEntityFlags(1<<7)
-  	end
-  end
   if player:HasCollectible(Items.spidershot_i) then
+  	if Game():GetRoom():GetFrameCount() == 1 then weblist = {} end
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
       if entity.Type == EntityType.ENTITY_TEAR and entity.Variant == 27 then
@@ -1239,11 +1213,20 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
         Isaac.Spawn(1000,44,0,posTear,Vector(0,0),player):ToEffect():SetTimeout(60)
         if entity:CollidesWithGrid() then
           local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
-          local web = Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
-          table.insert(weblist, web.Position)
+          Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+          local web = Game():GetRoom():GetGridEntity(index)
+          table.insert(weblist, web)
         end
       end
     end
+    for i=1, #weblist do
+    	local w = weblist[i]
+		if getDistance(player.Position, w.Position)<32 then
+			player:AddEntityFlags(1)
+		else
+			player:ClearEntityFlags(1)
+		end
+	end
   end
 end
 
@@ -1268,6 +1251,7 @@ function _Stillbirth:cricketsTailUpdate()
 	local availablePosition = nil
 	if player:HasCollectible(Items.crickets_tail_i) then
 		if room:GetFrameCount() == 1 then
+			cricketstail_spawn_delay = 0
 			for i=1, #entities do
 				local e = entities[i]
 				if e:IsActiveEnemy(false) then
@@ -1277,21 +1261,22 @@ function _Stillbirth:cricketsTailUpdate()
 		end
 		if isRoomOver(room) and room:IsFirstVisit() then
 			local center = GetRoomCenter()
-			availablePosition = room:FindFreePickupSpawnPosition(center,1.0,false)
+			availablePosition = room:FindFreePickupSpawnPosition(center,32.0,false)
 			cricketstail_spawn_delay = cricketstail_spawn_delay + 1
-			local rand = math.random(100)
-			if cricketstail_spawn_delay >= 10 and rand <= crickets_tail_SPAWN_CHANCE and g_vars.cricketsTail_hadEnemies then
-				cricketstail_spawn_delay = 0
-				g_vars.cricketsTail_hadEnemies = false
-				for i=1, #entities do
-					local e = entities[i]
-					if e and avalaiblePosition ~= nil then
-						if e.Type == 5 and getDistance(e.Postion, availablePosition) <= 32 and not e.Variant==52 then
-							e:Remove()
+			if cricketstail_spawn_delay == 10 then
+				local rand = math.random(100)
+				if rand <= crickets_tail_SPAWN_CHANCE and g_vars.cricketsTail_hadEnemies then
+					g_vars.cricketsTail_hadEnemies = false
+					for i=1, #entities do
+						local e = entities[i]
+						if e and avalaiblePosition ~= nil then
+							if e.Type == 5 and getDistance(e.Postion, availablePosition) <= 32 and not e.Variant==52 then
+								e:Remove()
+							end
 						end
 					end
+					Isaac.Spawn(5,PickupVariant.PICKUP_SPIKEDCHEST,0,availablePosition,Vector(0,0),player)
 				end
-				Isaac.Spawn(5,PickupVariant.PICKUP_SPIKEDCHEST,0,availablePosition,Vector(0,0),player)
 			end
 		end
 	end
@@ -1323,23 +1308,45 @@ function _Stillbirth:HeartPlusHeartUpdate()
 				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
 					coeur[i]:AddEntityFlags(1<<25);
 					sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
-					sprite:Update();
-					coeur[i].SubType = HeartSubType.HEART_SOUL;
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					--if not sprite:WasEventTriggered("Appear") or sprite:isFinished("Appear") then
+					--	sprite:Play("Appear", true)
+					--	sprite:Update()
+					--else
+						sprite:Play("Idle", true)
+					--	sprite:Update()
+					--end
+					if bval < 40 then
+						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+						sprite:Play("Collect", true)
+						player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
+						coeur[i]:Remove()
+					end
 				end
 
 				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
 					sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
-					sprite:Update()
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					sprite:Play("Idle", true)
 					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+						sprite:Play("Collect", true)
 						player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
 						coeur[i]:Remove()
 					end
 				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
 					sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
-					sprite:Update();
-					if bval < 40 and player:CanPickBlackHearts() and bleu == 0 then
+					local top_left = coeur[i].Position + Vector(-16, -16)
+					local bot_right = coeur[i].Position + Vector(16, 16)
+					sprite:Render(coeur[i].Position, top_left, bot_right)
+					sprite:Play("Idle", true)
+					if bval < 40 and player:CanPickBlackHearts() then
 						SFXManager():Play(185,1.0,1,false,1.0)
+						sprite:Play("Collect", true)
 						player:AddBlackHearts(4)
 						coeur[i]:Remove()
 					end
@@ -1380,11 +1387,11 @@ Azqswx
 function _Stillbirth:MizaruUpdateCache()
     local frame = Game():GetFrameCount();
     local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(Items.mizaru_i) then
+    if player:HasCollectible(Items.mizaru_i) and IsShooting(player) then
 		if not g_vars.mizaru_n then
 			g_vars.mizaru_n = player.MaxFireDelay
 		end
-		if frame % 15 == 0 then
+		if frame % 30 == 0 then
 		    player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY) 
 		    player:EvaluateItems()     
 		end
@@ -1422,25 +1429,24 @@ Passive Item : Kikazaru : Supprime Curse of the Maze & Labyrinth. Larmes de sang
 --counterKikazaru : counter to spawn a tear every 2*MaxFireDelay
 
 function _Stillbirth:HasKikazaru()
-  local player = Isaac.GetPlayer(0)    
+  local player = Isaac.GetPlayer(0)
   if player:HasCollectible(Items.kikazaru_i) then
+    if g_vars.Kikazaru_oldFrame <= 0 then
+      g_vars.Kikazaru_oldFrame = player.FrameCount
+    end
     local tearRate = 2*player.MaxFireDelay
     local aimDirection = player:GetAimDirection()
-    if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
-      local angle = aimDirection:GetAngleDegrees()
-      local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
-      local vectorRight = Vector.FromAngle(angle - 90)*(10*player.ShotSpeed) + player.Velocity
-      if g_vars.kikazaru_counterKikazaru and player.FireDelay == 0 then
+	if IsShooting(player) and (player.FrameCount - g_vars.Kikazaru_oldFrame) > tearRate then 
+      if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
+        local angle = aimDirection:GetAngleDegrees()
+        local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
+        local vectorRight = Vector.FromAngle(angle - 90)*(10*player.ShotSpeed) + player.Velocity
         local tearLeft = player:FireTear(player.Position, vectorLeft, false, false, false)
         local tearRight = player:FireTear(player.Position, vectorRight, false, false, false)
         tearLeft:ChangeVariant(1)
         tearRight:ChangeVariant(1)
-        g_vars.kikazaru_counterKikazaru = false
-      elseif not counterKikazaru and player.FireDelay == 0 then
-        g_vars.kikazaru_counterKikazaru = true
       end
-    else
-      g_vars.kikazaru_counterKikazaru = true
+	  g_vars.Kikazaru_oldFrame = player.FrameCount
     end
   end
 end
@@ -1459,28 +1465,30 @@ function _Stillbirth:GodSaleUpdate()
 	local entities = Isaac.GetRoomEntities()
 	local currentStage = Game():GetLevel():GetStage()
 	if player:HasCollectible(Items.godsale_i) then
-		if room.GetType() == RoomType.ROOM_SHOP then
+		if room:GetType() == RoomType.ROOM_SHOP then
 			for i=1, #entities do
 				local e = entities[i]
 				if e.Type == 5 and e.Variant == PickupVariant.PICKUP_SHOPITEM then
-					table.insert(g_vars.godsale_freeitems, e:ToPickup())
+					table.insert(g_vars.godsale_freeitems, e)
 				end
 			end
 		    if g_vars.godsale_previousStage ~= currentStage then
 		        g_vars.godsale_previousStage = currentStage
-				g_vars.godsale_rand = math.random(2^#GodSale_freeitems)
-				g_vars.godsale_rand = bit.tobits(rand)
+				g_vars.godsale_rand = math.random(2^(#g_vars.godsale_freeitems))
+				g_vars.godsale_rand = bit.tobits(g_vars.godsale_rand)
+				print(g_vars.godsale_rand)
 			end
 			for i=1, #g_vars.godsale_freeitems do
 				if g_vars.godsale_rand[i] == 1 then
-					g_vars.godsale_freeitems[i].Price = 0
+					local e = g_vars.godsale_freeitems[i]:ToPickup()
+					e.Price = 0
 				end
 			end
 		end
 		player:GetEffects():AddTrinketEffect(TrinketType.TRINKET_SILVER_DOLLAR, false);
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate)
+--_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate) --error bit.tobits() bitwise on non integer
 
 --[[ 
 Iwazaru

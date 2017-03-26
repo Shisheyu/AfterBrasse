@@ -85,7 +85,8 @@ else
 					debug_i = Isaac.GetItemIdByName("Debug"),
 					rngbaby_i= Isaac.GetItemIdByName("Rng Baby"),
 					godsale_i = Isaac.GetItemIdByName("God Sale"),
-					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")
+					iwazaru_i = Isaac.GetItemIdByName("Iwazaru")--,
+					--babyBlender_i = Isaac.GetItemIdByName("Baby Blender")
 				}
 
 	Familiars =	{
@@ -105,7 +106,8 @@ else
 	CustomEntities =	{
 								TearLeaf_Variant = Isaac.GetEntityVariantByName( "Tear leaf" ),
 								BananaEntity = Isaac.GetEntityTypeByName( "Explosive Banana" ),
-								ToxicHeartEntity = Isaac.GetEntityTypeByName("Toxic Heart")
+								ToxicHeartEntity = Isaac.GetEntityTypeByName("Toxic Heart"),
+								RopeGridEntity = Isaac.GetEntityTypeByName("Rope")
 							}
 	Trinkets = {
 						chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
@@ -205,7 +207,13 @@ else
 								godsale_previousStage = 0,
 								godsale_rand = 0,
 								godsale_freeitems = {},
-								iwazaru_fired = false
+								iwazaru_fired = false,
+								bubblesCostume = false,
+								DGlasses_lastRoom = nil,
+								cricketspaw_multiplier = 1,
+								zodiacTransformed = false,
+								box_friends_used = false,
+								Kikazaru_oldFrame = 0
 							}
 		return g_vars
 	]]
@@ -220,15 +228,12 @@ else
 	if s and table._getn(g_vars) == table._getn(s) then g_vars = s; Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
 
 	require("luafiles/libs/luabit/bit")
-
-	require("luafiles/characters/character_init")
 	require("luafiles/init")
 	--require("luafiles/debugtext")
 
 	require("luafiles/items/collectibles")
 	require("luafiles/items/familiars")
 	require("luafiles/items/trinkets")
-
-	require("luafiles/transformations/transfo")
 	require("luafiles/mechanics/mechanics")
+	require("luafiles/floors/tomb")
 end
