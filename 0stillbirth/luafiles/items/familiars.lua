@@ -182,7 +182,7 @@ function _Stillbirth:dionea_onFamiliarUpdateL3(DioneaFam)
 	L3Sprite.PlaybackSpeed = 0.50;
 	
 	for i = 1,#dionea_Root do
-		dionea_Root[i]:FollowPosition(player.Position:__mul( #dionea_Root+1-i ):__add(g_vars.L3.Position:__mul(i)):__div(#dionea_Root+1));
+		dionea_Root[i]:FollowPosition(player.Position:__mul( #dionea_Root+1-i ):__add(g_vars.dionea_L3.Position:__mul(i)):__div(#dionea_Root+1));
 		dionea_Root[i]:MultiplyFriction(10.0);
 	end
 

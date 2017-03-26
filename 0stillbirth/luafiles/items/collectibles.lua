@@ -89,7 +89,7 @@ function _Stillbirth:use_beer()
 		        entities[i]:AddConfusion( EntityRef(p), 100, false )
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		    else
-		    	entities[i]:AddConfusion( EntityRef(p), 99999, false )
+		    	entities[i]:AddEntityFlags(1<<9)
 		        entities[i]:TakeDamage(10.0,0,EntityRef(p),1)
 		   	end
         end
@@ -1168,14 +1168,14 @@ function _Stillbirth:SpidershotUpdateTears()
       if entities[i].Type == EntityType.ENTITY_TEAR then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(5)
+        local rng = math.random(20)
         local Luck = player.Luck
-        if rng <= Luck and lifetime == 1 then
+        if rng <= Luck and lifetime == 1 and entity.SpawnerType == EntityType.ENTITY_PLAYER then
           entity:AddEntityFlags(1);
         end
         if entity:HasEntityFlags(1) and lifetime == 1 and entity.Variant ~= 27 then
           entity:ChangeVariant(27)
-          
+          entity.CollisionDamage = entity.CollisionDamage * 2
         end
       end
     end
@@ -1189,13 +1189,16 @@ function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags,
       local posE = DmgEntity.Position;
       index = Game():GetRoom():GetGridIndex(posE);
       Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+      DmgEntity:AddEntityFlags(1<<7)
     end
   end
 end
 
+local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
   if player:HasCollectible(Items.spidershot_i) then
+  	if Game():GetRoom():GetFrameCount() == 1 then weblist = {} end
     local entities = Isaac.GetRoomEntities();
     for i,entity in ipairs(entities) do
       if entity.Type == EntityType.ENTITY_TEAR and entity.Variant == 27 then
@@ -1205,9 +1208,19 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
         if entity:CollidesWithGrid() then
           local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
           Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+          local web = Game():GetRoom():GetGridEntity(index)
+          table.insert(weblist, web)
         end
       end
     end
+    for i=1, #weblist do
+    	local w = weblist[i]
+		if getDistance(player.Position, w.Position)<32 then
+			player:AddEntityFlags(1)
+		else
+			player:ClearEntityFlags(1)
+		end
+	end
   end
 end
 
