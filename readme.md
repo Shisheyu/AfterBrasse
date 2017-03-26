@@ -91,8 +91,8 @@ Tapez ces commandes dans l'ordre :
 - git add *
 - git commit -m "Description du commit"
 - git push
-    -username
-    -password
+    - username
+    - password
 
 Git permet de récupérer des versions précédentes, grâce à son système de versionnage (commits)
 - Allez dans commits
