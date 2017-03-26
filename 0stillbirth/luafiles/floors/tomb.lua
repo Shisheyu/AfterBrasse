@@ -3,12 +3,12 @@ function _Stillbirth:GenerateTomb()
 	local player = Isaac.GetPlayer(0)
 	if isNextFloorTomb then
 		overlay = Sprite()
-		--overlay:Load("/gfx/backdrop/tomb_backdrop.anm2", true)
-		--overlay:Render(Game():GetRoom():GetRenderSurfaceTopLeft(), Vector(0,0), Vector(0,0))
-        --overlay:Play("Stage",false)
+		overlay:Load("/gfx/backdrop/void_overlay.anm2", true)
+		overlay:Render(Game():GetRoom():GetRenderSurfaceTopLeft(), Vector(0,0), Vector(0,0))
+        overlay:Play("Stage",true)
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, _Stillbirth.GenerateTomb)
+--_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, _Stillbirth.GenerateTomb)
 
 local ropePos = nil
 local ropeHasSpawned = false
@@ -41,8 +41,13 @@ function _Stillbirth:AddRope()
 		ropeHasSpawned = true
 	end
 	if ropePos then
-		if getDistance(player.Position, ropePos) and ropeHasSpawned then
+		if getDistance(player.Position, ropePos) < 32 and ropeHasSpawned then
 			isNextFloorTomb = true
+			player:AnimateLightTravel()
+			level:SetStage(LevelStage.STAGE1_1, StageType.STAGETYPE_AFTERBIRTH)
+			local active = player:GetActiveItem()
+			player:UseActiveItem(CollectibleType.COLLECTIBLE_FORGET_ME_NOW, false, false, true, false)
+			--player:AddCollectible(active)
 		end
 	end
 end

@@ -169,7 +169,7 @@ function _Stillbirth:hot_pizza_slice_cacheUpdate(player, cacheFlag)
 
     if player:HasCollectible(Items.hot_pizza_slice_i) then
         if (cacheFlag == CacheFlag.CACHE_DAMAGE) then
-            player.Damage = DamageToSet(player, 1, g_vars.cricketspaw_multiplier);
+            player.Damage = DamageToSet(player, 1, 1);
             if not g_vars.hot_pizza_slice_HpUp_Done then
                 player.SpriteScale = player.SpriteScale * 1.2;
                 player:AddSoulHearts(2);
@@ -1014,7 +1014,7 @@ function _Stillbirth:SpinachCache(player, cacheFlag)
 			player.TearHeight = player.TearHeight + 5*g_vars.spinach_cnt
 		end
 		if cacheFlag == CacheFlag.CACHE_DAMAGE then
-			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt, g_vars.cricketspaw_multiplier)
+			player.Damage = DamageToSet(player, 1*g_vars.spinach_cnt, 1)
 		end
 	end
 end
