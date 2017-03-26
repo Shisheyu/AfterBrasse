@@ -211,7 +211,8 @@ else
 								bubblesCostume = false,
 								DGlasses_lastRoom = nil,
 								cricketspaw_multiplier = 1,
-								zodiacTransformed = false
+								zodiacTransformed = false,
+								box_friends_used = false
 							}
 		return g_vars
 	]]

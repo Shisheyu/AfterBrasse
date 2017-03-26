@@ -1,10 +1,49 @@
+--[[
+Box of Friends Synergy
+--Dogeek
+]]--
+local fam = {}
+
+function _Stillbirth:boxOfFriendsNewRoomReset()
+	if g_vars.box_friends_used then
+		for i=1, #fam do
+			fam[i]:Remove()
+		end
+		fam = {}
+		g_vars.box_friends_used = false
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.boxOfFriendsNewRoomReset)
+
+function _Stillbirth:onBoxOfFriendsUse(box_friends, rng)
+	local player = Isaac.GetPlayer(0)
+	g_vars.box_friends_used = true
+	if player:HasCollectible(Items.SunWukong_i) then
+		local e = Isaac.Spawn(3, Familiars.SunWukong_Familiar_Variant, 0, player.Position, Vector(0, 0), player)
+		table.insert(fam, e)
+	end
+	if player:HasCollectible(Items.DioneaFamIdL1_i) then
+		if g_vars.dionea_L1exists then
+			local e = Isaac.Spawn(3, Familiars.DioneaFamVariantL1, 0, player.Position, Vector(0, 0), player)
+			table.insert(fam, e)
+		elseif g_vars.dionea_L2exists then
+			local e = Isaac.Spawn(3, Familiars.DioneaFamVariantL2, 0, g_vars.dionea_L1.Position, Vector(0, 0), player)
+			table.insert(fam, e)
+		elseif g_vars.dionea_L3exists then
+			local e = Isaac.Spawn(3, Familiars.DioneaFamVariantL3, 0, player.Position, Vector(0, 0), player)
+			table.insert(fam, e)
+		end
+	end
+	return true
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onBoxOfFriendsUse, CollectibleType.COLLECTIBLE_BOX_OF_FRIENDS)
 
 --[[
 Krayz
 Item : SunWukong (famillier)
 TODO?: Maybe make a Realign Familiars Function(annoying)
 Tire de temps à autres une larme feuille qui stopwatch les ennemis
---]]
+]]--
 function _Stillbirth:FAM_SunWukong_init(Familiar) -- init Familiar variables
 	local FAM_SunWukongSprite = Familiar:GetSprite()
 	Familiar.GridCollisionClass = GridCollisionClass.COLLISION_WALL
@@ -47,7 +86,7 @@ Drazeb - Krayz
 Item : Bomb Bum (famillier)
 -- Spawn 1 random trinket every N(defined in the var:"g_vars.FAM_BombCounter") Bombs::
 -- Work like the DarkBum: grab all the bombs he can in the room then come back to the player and spawn the trinket if he IsOkForIt.
---]]
+]]--
 function _Stillbirth:FAM_BombBum_init(Familiar) -- init Familiar variables
     local FAM_BBSprite = Familiar:GetSprite()
     Familiar.GridCollisionClass = GridCollisionClass.COLLISION_WALL
