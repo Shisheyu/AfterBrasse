@@ -11,7 +11,7 @@ def lua_parser(file_):
 	return reconstituted
 
 if __name__ == "__main__":
-	filename = "0stillbirth/main.lua"
+	filename = "main.lua"
 	re_filename = "main_oneblock.lua"
 	with open(filename, "r") as f:
 		re = lua_parser(f)
