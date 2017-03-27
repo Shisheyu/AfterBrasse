@@ -103,7 +103,7 @@ TODO : stop randomizing every frame (random every 3-4 secs) & fix paralysis
 local laser_frozenEntities = {}
 local laserPool = {CollectibleType.COLLECTIBLE_TECHNOLOGY, CollectibleType.COLLECTIBLE_TECHNOLOGY_2, CollectibleType.COLLECTIBLE_TECH_5, CollectibleType.COLLECTIBLE_TECH_X, CollectibleType.COLLECTIBLE_ROBO_BABY, CollectibleType.COLLECTIBLE_ROBO_BABY_2, Items.tech0_i}
 
-local rand = 1
+
 function _Stillbirth:LaserUpdate()
 	local player = Isaac.GetPlayer(0)
 	local blue = Color(0, 0, 0, 1, 0, 200, 255)
@@ -136,19 +136,19 @@ function _Stillbirth:LaserUpdate()
 				if entities[i].Type == EntityType.ENTITY_LASER and (entities[i].Parent.Type == EntityType.ENTITY_PLAYER or entities[i].Parent.Type == EntityType.ENTITY_FAMILIAR) then
 					local laser = entities[i]:ToLaser()
 					if not laser:HasEntityFlags(EntityFlag.FLAG_NO_BLOOD_SPLASH) then
-						if Game():GetFrameCount() % 30 == 0 then rand = math.random(1, 3) end
+						local rand = 2--math.random(1, 3)
 						laser:AddEntityFlags(EntityFlag.FLAG_NO_BLOOD_SPLASH)
 						if rand == 1 then --Damage Up
 							laser.CollisionDamage = laser.CollisionDamage * 1.5
 							laser:SetColor(red, 60, 999, false, false)
 						elseif rand == 2 then --paralysis
 							--laser:AddFreeze(EntityRef(player), 180)--180 frames de freeze
-							laser.TearFlags = bit.bor(laser.TearFlags, 1<<5)
+							laser.TearFlags = 1<<5
 							laser:SetColor(yellow, 60, 999, false, false)
 						else --homing
 							--laser:SetHomingType(0) --LaserHomingType Type ??
 							--player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_SPOON_BENDER, false)
-							laser.TearFlags = bit.bor(laser.TearFlags, 1<<2) --homing tear flag
+							laser.TearFlags = 1<<2 --homing tear flag
 							laser:SetColor(blue, 60, 999, false, false)
 						end
 					end
@@ -159,6 +159,23 @@ function _Stillbirth:LaserUpdate()
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.LaserUpdate)
+
+function _Stillbirth:LaserDmg()
+	local player = Isaac.GetPlayer(0)
+	local blue = Color(0, 0, 0, 1, 0, 200, 255)
+	local red = Color(0, 0, 0, 1, 140, 1, 1)
+	local yellow = Color(0, 0, 0, 1, 243, 247, 2)
+	if (hasTransfo(laserPool, 3) or g_vars.translaser_hasTransfo) then
+		local entities = Isaac.GetRoomEntities()
+		for i=1, #entities do
+			if entities[i]:IsActiveEnemy and entities[i]:TakeDamage(float Damage, 1<<5, EntityRef(player), 0)
+				print 
+			end
+		end
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.LaserDmg)
+
 --[[
 Transfo Bubbles
 
