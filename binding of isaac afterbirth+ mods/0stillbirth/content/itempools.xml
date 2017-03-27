@@ -1,0 +1,186 @@
+<ItemPools>
+	<Pool Name="treasure">
+		<Item Name="3D Glasses" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Baby Blender" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> 
+		<Item Name="Blank Tissues" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Bob's Bitrex" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Brave Shoe" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Bubble's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cataract" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Choranaptyxic" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Cricket's Collar" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Paw" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Tail" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> > <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<!--<Item Name="Cricket's Toys" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Dad's Beer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dionaea Muscipula" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> 
+		<Item Name="Explosive Banana" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="First Blood" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Hazmat Suit" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Heart Transplant" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Kikazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Magic Mirror" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Medusa's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Mizaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="RNG Baby" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Spidershot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Sun Wukong" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Technology 0" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="shop">
+		<Item Name="<3+<3=<3<3" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Diamond Icky Card" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Money = Luck" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Spyglass" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="White Candle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="boss">
+		<Item Name="Appetizer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Hot Pizza Slice" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Mom's Cake" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Offal" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Pepper Spray" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Rabbit's Foot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Rattle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Spinach" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Tarot Booster" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Toxic Mushroom" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="devil">
+		<Item Name="Blind Pact" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Devil Sale" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Solomon" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="angel">
+		<Item Name="Cricket's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cricket's Body" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans les coffres à piques également-->
+		<!--<Item Name="Cricket's Collar" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Cricket's Paw" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cricket's Tail" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Cricket's Toys" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="God Sale" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="secret">
+		<Item Name="Golden Idol" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Legacy" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Lemniscate" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Ottid" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="library">
+		<Item Name="Encyclopedia" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="challenge"> <!--cette pool doit apparemment contenir les items de bombes. raison inconnues-->
+		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="goldenChest">
+		<!---->
+	</Pool>
+	<Pool Name="redChest">
+		<!---->
+	</Pool>
+	<Pool Name="beggar">
+		<!---->
+	</Pool>
+	<Pool Name="demonBeggar">
+		<!---->
+	</Pool>
+	<Pool Name="curse">
+		<!---->
+	</Pool>
+	<Pool Name="keyMaster">
+		<!---->
+	</Pool>
+	<Pool Name="bossrush"> <!--cette pool doit apparemment contenir les items de bombes. raison inconnues-->
+		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="dungeon">
+		<!---->
+	</Pool>
+	<Pool Name="greedTreasure">
+		<Item Name="3D Glasses" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Baby Blender" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> 
+		<Item Name="Blank Tissues" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Bob's Bitrex" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Brave Shoe" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Bubble's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cataract" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Choranaptyxic" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Cricket's Collar" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Paw" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Cricket's Tail" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<!--<Item Name="Cricket's Toys" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP--> <!--sera présent à termes dans (les coffres à piques & prayer room) au lieu (d'item room)-->
+		<Item Name="Dad's Beer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dionaea Muscipula" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Explosive Banana" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="First Blood" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Hazmat Suit" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Heart Transplant" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Kikazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Magic Mirror" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Medusa's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Mizaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="RNG Baby" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Spidershot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Sun Wukong" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Technology 0" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="greedBoss">
+		<Item Name="Appetizer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Hot Pizza Slice" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Mom's Cake" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Offal" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Pepper Spray" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Rabbit's Foot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Rattle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Spinach" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Tarot Booster" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Toxic Mushroom" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="greedShop">
+		<Item Name="<3+<3=<3<3" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Diamond Icky Card" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Money = Luck" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Spyglass" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="White Candle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="greedCurse">
+		<!---->
+	</Pool>
+	<Pool Name="greedDevil">
+		<Item Name="Blind Pact" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Devil Sale" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Solomon" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="greedAngel">
+		<Item Name="Cricket's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cricket's Body" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> <!--sera présent à termes dans les coffres à piques également-->
+		<!--<Item Name="Cricket's Collar" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Cricket's Paw" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Cricket's Tail" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Cricket's Toys" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="God Sale" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+	<Pool Name="greedLibrary">
+		<Item Name="Encyclopedia" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="greedSecret">
+		<Item Name="Golden Idol" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--<Item Name="Legacy" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<!--<Item Name="Lemniscate" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Ottid" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+	</Pool>
+	<Pool Name="greedGoldenChest">
+		<!---->
+	</Pool>
+	<Pool Name="bombBum">
+		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+	</Pool>
+</ItemPools>
