@@ -1,0 +1,41 @@
+<entities anm2root="gfx/" version="5">
+     <entity anm2path="002.150_tear_Leaf.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="12" friction="1" id="2" name="Tear leaf" numGridCollisionPoints="12" shadowSize="8" stageHP="0" variant="150">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+     <entity anm2path="003.987_legacy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="4" name="Legacy" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="987">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+     <entity anm2path="003.988_sunwukong.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="SunWukong" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="988">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+	</entity>
+     <entity anm2path="003.989_fam_bombbum.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="fam_BombBum" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="989">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+     <entity anm2path="003.990_orbital.anm2" baseHP="0" boss="0" champion="0" collisionDamage="2" collisionMass="3" collisionRadius="13" friction="1" id="3" name="fam_electron" numGridCollisionPoints="12" shadowSize="8" stageHP="0" variant="990">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="ExplosiveBanana.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="990" name="Explosive Banana" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="fam_dionea L1.anm2" baseHP="0" boss="0" champion="0" collisionDamage="1" collisionMass="3" collisionRadius="12" friction="1" id="3" name="DioneaFamiliar L1" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="666" subtype="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+	<entity anm2path="fam_dionea L2.anm2" baseHP="0" boss="0" champion="0" collisionDamage="3" collisionMass="3" collisionRadius="13" friction="1" id="3" name="DioneaFamiliar L2" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="667" subtype="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+	<entity anm2path="fam_dionea L3.anm2" baseHP="0" boss="0" champion="0" collisionDamage="5" collisionMass="3" collisionRadius="15" friction="1" id="3" name="DioneaFamiliar L3" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="668" subtype="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+	<entity anm2path="root.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="1" friction="1" id="3" name="Root" numGridCollisionPoints="0" shadowSize="10" stageHP="0" variant="669">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="gemini.anm2" baseHP="0" boss="0" champion="0" collisionDamage="5" collisionMass="3" collisionRadius="15" friction="1" id="5" name="fam_Gemini" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="670" subtype="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="ToxicHeart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="671" name="Toxic Heart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="grid/rope.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="672" name="Rope" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+</entities>
