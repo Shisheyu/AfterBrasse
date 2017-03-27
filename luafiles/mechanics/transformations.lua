@@ -168,8 +168,8 @@ function _Stillbirth:LaserDmg()
 	if (hasTransfo(laserPool, 3) or g_vars.translaser_hasTransfo) then
 		local entities = Isaac.GetRoomEntities()
 		for i=1, #entities do
-			if entities[i]:IsActiveEnemy and entities[i]:TakeDamage (float Damage, 1<<5, EntityRef(player), integer DamageCountdown)
-				
+			if entities[i]:IsActiveEnemy and entities[i]:TakeDamage(float Damage, 1<<5, EntityRef(player), 0)
+				print 
 			end
 		end
 	end
