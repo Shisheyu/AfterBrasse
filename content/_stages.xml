@@ -1,3 +1,0 @@
-<stages root="rooms/" bossgfxroot="gfx/ui/boss/">
-    <stage id="29" name="Tomb" path="Tomb.xml" playerspot="playerspot.png" bossspot="bossspot.png" />
-</stages>
