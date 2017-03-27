@@ -3,31 +3,19 @@ Item : transfo cricket
 Type : transfo
 By : Dogeek
 Date : 2017-03-06
-TODO : MakeBridge fix
 ]]--
 
 
 local cricketPool = {4, 224, Items.cricketsPaw_i, Items.crickets_tail_i}--, Items.crickets_leash_i, Items.crickets_toys_i}
 
-local function MakeBridge(grid, rock_index, player, room)
-	local direction = player:GetHeadDirection()
-	if direction == Direction.LEFT then
-		direction = -1
-	elseif direction == Direction.RIGHT then
-		direction = 1
-	elseif direction == Direction.UP then
-		direction = -room:GetGridWidth()
-	elseif direction == Direction.DOWN then
-		direction = room:GetGridWidth()
-	else
-		direction = 0
-	end
-	if grid[rock_index+direction] then
-		if grid[rock_index+direction].Desc.Type == GridEntityType.GRID_PIT then
-			--local pit = grid[rock_index+direction]:ToPit()
-			--room:TryMakeBridge(pit)
-		end
-	end
+local function MakeBridge(rock_index)
+	local player = Isaac.GetPlayer(0)
+	local room = Game():GetRoom()
+	local i = getGridIndex(player:GetHeadDirection(), rock_index)
+	local ent = room:GetGridEntity(i)
+	if ent and ent.Desc.Type == GridEntityType.GRID_PIT then
+        room:TryMakeBridge(ent)
+    end
 end
 
 function _Stillbirth:transcricket_hasTransformUpdate()
@@ -42,16 +30,15 @@ function _Stillbirth:transcricket_hasTransformUpdate()
         end
 		player:AddCacheFlags(CacheFlag.CACHE_FLYING)
 		player:EvaluateItems()
-		local grid = getGrid()
-		for i=1, #grid do
-			local gridEntity = grid[i]
+		local grid = room:GetGridSize()-1
+		for i=1, grid do
+			local gridEntity = room:GetGridEntity(i)
 			if gridEntity  then
 				local type_ = gridEntity.Desc.Type
 				if type_==GridEntityType.GRID_ROCK or type_==GridEntityType.GRID_ROCKB or type_==GridEntityType.GRID_ROCKT or type_==GridEntityType.GRID_ROCK_BOMB or type_==GridEntityType.GRID_ROCK_ALT or type_==GridEntityType.GRID_ROCK_SS or type_==GridEntityType.GRID_POOP then
-                                        local scalar = math.abs(player:GetMovementVector():Normalized():Dot((player.Position - gridEntity.Position):Normalized()))
-					if math.abs((player.Position - gridEntity.Position):Length()) <= 40  and (scalar>=0.8 and scalar <=1.2) then
+					if isColinear(player.Position, gridEntity.Position, 0.2) and getDistance(player.Position, gridEntity.Position) <= 40 then
+						MakeBridge(gridEntity:GetGridIndex())
 						gridEntity:Destroy()
-						--MakeBridge(grid, i, player, room)
 					end
 				end
 			end

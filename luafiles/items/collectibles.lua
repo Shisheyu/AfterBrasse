@@ -311,30 +311,6 @@ Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
 -Dogeek
 -Azqswx
 --]]
-function BounceHearts(heart)
-	local player = Isaac.GetPlayer(0)
-	--local velmul = 2
-	local velocity = player.Velocity --* velmul
-	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-	if getDistance(player.Position, heart.Position) <= 16 then
-		heart:AddVelocity(velocity)
-	end
-	--BounceHeartHeart(heart)
-end
-
-function BounceHeartHeart(heart1)
-	local entities = Isaac.GetRoomEntities()
-	for j=1, #entities do
-		local e2 = entities[j]
-		if e2.Type == 5 and e2.Variant == 10 then
-			local velocity = heart1.Velocity
-			if getDistance(heart1.Position, e2.Position) <= 20 then
-				e2:AddVelocity(velocity)
-				heart1.Velocity = Vector(0,0)
-			end
-		end
-	end
-end
 
 function _Stillbirth:SolomonCacheUp(player, cacheFlag) --Krayz
     local player = Isaac.GetPlayer(0)
@@ -1296,60 +1272,64 @@ function _Stillbirth:HeartPlusHeartUpdate()
 	local Heart = player:GetMaxHearts();
 
 	if player:HasCollectible(Items.double_heart_i) then
-
 		local coeur = Isaac.GetRoomEntities();
 		local vec = player.Position;
-
+		local fullhealth = playerHasFullHealth()
 		for i = 1, #coeur do 					-- VERIFIER SI ORDRE DES COEURS CHANGE : Ordre change :'(
-
 			if (coeur[i].Type == 5) and (coeur[i].Variant == 10) then	--Test si de type: pickup + coeur
 				local sprite = coeur[i]:GetSprite();					-- Récupération sprite coeur
 				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative à Isaac
-				if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
-					coeur[i]:AddEntityFlags(1<<25);
-					sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
-					local top_left = coeur[i].Position + Vector(-16, -16)
-					local bot_right = coeur[i].Position + Vector(16, 16)
-					sprite:Render(coeur[i].Position, top_left, bot_right)
-					--if not sprite:WasEventTriggered("Appear") or sprite:isFinished("Appear") then
-					--	sprite:Play("Appear", true)
-					--	sprite:Update()
-					--else
+				local cpos = coeur[i].Position
+				local tl = cpos-Vector(16,16)
+				local br = cpos+Vector(16,16)
+				if not fullhealth[1] then
+					if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
+						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
+							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+						end
+						coeur[i]:AddEntityFlags(1<<25);
+						sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
+						sprite:Render(cpos, tl, br);
 						sprite:Play("Idle", true)
-					--	sprite:Update()
-					--end
-					if bval < 40 then
-						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
-						sprite:Play("Collect", true)
-						player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
-						coeur[i]:Remove()
+						if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
+							SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+							player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
+							coeur[i]:Remove()
+						end
 					end
-				end
 
-				if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
-					sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
-					local top_left = coeur[i].Position + Vector(-16, -16)
-					local bot_right = coeur[i].Position + Vector(16, 16)
-					sprite:Render(coeur[i].Position, top_left, bot_right)
-					sprite:Play("Idle", true)
-					if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
-						SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
-						sprite:Play("Collect", true)
-						player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
-						coeur[i]:Remove()
+					if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
+						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
+							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+						end
+						sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
+						sprite:Render(cpos, tl, br);
+						sprite:Play("Idle", true)
+						if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
+							SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
+							player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
+							coeur[i]:Remove()
+						end
 					end
-				elseif coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
-					sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
-					local top_left = coeur[i].Position + Vector(-16, -16)
-					local bot_right = coeur[i].Position + Vector(16, 16)
-					sprite:Render(coeur[i].Position, top_left, bot_right)
-					sprite:Play("Idle", true)
-					if bval < 40 and player:CanPickBlackHearts() then
-						SFXManager():Play(185,1.0,1,false,1.0)
-						sprite:Play("Collect", true)
-						player:AddBlackHearts(4)
-						coeur[i]:Remove()
+				else
+					BounceHearts(coeur[i])
+				end
+				if not fullhealth[2] then
+					if coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
+						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
+							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+						end
+						sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
+						sprite:Render(cpos, tl, br);
+						sprite:Play("Idle", true)
+						if bval < 40 and player:CanPickBlackHearts() then
+							SFXManager():Play(185,1.0,1,false,1.0)
+							player:AddBlackHearts(4)
+							coeur[i]:Remove()
+						end
 					end
+				else
+					BounceHearts(coeur[i])
 				end
 			end
 		end
