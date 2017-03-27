@@ -130,8 +130,9 @@ end
 
 function getGrid() -- get all grid entities in the current room, returns a table with all grid entities from left to right, up to dwn
 	local room = Game():GetRoom()
+	local size = room:GetGridSize()-1
 	local grid = {}
-	for i=1, room:GetGridWidth()*room:GetGridHeight() do
+	for i=1, size do
 		if room:GetGridEntity(i) == nil then
 			table.insert(grid, false)
 		else
@@ -139,6 +140,59 @@ function getGrid() -- get all grid entities in the current room, returns a table
 		end
 	end
 	return grid
+end
+
+function getGridIndex(direction, base_index) --direction from Direction enum && return the index based on the player
+	local index = 0
+	local room = Game():GetRoom()
+	if direction == Direction.LEFT then
+		index = -1
+	elseif direction == Direction.RIGHT then
+		index = 1
+	elseif direction == Direction.UP then
+		index = -room:GetGridWidth()
+	elseif direction == Direction.DOWN then
+		index = room:GetGridWidth()
+	else
+		index = 0
+	end
+	return base_index + index
+end
+
+function BounceHearts(heart)
+	local player = Isaac.GetPlayer(0)
+	local velocity = player.Velocity
+	heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
+	if getDistance(player.Position, heart.Position) <= 16 then
+		heart:AddVelocity(velocity)
+	end
+	--BounceHeartHeart(heart)
+end
+
+function BounceHeartHeart(heart1)
+	local entities = Isaac.GetRoomEntities()
+	for j=1, #entities do
+		local e2 = entities[j]
+		if e2.Type == 5 and e2.Variant == 10 then
+			local velocity = heart1.Velocity
+			if getDistance(heart1.Position, e2.Position) <= 20 then
+				e2:AddVelocity(velocity)
+				heart1.Velocity = Vector(0,0)
+			end
+		end
+	end
+end
+
+function playerHasFullHealth()
+	local player = Isaac.GetPlayer(0)
+	local max_hearts = 24
+	if player:HasCollectible(Items.solomon_i) then max_hearts = 12 end
+	local bitmask = {true, true} -- 1:player has max redhearts and soulhearts if true 2:player has max blackhearts if true
+	local soul = player:GetSoulHearts()
+	local red = player:GetMaxHearts()
+	if red+soul < max_hearts then bitmask[1] = false else bitmask[1] = true end
+	if IsFullBlackHearts(player) then bitmask[2] = true else bitmask[2] = false end
+	return bitmask
 end
 
 function boolToInt(bool) --cast a boolean to an integer
