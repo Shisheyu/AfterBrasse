@@ -1176,10 +1176,9 @@ function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags,
   end
 end
 
-
+local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
   local player = Isaac.GetPlayer(0)
-  local room = Game():GetRoom()
   if player:HasCollectible(Items.spidershot_i) then
   	if Game():GetRoom():GetFrameCount() == 1 then weblist = {} end
     local entities = Isaac.GetRoomEntities();
@@ -1191,38 +1190,25 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
         if entity:CollidesWithGrid() then
           local index = Game():GetRoom():GetGridIndex(posTear-oldVeloc);
           Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+          local web = Game():GetRoom():GetGridEntity(index)
+          table.insert(weblist, web)
         end
       end
     end
-    if isRoomOver(room) then
-		local grid = room:GetGridSize()-1
-		for i=1, grid do
-			local gridEntity = room:GetGridEntity(i)
-			if gridEntity and gridEntity.Desc.Type == GridEntityType.GRID_SPIDERWEB and not has_value(weblist, gridEntity:GetGridIndex()) then
-				gridEntity:Destroy(true)
-			end
+    for i=1, #weblist do
+    	local w = weblist[i]
+		if getDistance(player.Position, w.Position)<32 then
+			player:AddEntityFlags(1)
+		else
+			player:ClearEntityFlags(1)
 		end
 	end
   end
 end
 
-local weblist = {}
-function _Stillbirth:SpidershotNewRoomUpdate()
-	local room = Game():GetRoom()
-	local grid = room:GetGridSize()-1
-	weblist = {}
-	for i=1, grid do
-		local gridEntity = room:GetGridEntity(i)
-		if gridEntity and gridEntity.Desc.Type == GridEntityType.GRID_SPIDERWEB then
-			table.insert(weblist, gridEntity:GetGridIndex())
-		end
-	end
-end
-
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, _Stillbirth.SpidershotUpdateTears)
 _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SpidershotEffectOnGridandCreep)
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.SpidershotNewRoomUpdate)
 
 --[[ http://pastebin.com/e8tSm91i pools
 Item : cricket's tail
