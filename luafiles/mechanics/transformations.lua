@@ -193,7 +193,7 @@ function _Stillbirth:BubblesBehavior()
       	if not g_vars.bubblesCostume then
       		g_vars.bubblesCostume = true
       		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
-      		--player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
+      		player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
       	end
 		player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 		player:AddCacheFlags(CacheFlag.CACHE_SPEED)
