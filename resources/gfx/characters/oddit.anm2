@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="robot" CreatedOn="12/03/2017 04:37:00" Version="116" Fps="30"/>
+	<Info CreatedBy="robot" CreatedOn="12/03/2017 01:40:00" Version="116" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="costumes\oddit_head.png" Id="0"/>

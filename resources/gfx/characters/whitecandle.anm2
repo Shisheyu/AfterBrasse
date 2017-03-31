@@ -2,10 +2,10 @@
 	<Info CreatedBy="robot" CreatedOn="22/03/2017 19:17:31" Version="104" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="..\..\..\stillbirth\resources\gfx\characters\costumes\whitecandle_head.png" Id="0"/>
+			<Spritesheet Path="costumes\whitecandle_head.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="head3" Id="0" SpritesheetId="0"/>
+			<Layer Name="head0" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>
