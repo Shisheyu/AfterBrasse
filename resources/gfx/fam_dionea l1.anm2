@@ -2,7 +2,7 @@
 	<Info CreatedBy="robot" CreatedOn="3/8/2017 2:05:29 AM" Version="104" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="familiar\fam_dionea L1.png" Id="0"/>
+			<Spritesheet Path="familiar\fam_dionea_l1.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
 			<Layer Name="body" Id="0" SpritesheetId="0"/>
