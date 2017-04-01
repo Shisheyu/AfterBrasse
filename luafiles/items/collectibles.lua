@@ -41,9 +41,10 @@ function _Stillbirth:usePortableRestock()
   if player:HasCollectible(Items.portable_restock_i) then
     if player:GetNumCoins() > 0 then
       player:AddCoins(-1);
-      local luckOfReroll = math.random(0,50);
-      if luckOfReroll < player.Luck then
-        player:UseActiveItem(105,false,false,false,false);
+      local luckOfReroll = math.random(0,8);
+      if luckOfReroll <= 1 then
+        local room = Game():GetRoom();
+        room:ShopRestockFull();
       end
     end
   end
