@@ -12,6 +12,31 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
 --[[
+Passive Item: "Bobbly"
+Random Isaac's Tears
+-Azqswx-
+--]]
+
+local _Stillbirth = RegisterMod("test",1);
+local Items = 
+{
+    blobby_i = Isaac.GetItemIdByName("Blobby");
+}
+
+function _Stillbirth:randomIsaacTears()
+    local player = Isaac.GetPlayer(0);
+    if player:HasCollectible(Items.blobby_i) then
+        local rngProc_blobby = math.random(0,100);
+        if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
+            player.FireDelay = player.MaxFireDelay;
+            player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
+        end
+    end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.randomIsaacTears);
+
+--[[
 Active Item: "Cricket's Paw"
 -Sliost-
 --]]
