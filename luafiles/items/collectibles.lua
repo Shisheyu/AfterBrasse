@@ -12,6 +12,30 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
 --[[
+Active Item: "Portable restock"
+Portable reroll machine
+-Azqswx-
+--]]
+local _Stillbirth = RegisterMod("test", 1);
+local portable_restock_i = Isaac.GetItemIdByName("Portable Restock");
+
+function _Stillbirth:usePortableRestock()
+  local player = Isaac.GetPlayer(0);
+  if player:HasCollectible(Items.portable_restock_i) then
+    if player:GetNumCoins() > 0 then
+      player:AddCoins(-1);
+      local luckOfReroll = math.random(0,50);
+      if luckOfReroll < player.Luck then
+        player:UseActiveItem(105,false,false,false,false);
+      end
+    end
+  end
+  return true;
+end
+
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestock, Items.portable_restock_i );
+
+--[[
 Active Item: "Cricket's Paw"
 -Sliost-
 --]]
