@@ -1,11 +1,11 @@
 <AnimatedActor>
-	<Info CreatedBy="robot" CreatedOn="06/03/2017 19:26:20" Version="115" Fps="30"/>
+	<Info CreatedBy="robot" CreatedOn="12/03/2017 01:55:09" Version="133" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="costumes\hazmatsuit_head.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="head0" Id="0" SpritesheetId="0"/>
+			<Layer Name="head" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>

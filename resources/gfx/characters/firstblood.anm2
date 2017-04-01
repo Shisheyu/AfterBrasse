@@ -5,7 +5,7 @@
 			<Spritesheet Path="costumes\firstblood_body.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="body0" Id="0" SpritesheetId="0"/>
+			<Layer Name="body4" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>

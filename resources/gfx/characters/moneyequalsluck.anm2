@@ -2,10 +2,10 @@
 	<Info CreatedBy="robot" CreatedOn="12/03/2017 02:31:14" Version="125" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="costumes\money=luck_head.png" Id="0"/>
+			<Spritesheet Path="costumes\money = luck_head.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="head0" Id="0" SpritesheetId="0"/>
+			<Layer Name="head4" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>
