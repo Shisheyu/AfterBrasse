@@ -12,12 +12,29 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
 --[[
+Passive Item: "Blobby"
+Random Isaac's Tears
+-Azqswx-
+--]]
+
+function _Stillbirth:blobbyUpdate()
+    local player = Isaac.GetPlayer(0);
+    if player:HasCollectible(Items.blobby_i) then
+        local rngProc_blobby = math.random(0,100);
+        if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
+            player.FireDelay = player.MaxFireDelay;
+            player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
+        end
+    end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.blobbyUpdate);
+
+--[[
 Active Item: "Portable restock"
 Portable reroll machine
 -Azqswx-
 --]]
-local _Stillbirth = RegisterMod("test", 1);
-local portable_restock_i = Isaac.GetItemIdByName("Portable Restock");
 
 function _Stillbirth:usePortableRestock()
   local player = Isaac.GetPlayer(0);
