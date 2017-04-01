@@ -2,8 +2,8 @@
 	<Info CreatedBy="robot" CreatedOn="12/03/2017 20:44:43" Version="119" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="costumes\choranaptyxic_headblue.png" Id="0"/>
-			<Spritesheet Path="costumes\choranaptyxic_bodyblue.png" Id="1"/>
+			<Spritesheet Path="costumes\choronaptyxic_headblue.png" Id="0"/>
+			<Spritesheet Path="costumes\choronaptyxic_bodyblue.png" Id="1"/>
 		</Spritesheets>
 		<Layers>
 			<Layer Name="body" Id="0" SpritesheetId="1"/>

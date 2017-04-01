@@ -2,10 +2,10 @@
 	<Info CreatedBy="robot" CreatedOn="15/02/2017 11:17:32" Version="105" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="costumes\techzero_head.png" Id="0"/>
+			<Spritesheet Path="costumes\techzero.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="head0" Id="0" SpritesheetId="0"/>
+			<Layer Name="head4" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>

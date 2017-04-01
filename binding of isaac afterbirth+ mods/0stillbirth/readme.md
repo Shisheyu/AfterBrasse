@@ -30,6 +30,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Azqswx
 - Sliost
 - Dogeek
+- Conan_Sempai
+- Alch3my
+- Sp4ceCore
 
 ## Animateurs
 
@@ -71,8 +74,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Créez un dossier vide appelé "0stillbirth" (si ce dossier existe déjà, supprimez le et recréez un dossier vide)
 - Ouvrez ce dossier dans un terminal(Shift + clic droit, ouvrir une invite de commande ici)
 - Tapez ces commandes (dans le dossier 0stillbirth):
-    - git init
-    - git pull https://github.com/Shisheyu/AfterBrasse
+    - git clone https://github.com/Shisheyu/AfterBrasse .
 
 ## Unix (MacOS & Linux)
 
@@ -80,8 +82,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 - Créez un dossier vide appelé "0stillbirth" (si ce dossier existe déjà, supprimez le et recréez un dossier vide)
 - Ouvrez ce dossier dans un terminal(Clic droit : ouvrir un terminal)
 - Tapez ces commandes (dans le dossier 0stillbirth):
-    - git init
-    - git pull https://github.com/Shisheyu/AfterBrasse
+    - git clone https://github.com/Shisheyu/AfterBrasse .
 
 # Utiliser git
 

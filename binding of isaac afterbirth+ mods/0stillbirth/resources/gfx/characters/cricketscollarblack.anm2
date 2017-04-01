@@ -1,11 +1,11 @@
 <AnimatedActor>
-	<Info CreatedBy="robot" CreatedOn="12/03/2017 02:45:40" Version="152" Fps="30"/>
+	<Info CreatedBy="robot" CreatedOn="12/03/2017 01:28:14" Version="147" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="costumes\cricketscollar_headblack.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="head0" Id="0" SpritesheetId="0"/>
+			<Layer Name="head" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events/>
