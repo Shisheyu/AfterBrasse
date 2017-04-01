@@ -185,7 +185,7 @@ end
 _Stillbirth:AddCallback( ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.hot_pizza_slice_cacheUpdate);
 
 --[[
-Active item : Golden Idol : Donne un coeur bleugoldé
+Active item : Golden Idol : Donne un coeur bleugoldÃ©
 -Dogeek-
 -K
 --]]
@@ -238,16 +238,16 @@ function _Stillbirth:medusaHead_use()
     local dir = player:GetHeadDirection();
 	SFXManager():Play(18, 1.0, 1, false, 1.0)
     for i = 1, #enemies do
-        if enemies[i]:IsVulnerableEnemy(enemies[i]) then        --Test si entité = ennemi
+        if enemies[i]:IsVulnerableEnemy(enemies[i]) then        --Test si entitÃ© = ennemi
             local vecE = enemies[i].Position;
-            local posRelatX = vecE.X - vec.X;               --Calcul position X relative du mob par rapport à Isaac
-            local posRelatY = vecE.Y - vec.Y;               --Calcul position Y relative du mob par rapport à Isaac
+            local posRelatX = vecE.X - vec.X;               --Calcul position X relative du mob par rapport Ã  Isaac
+            local posRelatY = vecE.Y - vec.Y;               --Calcul position Y relative du mob par rapport Ã  Isaac
             local distance = math.sqrt((vec.X-vecE.X)^2+(vec.Y-vecE.Y)^2);      --Calcul de la distance entre le mob et Isaac
 
             if distance < range  then
                 local angle = math.deg(math.atan(posRelatY, posRelatX))     --Calcul de l'angle entre le mob et l'axe X d'Isaac
                 if not enemies[i]:IsBoss() then                             --Test si ennemi est un boss ou pas
-                    if ((dir == 1) and (-112.5 < angle) and (angle < -67.5))then      --Test si Isaac regarde haut/bas/gauche/droite + test si mob dans un cône de 45°
+                    if ((dir == 1) and (-112.5 < angle) and (angle < -67.5))then      --Test si Isaac regarde haut/bas/gauche/droite + test si mob dans un cÃ´ne de 45Â°
                         enemies[i]:AddEntityFlags(1<<5)                           -- "1<<5" = Flag for freezing entity
                         enemies[i]:SetColor(Color(0.25,0.25,0.25,1,39,39,39),1000000,99,false,true)        --Change la couleur
                     elseif ((dir == 2) and (-22.5 < angle) and (angle < 22.5)) then
@@ -279,7 +279,7 @@ end
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.medusaHead_use, Items.medusa_head_i );
 
 --[[
-Passive Item : Blind Pact : Missing No de DD donne un passif de DD aleatoire a chaque étage.
+Passive Item : Blind Pact : Missing No de DD donne un passif de DD aleatoire a chaque Ã©tage.
 -Dogeek-
 --]]
 
@@ -307,7 +307,7 @@ _Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.blindPactUpdat
 --[[
 Passive Item: Solomon
 -- BUG?: If player already has an item given by this, delete the costume and didnt add it again
-Réduit la barre d'HP à 6 coeurs max mais gros boost de stats
+RÃ©duit la barre d'HP Ã  6 coeurs max mais gros boost de stats
 -Dogeek
 -Azqswx
 --]]
@@ -475,14 +475,14 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cataract_PostUp
 --[[
 -Krayz
 Item Passif : Bubble's Head
-Tire de temps à autres une larme feuille qui stopwatch les ennemis
+Tire de temps Ã  autres une larme feuille qui stopwatch les ennemis
 --]]
 
 function _Stillbirth:BubblesHead_Update()
     local player = Isaac.GetPlayer(0)
     local entities = Isaac.GetRoomEntities()
 
-    if player:HasCollectible(Items.BubblesHead_i) then
+    if player:HasCollectible(Items.BubblesHead_i) and player:HasWeaponType(1) then
         if (player.FrameCount - g_vars.BubblesHead_oldFrame) <= 0 then
             g_vars.BubblesHead_oldFrame = player.FrameCount
         end
@@ -594,7 +594,7 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.OnBlankTissueUse, Items.blankTissues_i)
 
 --[[
-Item Passive : Choranaptyxic : Stats basées sur grande ou petite salle. Salle neutre ne modifie pas
+Item Passive : Choranaptyxic : Stats basÃ©es sur grande ou petite salle. Salle neutre ne modifie pas
 --Dogeek
 Tear rate + speed petite
 Range + damage dans les grandes
@@ -1212,7 +1212,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SpidershotEffec
 
 --[[ http://pastebin.com/e8tSm91i pools
 Item : cricket's tail
-Type : augmente les chances de coffres à piques
+Type : augmente les chances de coffres Ã  piques
 By : Dogeek
 Date : 2017-03-10
 ]]--
@@ -1277,8 +1277,8 @@ function _Stillbirth:HeartPlusHeartUpdate()
 		local fullhealth = playerHasFullHealth()
 		for i = 1, #coeur do 					-- VERIFIER SI ORDRE DES COEURS CHANGE : Ordre change :'(
 			if (coeur[i].Type == 5) and (coeur[i].Variant == 10) then	--Test si de type: pickup + coeur
-				local sprite = coeur[i]:GetSprite();					-- Récupération sprite coeur
-				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative à Isaac
+				local sprite = coeur[i]:GetSprite();					-- RÃ©cupÃ©ration sprite coeur
+				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative Ã  Isaac
 				local cpos = coeur[i].Position
 				local tl = cpos-Vector(16,16)
 				local br = cpos+Vector(16,16)
@@ -1291,7 +1291,7 @@ function _Stillbirth:HeartPlusHeartUpdate()
 						sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
 						sprite:Render(cpos, tl, br);
 						sprite:Play("Idle", true)
-						if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
+						if bval < 40 then									--Test si possibilitÃ© de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 							SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
 							player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
 							coeur[i]:Remove()
@@ -1305,7 +1305,7 @@ function _Stillbirth:HeartPlusHeartUpdate()
 						sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
 						sprite:Render(cpos, tl, br);
 						sprite:Play("Idle", true)
-						if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
+						if bval < 40 then									--Test si possibilitÃ© de prendre coeur bleu + Isaac sur coeur + coeur est bleu
 							SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
 							player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
 							coeur[i]:Remove()
@@ -1403,7 +1403,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.MizaruRandom
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.MizaruUpdateCache)
 
 --[[
-Passive Item : Kikazaru : Supprime Curse of the Maze & Labyrinth. Larmes de sang bonus sortant des oreilles avec un tear rate de moitié.
+Passive Item : Kikazaru : Supprime Curse of the Maze & Labyrinth. Larmes de sang bonus sortant des oreilles avec un tear rate de moitiÃ©.
 -Sliost-
 ]]--
 --counterKikazaru : counter to spawn a tear every 2*MaxFireDelay
@@ -1435,7 +1435,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.HasKikazaru);
 
 --[[
 God Sale
-Passive Item : Moitié du shop gratos mais aléatoire à chaque shop. Rajout de shops dans Womb
+Passive Item : MoitiÃ© du shop gratos mais alÃ©atoire Ã  chaque shop. Rajout de shops dans Womb
 Dogeek
 ]]--
 
