@@ -12,18 +12,12 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
 --[[
-Passive Item: "Bobbly"
+Passive Item: "Blobby"
 Random Isaac's Tears
 -Azqswx-
 --]]
 
-local _Stillbirth = RegisterMod("test",1);
-local Items = 
-{
-    blobby_i = Isaac.GetItemIdByName("Blobby");
-}
-
-function _Stillbirth:randomIsaacTears()
+function _Stillbirth:blobbyUpdate()
     local player = Isaac.GetPlayer(0);
     if player:HasCollectible(Items.blobby_i) then
         local rngProc_blobby = math.random(0,100);
@@ -34,7 +28,29 @@ function _Stillbirth:randomIsaacTears()
     end
 end
 
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.randomIsaacTears);
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.blobbyUpdate);
+
+--[[
+Active Item: "Portable restock"
+Portable reroll machine
+-Azqswx-
+--]]
+
+function _Stillbirth:usePortableRestock()
+  local player = Isaac.GetPlayer(0);
+  if player:HasCollectible(Items.portable_restock_i) then
+    if player:GetNumCoins() > 0 then
+      player:AddCoins(-1);
+      local luckOfReroll = math.random(0,50);
+      if luckOfReroll < player.Luck then
+        player:UseActiveItem(105,false,false,false,false);
+      end
+    end
+  end
+  return true;
+end
+
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestock, Items.portable_restock_i );
 
 --[[
 Active Item: "Cricket's Paw"
@@ -568,36 +584,39 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TearLeaf_BossTimer)
 
 --[[
-Passive item : First Blood
+Passive item: "First Blood"
 -Azqswx-
 --]]
 
-function _Stillbirth:FirstBloodEffect() -- Only one tear Version (event with quad shot only one OP tear)
-    local player = Isaac.GetPlayer(0);
-    local roomframe = Game():GetRoom():GetFrameCount();
-    local entities = Isaac.GetRoomEntities();
-	local room = Game():GetRoom()
-    if roomframe == 1 then
-        g_vars.FirstBlood_Done = false
+function _Stillbirth:newRoomWithEnemies()
+    local room = Game():GetRoom()
+    if not room:IsClear() then
+        g_vars.FirstBlood_Done = true;
     end
-    if player:HasCollectible(Items.first_blood_i) then
-        if not g_vars.FirstBlood_Done and not room:IsClear() then
-            for i = 1, #entities do
-                if (entities[i].Type == EntityType.ENTITY_TEAR) and (entities[i]:GetLastParent().Type == player.Type) then --[Alt:] add "and  g_vars.FirstBlood_Done" so it trigger for 1 tear only
-                    local e = entities[i]:ToTear()
-                    g_vars.FirstBlood_Done = true
-                    e:SetDeadEyeIntensity(0.2)
-                    e.Scale = 1 + (e.CollisionDamage * 0.5)
-                    e.CollisionDamage  = e.CollisionDamage  + 50
-                    if entities[i].FrameCount <= 1 then
-                        e:ChangeVariant(1);
-                    end
+end
+
+function _Stillbirth:firstBloodEffect()
+    local player = Isaac.GetPlayer(0);
+    local playerDamage = player.Damage;
+    local entities = Isaac.GetRoomEntities();
+    if g_vars.FirstBlood_Done and player:HasCollectible(Items.first_blood_i) then
+        for i = 1, #entities do
+            if (entities[i].Type == EntityType.ENTITY_TEAR) and (entities[i]:GetLastParent().Type == player.Type) then
+            	local e = entities[i]:ToTear();
+                --entities[i]:ToTear():SetDeadEyeIntensity(10.0)
+                e.CollisionDamage  = playerDamage * 10;
+                e.Scale = 1+playerDamage*0.5;
+                if entities[i].FrameCount <= 1 then
+                    e:ChangeVariant(1);
                 end
+                g_vars.FirstBlood_Done = false;
             end
         end
     end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.FirstBloodEffect)
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.newRoomWithEnemies)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.firstBloodEffect)
 
 --[[
 Blank Tissue : supprime toute les larmes de la salle
