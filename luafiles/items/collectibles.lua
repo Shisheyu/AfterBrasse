@@ -38,12 +38,16 @@ Portable reroll machine
 
 function _Stillbirth:usePortableRestock()
   local player = Isaac.GetPlayer(0);
+  local roomType = Game():GetRoom():GetType()
   if player:HasCollectible(Items.portable_restock_i) then
     if player:GetNumCoins() > 0 then
       player:AddCoins(-1);
       local luckOfReroll = math.random(0,50);
       if luckOfReroll < player.Luck then
         player:UseActiveItem(105,false,false,false,false);
+        if roomType == RoomType.ROOM_SHOP then
+        player:UseActiveItem(166,false,false,false,false);
+        end
       end
     end
   end
