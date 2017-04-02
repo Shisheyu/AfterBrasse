@@ -320,6 +320,20 @@ function GetClosestTear(entities, player, TType, TVariant)
     return e
 end
 
+function explosionInRange(entity)
+    local entities=Isaac.GetRoomEntities()
+    local bombRange = 96.0 --96 : radius of a basic bomb
+    if Isaac.GetPlayer(0):HasCollectible(106) then bombRange = 112 end --mr mega
+    for i=1, #entities do
+        if entities[i].Type == 1000 and entities[i].Variant == 1 then --effect bomb_explosion
+            if getDistance(entities[i].Position, entity.Position) < bombRange then 
+                return true
+            end
+        end
+    end
+    return false
+end
+
 Minutes60fps = function(a) return a*60*60 end
 Secondes60fps = function(a) return a*60 end
 Minutes30fps = function(a) return a*60*30 end
