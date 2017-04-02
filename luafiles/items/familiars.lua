@@ -284,22 +284,28 @@ end
 	L3Sprite:Update()
 end
 
+function _Stillbirth:dionea_ResetRoomTearCount()
+    g_vars.dionea_tearsRoomCount = 0
+end
+
  function _Stillbirth:dionea_onGameUpdate()
 	local entities = Isaac.GetRoomEntities();
 	local player = Isaac.GetPlayer(0);
 	local Nbr = 10;
 	for i = 1, #entities do
-		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true then
+		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true and g_vars.dionea_tearsRoomCount<=g_vars.dionea_max_tears_per_rooms then
 			local distance = ((g_vars.dionea_L1.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L1.Position.Y-entities[i].Position.Y)^2)^(1/2);
 			if distance <= 35 then
 				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
+				g_vars.dionea_tearsRoomCount=g_vars.dionea_tearsRoomCount+1
 				entities[i]:Kill();
 			end
 		end
-		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L2exists == true then
+		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L2exists == true  and g_vars.dionea_tearsRoomCount<=g_vars.dionea_max_tears_per_rooms then
 			local distance = ((g_vars.dionea_L2.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L2.Position.Y-entities[i].Position.Y)^2)^(1/2);
 			if distance <= 35 then
 				g_vars.dionea_tearsCount = g_vars.dionea_tearsCount+1;
+				g_vars.dionea_tearsRoomCount = g_vars.dionea_tearsRoomCount+1
 				entities[i]:Kill();
 			end
 		end
@@ -325,6 +331,7 @@ end
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.dionea_onGameUpdate)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.dionea_ResetRoomTearCount)
 
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.dionea_onFamiliarUpdateL1, Familiars.DioneaFamVariantL1)
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.dionea_onEvaluateCacheL1)
