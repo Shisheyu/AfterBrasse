@@ -161,7 +161,7 @@ else
 								FAM_SunWukong_oldFrame = 0,
 								FAM_BombBumExists = false,
 								FAM_BombCounter = 0,
-								FAM_nBombBeforDrop = 10,
+								FAM_nBombBeforDrop = 5,
 								FirstBlood_Done = false,
 								hasElectronSpawned = false,
 								numberOfElectrons = 0,

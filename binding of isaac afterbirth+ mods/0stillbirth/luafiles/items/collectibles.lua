@@ -20,7 +20,7 @@ Random Isaac's Tears
 function _Stillbirth:blobbyUpdate()
     local player = Isaac.GetPlayer(0);
     if player:HasCollectible(Items.blobby_i) then
-        local rngProc_blobby = math.random(0,100);
+        local rngProc_blobby = math.random(-10, 30);
         if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
             player.FireDelay = player.MaxFireDelay;
             player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
@@ -1198,7 +1198,7 @@ function _Stillbirth:SpidershotUpdateTears()
       if entities[i].Type == EntityType.ENTITY_TEAR then
         local entity = entities[i]:ToTear();
         local lifetime = entity.FrameCount;
-        local rng = math.random(20)
+        local rng = math.random(-10, 30)
         local Luck = player.Luck
         if rng <= Luck and lifetime == 1 and entity.SpawnerType == EntityType.ENTITY_PLAYER then
           entity:AddEntityFlags(1);
