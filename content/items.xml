@@ -71,8 +71,9 @@
 	<active cache="" id="568"description="Restock 24/7" gfx="portable_restock.png" name="Portable Restock" maxcharges="0"/>
 	
 	<!--familiar cache="" id="insert ID" description="A random particle appears..." gfx="electron.png" name="Electron"/-->
-	<trinket cache="" id="120" description="Challenge down" gfx="greencross.png" name="Green Cross"/>
-	<trinket cache="" id="121" description="You've been a good child" gfx="krampustooth.png" name="Krampus's Tooth"/>
+	<trinket cache="" id="120" description="Challenge down" gfx="green_cross.png" name="Green Cross"/>
+	<trinket cache="" id="121" description="You've been a good child" gfx="krampus_tooth.png" name="Krampus's Tooth"/>
 	<trinket cache="" id="122" description="100% mithril" gfx="chainmail.png" name="Chainmail"/>
-	<trinket cache="" id="123" description="Strong touch" gfx="torngloves.png" name="Torn Gloves"/>
+	<trinket cache="" id="123" description="Strong touch" gfx="torn_gloves.png" name="Torn Gloves"/>
+	<trinket cache="" id="124" description="Force Doors" gfx="rusty_crowbar.png" name="Rusty Crowbar"/>
 </items>

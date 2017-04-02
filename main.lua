@@ -115,7 +115,8 @@ else
 						chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
 						greenCross_t = Isaac.GetTrinketIdByName("Green Cross"),
 						kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth"),
-						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves")
+						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves"),
+						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar")
 					}
 
 	Curses = {
