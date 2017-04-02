@@ -59,6 +59,7 @@ _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestoc
 --[[
 Active Item: "Cricket's Paw"
 -Sliost-
+--Dogeek
 --]]
 function _Stillbirth:UseCricketsPaw()
     local player = Isaac.GetPlayer(0)
@@ -774,7 +775,7 @@ local BanaV = 	{
                             costume = Isaac.GetCostumeIdByPath("gfx/characters/costume_exbanana.anm2")
                         }
 
-local function resetVars()
+local function ExBanana_resetVars()
     BanaV.ExBanana = nil
     BanaV.ExBananaCreep = nil
     BanaV.ExBananaCreep2 = nil
@@ -807,7 +808,7 @@ function _Stillbirth:ExBanana_Mine()
     if ( player:HasCollectible(Items.ExBanana_i) ) then
         local entities = Isaac.GetRoomEntities()
         local room = Game():GetRoom()
-        if room:GetFrameCount() == 1 then resetVars() end -- reset vars every room
+        if room:GetFrameCount() == 1 then ExBanana_resetVars() end -- reset vars every room
         if BanaV.Ready and IsShooting(player) then
             player:TryRemoveNullCostume(BanaV.costume)
             Velocity = Vector( ((player:GetLastDirection().X*8) + (player:GetVelocityBeforeUpdate().X*1.1)), (( player:GetLastDirection().Y*8 ) + (player:GetVelocityBeforeUpdate().Y*1.1)) )
@@ -891,7 +892,7 @@ function _Stillbirth:ExBanana_Mine()
                         BanaV.ExBananaCreep:ToEffect():SetTimeout(1)
                         BanaV.ExBananaCreep2:ToEffect():SetTimeout(1)
                         BanaV.ExBanana:Remove()
-                        resetVars()
+                        ExBanana_resetVars()
                     end
                 end
             end
@@ -1268,6 +1269,11 @@ Date : 2017-03-10
 local cricketstail_spawn_delay = 0
 local crickets_tail_SPAWN_CHANCE = 25
 
+function _Stillbirth:cricketsTail_hadEnemiesReset()
+    g_vars.cricketsTail_hadEnemies = false
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.cricketsTail_hadEnemiesReset)
+
 function _Stillbirth:cricketsTailUpdate()
 	local player = Isaac.GetPlayer(0)
 	local entities = Isaac.GetRoomEntities()
@@ -1283,7 +1289,7 @@ function _Stillbirth:cricketsTailUpdate()
 				end
 			end
 		end
-		if isRoomOver(room) and room:IsFirstVisit() then
+		if isRoomOver(room) and room:IsFirstVisit() and room:GetType() == RoomType.ROOM_DEFAULT and g_vars.cricketsTail_hadEnemies then
 			local center = GetRoomCenter()
 			availablePosition = room:FindFreePickupSpawnPosition(center,32.0,false)
 			cricketstail_spawn_delay = cricketstail_spawn_delay + 1

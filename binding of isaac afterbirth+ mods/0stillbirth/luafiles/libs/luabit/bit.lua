@@ -42,6 +42,7 @@ local function check_int(n)
 end
 
 local function to_bits(n)
+ --n = math.floor(n)
  check_int(n)
  if(n < 0) then
   -- negative
