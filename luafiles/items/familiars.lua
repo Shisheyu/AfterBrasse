@@ -116,6 +116,7 @@ function _Stillbirth:FAM_BombBum_Update(Familiar) -- Familiar AI
         Familiar:FollowPosition( entities[ClosestB].Position ) -- Fam go to closest bomb
         Familiar.Velocity =  Familiar.Velocity:Clamped(-5.5, -5.5, 5.5, 5.5) -- Speed Limiter when going to bomb
         if bval <= 25  and FamiliarFrameCount % 10 == 0 then --IsOk.
+            SFXManager():Play(201, 1.0, 0, false, 0.0)
             if entities[ClosestB].SubType == 1 then
                 g_vars.FAM_BombCounter = g_vars.FAM_BombCounter + 1
             elseif entities[ClosestB].SubType == 2 then
