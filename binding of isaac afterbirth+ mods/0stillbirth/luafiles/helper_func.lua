@@ -237,7 +237,7 @@ function print(...)
 		str = str .. sep .. tostring(select(i, ...))
 		sep = '\t'
 	end
-	return Isaac.DebugString(str)
+	return Isaac.ConsoleOutput(str)
 end
 
 function getDistance(Vector1, Vector2)

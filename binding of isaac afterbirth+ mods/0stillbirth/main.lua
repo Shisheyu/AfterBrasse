@@ -243,4 +243,8 @@ else
 	require("luafiles/items/trinkets")
 	require("luafiles/mechanics/mechanics")
 	require("luafiles/floors/tomb")
+	function _Stillbirth:DebugPostNewRoomUpdate()
+	    Isaac.ConsoleOutput("Torn Gloves ID: "..tostring(Trinkets.torn_gloves_t))
+    end
+    _Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.DebugPostNewRoomUpdate)
 end

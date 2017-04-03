@@ -157,11 +157,21 @@ Passive item: "Brave Shoe"
 function _Stillbirth:braveShoeDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
     local player = Isaac.GetPlayer(0)
 	local roomType = Game():GetRoom():GetType()
-    if player:HasCollectible(Items.brave_shoe_i) then
+    if player:HasCollectible(Items.brave_shoe_i) then --brave shoe
         if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) then
             return false
         end
     end
+    if (player:HasTrinket(Trinkets.torn_gloves_t)) then --torn gloves
+		if (dmg_flag == DamageFlag.DAMAGE_CHEST) then
+			return false
+		end
+	end
+	if player:HasTrinket(Trinkets.chainmail_t) then --chainmail
+        if dmg_flag == DamageFlag.DAMAGE_CURSED_DOOR then
+          return false
+        end
+  end
     return
 end
 
@@ -1267,7 +1277,7 @@ Date : 2017-03-10
 ]]--
 
 local cricketstail_spawn_delay = 0
-local crickets_tail_SPAWN_CHANCE = 25
+local crickets_tail_SPAWN_CHANCE = 33
 
 function _Stillbirth:cricketsTail_hadEnemiesReset()
     g_vars.cricketsTail_hadEnemies = false
