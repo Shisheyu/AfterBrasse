@@ -389,7 +389,7 @@ ItemPools.PASSIVES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
 SLOTS = {DoorSlot.LEFT0, DoorSlot.UP0, DoorSlot.RIGHT0, DoorSlot.DOWN0, DoorSlot.LEFT1, DoorSlot.UP1, DoorSlot.RIGHT1, DoorSlot.DOWN1}
 
 function isActiveCollectible(item_id)
-    if has_value(ItemPools.ACTIVES, item_id)
+    if has_value(ItemPools.ACTIVES, item_id) then
         return true
     else
         return false
@@ -397,7 +397,7 @@ function isActiveCollectible(item_id)
 end
 
 function isPassiveCollectible(item_id)
-    if has_value(ItemPools.PASSIVES, item_id)
+    if has_value(ItemPools.PASSIVES, item_id) then
         return true
     else
         return false
