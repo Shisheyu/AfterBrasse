@@ -84,24 +84,25 @@ jouer l'animation des portes qui cassent et les maintenir cassées
 --]]
 
 function _Stillbirth:rustyCrowbar_update()
-    	local player = Isaac.GetPlayer(0)
-    	if player:HasTrinket(Trinkets.rustyCrowbar_t) then
-		if Game():GetLevel():GetAbsoluteStage() == 11 then
-			local currentRoom = Game():GetRoom()
-			if currentRoom:IsInitialized() then
-				for i=1, #SLOTS do
-					local door = currentRoom:GetDoor(SLOTS[i])
-					if currentRoom:IsDoorSlotAllowed(SLOTS[i]) and door ~= nil then
-						if explosionInRange(door) then
-							door.Busted = true
-							door:Open()
-							local doorSprite = door.Sprite
-							doorSprite:Play("Break", true);
-						end
-					end
-				end
-			end
-		end
+    local player = Isaac.GetPlayer(0)
+    if player:HasTrinket(Trinkets.rustyCrowbar_t) then
+        local stage = Game():GetLevel():GetAbsoluteStage()
+	    if stage >= 11 then --chest and after (void and custom floors)
+		    local currentRoom = Game():GetRoom()
+		    if currentRoom:IsInitialized() then
+			    for i=1, #SLOTS do
+				    local door = currentRoom:GetDoor(SLOTS[i])
+				    if currentRoom:IsDoorSlotAllowed(SLOTS[i]) and door ~= nil then
+					    if explosionInRange(door) then
+						    door.Busted = true
+						    door:Open()
+						    local doorSprite = door.Sprite
+						    doorSprite:Play("Break", true);
+					    end
+				    end
+			    end
+		    end
+	    end
     end
 end
 
