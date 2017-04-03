@@ -76,4 +76,5 @@
 	<trinket cache="" id="122" description="100% mithril" gfx="chainmail.png" name="Chainmail"/>
 	<trinket cache="" id="123" description="Strong touch" gfx="torn_gloves.png" name="Torn Gloves"/>
 	<trinket cache="" id="124" description="Force Doors" gfx="rusty_crowbar.png" name="Rusty Crowbar"/>
+	<trinket cache="" id="125" description="'insert text here'" gfx="question_mark.png" name="?"/>
 </items>

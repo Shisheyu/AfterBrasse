@@ -116,7 +116,8 @@ else
 						greenCross_t = Isaac.GetTrinketIdByName("Green Cross"),
 						kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth"),
 						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves"),
-						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar")
+						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar"),
+						question_mark_t = Isaac.GetTrinketIdByName("?")
 					}
 
 	Curses = {
@@ -218,7 +219,8 @@ else
 								box_friends_used = false,
 								Kikazaru_oldFrame = 0,
 								dionea_max_tears_per_rooms = 3,
-								dionea_tearsRoomCount = 0
+								dionea_tearsRoomCount = 0,
+								questionmark_item = nil
 							}
 		return g_vars
 	]]

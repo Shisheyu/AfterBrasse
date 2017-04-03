@@ -84,25 +84,49 @@ jouer l'animation des portes qui cassent et les maintenir cassées
 --]]
 
 function _Stillbirth:rustyCrowbar_update()
-    	local player = Isaac.GetPlayer(0)
-    	if player:HasTrinket(Trinkets.rustyCrowbar_t) then
-		if Game():GetLevel():GetAbsoluteStage() == 11 then
-			local currentRoom = Game():GetRoom()
-			if currentRoom:IsInitialized() then
-				for i=1, #SLOTS do
-					local door = currentRoom:GetDoor(SLOTS[i])
-					if currentRoom:IsDoorSlotAllowed(SLOTS[i]) and door ~= nil then
-						if explosionInRange(door) then
-							door.Busted = true
-							door:Open()
-							local doorSprite = door.Sprite
-							doorSprite:Play("Break", true);
-						end
-					end
-				end
-			end
-		end
+    local player = Isaac.GetPlayer(0)
+    if player:HasTrinket(Trinkets.rustyCrowbar_t) then
+        local stage = Game():GetLevel():GetAbsoluteStage()
+	    if stage >= 11 then --chest and after (void and custom floors)
+		    local currentRoom = Game():GetRoom()
+		    if currentRoom:IsInitialized() then
+			    for i=1, #SLOTS do
+				    local door = currentRoom:GetDoor(SLOTS[i])
+				    if currentRoom:IsDoorSlotAllowed(SLOTS[i]) and door ~= nil then
+					    if explosionInRange(door) then
+						    door.Busted = true
+						    door:Open()
+						    local doorSprite = door.Sprite
+						    doorSprite:Play("Break", true);
+					    end
+				    end
+			    end
+		    end
+	    end
     end
 end
 
 _Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.rustyCrowbar_update);
+
+--[[
+Trinket : ?
+Random passive item every room
+--Dogeek
+]]--
+
+function _Stillbirth:questionMark_NewRoomUpdate()
+    local player = Isaac.GetPlayer(0)
+    if player:HasTrinket(Trinkets.question_mark_t) then
+        if g_vars.questionmark_item then
+            player:RemoveCollectible(g_vars.questionmark_item)
+        end
+        repeat g_vars.questionmark_item = ItemPools.PASSIVES[math.random(#ItemPools.PASSIVES)] until not player:HasCollectible(g_vars.questionmark_item)
+        player:AddCollectible(g_vars.questionmark_item, 0, false)
+    else
+        if g_vars.questionmark_item then
+            player:RemoveCollectible(g_vars.questionmark_item)
+            g_vars.questionmark_item = nil
+        end
+    end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.questionMark_NewRoomUpdate)
