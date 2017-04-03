@@ -115,7 +115,8 @@ else
 						chainmail_t = Isaac.GetTrinketIdByName("Chainmail"),
 						greenCross_t = Isaac.GetTrinketIdByName("Green Cross"),
 						kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth"),
-						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves")
+						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves"),
+						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar")
 					}
 
 	Curses = {
@@ -161,7 +162,7 @@ else
 								FAM_SunWukong_oldFrame = 0,
 								FAM_BombBumExists = false,
 								FAM_BombCounter = 0,
-								FAM_nBombBeforDrop = 10,
+								FAM_nBombBeforDrop = 5,
 								FirstBlood_Done = false,
 								hasElectronSpawned = false,
 								numberOfElectrons = 0,
@@ -215,7 +216,9 @@ else
 								cricketspaw_multiplier = 1,
 								zodiacTransformed = false,
 								box_friends_used = false,
-								Kikazaru_oldFrame = 0
+								Kikazaru_oldFrame = 0,
+								dionea_max_tears_per_rooms = 3,
+								dionea_tearsRoomCount = 0
 							}
 		return g_vars
 	]]
