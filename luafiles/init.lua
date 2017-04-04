@@ -4,7 +4,6 @@ local function Stillbirth_Player_Init() -- player ini
 	if not g_vars then
 		g_vars = data_Init()
 	end
-	REBALANCE_InitKeeper()
 	--force evaluation of every cacheFlags
 	player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 	player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)

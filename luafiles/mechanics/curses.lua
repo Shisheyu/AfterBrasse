@@ -1,7 +1,7 @@
 --bug bit avec miracle???? doubtful ne s'enlève pas et wealth fait spawn des piedestaux en plus
 
 local NUM_BLESSINGS = 6 --6
-local currentBlessing = ""
+local currentBlessing = nil
 
 local collectibleHasSpawned = false
 local wealth_pickup_spawned = false
@@ -15,25 +15,25 @@ function _Stillbirth:useBlessing(curse)
 	else
 		local rand = math.random(g_vars.BLESSING_CHANCE*NUM_BLESSINGS) --1/3 d'avoir une blessing
 		if rand == 1 then
-			currentBlessing = "Blessing of the ".."guide"
+			currentBlessing = "guide"
 			return bit.bor(Curses.blessing_guide, curse)
 		elseif rand == 2 then
-			currentBlessing = "Blessing of the ".."light"
+			currentBlessing = "light"
 			return bit.bor(Curses.blessing_light, curse)
 		elseif rand == 3 then
-			currentBlessing = "Blessing of the ".."miracle"
+			currentBlessing = "miracle"
 			return bit.bor(Curses.blessing_miracle, curse)
 		elseif rand == 4 then
-			currentBlessing = "Blessing of the ".."acceptance"
+			currentBlessing = "mighty"
 			return bit.bor(Curses.blessing_acceptance, curse)
 		elseif rand == 5 then
-			currentBlessing = "Blessing of the ".."wealth"
+			currentBlessing = "wealth"
 			return bit.bor(Curses.blessing_wealth, curse)
 		elseif rand == 6 then
-			currentBlessing = "Blessing of the ".."doubtful"
+			currentBlessing = "doubtful"
 			return bit.bor(Curses.blessing_doubtful, curse)
 		else
-			currentBlessing = ""
+			currentBlessing = nil
 			return curse
 		end
 	end
@@ -137,12 +137,104 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.removeBlessingD
 
 --DISPLAY BLESSING NAME
 
+function _Stillbirth:getNewLevelFramecount()
+    g_vars.newLevelFrameCount = Game():GetFrameCount()
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, _Stillbirth.getNewLevelFramecount)
+
+local spriteBlessing = {
+                guide=Sprite(),
+                light = Sprite(),
+                doubtful = Sprite(),
+                miracle = Sprite(),
+                wealth = Sprite(),
+                mighty = Sprite()
+}
+spriteBlessing.guide:Load("gfx/ui/blessings/blessing_of_the_guide.anm2", true)
+spriteBlessing.light:Load("gfx/ui/blessings/blessing_of_enlightment.anm2", true)
+spriteBlessing.doubtful:Load("gfx/ui/blessings/blessing_of_the_doubtful.anm2", true)
+spriteBlessing.miracle:Load("gfx/ui/blessings/blessing_of_the_miracle.anm2", true)
+spriteBlessing.wealth:Load("gfx/ui/blessings/blessing_of_the_wealthy.anm2", true)
+spriteBlessing.mighty:Load("gfx/ui/blessings/blessing_of_the_mighty.anm2", true)
+
+local pressed = false --the switch for rendering\not rendering the sprite
+local halftick = false --trigger the update function only half the times you render
+local spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,280)) --position to render at
+local empty_vector = Vector(0,0)
+
+function handleTabAndFramerateForBlessings(sprite)
+    local player = Isaac.GetPlayer(0)
+    local nb = Game():GetFrameCount()-g_vars.newLevelFrameCount
+    local delay = 60 --1sec
+    local onScreenTime = 120 --2sec
+    local condition_frames = (nb >= delay  and nb <= delay+onScreenTime)
+    if condition_frames then
+	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,64))
+	    sprite:Play("Text", true)
+	end
+	if Input.IsActionTriggered(ButtonAction.ACTION_MAP, player.ControllerIndex) then
+	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,64))
+	    pressed = not pressed
+		if pressed then
+			sprite:Play("Text",true)
+		end
+	elseif pressed and not Input.IsActionPressed(ButtonAction.ACTION_MAP, player.ControllerIndex) then 
+	    pressed = not pressed 
+	end
+	if (pressed or condition_frames) then
+		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
+		if halftick then
+			sprite:Update() --render and update the sprite at the given position
+		end
+	end
+	RenderText(condition_frames)
+end
+
 function _Stillbirth:displayBlessing()
-	local room = Game():GetRoom()
-	Isaac.RenderText(currentBlessing, 50, 20, 255, 255, 255, 255)
+    if currentBlessing == "guide" then
+        handleTabAndFramerateForBlessings(spriteBlessing.guide)
+    elseif currentBlessing == "light" then
+        handleTabAndFramerateForBlessings(spriteBlessing.light)
+    elseif currentBlessing == "doubtful" then
+        handleTabAndFramerateForBlessings(spriteBlessing.doubtful)
+    elseif currentBlessing == "miracle" then
+        handleTabAndFramerateForBlessings(spriteBlessing.miracle)
+    elseif currentBlessing == "wealth" then
+        handleTabAndFramerateForBlessings(spriteBlessing.wealth)
+    elseif currentBlessing == "mighty" then
+        handleTabAndFramerateForBlessings(spriteBlessing.mighty)
+    end
+	halftick = not halftick
+	--RenderText(currentBlessing, pressed, spriteBlessing:GetFilename(), spriteBlessing:IsLoaded())
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.displayBlessing)
 
+--[[
+local sp = Sprite() --create a sprite
+sp:Load("gfx/ui/blessings/blessing_of_enlightment.anm2",true) --load the anim file and the animation to play
+local sp_position = Isaac.WorldToRenderPosition(Vector(320,280)) --position to render at
+local empty_vector = Vector(0,0)
+local pressed = false --the switch for rendering\not rendering the sprite
+local halftick = false --trigger the update function only half the times you render
+
+function _Stillbirth:onRender()
+	local player = Isaac.GetPlayer(0)
+	if Input.IsButtonTriggered(Keyboard.KEY_TAB, player.ControllerIndex) then
+		pressed = not pressed
+		if pressed then
+			sp:Play("Text",true)
+		end
+		--switch between rendering and not rendering when T is pressed on the keyboard
+	end
+	if pressed then
+		sp:Render(sp_position,empty_vector,empty_vector)
+		if halftick then
+			sp:Update() --render and update the sprite at the given position
+		end
+	end
+	halftick = not halftick
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.onRender)]]--
 --monkey items curse negation
 
 function _Stillbirth:MonkeyCurseUpdate(curse)

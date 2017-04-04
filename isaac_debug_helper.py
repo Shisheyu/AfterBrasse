@@ -11,6 +11,8 @@ log_path = "/home/simon/.local/share/binding of isaac afterbirth+/log.txt" #modi
 #log_path = "C:\\Users\\****\\Documents\\My Games\\Binding of Isaac Afterbirth+\\log.txt" #modidy by you path
 db = 0
 
+
+
 class DebugLog:
     def __init__(self):
         self._ThreadRunning = 0
@@ -23,7 +25,7 @@ class DebugLog:
         while (1):
             tmp = f.readline().lower()
             if oldline != tmp: #display spam only once@FileLoad
-                if "err" in tmp or "error" in tmp or "assert" in tmp or "warn" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Filtre d'error a afficher / ne pas afficher
+                if "err" in tmp or "error" in tmp or "warn" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Filtre d'error a afficher / ne pas afficher
                     print(tmp, end='', file=sys.stderr)
                 elif "lua" in tmp:
                     print(tmp, end='')
