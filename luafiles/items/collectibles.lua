@@ -723,9 +723,8 @@ function _Stillbirth:ExBanana_use()
 end
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.ExBanana_use, Items.ExBanana_i );
 
-local function IsEntityInPit(e)
-	local ge = Game():GetRoom():GetGridEntityFromPos(e.Position)
-	return ge and ge:ToPit() or false
+local function ExBanana_SkipToEndMov(condition)
+	if condition then BanaV.ExBanana_frame = 39 end
 end
 
 function _Stillbirth:ExBanana_Mine()
@@ -757,13 +756,15 @@ function _Stillbirth:ExBanana_Mine()
             BanaV.ExBanana_frame = BanaV.ExBanana_frame + 1
             if BanaV.ExBanana:CollidesWithGrid() then
                 BanaV.ExBanana:MultiplyFriction( 0.3 )
+				ExBanana_SkipToEndMov(IsEntityInPit(BanaV.ExBanana)) -- skip to endMov code
             end
             if BanaV.ExBanana_frame < 18 then
                 local amp = inQuad( BanaV.ExBanana_frame * 0.60, 1, 9-1, 9 )
                 db_a = amp
                 BanaV.ExBanana.PositionOffset = Vector( 0, amp ) -- Zou
             elseif BanaV.ExBanana_frame < 40 then
-                BanaV.ExBanana.PositionOffset = Vector( 0,14 ) -- EndCourseOnTheFloor
+				if BanaV.ExBanana_frame < 39 then ExBanana_SkipToEndMov(math.abs(BanaV.ExBanana.Velocity.X) + math.abs(BanaV.ExBanana.Velocity.Y) < 0.02) end -- skip to endMov code
+                BanaV.ExBanana.PositionOffset = Vector( 0, 14 ) -- EndMovOnTheFloor
                 BanaV.ExBanana:MultiplyFriction( 0.05 ) -- StopMoving
                 if not BanaV.CreepSpawn then
                     BanaV.ExBananaCreep2 = Isaac.Spawn( 1000, 24, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep2 Yl
@@ -784,7 +785,7 @@ function _Stillbirth:ExBanana_Mine()
 						BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, a/100 , 255, 255, 0 ) , 9999, 9999, false, false ) -- creep
 						BanaV.ExBanana:SetColor( Color( (a/200)+0.15, 0.15, 0.0, 1.0, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
 						if a == 20 then
-							BanaV.ExBananaCreep = Isaac.Spawn( 1000, 44, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep Sl -- Add Delay befor slow
+							BanaV.ExBananaCreep = Isaac.Spawn( 1000, 44, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep Sl
 							BanaV.ExBananaCreep:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
 							BanaV.ExBananaCreep:SetColor( Color( 0.0, 0.0, 0.0, 0.0, 0, 0, 0 ) , 9999, 9999, false, false )
 							BanaV.ExBananaCreep.SpriteScale = BanaV.ExBananaCreep.SpriteScale * 5.0
@@ -800,11 +801,11 @@ function _Stillbirth:ExBanana_Mine()
 						BanaV.ExBananaActive = true -- Start damage/effect
 					end
 				else -- Fall in pit
-					-- sortof fancy falling sound effects
+					-- SortOf fancy falling sound effects
 					if a == 1 then
-						SFXManager():Play(242, 0.5, 0, false, 1.5)
+						SFXManager():Play(242, 0.5, 0, false, 6.0)
 					else
-						SFXManager():AdjustPitch(242, 1.5+(a/15)^0.9)
+						SFXManager():AdjustPitch(242, (6.0-a/7) >= 0 and (6.0-a/7) or 0)
 						SFXManager():AdjustVolume(242, (0.5 - a/70) >= 0 and (0.5 - a/70) or 0)
 					end
 					if a <= 40 then
@@ -812,6 +813,7 @@ function _Stillbirth:ExBanana_Mine()
 						BanaV.ExBanana.SpriteScale = BanaV.ExBanana.SpriteScale * (1.0-a/60)
 						local c = a/30 <= 1 and a/30 or 1
 						BanaV.ExBanana:SetColor( Color( 0.15+c, 0.15+c, c, 1.0-c, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
+						BanaV.ExBanana.PositionOffset = Vector( 0, 14+a/20 ) -- Add even more SortOfFallingly anm
 					elseif a == 41 then
 						SFXManager():Play(267, 0.3, 0, false, 0.2)
 						BanaV.ExBanana:Remove()
