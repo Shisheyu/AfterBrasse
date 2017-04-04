@@ -289,7 +289,8 @@ local isInitEntities = false
 -- Scorpio
 local poisoned_enemies = {}
 -- Gemini
-local geminiSeparated = false
+local gemini_unleashed_has_spawned = false
+local gemini_unleashed_fam = nil
 
 function _Stillbirth:initZodiacPlayer(player)
 	-- Taurus
@@ -304,7 +305,8 @@ function _Stillbirth:initZodiacPlayer(player)
 	-- Scorpio
 	poisoned_enemies = {}
 	--Gemini
-	geminiSeparated = false
+	gemini_unleashed_has_spawned = false
+	gemini_unleashed_fam = nil
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,_Stillbirth.initZodiacPlayer);
 
@@ -383,7 +385,7 @@ function _Stillbirth:onZodiacDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_c
 	local player = Isaac.GetPlayer(0);
 	local roomType = Game():GetRoom():GetType()
 	local damageReturn = true;
-
+    local entities = Isaac.GetRoomEntities()
 	if g_vars.zodiacTransformed then
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_LEO) then
 			if ((dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) or dmg_flag == DamageFlag.DAMAGE_ACID) then
@@ -397,8 +399,13 @@ function _Stillbirth:onZodiacDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_c
 				damageReturn = false;
 			end
 		end
-		if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) then
-			--
+		if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) and not gemini_unleashed_has_spawned then
+			local pos = nil
+			for i=1, #entities do
+				if entities[i].Type == EntityType.ENTITY_FAMILIAR and entities[i].Variant == FamiliarVariant.GEMINI then pos=entities[i].Position;entities[i]:Remove() end
+			end
+			gemini_unleashed_fam = Isaac.Spawn(Familiars.GeminiUnleashed, Familiars.GeminiUnleashedVariant, 0, pos, Vector(0,0), player)
+			gemini_unleashed_has_spawned = true
 		end
 	end
 	return damageReturn;
@@ -472,7 +479,21 @@ function _Stillbirth:ZodiacTransfoCache(player, cacheFlag)
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.ZodiacTransfoCache)
 
- 
+function _Stillbirth:ZodiacNewRoomUpdate()
+	local player = Isaac.GetPlayer(0)
+	if zodiacTransformed then
+		if gemini_unleashed_has_spawned then
+			gemini_unleashed_has_spawned = false
+			gemini_unleashed_fam:Remove()
+		end
+		if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) then
+			player:RemoveCollectible(CollectibleType.COLLECTIBLE_GEMINI)
+			player:AddCollectible(CollectibleType.COLLECTIBLE_GEMINI, 0, false)
+		end
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.ZodiacNewRoomUpdate)
+
 function _Stillbirth:taurus_effect_updateStat(player, cacheFlag)
   local player = Isaac.GetPlayer(0);
   local room = Game():GetRoom();

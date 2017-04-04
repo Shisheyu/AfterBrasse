@@ -12,6 +12,51 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onUseDebugItem, Items.debug_i)
 
 --[[
+Passive Item: "Blobby"
+Random Isaac's Tears
+-Azqswx-
+--]]
+
+function _Stillbirth:blobbyUpdate()
+    local player = Isaac.GetPlayer(0);
+    if player:HasCollectible(Items.blobby_i) then
+        local rngProc_blobby = math.random(-10, 30);
+        if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
+            player.FireDelay = player.MaxFireDelay;
+            player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
+        end
+    end
+end
+
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.blobbyUpdate);
+
+--[[
+Active Item: "Portable restock"
+Portable reroll machine
+-Azqswx-
+--]]
+
+function _Stillbirth:usePortableRestock()
+  local player = Isaac.GetPlayer(0);
+  local roomType = Game():GetRoom():GetType()
+  if player:HasCollectible(Items.portable_restock_i) then
+    if player:GetNumCoins() > 0 then
+      player:AddCoins(-1);
+      local luckOfReroll = math.random(0,50);
+      if luckOfReroll < player.Luck then
+        player:UseActiveItem(105,false,false,false,false);
+        if roomType == RoomType.ROOM_SHOP then
+        player:UseActiveItem(166,false,false,false,false);
+        end
+      end
+    end
+  end
+  return true;
+end
+
+_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestock, Items.portable_restock_i );
+
+--[[
 Active Item: "Cricket's Paw"
 -Sliost-
 --Dogeek
@@ -109,6 +154,18 @@ _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_beer, Items.B
 Passive item: "Brave Shoe"
 -xahos-
 --]]
+--C'EST DEGEULASSE MAIS JE M'EN BALLEK. LES TRINKETS SONT FOUTUS LA DEDANS SINON CA MARCHE PAS PARCE QUE CE JEU A ÉTÉ CODÉ EN ROULANT LEUR BITES DANS LA FARINE.
+function _Stillbirth:braveShoeDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
+    local player = Isaac.GetPlayer(0)
+	local roomType = Game():GetRoom():GetType()
+    if player:HasCollectible(Items.brave_shoe_i) then
+        if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) then
+            return false
+        end
+    end
+    return
+end
+
 function _Stillbirth:braveShoeCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)
 
@@ -117,9 +174,18 @@ function _Stillbirth:braveShoeCache(player, cacheFlag)
             player.MoveSpeed = player.MoveSpeed + 0.2;
         end
     end
+    if (player:HasTrinket(Trinkets.torn_gloves_t)) then
+		if (dmg_flag == DamageFlag.DAMAGE_CHEST) then
+			return false
+		end
+	end
+	if player:HasTrinket(Trinkets.chainmail_t) then
+        if dmg_flag == DamageFlag.DAMAGE_CURSED_DOOR then
+            return false
+        end
+    end
 end
--- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
---~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.braveShoeDamage, EntityType.ENTITY_PLAYER)
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.braveShoeDamage, EntityType.ENTITY_PLAYER)
 _Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.braveShoeCache)
 
 --[[
@@ -500,14 +566,38 @@ end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesHead_Update)
 
 --------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------
+local tearLeaf_t = nil
+local tearLeaf_boss = nil
 
--- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
--- and all tearleaf mechanics related code
+function _Stillbirth:TearLeaf_MobSlowing( entity, damage, flag, source, countdown ) -- CustomTearEffect
+    if entity and entity:IsVulnerableEnemy() then
+        if source.Type == 2 and source.Variant == CustomEntities.TearLeaf_Variant then
+		    if entity:IsBoss() then --boss differenciation
+		    	tearLeaf_t = Isaac.GetFrameCount()
+		    	tearLeaf_boss = entity
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 180, 50, false, false ) -- StopWatch like color
+		    else
+		    	entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+		    	entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
+		    end
+        end
+    end
+    return
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.TearLeaf_MobSlowing );
 
--- _Stillbirth:AddCallback( ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.TearLeaf_MobSlowing );
--- _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TearLeaf_BossTimer)
+function _Stillbirth:TearLeaf_BossTimer()
+	if tearLeaf_t then
+		if Isaac.GetFrameCount() - tearLeaf_t >= 6*60 then
+			tearLeaf_boss:ClearEntityFlags(1<<7)
+			tearLeaf_t = nil
+			tearLeaf_boss = nil
+		end
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.TearLeaf_BossTimer)
 
 --[[
 Passive item: "First Blood"
@@ -682,7 +772,7 @@ https://www.youtube.com/watch?v=LH5ay10RTGY
 Lance une banane de type mine explosive, laisse du creep jaune qui ralentit
 Slow only apply to ground enemy
 --]]
--- this item don't need save
+--~ this item don't need save
 local BanaV = 	{
                             ExBanana = nil,
                             ExBananaCreep = nil,
@@ -723,10 +813,6 @@ function _Stillbirth:ExBanana_use()
 end
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.ExBanana_use, Items.ExBanana_i );
 
-local function ExBanana_SkipToEndMov(condition)
-	if condition then BanaV.ExBanana_frame = 39 end
-end
-
 function _Stillbirth:ExBanana_Mine()
     local player = Isaac.GetPlayer(0)
 
@@ -746,7 +832,7 @@ function _Stillbirth:ExBanana_Mine()
             BanaV.ExBanana:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
             BanaV.ExBananaSprite = BanaV.ExBanana:GetSprite();
             BanaV.ExBanana.EntityCollisionClass = EntityCollisionClass.ENTCOLL_ENEMIES
-            BanaV.ExBanana.GridCollisionClass = 6 -- 5 = allgrid ent 6 = nopits ; 3 = wall only
+            BanaV.ExBanana.GridCollisionClass = 5 -- 5 = allgrid ent 6 = nopits ; 3 = wall only
             BanaV.ExBananaSprite:Play("Idle", true);
             BanaV.ExBanana.RenderZOffset  = 5
             BanaV.ExBananaSpawned = true
@@ -756,15 +842,13 @@ function _Stillbirth:ExBanana_Mine()
             BanaV.ExBanana_frame = BanaV.ExBanana_frame + 1
             if BanaV.ExBanana:CollidesWithGrid() then
                 BanaV.ExBanana:MultiplyFriction( 0.3 )
-				ExBanana_SkipToEndMov(IsEntityInPit(BanaV.ExBanana)) -- skip to endMov code
             end
             if BanaV.ExBanana_frame < 18 then
                 local amp = inQuad( BanaV.ExBanana_frame * 0.60, 1, 9-1, 9 )
                 db_a = amp
                 BanaV.ExBanana.PositionOffset = Vector( 0, amp ) -- Zou
             elseif BanaV.ExBanana_frame < 40 then
-				if BanaV.ExBanana_frame < 39 then ExBanana_SkipToEndMov(math.abs(BanaV.ExBanana.Velocity.X) + math.abs(BanaV.ExBanana.Velocity.Y) < 0.02) end -- skip to endMov code
-                BanaV.ExBanana.PositionOffset = Vector( 0, 14 ) -- EndMovOnTheFloor
+                BanaV.ExBanana.PositionOffset = Vector( 0,14 ) -- EndCourseOnTheFloor
                 BanaV.ExBanana:MultiplyFriction( 0.05 ) -- StopMoving
                 if not BanaV.CreepSpawn then
                     BanaV.ExBananaCreep2 = Isaac.Spawn( 1000, 24, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep2 Yl
@@ -772,56 +856,29 @@ function _Stillbirth:ExBanana_Mine()
                     BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, 0.0, 255, 255, 0 ) , 9999, 9999, false, false )
                     BanaV.ExBananaCreep2.SpriteScale = BanaV.ExBananaCreep2.SpriteScale * 6.0
                     BanaV.ExBananaCreep2:ToEffect():SetTimeout(9999)
-					if not IsEntityInPit(BanaV.ExBanana) then
-						SFXManager():Play(445, 1.9, 0, false, 0.45)
-					end
+                    SFXManager():Play(445, 0.9, 0, false, 0.45)
                     BanaV.CreepSpawn = true
                 end
-				dbz = IsEntityInPit(BanaV.ExBanana)
+            elseif BanaV.ExBanana_frame <= 70 then
+                local a = (BanaV.ExBanana_frame - 40)
+                BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, a/100 , 255, 255, 0 ) , 9999, 9999, false, false ) -- creep
+                BanaV.ExBanana:SetColor( Color( (a/200)+0.15, 0.15, 0.0, 1.0, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
+                if a == 20 then
+                    BanaV.ExBananaCreep = Isaac.Spawn( 1000, 44, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep Sl -- Add Delay befor slow
+                    BanaV.ExBananaCreep:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
+                    BanaV.ExBananaCreep:SetColor( Color( 0.0, 0.0, 0.0, 0.0, 0, 0, 0 ) , 9999, 9999, false, false )
+                    BanaV.ExBananaCreep.SpriteScale = BanaV.ExBananaCreep.SpriteScale * 5.0
+                    BanaV.ExBananaCreep:ToEffect():SetTimeout(9999)
+                end
             else
-				local a = (BanaV.ExBanana_frame - 40)
-				if not IsEntityInPit(BanaV.ExBanana) then
-					if BanaV.ExBanana_frame <= 70 then
-						BanaV.ExBananaCreep2:SetColor( Color( 1.0, 1.0, 0.0, a/100 , 255, 255, 0 ) , 9999, 9999, false, false ) -- creep
-						BanaV.ExBanana:SetColor( Color( (a/200)+0.15, 0.15, 0.0, 1.0, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
-						if a == 20 then
-							BanaV.ExBananaCreep = Isaac.Spawn( 1000, 44, 0, BanaV.ExBanana.Position, Vector(0, 0), player ) -- ExBanana Creep Sl
-							BanaV.ExBananaCreep:AddEntityFlags( 1<<0|1<<4|1<<15|1<<26|1<<29|1<<30 )
-							BanaV.ExBananaCreep:SetColor( Color( 0.0, 0.0, 0.0, 0.0, 0, 0, 0 ) , 9999, 9999, false, false )
-							BanaV.ExBananaCreep.SpriteScale = BanaV.ExBananaCreep.SpriteScale * 5.0
-							BanaV.ExBananaCreep:ToEffect():SetTimeout(9999)
-						end
-					else
-						if not BanaV.ExBananaSprite:IsPlaying( "Float" ) then
-							BanaV.ExBananaSprite:Play( "Float", true )
-							SFXManager():Play(229, 0.5, 0, false, 2.5)
-						end
-						BanaV.ExBananaCreep.Position = BanaV.ExBanana.Position
-						BanaV.ExBananaCreep2.Position = BanaV.ExBanana.Position
-						BanaV.ExBananaActive = true -- Start damage/effect
-					end
-				else -- Fall in pit
-					-- SortOf fancy falling sound effects
-					if a == 1 then
-						SFXManager():Play(242, 0.5, 0, false, 6.0)
-					else
-						SFXManager():AdjustPitch(242, (6.0-a/7) >= 0 and (6.0-a/7) or 0)
-						SFXManager():AdjustVolume(242, (0.5 - a/70) >= 0 and (0.5 - a/70) or 0)
-					end
-					if a <= 40 then
-						BanaV.ExBananaCreep2:Remove()
-						BanaV.ExBanana.SpriteScale = BanaV.ExBanana.SpriteScale * (1.0-a/60)
-						local c = a/30 <= 1 and a/30 or 1
-						BanaV.ExBanana:SetColor( Color( 0.15+c, 0.15+c, c, 1.0-c, 0, 0, 0 ) , 9999, 9999, false, false ) -- banana
-						BanaV.ExBanana.PositionOffset = Vector( 0, 14+a/20 ) -- Add even more SortOfFallingly anm
-					elseif a == 41 then
-						SFXManager():Play(267, 0.3, 0, false, 0.2)
-						BanaV.ExBanana:Remove()
-						BanaV.ExBananaCreep2:Remove()
-						ExBanana_resetVars()
-					end
-				end
-			end
+                if not BanaV.ExBananaSprite:IsPlaying( "Float" ) then
+                    BanaV.ExBananaSprite:Play( "Float", true )
+                    SFXManager():Play(229, 0.4, 0, false, 2.5)
+                end
+                BanaV.ExBananaCreep.Position = BanaV.ExBanana.Position
+                BanaV.ExBananaCreep2.Position = BanaV.ExBanana.Position
+                BanaV.ExBananaActive = true -- Start damage/effect
+            end
         elseif BanaV.ExBananaSpawned and BanaV.ExBananaActive then
             local f = player.FrameCount
             local rg = (function() if f&3==0 then return math.abs(math.sin(f)) end end )() -- blink
@@ -1167,9 +1224,17 @@ function _Stillbirth:SpidershotUpdateTears()
   end
 end
 
-
--- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
---~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)
+function _Stillbirth:SpidershotEffectOnMob(DmgEntity, DamageAmount, DamageFlags, DamageSource, DamageCountdown)
+  local player = Isaac.GetPlayer(0)
+  if player:HasCollectible(Items.spidershot_i) then
+    if DamageSource.Type == EntityType.ENTITY_TEAR and DamageSource.Variant == 27 then
+      local posE = DmgEntity.Position;
+      index = Game():GetRoom():GetGridIndex(posE);
+      Game():GetRoom():SpawnGridEntity(index,10,0,0,0)
+      DmgEntity:AddEntityFlags(1<<7)
+    end
+  end
+end
 
 local weblist = {}
 function _Stillbirth:SpidershotEffectOnGridandCreep()
@@ -1202,6 +1267,7 @@ function _Stillbirth:SpidershotEffectOnGridandCreep()
 end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, _Stillbirth.SpidershotUpdateTears)
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.SpidershotEffectOnGridandCreep)
 
 --[[ http://pastebin.com/e8tSm91i pools
@@ -1212,7 +1278,7 @@ Date : 2017-03-10
 ]]--
 
 local cricketstail_spawn_delay = 0
-local crickets_tail_SPAWN_CHANCE = 25
+local crickets_tail_SPAWN_CHANCE = 33
 
 function _Stillbirth:cricketsTail_hadEnemiesReset()
     g_vars.cricketsTail_hadEnemies = false
@@ -1257,7 +1323,7 @@ function _Stillbirth:cricketsTailUpdate()
 	end
 end
 
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpdate)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpdate) 
 
 --[[
 <3+<3 = <3<3
@@ -1371,8 +1437,8 @@ function _Stillbirth:MizaruUpdateCache()
 			g_vars.mizaru_n = player.MaxFireDelay
 		end
 		if frame % 30 == 0 then
-		    player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
-		    player:EvaluateItems()
+		    player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY) 
+		    player:EvaluateItems()     
 		end
 	end
 end
@@ -1388,7 +1454,7 @@ function _Stillbirth:MizaruRandomFireRate(player, cacheFlag)
         elseif g_vars.mizaru_n == 0 then
             fire_delay_base = player.MaxFireDelay;
         end
-        if rng < 0.5 and g_vars.mizaru_n <= player.MaxFireDelay*1.25 then
+        if rng < 0.5 and g_vars.mizaru_n <= player.MaxFireDelay*1.25 then 
             g_vars.mizaru_n = g_vars.mizaru_n + 1;
             player.MaxFireDelay = g_vars.mizaru_n;
         elseif rng > 0.5 and g_vars.mizaru_n >= player.MaxFireDelay*0.75 then
@@ -1415,7 +1481,7 @@ function _Stillbirth:HasKikazaru()
     end
     local tearRate = 2*player.MaxFireDelay
     local aimDirection = player:GetAimDirection()
-	if IsShooting(player) and (player.FrameCount - g_vars.Kikazaru_oldFrame) > tearRate then
+	if IsShooting(player) and (player.FrameCount - g_vars.Kikazaru_oldFrame) > tearRate then 
       if aimDirection.X ~= 0 or  aimDirection.Y ~= 0 then
         local angle = aimDirection:GetAngleDegrees()
         local vectorLeft = Vector.FromAngle(angle + 90)*(10*player.ShotSpeed) + player.Velocity
@@ -1469,7 +1535,7 @@ function _Stillbirth:GodSaleUpdate()
 end
 --_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GodSaleUpdate) --error bit.tobits() bitwise on non integer
 
---[[
+--[[ 
 Iwazaru
 -- "Baillon qui se met sur la bouche. Quand le joueur se fait toucher, le baillon active un shoop dawoop (1 fois par salle)"
 Sliost & Dogeek(pour finir l'item)
@@ -1486,55 +1552,15 @@ function _Stillbirth:IwazaruFiredReset()
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.IwazaruFiredReset)
 
--- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
--- _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.HasIwazaru,EntityType.ENTITY_PLAYER);
-
-
---[[
-Passive Item: "Blobby"
-Random Isaac's Tears
--Azqswx-
---]]
-
-function _Stillbirth:blobbyUpdate()
-    local player = Isaac.GetPlayer(0);
-    if player:HasCollectible(Items.blobby_i) then
-        local rngProc_blobby = math.random(-10, 30);
-        if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
-            player.FireDelay = player.MaxFireDelay;
-            player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
-        end
-    end
-end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE , _Stillbirth.blobbyUpdate);
-
---[[
-Active Item: "Portable restock"
-Portable reroll machine
--Azqswx-
---]]
-
-function _Stillbirth:usePortableRestock()
-  local player = Isaac.GetPlayer(0);
-  local roomType = Game():GetRoom():GetType()
-  if player:HasCollectible(Items.portable_restock_i) then
-    if player:GetNumCoins() > 0 then
-      player:AddCoins(-1);
-      local luckOfReroll = math.random(0,50);
-      if luckOfReroll < player.Luck then
-        player:UseActiveItem(105,false,false,false,false);
-        if roomType == RoomType.ROOM_SHOP then
-        player:UseActiveItem(166,false,false,false,false);
-        end
-      end
-    end
+function _Stillbirth:HasIwazaru(entity,dmg_amount, dmg_flag, dmg_src, dmg_countdown)
+  local player = Isaac.GetPlayer(0)
+  if player:HasCollectible(Items.iwazaru_i) and not g_vars.iwazaru_fired then
+  	g_vars.iwazaru_fired = true
+    local angle = player:GetAimDirection():GetAngleDegrees()
+    local shoop = EntityLaser.ShootAngle(3,player.Position,angle,30,Vector(0,-20),player)
+    shoop.CollisionDamage = 2 -- TODO : Adjust value?
   end
-  return true;
+  return true
 end
-_Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestock, Items.portable_restock_i );
-
-
-
-
+_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.HasIwazaru,EntityType.ENTITY_PLAYER);
 --[[--END--]]
-

@@ -46,7 +46,7 @@ local Sv_Triggered_Key = false
 local Sv_Trigger_Force = false
 local NOFSAVE = 0 -- can recycle as emergency stop?
 
-local function data_reinit_save(base_data)
+local function data_init_save(base_data)
 	for k,v in pairs(base_data) do
 		if not k:find("PERMANENT_") then
 			g_vars[k] = v
@@ -65,7 +65,7 @@ end
 
 function _Stillbirth:Mod_SaveMoreThanFramePerfect()
 	if IsNewGame() and not Sv_res_done then
-		data_reinit_save(initial_data_init())
+		data_init_save(initial_data_init())
 		_save_(g_vars)
 		Mod_SaveIt_Timer = 0
 --~ 		NOFSAVE = 0
@@ -73,7 +73,7 @@ function _Stillbirth:Mod_SaveMoreThanFramePerfect()
 		Sv_res_done = true
 	end
 	if ( Game():IsPaused() or Input.IsButtonTriggered(342, 0) or not Isaac.HasModData(_Stillbirth) ) and not Sv_Triggered_Key then
---~ 		NOFSAVE = NOFSAVE + 1
+		NOFSAVE = NOFSAVE + 1
 		Sv_Triggered_Key = true
 		local p = Isaac.GetPlayer(0)
 		db_c = _save_(g_vars)
@@ -117,24 +117,22 @@ function _Stillbirth:Mod_SaveIt_Minutes()
 	end
 	dbz = p:IsVulnerableEnemy()
 end
-
-function _Stillbirth:Mod_Save_postLevel()
+function _Stillbirth:Mod_SaveIt_Level(Curses) -- Save at Level start
 	local level = Game():GetLevel()
+--~ 	if g_vars.GlobalSeed == 0 then
+--~ 		SetRandomSeed() -- Re-seed the random .. because why not.
+--~ 		Isaac.DebugString("Seed Generated")
+--~ 	end
 	if level:GetAbsoluteStage() ~= 1 then
 		db_c = _save_(g_vars)
-		Isaac.DebugString("Save by postLevel")
+		Isaac.DebugString("Save by Level")
+--~ 		NOFSAVE = NOFSAVE + 1
 		Mod_SaveIt_Timer = 0
+		db_d = "SavedByLevel" .. "  " .. tostring(Curses)  .. " stage: " .. tostring(level:GetAbsoluteStage())
 	end
+	return Curses
 end
-
-function _Stillbirth:Mod_Save_gameExit()
-		db_c = _save_(g_vars)
-		Isaac.DebugString("Save gameExit")
-		Mod_SaveIt_Timer = 0
-end
-
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.Mod_SaveIt_Minutes);
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.Mod_SaveMoreThanFramePerfect);
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, _Stillbirth.Mod_Save_postLevel);
-_Stillbirth:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, _Stillbirth.Mod_Save_gameExit);
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_CURSE_EVAL, _Stillbirth.Mod_SaveIt_Level);
 ------------------------------------------------------------------------------------------------------------------------
