@@ -41,7 +41,6 @@ _Stillbirth:AddCallback(ModCallbacks.MC_USE_ITEM, _Stillbirth.onBoxOfFriendsUse,
 --[[
 Krayz
 Item : SunWukong (famillier)
-TODO?: Maybe make a Realign Familiars Function(annoying)
 Tire de temps à autres une larme feuille qui stopwatch les ennemis
 ]]--
 function _Stillbirth:FAM_SunWukong_init(Familiar) -- init Familiar variables
@@ -66,7 +65,7 @@ function _Stillbirth:FAM_SunWukong_Update(Familiar) -- Familiar 'AI'
 	if IsShooting(player) and (player.FrameCount - g_vars.FAM_SunWukong_oldFrame) > FamiliarFireDelay then
 		local v = Vector( math.abs(player:GetLastDirection().X), math.abs(player:GetLastDirection().Y) )
 		g_vars.FAM_SunWukong_oldFrame = player.FrameCount
-		if (v.X == 1 or v.X == 0) and (v.Y == 1 or v.Y == 0) and g_vars.FAM_SunWukongCounter < 18 then
+		if (v.X == 1 or v.Y == 1) and g_vars.FAM_SunWukongCounter < 18 then
 			local tear = ShootCustomTear( 0, Familiar, player, 1.3, Vector(11, 11), true )
 			tear:SetColor( Color( 0.5, 1.0, 0.7, 0.85, 5, 10, 7 ) , 9999, 50, false, false )
 			g_vars.FAM_SunWukongCounter = g_vars.FAM_SunWukongCounter + 1
@@ -220,7 +219,7 @@ function _Stillbirth:dionea_onFamiliarUpdateL3(DioneaFam)
 	local L3Sprite = DioneaFam:GetSprite();
 	local FamiliarFrameCount = L3Sprite:GetFrame();
 	L3Sprite.PlaybackSpeed = 0.50;
-	
+
 	for i = 1,#dionea_Root do
 		dionea_Root[i]:FollowPosition(player.Position:__mul( #dionea_Root+1-i ):__add(g_vars.dionea_L3.Position:__mul(i)):__div(#dionea_Root+1));
 		dionea_Root[i]:MultiplyFriction(10.0);
@@ -251,11 +250,11 @@ function _Stillbirth:dionea_onFamiliarUpdateL3(DioneaFam)
 		end
 		if not SFXManager():IsPlaying(100) and L3Sprite:IsEventTriggered("Eating") then
 			SFXManager():Play(100,1.0,1,false,1.0)			--Joue son Carnivore
-		end      
+		end
 		local bval =  math.abs( entities[ClosestB].Position.X - DioneaFam.Position.X ) + math.abs( entities[ClosestB].Position.Y - DioneaFam.Position.Y )
-        DioneaFam:FollowPosition( entities[ClosestB].Position );  
-        g_vars.dionea_eating = true; 
-        if bval >= 5 then 
+        DioneaFam:FollowPosition( entities[ClosestB].Position );
+        g_vars.dionea_eating = true;
+        if bval >= 5 then
         	g_vars.dionea_eating = false;
         end
     else
@@ -272,7 +271,7 @@ function _Stillbirth:dionea_onFamiliarUpdateL3(DioneaFam)
         else
             DioneaFam:MultiplyFriction(0.2); -- Stop
         end
-    end    
+    end
 end
 
  function _Stillbirth:dionea_onInitL3(DioneaFam)
@@ -343,70 +342,102 @@ _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.dionea_onInit
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, _Stillbirth.dionea_onFamiliarUpdateL3, Familiars.DioneaFamVariantL3)
 _Stillbirth:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, _Stillbirth.dionea_onInitL3, Familiars.DioneaFamVariantL3)
 
---~ --[[ -- WAITING TO FINISH RE IMPLEMENTING THE NEW ANM2 + TEST
---~ Item: "RNG Baby" -- Glitched qui clignotte skin original / skin custom
---~ -Krayz-
---~ --]]
---~ --no need to save
---~ local RNGBabyVars = {
---~ 								RNGBaby_Familiar = nil,
---~ 								seed = nil
---~ 							}
---~ -- TODO: SAVE and RESTORE THE LAST FAMILIAR after a game continu
---~ -- TODO: full Aimation / anm2 with all look direction
 
---~ local RNGBaby_FamiliarSprite  = nil -- local
---~ local RNGBaby_saveOldFam = nil --local
+--[[
+Item: "RNG Baby" -- V_Glitched qui clignotte skin original / skin custom
+-Krayz-
+--]]
 
---~ local RNGBaby_FamRevealCounter = math.random(10)+5
---~ local RNGBaby_default = false
+--[[note(Krayz)ToDo: in a PLAYER_INIT or cache update or ... do: if familiarFoundInSave then respawn it. --]]
+--[[note(Krayz)ToDo: Fixing anm2 (side anims) --]]
+--[[
+local g_vars = {
+								RNGBaby_Familiar = false
+							}
 
---~ function RNGBaby:RNGBaby_()
---~ 	local player = Isaac.GetPlayer(0)
---~ 	local room = Game():GetRoom()
---~ 	local AtkfamiliarPool = 	{
---~ 										1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,30,
---~ 										31,48,53,54,59,61,63,74,76,77,80,81,84,
---~ 										85,87,92,97,98,99,101,104,106,108
---~ 									}
+local RNGBaby_FamiliarSprite = nil -- local
+local RNGBaby_saveOldFam = nil --local
+local RNGBaby_FamRevealCounter = math.random(25)+5
+local RNGBaby_default = false
+local RNGBaby_hasFamiliar = false
+dbc = 0
+local RNGBaby_variant = false
+local RNGBaby_oldfamPos = false
 
---~ 	if ( player:HasCollectible(Items.rngbaby_i) ) then
---~ 		if room:GetFrameCount() == 1 and room:IsFirstVisit() then
---~ 			g_vars.FAM_LastRNGBabyExists = true
---~ 			if RNGBabyVars.RNGBaby_Familiar then
---~ 				RNGBabyVars.RNGBaby_Familiar:Remove()
---~ 				RNGBabyVars.RNGBaby_Familiar = nil
---~ 			end
---~ 			local seed = Game():GetLevel():GetDungeonPlacementSeed()
---~ 			local rand = (math.random(seed) % #AtkfamiliarPool) + 1
---~ 			RNGBabyVars.RNGBaby_Familiar = Isaac.Spawn(3, AtkfamiliarPool[rand], 0, player.Position, Vector(0, 0), player)
---~ 			g_vars.FAM_LastRNGBabyExists = RNGBaby_Familiar
---~ 			RNGBabyVars.RNGBaby_Familiar.IsFollower = true
---~ 			RNGBaby_FamiliarSprite = RNGBabyVars.RNGBaby_Familiar:GetSprite()
---~ 			saveOldFam = RNGBaby_FamiliarSprite:GetFilename()
---~ 		end
---~ 		if not IsShooting(player) then
---~ 			if FamRevealCounter > 0 then
---~ 				FamRevealCounter = FamRevealCounter - 1
---~ 			end
---~ 			if FamRevealCounter <= 0 then
---~ 				default = false
---~ 				RNGBaby_FamiliarSprite:Load("gfx/rngbaby.anm2", true)
---~ 				RNGBaby_FamiliarSprite:Play("Float", true)
---~ 				RNGBaby_FamiliarSprite:PlayOverlay("Float", true)
+function _Stillbirth:RNGBaby_()
+	local player = Isaac.GetPlayer(0)
+	local room = Game():GetRoom()
+	-- this has bug when isaac change weapon type (delet the familiar/ easy fix, but the familiar will respawn once)
+	local AtkfamiliarPool = {	1,2,3,4,5,6,7,8,9,10,11,13,14,53,54,61,63,74,76,80,81,87,92,97,99,101,104,108}--, Familiars.SunWukong_Familiar_Variant}
+	-- this give the conjoined transformation
+--~ 	local itemIds = {	8,67,88,95,99,100,113,117,163,167,174,188,267,268,269,275,277,319,322,360,361,384,390,417,417,430,431,435,471,473 } -- Items.sunwukong_i
+	if ( player:HasCollectible(Items.rngbaby_i) ) then
+		if room:GetFrameCount() == 1 or not RNGBaby_hasFamiliar or (RNGBaby_hasFamiliar and not g_vars.RNGBaby_Familiar:Exists()) then
+			local pos = player.Position
+			local vel = Vector(0, 0)
+			if not RNGBaby_hasFamiliar or not RNGBaby_variant or room:GetFrameCount() == 1 then
+				if g_vars.RNGBaby_Familiar then
+					g_vars.RNGBaby_Familiar:Remove()
+					g_vars.RNGBaby_Familiar = false
+				end
+				local seed = Game():GetLevel():GetDungeonPlacementSeed()
+				local rand = (math.random(seed) % #AtkfamiliarPool) + 1
+				RNGBaby_variant  = AtkfamiliarPool[rand]
+				Isaac.DebugString("SPAWN A")
+			else
+				pos = g_vars.RNGBaby_Familiar.Position
+				vel = g_vars.RNGBaby_Familiar.Velocity
+				cleanSpawn = true -- remove the spawn "poof" gfx
+				Isaac.DebugString("SPAWN B")
+			end
+			g_vars.RNGBaby_Familiar = Isaac.Spawn(3, RNGBaby_variant , 0, pos, vel, player):ToFamiliar()
+			if cleanSpawn then g_vars.RNGBaby_Familiar:ClearEntityFlags(1<<2) end
+			g_vars.RNGBaby_Familiar:AddEntityFlags(1<<21)
+			RNGBaby_FamiliarSprite = g_vars.RNGBaby_Familiar:GetSprite()
+			RNGBaby_FamiliarSprite:Play(RNGBaby_FamiliarSprite:GetDefaultAnimationName(), true)
+			RNGBaby_saveOldFam = RNGBaby_FamiliarSprite:GetFilename()
+			RNGBaby_hasFamiliar  = true
+
+		end
+		if g_vars.RNGBaby_Familiar then
+			RNGBaby_oldfamPos = g_vars.RNGBaby_Familiar.Position
+		end
+		if not IsShooting(player) then
+			if RNGBaby_FamRevealCounter > 0 then
+				RNGBaby_FamRevealCounter = RNGBaby_FamRevealCounter - 1
+			end
+			if RNGBaby_FamRevealCounter <= 0 then
+				RNGBaby_default = false
+				RNGBaby_FamiliarSprite:Load("gfx/003.000_01_RngBaby.anm2", true)
+				RNGBaby_FamiliarSprite:Play("FloatDown", true)
+				RNGBaby_FamRevealCounter = math.random(25)+5
+				dbd = RNGBaby_FamRevealCounter
 --~ 				RNGBaby_FamiliarSprite:Reload()
---~ 				FamRevealCounter = math.random(10)+5
+				RNGBaby_FamiliarSprite:LoadGraphics()
+			end
+		end
+		if not RNGBaby_default and ((RNGBaby_saveOldFam and player.FrameCount%(math.random(25)+5) == 0) or IsShooting(player)) then
+--~ 			dbd = g_vars.RNGBaby_Familiar.Variant
+			RNGBaby_FamiliarSprite:Load(RNGBaby_saveOldFam, true)
+--~ 			if RNGBaby_FamiliarSprite:SetAnimation("FloatDown") then
+--~ 				RNGBaby_FamiliarSprite:Play("FloatDown", true)
+--~ 			elseif RNGBaby_FamiliarSprite:SetAnimation("Float") then
+--~ 				RNGBaby_FamiliarSprite:Play("Float", true)
+--~ 			else
+				RNGBaby_FamiliarSprite:Play(RNGBaby_FamiliarSprite:GetDefaultAnimationName(), true)
 --~ 			end
---~ 		end
---~ 		if not default and saveOldFam and player.FrameCount%(math.random(10)+5) == 0 then
---~ 			RNGBaby_FamiliarSprite:Load(saveOldFam, true)
---~ 			RNGBaby_FamiliarSprite:Play(RNGBaby_FamiliarSprite:GetDefaultAnimationName(), true)
 --~ 			RNGBaby_FamiliarSprite:Reload()
---~ 			default = true
+			RNGBaby_FamiliarSprite:LoadGraphics()
+			RNGBaby_default = true
+		end
+--~ 		if not g_vars.RNGBaby_Familiar:Exists() then
+--~ 			g_vars.RNGBaby_Familiar = Isaac.Spawn(3, RNGBaby_variant , 0, RNGBaby_oldfamPos, Vector(0, 0), player):ToFamiliar()
+--~ 			g_vars.RNGBaby_Familiar:ClearEntityFlags(1<<2)
 --~ 		end
---~ 	end
---~ end
---~ RNGBaby:AddCallback( ModCallbacks.MC_POST_UPDATE , RNGBaby.RNGBaby_ );
+	end
+end
+_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE , _Stillbirth.RNGBaby_ );
+--]]
 
 --[[
 Item : Electron
