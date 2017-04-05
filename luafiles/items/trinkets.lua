@@ -2,17 +2,8 @@
 Trinket : Chainmail pas de degat sur les curse rooms
 --Dogeek
 --]]
-
-function _Stillbirth:curseRoomUpdate(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
-  player = Isaac.GetPlayer(0)
-
-  if player:HasTrinket(Trinkets.chainmail_t) then
-        if dmg_flag == DamageFlag.DAMAGE_CURSED_DOOR then
-          return false
-        end
-  end
-end
-_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.curseRoomUpdate, EntityType.ENTITY_PLAYER)
+-- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
+--~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.curseRoomUpdate, EntityType.ENTITY_PLAYER)
 
 --[[
 Trinket : Krampus's Tooth
@@ -65,17 +56,8 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GreenCrossUpdat
 Trinket : Torn gloves
 -Slyhawks-
 --]]
-
-function _Stillbirth:tornGloves_take_damage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
-	player = Isaac.GetPlayer(0)
-	if (player:HasTrinket(Trinkets.torn_gloves_t)) then
-		if (dmg_flag == DamageFlag.DAMAGE_CHEST) then
-			return false
-		end
-	end
-end
-
-_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.tornGloves_take_damage, EntityType.ENTITY_PLAYER)
+-- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
+--~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.tornGloves_take_damage, EntityType.ENTITY_PLAYER)
 
 --[[
 Trinket : Rusty Crowbar : permet de bomber le chest
@@ -107,3 +89,26 @@ function _Stillbirth:rustyCrowbar_update()
 end
 
 _Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.rustyCrowbar_update);
+
+--[[
+Trinket : ?
+Random passive item every room
+--Dogeek
+]]--
+
+function _Stillbirth:questionMark_NewRoomUpdate()
+    local player = Isaac.GetPlayer(0)
+    if player:HasTrinket(Trinkets.question_mark_t) then
+        if g_vars.questionmark_item then
+            player:RemoveCollectible(g_vars.questionmark_item)
+        end
+        repeat g_vars.questionmark_item = ItemPools.PASSIVES[math.random(#ItemPools.PASSIVES)] until not player:HasCollectible(g_vars.questionmark_item)
+        player:AddCollectible(g_vars.questionmark_item, 0, false)
+    else
+        if g_vars.questionmark_item then
+            player:RemoveCollectible(g_vars.questionmark_item)
+            g_vars.questionmark_item = nil
+        end
+    end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.questionMark_NewRoomUpdate)

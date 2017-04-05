@@ -66,7 +66,7 @@
 	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
 	<passive cache="" id="564" description="You feel blessed" gfx="whitecandle.png" name="White Candle"/>
 	<active cache="" id="565" description="Debug Item" gfx="whitecandle.png" name="Debug" maxcharges="0"/>
-	<passive cache="" id="566"description="RNG Baby" gfx="rngbaby.png" name="RNG Baby"/>
+	<passive cache="" id="566"description="RNG baby" gfx="rngbaby.png" name="RNG Baby"/>
 	<passive cache="" id="567"description="Omnidirectional tears" gfx="solomon.png" name="Blobby"/>
 	<active cache="" id="568"description="Restock 24/7" gfx="portable_restock.png" name="Portable Restock" maxcharges="0"/>
 	
@@ -75,6 +75,6 @@
 	<trinket cache="" id="121" description="You've been a good child" gfx="krampus_tooth.png" name="Krampus's Tooth"/>
 	<trinket cache="" id="122" description="100% mithril" gfx="chainmail.png" name="Chainmail"/>
 	<trinket cache="" id="123" description="Strong touch" gfx="torn_gloves.png" name="Torn Gloves"/>
-	<trinket cache="" id="124" description="Force Doors" gfx="rusty_crowbar.png" name="Rusty Crowbar"/>
+	<trinket cache="" id="124" description="Force doors" gfx="rusty_crowbar.png" name="Rusty Crowbar"/>
 	<trinket cache="" id="125" description="'insert text here'" gfx="question_mark.png" name="?"/>
 </items>

@@ -39,4 +39,7 @@
 	<costume type="none" id="" anm2path="laser.anm2" priority="99"/>
 	<costume anm2path="costume_exbanana.anm2" hasSkinAlt="true" id="550" priority="200" type="none" />
 	<costume type="passive" id="564" anm2path="whitecandle.anm2" priority="99"/>
+	<costume type="none" id="Zodiac" anm2path="zodiac_transfo.anm2"/> 
+	<costume type="none" id="Zodiac" anm2path="zodiac_aura.anm2"/> 
+	<costume type="none" id="Zodiac" anm2path="zodiac_eyeshoot.anm2"/> 
 </costumes>

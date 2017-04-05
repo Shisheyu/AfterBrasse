@@ -2,16 +2,8 @@
 Trinket : Chainmail pas de degat sur les curse rooms
 --Dogeek
 --]]
-
---function _Stillbirth:curseRoomUpdate(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
---  player = Isaac.GetPlayer(0)
---  if player:HasTrinket(Trinkets.chainmail_t) then
---        if dmg_flag == DamageFlag.DAMAGE_CURSED_DOOR then
---          return false
---        end
---  end
---end
---_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.curseRoomUpdate, EntityType.ENTITY_PLAYER)
+-- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
+--~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.curseRoomUpdate, EntityType.ENTITY_PLAYER)
 
 --[[
 Trinket : Krampus's Tooth
@@ -64,17 +56,8 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.GreenCrossUpdat
 Trinket : Torn gloves
 -Slyhawks-
 --]]
-
---function _Stillbirth:torn_gloves_damage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
---	player = Isaac.GetPlayer(0)
---	if (player:HasTrinket(Trinkets.torn_gloves_t)) then
---		if (dmg_flag == DamageFlag.DAMAGE_CHEST) then
---			return false
---		end
---	end
---	return true
---end
---_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.torn_gloves_damage, EntityType.ENTITY_PLAYER)
+-- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
+--~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.tornGloves_take_damage, EntityType.ENTITY_PLAYER)
 
 --[[
 Trinket : Rusty Crowbar : permet de bomber le chest

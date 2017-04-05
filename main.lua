@@ -116,13 +116,14 @@ else
 						greenCross_t = Isaac.GetTrinketIdByName("Green Cross"),
 						kramp_tooth_t = Isaac.GetTrinketIdByName("Krampus's Tooth"),
 						torn_gloves_t = Isaac.GetTrinketIdByName("Torn Gloves"),
-						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar")
+						rustyCrowbar_t = Isaac.GetTrinketIdByName("Rusty Crowbar"),
+						question_mark_t = Isaac.GetTrinketIdByName("?")
 					}
 
 	Curses = {
 					blessing_light = 2^(Isaac.GetCurseIdByName("Blessing of the Light")-1),
-					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1), 
-					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1), 
+					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1),
+					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1),
 					blessing_acceptance = 2^(Isaac.GetCurseIdByName("Blessing of the Acceptance")-1),
 					blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealth")-1),
 					blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
@@ -136,7 +137,7 @@ else
 	function initial_data_init()
 	local g_vars = [[
 		local g_vars =	{ 	-- Here goes the global variables( that will be saved )
-								-- prefix variables with "PERMANENT_" to keep thos variables out of the 'newgame vars reset' (for challenge or anything you want to be permanently saved)
+								-- prefix variables with "PERMANENT_" to keep thos variables saved and not reset (for challenge or anything you want to be permanently saved)
 								PERMANENT_test01 = nil,
 								PERMANENT_test02 = nil,
 								PERMANENT_test03 = nil,
@@ -218,7 +219,8 @@ else
 								box_friends_used = false,
 								Kikazaru_oldFrame = 0,
 								dionea_max_tears_per_rooms = 3,
-								dionea_tearsRoomCount = 0
+								dionea_tearsRoomCount = 0,
+								questionmark_item = nil
 							}
 		return g_vars
 	]]
@@ -229,16 +231,17 @@ else
 	require("luafiles/save_load")
 	local s = _load_() -- Load
 	Isaac.DebugString(">>> Save Normal Size:" .. tostring(table._getn(g_vars)) .. " || Current Size:" .. tostring(table._getn(s)))
-	-- If save found and correct size then restore it else reset
-	if s and table._getn(g_vars) == table._getn(s) then g_vars = s; Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> Save reset: size = " .. tostring(table._getn(g_vars))) end
+	-- If save found and correct size then restore it else error
+	if s and table._getn(g_vars) == table._getn(s) then g_vars = s; Isaac.DebugString(">>> Save restored") else Isaac.DebugString(">>> [stillbirthErrorLog] Save size error: size = " .. tostring(table._getn(g_vars))) end
 
 	require("luafiles/libs/luabit/bit")
 	require("luafiles/init")
-	--require("luafiles/debugtext")
+--~ 	require("luafiles/debugtext")
 
 	require("luafiles/items/collectibles")
 	require("luafiles/items/familiars")
 	require("luafiles/items/trinkets")
+	require("luafiles/items/mc_entity_take_dmg")
 	require("luafiles/mechanics/mechanics")
 	require("luafiles/floors/tomb")
 end
