@@ -40,7 +40,7 @@
 	<active id="537" description="WORK IN PROGRESS -- Situs inversus" gfx="hearthtransplant.png" name="Heart Transplant" maxcharges="6"/>
 	<passive cache="damage" id="538" description="Jalapeñoooos" gfx="hotpizzaslice.png" name="Hot Pizza Slice"/>
 	<passive cache="" id="539" description="WORK IN PROGRESS -- Nuke'em all" gfx="ionizingradiation.png" name="Ionizing Radiation"/>
-	<passive cache="" id="540" description="WORK IN PROGRESS -- Speak no evil" gfx="iwazaru.png" name="Iwazaru"/>
+	<passive cache="" id="540" description="Speak no evil" gfx="iwazaru.png" name="Iwazaru"/>
 	<passive cache="" id="541" description="Hear no evil" gfx="kikazaru.png" name="Kikazaru"/>
 	<familiar cache="" id="542" description="WORK IN PROGRESS -- Who knows yours?" gfx="fam_legacy.png" name="Legacy"/>
 	<passive cache="" id="543" description="WORK IN PROGRESS -- Déjà-vu" gfx="lemniscate.png" name="Lemniscate"/>

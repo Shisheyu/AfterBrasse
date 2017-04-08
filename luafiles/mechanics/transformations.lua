@@ -1,3 +1,15 @@
+local bandals_transfals = {
+						ZODIAC = Sprite(),
+						MAX = Sprite(),
+						LASER = Sprite(),
+						BUBBLES = Sprite()
+						}
+
+bandals_transfals.ZODIAC:Load("gfx/ui/tansformations/ui_transformation_zodiac.anm2", true)
+bandals_transfals.MAX:Load("gfx/ui/tansformations/ui_transformation_max.anm2", true)
+bandals_transfals.LASER:Load("gfx/ui/tansformations/ui_transformation_laser.anm2", true)
+bandals_transfals.BUBBLES:Load("gfx/ui/tansformations/ui_transformation_bubbles.anm2", true)
+
 --[[
 Item : transfo cricket
 Type : transfo
@@ -27,6 +39,7 @@ function _Stillbirth:transcricket_hasTransformUpdate()
         if not g_vars.transcricket_hasCostume then
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/cricket.anm2"))
         	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
+        	bandals_transfals.MAX:Play("Text", true)
         	g_vars.transcricket_hasCostume = true
         end
 		player:AddCacheFlags(CacheFlag.CACHE_FLYING)
@@ -115,6 +128,7 @@ function _Stillbirth:LaserUpdate()
         if not g_vars.translaser_hasCostume then
         	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/laser.anm2"))
+        	bandals_transfals.LASER:Play("Text", true)
         	g_vars.translaser_hasCostume = true
         end
         if IsShooting(player) then
@@ -192,7 +206,8 @@ function _Stillbirth:BubblesBehavior()
       -- Transform if available
       	if not g_vars.bubblesCostume then
       		g_vars.bubblesCostume = true
-      		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
+      		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
+      		bandals_transfals.BUBBLES:Play("Text", true)
       		player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
       	end
 		player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
@@ -317,6 +332,7 @@ function _Stillbirth:ZodiacTransfoUpdate()
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_transfo.anm2"))
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_aura.anm2"))
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_eyeshoot.anm2"))
+			bandals_transfals.ZODIAC:Play("Text", true)
 			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
 			g_vars.zodiacTransformed = true
 		end

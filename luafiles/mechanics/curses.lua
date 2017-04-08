@@ -161,27 +161,37 @@ local pressed = false --the switch for rendering\not rendering the sprite
 local halftick = false --trigger the update function only half the times you render
 local spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,280)) --position to render at
 local empty_vector = Vector(0,0)
+local resumeAnimationBlessing = true
 
 function handleTabAndFramerateForBlessings(sprite)
     local player = Isaac.GetPlayer(0)
     local nb = Game():GetFrameCount()-g_vars.newLevelFrameCount
-    local delay = 60 --1sec
+    local delay = 30 --frames
     local onScreenTime = 120 --2sec
     local condition_frames = (nb >= delay  and nb <= delay+onScreenTime)
     if condition_frames then
-	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,64))
+	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,196))
 	    sprite:Play("Text", true)
 	end
 	if Input.IsActionTriggered(ButtonAction.ACTION_MAP, player.ControllerIndex) then
-	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,64))
+	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,196))
 	    pressed = not pressed
 		if pressed then
 			sprite:Play("Text",true)
+			resumeAnimationBlessing = true
 		end
 	elseif pressed and not Input.IsActionPressed(ButtonAction.ACTION_MAP, player.ControllerIndex) then 
-	    pressed = not pressed 
+	    pressed = not pressed
+	    resumeAnimationBlessing = true
 	end
-	if (pressed or condition_frames) then
+	if sprite:GetFrame() == 35 and pressed then resumeAnimationBlessing = false end
+	if pressed then
+		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
+		if halftick and resumeAnimationBlessing then
+			sprite:Update() --render and update the sprite at the given position
+		end
+	end
+	if condition_frames then
 		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
 		if halftick then
 			sprite:Update() --render and update the sprite at the given position
@@ -208,34 +218,6 @@ function _Stillbirth:displayBlessing()
 	--RenderText(currentBlessing, pressed, spriteBlessing:GetFilename(), spriteBlessing:IsLoaded())
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.displayBlessing)
-
---[[
-local sp = Sprite() --create a sprite
-sp:Load("gfx/ui/blessings/blessing_of_enlightment.anm2",true) --load the anim file and the animation to play
-local sp_position = Isaac.WorldToRenderPosition(Vector(320,280)) --position to render at
-local empty_vector = Vector(0,0)
-local pressed = false --the switch for rendering\not rendering the sprite
-local halftick = false --trigger the update function only half the times you render
-
-function _Stillbirth:onRender()
-	local player = Isaac.GetPlayer(0)
-	if Input.IsButtonTriggered(Keyboard.KEY_TAB, player.ControllerIndex) then
-		pressed = not pressed
-		if pressed then
-			sp:Play("Text",true)
-		end
-		--switch between rendering and not rendering when T is pressed on the keyboard
-	end
-	if pressed then
-		sp:Render(sp_position,empty_vector,empty_vector)
-		if halftick then
-			sp:Update() --render and update the sprite at the given position
-		end
-	end
-	halftick = not halftick
-end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.onRender)]]--
---monkey items curse negation
 
 function _Stillbirth:MonkeyCurseUpdate(curse)
 	local player = Isaac.GetPlayer(0)

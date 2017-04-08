@@ -556,6 +556,14 @@ local chora_bspeed = 0
 local chora_btears = 1
 local chora_lastShape = 0
 
+function _Stillbirth:ChoranaptyxicNewRoom()
+	if g_vars.chora_hasCostume then
+		player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicblue.anm2"))
+		player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicred.anm2"))
+		g_vars.chora_hasCostume = false
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.ChoranaptyxicNewRoom)
 
 function _Stillbirth:ChoranaptyxicCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)

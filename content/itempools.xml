@@ -20,7 +20,7 @@
 		<!--<Item Name="Hazmat Suit" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Heart Transplant" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Kikazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Magic Mirror" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Medusa's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -29,6 +29,7 @@
 		<Item Name="Spidershot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Sun Wukong" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Technology 0" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Blobby" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="shop">
 		<Item Name="<3+<3=<3<3" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -36,6 +37,7 @@
 		<Item Name="Money = Luck" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="White Candle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Portable Restock" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="boss">
 		<Item Name="Appetizer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -83,10 +85,10 @@
 		<!---->
 	</Pool>
 	<Pool Name="beggar">
-		<!---->
+		<Item Name="Portable Restock" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="demonBeggar">
-		<!---->
+		<Item Name="Blind Pact" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="curse">
 		<!---->
@@ -121,7 +123,7 @@
 		<!--<Item Name="Hazmat Suit" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Heart Transplant" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<!--<Item Name="Ionizing Radiation" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<!--<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
+		<Item Name="Iwazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Kikazaru" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Magic Mirror" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Medusa's Head" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -130,6 +132,7 @@
 		<Item Name="Spidershot" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Sun Wukong" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Technology 0" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Blobby" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="greedBoss">
 		<Item Name="Appetizer" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
@@ -149,6 +152,7 @@
 		<Item Name="Money = Luck" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Spyglass" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 		<Item Name="White Candle" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<Item Name="Portable Restock" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 	</Pool>
 	<Pool Name="greedCurse">
 		<!---->
@@ -165,7 +169,7 @@
 		<Item Name="Cricket's Paw" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<Item Name="Cricket's Tail" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
 		<!--<Item Name="Cricket's Toys" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
-		<Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/>
+		<!--Item Name="Dad's Whip" DecreaseBy="1" RemoveOn="0.1" Weight="1"/-->
 		<!--<Item Name="God Sale" DecreaseBy="1" RemoveOn="0.1" Weight="1"/> WIP-->
 	</Pool>
 	<Pool Name="greedLibrary">
