@@ -1,0 +1,78 @@
+<items version="1" gfxroot="gfx/items/">
+   <!-- REF FOR ITEMS.XML
+   Possible Cacheflags:	all damage familiars firedelay flying luck range tearcolor tearflag shotspeed speed weapon
+
+   Possibilités d'ajout:	special="true false" hearts="n"(heal) maxhearts="n"(maxhp) devilprice="n" bombs="n" coins="n" keys="n" blackhearts="n" (half by half) soulhearts="" (half by half) cooldown="" id=""
+
+	v-items template-v
+
+	<active cache="" id="" maxcharges="1" description="Desc" gfx="sprite.png" name="Name"/>
+	<passive cache="" id="" description="Desc" gfx="sprite.png" name="Name"/>
+	<familiar cache="" id="" description="Desc" gfx="sprite.png" name="Name"/>
+	<trinket cache="" id="" description="Desc" gfx="sprite.png" name="Name"/> 
+   -->
+	<passive cache="" id="511" description="Soul extension" gfx="3+3=33.png" name="<3+<3=<3<3"/>
+	<active cache="" id="512" description="Temporary double shot" gfx="3Dglasses.png" name="3D Glasses" maxcharges="3"/>
+	<passive cache="firedelay" id="513" description="It's salty" gfx="appetizer.png" name="Appetizer"/>
+	<active id="514" description="WORK IN PROGRESS -- Protein shake" gfx="babyblender.png" name="Baby Blender" maxcharges="0"/>
+	<active id="515" description="ctrl + shift + del" gfx="blanktissues.png" name="Blank Tissues" maxcharges="2"/>
+	<passive cache="" id="516" description="Now it's too late" devilprice="2" gfx="blindpact.png" name="Blind Pact"/>
+	<passive cache="" id="517" description="WORK IN PROGRESS -- Anorexia nervosa best friend" gfx="bobsbitrex.png" name="Bob's Bitrex"/>
+	<passive cache="speed" id="518" description="It sticks" gfx="braveshoes.png" name="Brave Shoe"/>
+	<passive cache="" id="519" description="Stopping power" gfx="bubbleshead.png" name="Bubble's Head"/>
+	<passive cache="damage" id="520" description="Frantic tears" gfx="cataract.png" name="Cataract"/>
+	<passive cache="damage range speed" id="521" description="Size does matter!" gfx="choranaptyxic.png" name="Choranaptyxic"/>
+	<passive cache="" id="522" description="WORK IN PROGRESS -- Only threes" gfx="cricketscollar.png" name="Cricket's Collar"/>
+	<active id="523" description="Power generator" gfx="cricketspaw.png" name="Cricket's Paw"/>
+	<passive cache="" id="524" description="Belief?" gfx="cricketstail.png" name="Cricket's Tail"/>
+	<active id="525" description="WORK IN PROGRESS -- Reusable entertainment" gfx="cricketstoy.png" name="Cricket's Toy" maxcharges="1"/>
+	<active id="526" description="Mass confusion" gfx="dadsbeer.png" name="Dad's Beer" maxcharges="3"/>
+	<passive cache="" id="527" description="WORK IN PROGRESS -- Lash lash lash" gfx="dadswhip.png" name="Dad's Whip"/>
+	<passive cache="" id="528" description="WORK IN PROGRESS -- Devil's price" gfx="devilsale.png" name="Devil Sale"/>
+	<active id="529" description="WORK IN PROGRESS -- Only one good side" gfx="diamondickycard.png" name="Diamond Icky Card" maxcharges="6"/>
+	<familiar cache="" id="530" description="Nom nom nom" gfx="fam_dionaeamuscipula.png" name="Dionaea Muscipula"/>
+	<active id="531" description="alpha Omega" gfx="encyclopedia.png" name="Encyclopedia" maxcharges="4"/>
+	<active id="532" description="Fruity claymores" gfx="explosivebanana.png" name="Explosive Banana" maxcharges="2"/>
+	<passive cache="" id="533" description="Teenager in love" gfx="firstblood.png" name="First Blood"/>
+	<passive cache="" id="534" description="WORK IN PROGRESS -- Heaven as a price" gfx="godsale.png" name="God Sale"/>
+	<active id="535" description="Quick trade" gfx="goldenidol.png" name="Golden Idol" maxcharges="6"/>
+	<passive cache="" id="536" description="WORK IN PROGRESS -- Post apocalyptic fashion" gfx="hazmatsuit.png" name="Hazmat Suit"/>
+	<active id="537" description="WORK IN PROGRESS -- Situs inversus" gfx="hearthtransplant.png" name="Heart Transplant" maxcharges="6"/>
+	<passive cache="damage" id="538" description="Jalapeñoooos" gfx="hotpizzaslice.png" name="Hot Pizza Slice"/>
+	<passive cache="" id="539" description="WORK IN PROGRESS -- Nuke'em all" gfx="ionizingradiation.png" name="Ionizing Radiation"/>
+	<passive cache="" id="540" description="WORK IN PROGRESS -- Speak no evil" gfx="iwazaru.png" name="Iwazaru"/>
+	<passive cache="" id="541" description="Hear no evil" gfx="kikazaru.png" name="Kikazaru"/>
+	<familiar cache="" id="542" description="WORK IN PROGRESS -- Who knows yours?" gfx="fam_legacy.png" name="Legacy"/>
+	<passive cache="" id="543" description="WORK IN PROGRESS -- Déjà-vu" gfx="lemniscate.png" name="Lemniscate"/>
+	<active id="544" description="Blue, clear & beautiful" gfx="magicmirror.png" name="Magic Mirror" maxcharges="2"/>
+	<active id="545" description="You look stonning" gfx="medusashead.png" name="Medusa's Head" maxcharges="6"/>
+	<passive cache="" id="546" description="See no evil" gfx="mizaru.png" name="Mizaru"/>
+	<passive cache="range" id="547" description="Is it a lie?" gfx="momscake.png" name="Mom's Cake"/>
+	<passive cache="" id="548" description="$$$ = LCK" gfx="money=lck.png" name="Money = Luck"/>
+	<passive cache="" id="549" description="It's morphin' time" gfx="oddit.png" name="Ottid"/>
+	<passive cache="all" id="550" description="Yuck!" gfx="offal.png" name="Offal"/>
+	<passive cache="shotspeed firedelay" id="551" description="It's dangerous to go alone" gfx="pepperspray.png" name="Pepper Spray"/>
+	<passive cache="speed luck" id="552" description="Who's lucky now?" gfx="rabbitsfoot.png" name="Rabbit's Foot"/>
+	<passive cache="firedelay" id="553" description="Confiscated..." gfx="rattle.png" name="Rattle"/>
+	<familiar cache="" id="554" description="WORK IN PROGRESS -- He can't choose your family" gfx="fam_rngbaby.png" name="RNG Baby"/>
+	<passive cache="all" id="555" description="Command demons" devilprice="2" gfx="solomon.png" name="Solomon"/>
+	<passive cache="" id="556" description="It comes with great responsibility" gfx="spidershot.png" name="Spidershot"/>
+	<passive cache="damage speed range" id="557" description="I yam what I yam" gfx="spinach.png" name="Spinach"/>
+	<passive cache="" id="558" description="WORK IN PROGRESS -- Land ahoy!" gfx="spyglass.png" name="Spyglass"/>
+	<familiar cache="" id="559" description="King of monkeys" gfx="fam_sunwukong.png" name="Sun Wukong"/>
+	<passive cache="" id="560" description="One reverse per booster" gfx="tarrotbooster.png" name="Tarot Booster"/>
+	<passive cache="" id="561" description="Wave theory" gfx="techzero.png" name="Technology 0"/>
+	<passive cache="speed" id="562" description="WORK IN PROGRESS -- Blasting flavours" gfx="toxicmushroom.png" name="Toxic Mushroom"/>
+	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
+	<passive cache="" id="564" description="You feel blessed" gfx="whitecandle.png" name="White Candle"/>
+	<passive cache="" id="565"description="Omnidirectional tears" gfx="blobby.png" name="Blobby"/>
+	<active cache="" id="566"description="Restock 24/7" gfx="portable_restock.png" name="Portable Restock" maxcharges="0"/>
+	
+	<!--familiar cache="" id="insert ID" description="A random particle appears..." gfx="electron.png" name="Electron"/-->
+	<trinket cache="" id="120" description="Challenge down" gfx="green_cross.png" name="Green Cross"/>
+	<trinket cache="" id="121" description="You've been a good child" gfx="krampus_tooth.png" name="Krampus's Tooth"/>
+	<trinket cache="" id="122" description="100% mithril" gfx="chainmail.png" name="Chainmail"/>
+	<trinket cache="" id="123" description="Strong touch" gfx="torn_gloves.png" name="Torn Gloves"/>
+	<trinket cache="" id="124" description="Force doors" gfx="rusty_crowbar.png" name="Rusty Crowbar"/>
+	<trinket cache="" id="125" description="'insert text here'" gfx="question_mark.png" name="?"/>
+</items>

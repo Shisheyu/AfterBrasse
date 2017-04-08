@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>Stillbirth</name>
+    <directory>0stillbirth</directory>
+    <id>864472370</id>
+    <description>
+        The Binding of Isaac : Stillbirth will be a mod/expansion containing new items, trinkets, pickups, floors, enemies, bosses, characters, challenges and an original soundtrack.
+
+        Stillbirth is a Community mod developed by Shisheyu's Twitch community.
+
+        Current Version : 1.2
+
+        28 Passive Items :
+
+        * Money = Luck
+        * Brave Shoe
+        * Technology 0
+        * Hot Pizza Slice
+        * Blobby
+        * Blind Pact
+        * Solomon
+        * Cataract
+        * Bubble's Head
+        * First Blood
+        * Choranaptyxic
+        * Ottid
+        * 9 brand new boss items
+        * Spidershot
+        * Cricket's Tail
+        * Soul Extension
+        * White Candle
+        * Kikazaru
+        * Mizaru
+        * Iwazaru
+
+
+        10 Active Items : 
+
+        * Dad's Beer
+        * Golden Idol
+        * Medusa's Head
+        * Portable Restock
+        * Cricket's Paw
+        * Blank Tissue
+        * Magic Mirror
+        * Encyclopedia
+        * Explosive Banana
+        * 3D Glasses
+
+        6 Trinkets :
+
+        * Chainmail
+        * Krampus' Tooth
+        * Green Cross
+        * Torn Gloves
+        * Rusty Crowbar
+        * ?
+
+        3 Familiars :
+        * Sun WuKong
+        * Bomb Bum
+        * Dionea Muscipula
+
+        And also 6 new curses, 5 new pills, and 4 new transformations to discover ! Furthermore, items are now in their respective item pools, you don't need to spawn them to test them anymore !
+
+        Be sure to check out @TBOI_Stillbirth on twitter for regular leaks, and updates about the mod !
+</description>
+    <version>1.2</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Items"/>
+    <tag id="Active Items"/>
+    <tag id="Trinkets"/>
+    <tag id="Pills"/>
+    <!--tag id="Cards"/-->
+    <tag id="Pickups"/>
+    <!--tag id="Player Characters"/-->
+    <tag id="Familiars"/>
+    <!--tag id="Babies"/-->
+    <!--tag id="Rooms"/-->
+    <!--tag id="Floors"/-->
+    <!--tag id="Enemies"/-->
+    <!--tag id="Bosses"/-->
+    <!--tag id="Hazards"/-->
+    <!--tag id="Challenges"/-->
+    <tag id="Tweaks"/>
+    <!--tag id="Removals"/-->
+    <tag id="Graphics"/>
+    <!--tag id="Shaders"/-->
+    <tag id="Sound Effects"/>
+    <tag id="Music"/>
+</metadata>
