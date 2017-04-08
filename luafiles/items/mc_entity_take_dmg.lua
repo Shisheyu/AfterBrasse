@@ -54,40 +54,6 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 					return false
 				end
 			end
-		else -- other_mc_entity_take_dmg
-			db_z = "other_mc_entity_take_dmg"
-
-			--[[
-				-Krayz
-				Leaf Tear Effect for bubble's head and sunwukong
-			--]]
-			if entity:IsVulnerableEnemy() then -- for effects applying on vulnerable enemies
-				if dmg_src.Type == 2 and dmg_src.Variant == CustomEntities.TearLeaf_Variant then
-					if entity:IsBoss() then --boss differenciation
-						tearLeaf_t = Isaac.GetFrameCount()
-						tearLeaf_boss = entity
-						entity:AddEntityFlags( 1 << 7 ) -- Slow flag
-						entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 180, 50, false, false ) -- StopWatch like color
-					else
-						entity:AddEntityFlags( 1 << 7 ) -- Slow flag
-						entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
-					end
-				end
-			end
-
-			--[[
-				Spidershot tear effect
-				Azqswx
-			--]]
-			if player:HasCollectible(Items.spidershot_i) then
-				if dmg_src.Type == EntityType.ENTITY_TEAR and dmg_src.Variant == 27 then
-					local room = Game():GetRoom()
-					local posE = entity.Position;
-					index = room:GetGridIndex(posE);
-					room:SpawnGridEntity(index,10,0,0,0)
-					-- entity:AddEntityFlags(1<<7) -- <-- why permaSlow on the damaged enemy?
-				end
-			end
 			--[[Zodiac Transform
 			Dogeek & Nagachi
 			]]--
@@ -122,6 +88,40 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 			if player:GetNumBlueSpiders() and player:GetNumBlueSpiders() <= MaxSpiderSpawned then
 				if g_vars.transcricket_hasTransfo and entity:IsVulnerableEnemy() and dmg_src.Type == 2 then
 					player:AddBlueSpider(player.Position)
+				end
+			end
+		else -- other_mc_entity_take_dmg
+			db_z = "other_mc_entity_take_dmg"
+
+			--[[
+				-Krayz
+				Leaf Tear Effect for bubble's head and sunwukong
+			--]]
+			if entity:IsVulnerableEnemy() then -- for effects applying on vulnerable enemies
+				if dmg_src.Type == 2 and dmg_src.Variant == CustomEntities.TearLeaf_Variant then
+					if entity:IsBoss() then --boss differenciation
+						tearLeaf_t = Isaac.GetFrameCount()
+						tearLeaf_boss = entity
+						entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+						entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 180, 50, false, false ) -- StopWatch like color
+					else
+						entity:AddEntityFlags( 1 << 7 ) -- Slow flag
+						entity:SetColor( Color( 0.8, 0.8, 0.8, 0.85, 120, 120, 120 ), 9999, 50, false, false ) -- StopWatch like color
+					end
+				end
+			end
+
+			--[[
+				Spidershot tear effect
+				Azqswx
+			--]]
+			if player:HasCollectible(Items.spidershot_i) then
+				if dmg_src.Type == EntityType.ENTITY_TEAR and dmg_src.Variant == 27 then
+					local room = Game():GetRoom()
+					local posE = entity.Position;
+					index = room:GetGridIndex(posE);
+					room:SpawnGridEntity(index,10,0,0,0)
+					-- entity:AddEntityFlags(1<<7) -- <-- why permaSlow on the damaged enemy?
 				end
 			end
 		end
