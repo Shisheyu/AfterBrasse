@@ -320,7 +320,7 @@ function DamageToSet(player, damageup, damage_multiplier)
 	end
 	local mabite = base_damage*math.sqrt(GetNumberOfDmgUps(player)*1.2+1)
 	flat_dmg = player.Damage - mabite
-	return base_damage*damage_multiplier*math.sqrt((GetNumberOfDmgUps(player)+damageup)*1.2+1)+flat_dmg
+	return (base_damage*damage_multiplier*math.sqrt((GetNumberOfDmgUps(player)+damageup)*1.2+1))+flat_dmg
 end
 
 function GetClosestTear(entities, player, TType, TVariant)
