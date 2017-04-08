@@ -39,7 +39,7 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 			--]]
 			if player:HasCollectible(Items.iwazaru_i) and not g_vars.iwazaru_fired then
 				g_vars.iwazaru_fired = true
-				local angle = player:GetAimDirection():GetAngleDegrees()
+				local angle = player:GetRecentMovementVector():GetAngleDegrees()
 				local shoop = EntityLaser.ShootAngle(3,player.Position,angle,30,Vector(0,-20),player)
 				shoop.CollisionDamage = 2 -- TODO : Adjust value?
 			end
