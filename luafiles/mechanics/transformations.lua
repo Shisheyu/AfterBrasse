@@ -49,24 +49,6 @@ end
 
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.transcricket_hasTransformUpdate)
 
-function _Stillbirth:transcricket_hasTransformDamage(entity, dmg_amount, dmg_flag, dmg_src, dmg_countdown)
-	local player = Isaac.GetPlayer(0)
-	local MaxSpiderSpawned = 40
-        local roomType = Game():GetRoom():GetType()
-	if g_vars.transcricket_hasTransfo then
-		if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) or dmg_flag == DamageFlag.DAMAGE_POOP or dmg_flag == DamageFlag.DAMAGE_ACID then
-			return false
-		end
-	end
-	if player:GetNumBlueSpiders() and player:GetNumBlueSpiders() <= MaxSpiderSpawned then
-		if g_vars.transcricket_hasTransfo and entity:IsVulnerableEnemy() and dmg_src.Type == 2 then
-			player:AddBlueSpider(player.Position)
-		end
-	end
-	return true
-end
-_Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.transcricket_hasTransformDamage);
-
 function _Stillbirth:transcricket_hasTransformCache(player, cacheFlag)
     local player = Isaac.GetPlayer(0)
     if g_vars.transcricket_hasTransfo then

@@ -1122,7 +1122,6 @@ function _Stillbirth:use_3D_glasses()
 end
 
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.use_3D_glasses, Items.D_glasses_i);
-
 --[[
 Spidershot
 Azqswx
@@ -1150,7 +1149,6 @@ function _Stillbirth:SpidershotUpdateTears()
     end
   end
 end
-
 
 -- NOTE(krayz): ModCallbacks.MC_ENTITY_TAKE_DMG moved in "mc_entity_take_dmg.lua" file
 --~ _Stillbirth:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, _Stillbirth.SpidershotEffectOnMob)

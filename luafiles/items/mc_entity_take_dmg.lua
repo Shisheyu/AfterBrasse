@@ -111,7 +111,19 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 					gemini_unleashed_has_spawned = true
 				end
 			end
-			--[[Next Callback here]]--
+			--[[Cricket Transform]]--
+			local MaxSpiderSpawned = 40
+			local roomType = Game():GetRoom():GetType()
+			if g_vars.transcricket_hasTransfo then
+				if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) or dmg_flag == DamageFlag.DAMAGE_POOP or dmg_flag == DamageFlag.DAMAGE_ACID then
+					return false
+				end
+			end
+			if player:GetNumBlueSpiders() and player:GetNumBlueSpiders() <= MaxSpiderSpawned then
+				if g_vars.transcricket_hasTransfo and entity:IsVulnerableEnemy() and dmg_src.Type == 2 then
+					player:AddBlueSpider(player.Position)
+				end
+			end
 		end
 	end
 	return true
