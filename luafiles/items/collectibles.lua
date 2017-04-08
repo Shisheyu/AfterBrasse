@@ -1247,7 +1247,7 @@ Soul Extention
 --Dogeek
 ]]--
 
-function DoubleHeartLogic(heart)
+function DoubleHeartLogic(heart, sprite)
 	local player = Isaac.GetPlayer(0)
 	local fullhealth = playerHasFullHealth()
 	local max_red_soul = fullhealth[1]
@@ -1260,30 +1260,33 @@ function DoubleHeartLogic(heart)
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
 				player:AddSoulHearts(2)
+				sprite:Play("Collect", true)
 				heart:Remove()
 			else
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.1)
+				heart:AddVelocity(player.Velocity*1.05)
 			end
 		elseif heart.SubType == HeartSubType.HEART_SOUL then
 			if not max_red_soul then
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
 				player:AddSoulHearts(4)
+				sprite:Play("Collect", true)
 				heart:Remove()
 			else
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.1)
+				heart:AddVelocity(player.Velocity*1.05)
 			end
 		elseif heart.SubType == HeartSubType.HEART_BLACK then
-			if (not max_black or not max_red_soul) and (not max_black and not max_red_soul) then --Exclusive OR coded with my ooha
+			if player:CanPickBlackHearts() then
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
 				player:AddBlackHearts(4)
+				sprite:Play("Collect", true)
 				heart:Remove()
 			else
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.1)
+				heart:AddVelocity(player.Velocity*1.05)
 			end
 		end
 	end
@@ -1300,18 +1303,19 @@ function _Stillbirth:SoulExtensionUpdate()
 				local heart_sprite = heart:GetSprite()
 				if heart.SubType == HeartSubType.HEART_HALF_SOUL then
 					heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
-					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
-					heart_sprite:Play("Idle", true)
 				elseif heart.SubType == HeartSubType.HEART_SOUL then
 					heart_sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)
-					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
-					heart_sprite:Play("Idle", true)
 				elseif heart.SubType == HeartSubType.HEART_BLACK then
 					heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
-					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
+				end
+				heart_sprite:Render(heart.Position, empty_vector, empty_vector)
+				if heart.FrameCount == 1 then
+					heart_sprite:Play("Appear", true)
+				elseif heart.FrameCount > 1 and not heart_sprite:IsPlaying("Appear") then
 					heart_sprite:Play("Idle", true)
 				end
-				DoubleHeartLogic(heart)
+				DoubleHeartLogic(heart, heart_sprite)
+				heart_sprite:Update()
 			end
 		end
 	end
