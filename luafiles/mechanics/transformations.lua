@@ -394,7 +394,7 @@ function _Stillbirth:ZodiacTransfoUpdate()
 				invincibilityFrameCounter = invincibilityFrameCounter + 1
 			end
 			if invincibilityFrameCounter > 0 and not taurusEffectGiven then
-				player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_MY_LITTLE_UNICORN, true)
+				player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_MY_LITTLE_UNICORN, false)
 				taurusEffectGiven = true
 			end
 			if invincibilityFrameCounter >= 150 or isRoomOver(room) then
