@@ -292,7 +292,7 @@ end
 	local player = Isaac.GetPlayer(0);
 	local Nbr = 10;
 	for i = 1, #entities do
-		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true and g_vars.dionea_tearsRoomCount<=g_vars.dionea_max_tears_per_rooms then
+		if entities[i].Type == EntityType.ENTITY_PROJECTILE and g_vars.dionea_L1exists == true then
 			local distance = ((g_vars.dionea_L1.Position.X-entities[i].Position.X)^2+(g_vars.dionea_L1.Position.Y-entities[i].Position.Y)^2)^(1/2);
 			if distance <= 35 then
 				if g_vars.dionea_tearsRoomCount<=g_vars.dionea_max_tears_per_rooms then

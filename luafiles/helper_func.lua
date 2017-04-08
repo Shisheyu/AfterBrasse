@@ -17,11 +17,11 @@ function IsShooting(player) -- return if player is shooting(true) or not(false)
 	end
 end
 
----function IsFullBlackHearts(player)  -- Usefull use of GetBlackHeart()
---	return (function(n) local s = player:GetSoulHearts() for i=0, 12 do if (1<<i)-1 == n then return ((i*2)==s and true) or false --end end return false end)( player:GetBlackHearts() )
---end
+function IsFullBlackHearts(player)  -- Usefull use of GetBlackHeart()
+	return (function(n) local s = player:GetSoulHearts() for i=0, 12 do if (1<<i)-1 == n then return ((i*2)==s and true) or false end end return false end)( player:GetBlackHearts() )
+end
 
-function IsFullBlackHeart(player)
+function IsFullBlackHearts2(player)
 	black = player:GetBlackHearts()
 	soul = player:GetSoulHearts()
 	return black == 2^soul
@@ -205,7 +205,7 @@ function playerHasFullHealth()
 	local soul = player:GetSoulHearts()
 	local red = player:GetMaxHearts()
 	if red+soul < max_hearts then bitmask[1] = false else bitmask[1] = true end
-	if IsFullBlackHearts(player) then bitmask[2] = true else bitmask[2] = false end
+	if IsFullBlackHearts2(player) then bitmask[2] = true else bitmask[2] = false end
 	if player:GetHearts()<red then bitmask[3] = false else bitmask[3] = true end
 	return bitmask
 end

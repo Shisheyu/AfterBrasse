@@ -232,12 +232,12 @@ function _Stillbirth:medusaHead_use()
 			local distance = getDistance(player.Position, e.Position)      --get distance between NPC and Isaac
 			if distance < range  then
 				if not e:IsBoss() then                             --if NPC is a boss, then freeze for 5 seconds else, freeze indefinitely
-                    if isColinear(e.Position-player.Position, player:GetAimDirection(), 0.5) then
+                    if isColinear(e.Position-player.Position, player:GetRecentMovementVector(), 0.5) then
                         e:AddEntityFlags(1<<5)                           -- "1<<5" = Flag for freezing entity
                         e:SetColor(Color(0.25,0.25,0.25,1,39,39,39),1000000,99,false,true)        --Change color
                     end
                 else
-                    if isColinear(player.Position-e.Position, player:GetAimDirection(), 0.5) then
+                    if isColinear(player.Position-e.Position, player:GetRecentMovementVector(), 0.5) then
                         e:AddFreeze(EntityRef(player), 150)                   --Add Freeze(5sec)
                         e:SetColor(Color(0.25,0.25,0.25,1,39,39,39),150,99,false,true)        --Change color
                     end
@@ -1246,90 +1246,80 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpd
 --[[
 <3+<3 = <3<3
 Soul Extention
-Azqswx -- Dogeek
+--Dogeek
 ]]--
 
-function _Stillbirth:HeartPlusHeartUpdate()
-
-	local player = Isaac.GetPlayer(0);
-	local bHeart = player:GetSoulHearts();
-	local Heart = player:GetMaxHearts();
-
-	if player:HasCollectible(Items.double_heart_i) then
-		local coeur = Isaac.GetRoomEntities();
-		local vec = player.Position;
-		local fullhealth = playerHasFullHealth()
-		for i = 1, #coeur do 					-- VERIFIER SI ORDRE DES COEURS CHANGE : Ordre change :'(
-			if (coeur[i].Type == 5) and (coeur[i].Variant == 10) then	--Test si de type: pickup + coeur
-				local sprite = coeur[i]:GetSprite();					-- Récupération sprite coeur
-				local bval =  math.abs( coeur[i].Position.X - player.Position.X ) + math.abs( coeur[i].Position.Y - player.Position.Y )		--Calcul distance relative à Isaac
-				local cpos = coeur[i].Position
-				local tl = cpos-Vector(16,16)
-				local br = cpos+Vector(16,16)
-				if true then
-					if coeur[i].SubType == HeartSubType.HEART_HALF_SOUL then
-						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
-							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-						end
-						coeur[i]:AddEntityFlags(1<<25);
-						sprite:Load("gfx/items/pickups/soulheart.anm2" , true)	--Remplace le sprite par le sprite x1
-						sprite:Render(cpos, tl, br);
-						sprite:Play("Idle", true)
-						if not fullhealth[1] then
-							if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
-								SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
-								player:AddSoulHearts(2)							--Rajoute 2coeurs bleus
-								coeur[i]:Remove()
-							end
-						else
-							BounceHearts(coeur[i])
-						end
-					end
-
-					if coeur[i].SubType == HeartSubType.HEART_SOUL and coeur[i]:GetEntityFlags() ~= 1<<25 then 	--Si coeur bleu ET PAS ANCIEN DEMI COEUR
-						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
-							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-						end
-						sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)	--Remplace le sprite par le sprite x2
-						sprite:Render(cpos, tl, br);
-						sprite:Play("Idle", true)
-						if not fullhealth[1] then
-							if bval < 40 then									--Test si possibilité de prendre coeur bleu + Isaac sur coeur + coeur est bleu
-								SFXManager():Play(185,1.0,1,false,1.0)			--Joue son PickUp heart
-								player:AddSoulHearts(4)							--Rajoute 2coeurs bleus
-								coeur[i]:Remove()
-							end
-						else
-							BounceHearts(coeur[i])
-						end
-					end
-				end
-				if true then
-					if coeur[i].SubType == HeartSubType.HEART_BLACK and coeur[i]:GetEntityFlags() ~= 1<<25 then
-						if coeur[i].EntityCollisionClass == EntityCollisionClass.ENTCOLL_NONE then
-							coeur[i].EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-						end
-						sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true);
-						sprite:Render(cpos, tl, br);
-						sprite:Play("Idle", true)
-						if not fullhealth[2] then
-							if bval < 40 and player:CanPickBlackHearts() then
-								SFXManager():Play(185,1.0,1,false,1.0)
-								player:AddBlackHearts(4)
-								coeur[i]:Remove()
-							end
-						else
-							BounceHearts(coeur[i])
-						end
-					end
-				end
+function DoubleHeartLogic(heart)
+	local player = Isaac.GetPlayer(0)
+	local fullhealth = playerHasFullHealth()
+	local max_red_soul = fullhealth[1]
+	local max_black = fullhealth[2]
+	local max_health = fullhealth[3]
+	local player_in_range_heart = (getDistance(player.Position, heart.Position)<34)
+	if player_in_range_heart then
+		if heart.SubType == HeartSubType.HEART_HALF_SOUL then
+			if not max_red_soul then
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
+				player:AddSoulHearts(2)
+				heart:Remove()
+			else
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
+				heart:AddVelocity(player.Velocity*1.1)
+			end
+		elseif heart.SubType == HeartSubType.HEART_SOUL then
+			if not max_red_soul then
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
+				player:AddSoulHearts(4)
+				heart:Remove()
+			else
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
+				heart:AddVelocity(player.Velocity*1.1)
+			end
+		elseif heart.SubType == HeartSubType.HEART_BLACK then
+			if (not max_black or not max_red_soul) and (not max_black and not max_red_soul) then --Exclusive OR coded with my ooha
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
+				player:AddBlackHearts(4)
+				heart:Remove()
+			else
+				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
+				heart:AddVelocity(player.Velocity*1.1)
 			end
 		end
 	end
 end
 
-_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.HeartPlusHeartUpdate);
+function _Stillbirth:SoulExtensionUpdate()
+	local player = Isaac.GetPlayer(0)
+	local entities = Isaac.GetRoomEntities()
+	local empty_vector = Vector(0,0)
+	if player:HasCollectible(Items.double_heart_i) then
+		for i=1, #entities do
+			if entities[i].Type == 5 and entities[i].Variant == 10 then
+				local heart = entities[i]
+				local heart_sprite = heart:GetSprite()
+				if heart.SubType == HeartSubType.HEART_HALF_SOUL then
+					heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
+					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
+					heart_sprite:Play("Idle", true)
+				elseif heart.SubType == HeartSubType.HEART_SOUL then
+					heart_sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)
+					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
+					heart_sprite:Play("Idle", true)
+				elseif heart.SubType == HeartSubType.HEART_BLACK then
+					heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
+					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
+					heart_sprite:Play("Idle", true)
+				end
+				DoubleHeartLogic(heart)
+			end
+		end
+	end
+end
 
+_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.SoulExtensionUpdate)
 --[[
 White candle
 
