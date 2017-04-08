@@ -352,7 +352,7 @@ end
 
 function IsEntityInPit(e)
 	local ge = Game():GetRoom():GetGridEntityFromPos(e.Position)
-	return ge and ge:ToPit() or false
+	return ge and (ge.Desc.Type == 7) or false
 end
 
 Minutes60fps = function(a) return a*60*60 end
