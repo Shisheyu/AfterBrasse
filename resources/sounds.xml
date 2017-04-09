@@ -1101,9 +1101,9 @@
 		<sample weight="1" path="golden-idol-2.wav" />
 	</sound>
 	<sound id="39">
-		<sample weight="1" path="tesla coil-1.wav" />
-		<sample weight="1" path="tesla coil-2.wav" />
-		<sample weight="1" path="tesla coil-3.wav" />
+		<sample weight="1" path="tesla-coil-1.wav" />
+		<sample weight="1" path="tesla-coil-2.wav" />
+		<sample weight="1" path="tesla-coil-3.wav" />
 	</sound>
 	<sound id="41">
 		<sample weight="1" path="log-out.wav" />
