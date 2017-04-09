@@ -1,6 +1,4 @@
---bug bit avec miracle???? doubtful ne s'enlève pas et wealth fait spawn des piedestaux en plus
-
-local NUM_BLESSINGS = 6 --6
+local NUM_BLESSINGS = 6
 local currentBlessing = nil
 
 local collectibleHasSpawned = false
@@ -177,7 +175,7 @@ function handleTabAndFramerateForBlessings(sprite)
 	    sprite:Play("Text", true)
 	end
 	if Input.IsActionTriggered(ButtonAction.ACTION_MAP, player.ControllerIndex) then
-	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,196))
+	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,320))
 	    pressed = not pressed
 		if pressed then
 			sprite:Play("Text",true)

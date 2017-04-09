@@ -131,12 +131,28 @@ else
 					blessing_wealth = 2^(Isaac.GetCurseIdByName("Blessing of the Wealthy")-1),
 					blessing_doubtful = 2^(Isaac.GetCurseIdByName("Blessing of the Doubtful")-1)
 				}
+				
 	Enemies = {
 					boss_cerberus = Isaac.GetEntityTypeByName("BossCerberusMiddle"),
 					boss_cerberus_middle = Isaac.GetEntityVariantByName("BossCerberusMiddle"),
 					boss_cerberus_neck = Isaac.GetEntityVariantByName("BossCerberusNeck"),
 					boss_cerberus_stomp = Isaac.GetEntityVariantByName("BossCerberusStomp")
-	}
+				}
+	
+	GiantBooks = {
+					blender = Sprite(),
+					crucifix = Sprite(),
+					dadsbeer = Sprite(),
+					encyclopedia = Sprite(),
+					medusa = Sprite(),
+					transplant = Sprite()
+				}
+	GiantBooks.blender:Load("gfx/ui/giantbook/blender_giant.anm2", true)
+	GiantBooks.crucifix:Load("gfx/ui/giantbook/crucifix_giant.anm2", true)
+	GiantBooks.dadsbeer:Load("gfx/ui/giantbook/dadsbeer_giant.anm2", true)
+	GiantBooks.encyclopedia:Load("gfx/ui/giantbook/encyclopedia_giant.anm2", true)
+	GiantBooks.medusa:Load("gfx/ui/giantbook/medusa_giant.anm2", true)
+	GiantBooks.transplant:Load("gfx/ui/giantbook/transplant_giant.anm2", true)
 
 --[[
 	If you have a NIL value it Will and May be turn to FALSE automatically to properly save
