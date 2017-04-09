@@ -123,6 +123,7 @@ else
 					}
 
 	Curses = {
+					curse_white_candle = 2^(Isaac.GetCurseIdByName("White Candle")-1),
 					blessing_light = 2^(Isaac.GetCurseIdByName("Blessing of Enlightment")-1),
 					blessing_guide = 2^(Isaac.GetCurseIdByName("Blessing of the Guide")-1), 
 					blessing_miracle = 2^(Isaac.GetCurseIdByName("Blessing of the Miracle")-1), 

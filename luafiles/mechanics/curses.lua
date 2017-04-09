@@ -13,6 +13,9 @@ function _Stillbirth:useBlessing(curse)
 		currentBlessing = ""
 		return curse
 	else
+		if curse == LevelCurse.CURSE_NONE and player:HasCollectible(Items.white_candle_i) then
+			curse = Curses.curse_white_candle
+		end
 		local rand = math.random(g_vars.BLESSING_CHANCE*NUM_BLESSINGS) --1/3 d'avoir une blessing
 		if rand == 1 then
 			currentBlessing = "guide"
