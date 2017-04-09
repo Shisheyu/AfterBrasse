@@ -104,9 +104,9 @@ end
 
 function _Stillbirth:LaserUpdate()
 	local player = Isaac.GetPlayer(0)
-	local blue = Color(0, 0, 0, 1, 0, 200, 255)
+	local blue = Color(0, 0, 0, 1, 51, 93, 171)
 	local red = Color(0, 0, 0, 1, 140, 1, 1)
-	local yellow = Color(0, 0, 0, 1, 243, 247, 2)
+	local yellow = Color(0, 0, 0, 1, 255, 215, 59)
 	local entities = Isaac.GetRoomEntities()
 	if Game():GetFrameCount() % 60 == 0 then random_laser_effect = math.random(1,3) end
 	if (hasTransfo(laserPool, 3) or g_vars.translaser_hasTransfo) then

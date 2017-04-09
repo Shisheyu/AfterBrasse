@@ -197,7 +197,6 @@ function handleTabAndFramerateForBlessings(sprite)
 			sprite:Update() --render and update the sprite at the given position
 		end
 	end
-	--RenderText(condition_frames)
 end
 
 function _Stillbirth:displayBlessing()
@@ -215,7 +214,6 @@ function _Stillbirth:displayBlessing()
         handleTabAndFramerateForBlessings(spriteBlessing.mighty)
     end
 	halftick = not halftick
-	--RenderText(currentBlessing, pressed, spriteBlessing:GetFilename(), spriteBlessing:IsLoaded())
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER, _Stillbirth.displayBlessing)
 
