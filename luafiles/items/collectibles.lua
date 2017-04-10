@@ -535,7 +535,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.firstBloodEffec
 Blank Tissue : supprime toute les larmes de la salle
 --Dogeek
 --]]
-local blankTissue_MAXCHARGE = 30*8 -- 30 fps * nb_of_seconds
+local blankTissue_MAXCHARGE = 7.5*8 -- 30 fps * nb_of_seconds
 local blankTissue_charge = blankTissue_MAXCHARGE
 function _Stillbirth:BlankTissueRecharge()
 	player = Isaac.GetPlayer(0)

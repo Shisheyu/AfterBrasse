@@ -64,30 +64,16 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 					end
 				end
 				if player:HasCollectible(CollectibleType.COLLECTIBLE_ARIES) then
-					if not (dmg_flag == DamageFlag.DAMAGE_EXPLOSION or dmg_src.Type == EntityType.ENTITY_TEAR) or player.MoveSpeed<1.7 then
+					local rand = math.random(-10, 20)
+					if rand <= player.Luck then
 						return false
 					end
 				end
-				if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) and not gemini_unleashed_has_spawned then
-					local pos = nil
-					for i=1, #entities do
-						if entities[i].Type == EntityType.ENTITY_FAMILIAR and entities[i].Variant == FamiliarVariant.GEMINI then pos=entities[i].Position;entities[i]:Remove() end
-					end
-					gemini_unleashed_fam = Isaac.Spawn(Familiars.GeminiUnleashed, Familiars.GeminiUnleashedVariant, 0, pos, Vector(0,0), player)
-					gemini_unleashed_has_spawned = true
-				end
 			end
-			--[[Cricket Transform]]--
-			local MaxSpiderSpawned = 40
-			local roomType = Game():GetRoom():GetType()
+			--[[cricket transfo]]--
 			if g_vars.transcricket_hasTransfo then
 				if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) or dmg_flag == DamageFlag.DAMAGE_POOP or dmg_flag == DamageFlag.DAMAGE_ACID then
 					return false
-				end
-			end
-			if player:GetNumBlueSpiders() and player:GetNumBlueSpiders() <= MaxSpiderSpawned then
-				if g_vars.transcricket_hasTransfo and entity:IsVulnerableEnemy() and dmg_src.Type == 2 then
-					player:AddBlueSpider(player.Position)
 				end
 			end
 		else -- other_mc_entity_take_dmg
@@ -122,6 +108,14 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 					index = room:GetGridIndex(posE);
 					room:SpawnGridEntity(index,10,0,0,0)
 					-- entity:AddEntityFlags(1<<7) -- <-- why permaSlow on the damaged enemy?
+				end
+			end
+			--[[Cricket Transform]]--
+			local MaxSpiderSpawned = 40
+			local roomType = Game():GetRoom():GetType()
+			if player:GetNumBlueSpiders() and player:GetNumBlueSpiders() <= MaxSpiderSpawned then
+				if g_vars.transcricket_hasTransfo and entity:IsVulnerableEnemy() and dmg_src.Type == 2 then
+					player:AddBlueSpider(player.Position)
 				end
 			end
 		end

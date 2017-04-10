@@ -308,7 +308,7 @@ local isInitEntities = false
 -- Scorpio
 local poisoned_enemies = {}
 -- Gemini
-local gemini_unleashed_has_spawned = false
+local g_vars.gemini_unleashed_has_spawned = false
 local gemini_unleashed_fam = nil
 
 function _Stillbirth:initZodiacPlayer(player)
@@ -322,7 +322,7 @@ function _Stillbirth:initZodiacPlayer(player)
 	-- Scorpio
 	poisoned_enemies = {}
 	--Gemini
-	gemini_unleashed_has_spawned = false
+	g_vars.gemini_unleashed_has_spawned = false
 	gemini_unleashed_fam = nil
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT,_Stillbirth.initZodiacPlayer);
@@ -393,23 +393,19 @@ function _Stillbirth:ZodiacTransfoUpdate()
 		end --end cancer
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_TAURUS) then --taurus effect
 			player:AddCacheFlags(CacheFlag.CACHE_SPEED)
-			if framecount%3 == 0 and player.MoveSpeed + taurusSpeed < 2.0 and not taurusEffectGiven and not room:IsClear() then -- every 3 frames gives a bit more speed
-				taurusSpeed = taurusSpeed + 0.01
-			end
-			if player.MoveSpeed + taurusSpeed >= 2.0 then
-				invincibilityFrameCounter = invincibilityFrameCounter + 1
-			end
-			if invincibilityFrameCounter > 0 and not taurusEffectGiven then
-				player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_MY_LITTLE_UNICORN, false)
-				taurusEffectGiven = true
-			end
-			if invincibilityFrameCounter >= 150 or isRoomOver(room) then
-				player:GetEffects():RemoveCollectibleEffect(CollectibleType.COLLECTIBLE_MY_LITTLE_UNICORN)
-				invincibilityFrameCounter = 0
-				taurusSpeed = 0
-			end
 			player:EvaluateItems()
 		end -- end taurus
+		if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) and not g_vars.gemini_unleashed_has_spawned then
+			local gemini_pos
+			for i=1, #entities do
+				if entities[i].Type == 3 and entities[i].Variant == FamiliarVariant.GEMINI then
+					gemini_pos = entities[i].Position
+					entities[i]:Remove()
+				end
+			end
+			Isaac.Spawn(3, Familiars.gemini_unleashed_fam, 0, gemini_pos, Vector(0,0), player)
+			g_vars.gemini_unleashed_has_spawned = true
+		end
 	end
 end
 _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.ZodiacTransfoUpdate)
@@ -420,39 +416,14 @@ function _Stillbirth:ZodiacTransfoCache(player, cacheFlag)
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_PISCES) and cacheFlag == CacheFlag.CACHE_FIREDELAY then
 			player.MaxFireDelay = player.MaxFireDelay - 1
 		end
-		if player:HasCollectible(CollectibleType.COLLECTIBLE_CAPRICORN) and cacheFlag == CacheFlag.CACHE_ALL then --a recoder pour donner qu'une fois
-			local cmp = {}
-			cmp.dmg = player.Damage / 3.5
-			cmp.rng = -player.TearHeight / 23.75
-			cmp.fd = 10/player.MaxFireDelay
-			cmp.spd = player.MoveSpeed
-			cmp.st = player.ShotSpeed
-			cmp.lck = player.Luck
-			if cmp.lck < math.min(cmp.dmg, cmp.rng, cmp.fd, cmp.spd, cmp.st) then
+		if player:HasCollectible(CollectibleType.COLLECTIBLE_CAPRICORN) and cacheFlag == CacheFlag.CACHE_ALL then
 				player.Luck = player.Luck + 1
-			elseif cmp.st < math.min(cmp.dmg, cmp.rng, cmp.fd, cmp.spd, cmp.lck) then
-				player.ShotSpeed = player.ShotSpeed + 0.4
-			elseif cmp.spd < math.min(cmp.dmg, cmp.rng, cmp.fd, cmp.st, cmp.lck) then
-				player.MoveSpeed = player.MoveSpeed + 0.3
-			elseif cmp.fd < math.min(cmp.dmg, cmp.rng, cmp.spd, cmp.st, cmp.lck) then
-				player.MaxFireDelay = player.MaxFireDelay - 2
-			elseif cmp.rng < math.min(cmp.dmg, cmp.fd, cmp.spd, cmp.st, cmp.lck) then
-				player.TearHeight = player.TearHeight - 5
-			elseif cmp.dmg < math.min(cmp.rng, cmp.fd, cmp.spd, cmp.st, cmp.lck) then
-				player.Damage = player.Damage + 1
-			else
-				player.Luck = player.Luck + 1
-				player.ShotSpeed = player.ShotSpeed + 0.1
 				player.MoveSpeed = player.MoveSpeed + 0.1
 				player.MaxFireDelay = player.MaxFireDelay - 1
-				player.TearHeight = player.TearHeight - 2
-				player.Damage = player.Damage + 0.3
-			end
+				player.TearHeight = player.TearHeight - 1.5
+				player.Damage = player.Damage + 0.5
 		end
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_SAGITTARIUS) then
-			if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
-				player.ShotSpeed = player.ShotSpeed - 0.1; -- to balance
-			end
 			if cacheFlag == CacheFlag.CACHE_TEARFLAG then
 				player.TearFlags = player.TearFlags | 1; -- Add spectral tears
 			end
@@ -479,7 +450,7 @@ function _Stillbirth:ZodiacTransfoCache(player, cacheFlag)
 		end
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_TAURUS) then
 			if cacheFlag == CacheFlag.CACHE_SPEED then
-				player.MoveSpeed = player.MoveSpeed + taurusSpeed
+				player.MoveSpeed = player.MoveSpeed + 0.6
 			end
 		end
 	end
@@ -494,8 +465,8 @@ function _Stillbirth:ZodiacNewRoomUpdate()
 	invincibilityFrameCounter = 0
 	-- Gemini
 	if zodiacTransformed then
-		if gemini_unleashed_has_spawned then
-			gemini_unleashed_has_spawned = false
+		if g_vars.gemini_unleashed_has_spawned then
+			g_vars.gemini_unleashed_has_spawned = false
 			gemini_unleashed_fam:Remove()
 		end
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_GEMINI) then

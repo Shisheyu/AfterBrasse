@@ -247,7 +247,8 @@ else
 								dionea_tearsRoomCount = 0,
 								questionmark_item = nil,
 								newLevelFrameCount = 0,
-								black_candle_replaced = false
+								black_candle_replaced = false,
+								gemini_unleashed_has_spawned = false
 							}
 		return g_vars
 	]]
