@@ -2,7 +2,7 @@
 	<Info CreatedBy="robot" CreatedOn="09/04/2017 00:49:06" Version="105" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="..\Desktop\gfx\ui\characters\Costumes\blackcandle_head.png" Id="0"/>
+			<Spritesheet Path="costumes\blackcandle_head.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
 			<Layer Name="head3" Id="0" SpritesheetId="0"/>
