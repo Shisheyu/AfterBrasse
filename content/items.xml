@@ -15,7 +15,7 @@
 	<active cache="" id="512" description="Temporary double shot" gfx="3Dglasses.png" name="3D Glasses" maxcharges="3"/>
 	<passive cache="firedelay" id="513" description="It's salty" gfx="appetizer.png" name="Appetizer"/>
 	<active id="514" description="WORK IN PROGRESS -- Protein shake" gfx="babyblender.png" name="Baby Blender" maxcharges="0"/>
-	<active id="515" description="ctrl + shift + del" gfx="blanktissues.png" name="Blank Tissues" maxcharges="240"/><!-- 240 = 30fps * 8 secs -->
+	<active id="515" description="ctrl + shift + del" gfx="blanktissues.png" name="Blank Tissues" maxcharges="60"/><!-- 60 = 7.5fps * 8 secs -->
 	<passive cache="" id="516" description="Now it's too late" devilprice="2" gfx="blindpact.png" name="Blind Pact"/>
 	<passive cache="" id="517" description="WORK IN PROGRESS -- Anorexia nervosa best friend" gfx="bobsbitrex.png" name="Bob's Bitrex"/>
 	<passive cache="speed" id="518" description="It sticks" gfx="braveshoes.png" name="Brave Shoe"/>

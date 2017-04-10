@@ -540,9 +540,10 @@ local blankTissue_charge = blankTissue_MAXCHARGE
 function _Stillbirth:BlankTissueRecharge()
 	player = Isaac.GetPlayer(0)
 	if player:HasCollectible(Items.blankTissues_i) then
-		if blankTissue_charge<blankTissue_MAXCHARGE then
+		if blankTissue_charge<blankTissue_MAXCHARGE and Game():GetFrameCount()%4 == 0 then
 			blankTissue_charge = blankTissue_charge+1
 			player:SetActiveCharge(blankTissue_charge)
+			if SFXManager():IsPlaying(SoundEffect.SOUND_BEEP) then SFXManager():Stop(SoundEffect.SOUND_BEEP) end
 		end
 	end
 end
