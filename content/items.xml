@@ -64,7 +64,7 @@
 	<passive cache="" id="561" description="Wave theory" gfx="techzero.png" name="Technology 0"/>
 	<passive cache="speed" id="562" description="WORK IN PROGRESS -- Blasting flavours" gfx="toxicmushroom.png" name="Toxic Mushroom"/>
 	<familiar cache="" id="563" description="He wants your bombs!" gfx="fam_bombbum.png" name="Bomb Bum"/>
-	<passive cache="" id="564" description="You feel blessed" gfx="whitecandle.png" name="White Candle"/>
+	<passive cache="" id="564" description="Blessing guaranty" gfx="whitecandle.png" name="White Candle"/>
 	<passive cache="" id="565"description="Omnidirectional tears" gfx="blobby.png" name="Blobby"/>
 	<active cache="" id="566"description="Restock 24/7" gfx="portable_restock.png" name="Portable Restock" maxcharges="0"/>
 	
