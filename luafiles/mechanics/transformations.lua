@@ -40,8 +40,10 @@ function _Stillbirth:transcricket_hasTransformUpdate()
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/cricket.anm2"))
         	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
         	bandals_transfals.MAX:Play("Text", true)
+        	bandals_transfals.MAX:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
         	g_vars.transcricket_hasCostume = true
         end
+        bandals_transfals.MAX:Update()
 		player:AddCacheFlags(CacheFlag.CACHE_FLYING)
 		player:EvaluateItems()
 		local grid = room:GetGridSize()-1
@@ -129,8 +131,10 @@ function _Stillbirth:LaserUpdate()
         	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/laser.anm2"))
         	bandals_transfals.LASER:Play("Text", true)
+        	bandals_transfals.LASER:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
         	g_vars.translaser_hasCostume = true
         end
+        bandals_transfals.LASER:Update()
         if IsShooting(player) then
 			local entities = Isaac.GetRoomEntities()
 			for i=1, #entities do
@@ -208,8 +212,10 @@ function _Stillbirth:BubblesBehavior()
       		g_vars.bubblesCostume = true
       		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
       		bandals_transfals.BUBBLES:Play("Text", true)
+      		bandals_transfals.BUBBLES:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
       		player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
       	end
+      	bandals_transfals.BUBBLES:Update()
 		player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 		player:AddCacheFlags(CacheFlag.CACHE_SPEED)
 		player:EvaluateItems()
@@ -333,9 +339,11 @@ function _Stillbirth:ZodiacTransfoUpdate()
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_aura.anm2"))
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_eyeshoot.anm2"))
 			bandals_transfals.ZODIAC:Play("Text", true)
+			bandals_transfals.ZODIAC:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
 			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
 			g_vars.zodiacTransformed = true
 		end
+		bandals_transfals.ZODIAC:Update()
 		if player:HasCollectible(308) then --aquarius
 			local creepPos = {}
 			for i=1, #entities do
