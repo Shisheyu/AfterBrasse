@@ -1334,7 +1334,7 @@ function _Stillbirth:SoulExtensionUpdate()
 			if entities[i].Type == 5 and entities[i].Variant == 10 then
 				local heart = entities[i]
 				local heart_sprite = heart:GetSprite()
-				if bit.band(heart:GetEntityFlags(), 1<<25) ~= 1<<25 then
+				if not heart:HasEntityFlags(1<<25) then
 					heart:AddEntityFlags(1<<25)
 					if heart.SubType == HeartSubType.HEART_HALF_SOUL then
 						heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
