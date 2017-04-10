@@ -1334,14 +1334,17 @@ function _Stillbirth:SoulExtensionUpdate()
 			if entities[i].Type == 5 and entities[i].Variant == 10 then
 				local heart = entities[i]
 				local heart_sprite = heart:GetSprite()
-				if heart.SubType == HeartSubType.HEART_HALF_SOUL then
-					heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
-				elseif heart.SubType == HeartSubType.HEART_SOUL then
-					heart_sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)
-				elseif heart.SubType == HeartSubType.HEART_BLACK then
-					heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
+				if bit.band(heart:GetEntityFlags(), 1<<25) ~= 1<<25 then
+					heart:AddEntityFlags(1<<25)
+					if heart.SubType == HeartSubType.HEART_HALF_SOUL then
+						heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
+					elseif heart.SubType == HeartSubType.HEART_SOUL then
+						heart_sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)
+					elseif heart.SubType == HeartSubType.HEART_BLACK then
+						heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
+					end
+					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
 				end
-				heart_sprite:Render(heart.Position, empty_vector, empty_vector)
 				if heart.FrameCount == 1 then
 					heart_sprite:Play("Appear", true)
 				elseif heart.FrameCount > 1 and not heart_sprite:IsPlaying("Appear") then
