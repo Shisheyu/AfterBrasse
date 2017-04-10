@@ -87,9 +87,9 @@ function _Stillbirth:use_beer()
     local entities = Isaac.GetRoomEntities( )
     local game = Game()
 	SFXManager():Play(19, 1.0, 1, false, 1)
-	GiantBooks.dadsbeer:Play("Shake", true)
-	GiantBooks.dadsbeer:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
-	GiantBooks.dadsbeer:Update()
+	--GiantBooks.dadsbeer:Play("Shake", true)
+	--GiantBooks.dadsbeer:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
+	--GiantBooks.dadsbeer:Update()
     for i = 1, #entities do
         if entities[i]:IsActiveEnemy() then
         	if entities[i]:IsBoss() then
@@ -185,6 +185,7 @@ Active item : Golden Idol : Donne un coeur bleugoldé
 --]]
 function _Stillbirth:GoldenIdol_onUse()
     local player = Isaac.GetPlayer(0)
+    SFXManager():Play(32, 1.0, 1, false, 1.0)
     if (not player:HasCollectible(Items.solomon_i)) or ((player:GetHearts()+player:GetSoulHearts())<12) then
     	player:AddSoulHearts(2);
     end
@@ -229,9 +230,9 @@ function _Stillbirth:medusaHead_use()
 	local player = Isaac.GetPlayer(0);
 	local range = math.abs(GetRange(player) * 12.5);
 	SFXManager():Play(18, 1.0, 1, false, 1.0)
-	GiantBooks.medusa:Play("Shake", true)
-	GiantBooks.medusa:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
-	GiantBooks.medusa:Update()
+	--GiantBooks.medusa:Play("Shake", true)
+	--GiantBooks.medusa:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
+	--GiantBooks.medusa:Update()
 	for i = 1, #entities do
 		if entities[i]:IsActiveEnemy(false) then        --Test if entity is ennemy NPC
 			local e = entities[i]
@@ -664,9 +665,9 @@ Active item : Encyclopedia
 function _Stillbirth:use_encyclopedia()
     local player = Isaac.GetPlayer(0);
     local rng = math.ceil(math.random(1,#libraryPool));
-    GiantBooks.encyclopedia:Play("Shake", true)
-	GiantBooks.encyclopedia:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
-	GiantBooks.encyclopedia:Update()
+    --GiantBooks.encyclopedia:Play("Shake", true)
+	--GiantBooks.encyclopedia:Render(Isaac.WorldToRenderPosition(320,200), Vector(0,0), Vector(0,0))
+	--GiantBooks.encyclopedia:Update()
     player:UseActiveItem(libraryPool[rng],true,false,false,false)
 	return true
 end
