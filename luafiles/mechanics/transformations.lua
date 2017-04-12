@@ -10,6 +10,27 @@ bandals_transfals.MAX:Load("gfx/ui/transformations/ui_transformation_max.anm2", 
 bandals_transfals.LASER:Load("gfx/ui/transformations/ui_transformation_laser.anm2", true)
 bandals_transfals.BUBBLES:Load("gfx/ui/transformations/ui_transformation_bubbles.anm2", true)
 
+function _Stillbirth:RenderUITransformation() -- Render the transformation name animation
+	local player = Isaac.GetPlayer(0)
+	if g_vars.transcricket_hasTransfo then
+		bandals_transfals.MAX:Update()
+		bandals_transfals.MAX:Render(Vector(250,50), Vector(0,0), Vector(0,0))
+	end
+	if g_vars.translaser_hasTransfo then
+		bandals_transfals.LASER:Update()
+		bandals_transfals.LASER:Render(Vector(250,50), Vector(0,0), Vector(0,0))
+	end
+	if g_vars.zodiacTransformed then
+		bandals_transfals.ZODIAC:Update()
+		bandals_transfals.ZODIAC:Render(Vector(250,50), Vector(0,0), Vector(0,0))
+	end
+	if g_vars.bubbles_hasTransfo then
+		bandals_transfals.BUBBLES:Update()
+		bandals_transfals.BUBBLES:Render(Vector(250,50), Vector(0,0), Vector(0,0))
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_RENDER,_Stillbirth.RenderUITransformation)
+
 --[[
 Item : transfo cricket
 Type : transfo
@@ -201,12 +222,12 @@ function _Stillbirth:BubblesBehavior()
 	local nextGridEntity = -1
 	local landing = 0
 	local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
-	local bubbles_transfo = hasTransfo(bubblesPool, 3)
+	g_vars.bubbles_hasTransfo = hasTransfo(bubblesPool, 3)
 
     -----------------------------------
     -- Bubbles transformation behavior
     -----------------------------------
-	if bubbles_transfo then
+	if g_vars.bubbles_hasTransfo then
       -- Transform if available
       	if not g_vars.bubblesCostume then
       		g_vars.bubblesCostume = true
@@ -279,7 +300,7 @@ function _Stillbirth:BubblesCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
 	local bubbles_transfo = hasTransfo(bubblesPool, 3)
-	if bubbles_transfo then
+	if g_vars.bubbles_hasTransfo then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
 			player.MoveSpeed = player.MoveSpeed + 0.3
 		end

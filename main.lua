@@ -248,7 +248,8 @@ else
 								questionmark_item = nil,
 								newLevelFrameCount = 0,
 								black_candle_replaced = false,
-								gemini_unleashed_has_spawned = false
+								gemini_unleashed_has_spawned = false,
+								bubbles_hasTransfo = false
 							}
 		return g_vars
 	]]
