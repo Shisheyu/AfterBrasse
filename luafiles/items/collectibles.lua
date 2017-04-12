@@ -579,6 +579,7 @@ local chora_btears = 1
 local chora_lastShape = 0
 
 function _Stillbirth:ChoranaptyxicNewRoom()
+	local player = Isaac.GetPlayer(0)
 	if g_vars.chora_hasCostume then
 		player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicblue.anm2"))
 		player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/choranaptyxicred.anm2"))
@@ -1329,11 +1330,13 @@ function _Stillbirth:SoulExtensionUpdate()
 	local player = Isaac.GetPlayer(0)
 	local entities = Isaac.GetRoomEntities()
 	local empty_vector = Vector(0,0)
+	local heart = nil
+	local heart_sprite = nil
 	if player:HasCollectible(Items.double_heart_i) then
 		for i=1, #entities do
 			if entities[i].Type == 5 and entities[i].Variant == 10 then
-				local heart = entities[i]
-				local heart_sprite = heart:GetSprite()
+				heart = entities[i]
+				heart_sprite = heart:GetSprite()
 				if not heart:HasEntityFlags(1<<25) then
 					heart:AddEntityFlags(1<<25)
 					if heart.SubType == HeartSubType.HEART_HALF_SOUL then
@@ -1343,11 +1346,10 @@ function _Stillbirth:SoulExtensionUpdate()
 					elseif heart.SubType == HeartSubType.HEART_BLACK then
 						heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
 					end
+					heart_sprite:Play("Appear", true)
 					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
 				end
-				if heart.FrameCount == 1 then
-					heart_sprite:Play("Appear", true)
-				elseif heart.FrameCount > 1 and not heart_sprite:IsPlaying("Appear") then
+				if heart.FrameCount > 15 and not heart_sprite:IsPlaying("Idle") then
 					heart_sprite:Play("Idle", true)
 				end
 				DoubleHeartLogic(heart, heart_sprite)

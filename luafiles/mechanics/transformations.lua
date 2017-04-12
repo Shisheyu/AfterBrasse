@@ -5,10 +5,10 @@ local bandals_transfals = {
 						BUBBLES = Sprite()
 						}
 
-bandals_transfals.ZODIAC:Load("gfx/ui/tansformations/ui_transformation_zodiac.anm2", true)
-bandals_transfals.MAX:Load("gfx/ui/tansformations/ui_transformation_max.anm2", true)
-bandals_transfals.LASER:Load("gfx/ui/tansformations/ui_transformation_laser.anm2", true)
-bandals_transfals.BUBBLES:Load("gfx/ui/tansformations/ui_transformation_bubbles.anm2", true)
+bandals_transfals.ZODIAC:Load("gfx/ui/transformations/ui_transformation_zodiac.anm2", true)
+bandals_transfals.MAX:Load("gfx/ui/transformations/ui_transformation_max.anm2", true)
+bandals_transfals.LASER:Load("gfx/ui/transformations/ui_transformation_laser.anm2", true)
+bandals_transfals.BUBBLES:Load("gfx/ui/transformations/ui_transformation_bubbles.anm2", true)
 
 --[[
 Item : transfo cricket
@@ -307,8 +307,6 @@ local hasSpeedAries = false
 local isInitEntities = false
 -- Scorpio
 local poisoned_enemies = {}
--- Gemini
-local g_vars.gemini_unleashed_has_spawned = false
 local gemini_unleashed_fam = nil
 
 function _Stillbirth:initZodiacPlayer(player)
@@ -337,7 +335,6 @@ function _Stillbirth:ZodiacTransfoUpdate()
 		if not g_vars.zodiacTransformed then
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_transfo.anm2"))
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_aura.anm2"))
-			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_eyeshoot.anm2"))
 			bandals_transfals.ZODIAC:Play("Text", true)
 			bandals_transfals.ZODIAC:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
 			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
@@ -385,8 +382,8 @@ function _Stillbirth:ZodiacTransfoUpdate()
 				end
 			end
 		end --end scorpio
-		if player:HasCollectible(303) then --virgo
-			player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_PHD, false);
+		if player:HasCollectible(303) and not player:HasCollectible(CollectibleType.COLLECTIBLE_PHD) then --virgo
+			player:AddCollectible(CollectibleType.COLLECTIBLE_PHD, 0, false);
 		end --end virgo
 		if player:HasCollectible(301) then --cancer
 			player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_WAFER, false);

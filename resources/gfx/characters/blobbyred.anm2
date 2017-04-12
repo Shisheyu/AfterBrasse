@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="robot" CreatedOn="10/04/2017 00:32:55" Version="119" Fps="30"/>
+	<Info CreatedBy="robot" CreatedOn="11/04/2017 07:39:58" Version="120" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="costumes\blobby_headred.png" Id="0"/>
@@ -8,7 +8,9 @@
 			<Layer Name="head2" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
-		<Events/>
+		<Events>
+			<Event Name="Shoot" Id="0"/>
+		</Events>
 	</Content>
 	<Animations DefaultAnimation="HeadDown">
 		<Animation Name="HeadDown" FrameNum="4" Loop="false">
@@ -22,7 +24,9 @@
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
-			<Triggers/>
+			<Triggers>
+				<Trigger EventId="0" AtFrame="2"/>
+			</Triggers>
 		</Animation>
 		<Animation Name="HeadRight" FrameNum="4" Loop="false">
 			<RootAnimation>
@@ -35,7 +39,9 @@
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
-			<Triggers/>
+			<Triggers>
+				<Trigger EventId="0" AtFrame="2"/>
+			</Triggers>
 		</Animation>
 		<Animation Name="HeadUp" FrameNum="4" Loop="false">
 			<RootAnimation>
@@ -48,7 +54,9 @@
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
-			<Triggers/>
+			<Triggers>
+				<Trigger EventId="0" AtFrame="2"/>
+			</Triggers>
 		</Animation>
 		<Animation Name="HeadLeft" FrameNum="4" Loop="false">
 			<RootAnimation>
@@ -61,7 +69,9 @@
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
-			<Triggers/>
+			<Triggers>
+				<Trigger EventId="0" AtFrame="2"/>
+			</Triggers>
 		</Animation>
 	</Animations>
 </AnimatedActor>
