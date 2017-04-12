@@ -1,3 +1,4 @@
+#-*- encoding:utf8 -*-
 #!/usr/bin/python3
 import tkinter as tk
 import sys
@@ -19,51 +20,51 @@ class GUI(tk.Frame):
 	def __init__(self, master=None):
 		super(GUI, self).__init__()
 		self.master = master
+		self.start_stop = False
 		self.log_path = get_log_path()
 		self.output = tk.Text(self)
-		self.frame=tk.Frame()
-		self.reloadButton = tk.Button(self.frame, text="Reload", command=self.reload)
-		self.startButton = tk.Button(self.frame, text="Start", command=self.start)
-		self.stopButton = tk.Button(self.frame, text="Stop", command=self.stop)
-		self.init_layout()
-		
+		self.menubar = tk.Menu(self)
+		self.menubar.add_command(label="Start", command=self.start)
+		self.menubar.add_command(label="Stop", command=self.stop)
+		master.config(menu=self.menubar)
 		self.oldline = "  "
+		self.init_layout()
 		pass
 	
 	def init_layout(self):
-		self.output.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
-		self.output.config(font="sans 12", width=200, height=60, state = tk.DISABLED)
+		self.output.config(font="sans 10", width=200, height=60)
 		self.output.tag_config("error", foreground="#FF0000")
+		self.output.tag_config("warning", foreground="#00FF00")
 		self.output.tag_config("info", foreground="#0000FF")
-		self.frame.pack(side=tk.RIGHT)
-		self.reloadButton.pack(in_=self.frame)
-		self.startButton.pack(in_=self.frame)
-		self.stopButton.pack(in_=self.frame)
+		self.output.pack()
+		self.readfile()
 		pass
 	
 	def readfile(self):
-		with open(self.log_path, "r") as f:
-			tmp = f.readline().lower()
+		if self.start_stop:
+			tmp = self.log_f.readline().lower()
 			if self.oldline != tmp: #display spam only once@FileLoad
-				if "err" in tmp or "error" in tmp or "warn" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Filtre d'error a afficher / ne pas afficher
-					#print(tmp, end='', file=sys.stderr)
-					self.output.insert(tk.END, tmp)
-					index = "end - 1 lines"
-					self.output.tag_add("error", index)
+				self.output.config(state=tk.NORMAL)
+				if "err" in tmp or "error" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Error filter to display
+					self.output.insert(tk.END, tmp, "error")
 				elif "lua" in tmp:
-					self.output.insert(tk.END, tmp)
-					index = "end - 1 lines"
-					self.output.tag_add("info", index)
+					self.output.insert(tk.END, tmp, "info")
+				elif "warn" in tmp:
+					self.output.insert(tk.END, tmp, "warning")
 				self.oldline = tmp
+			self.output.see(tk.END)
+			self.update_idletasks()
+			self.after(5, self.readfile)
 			pass
-		self.after(5, self.readfile)
-		pass
-	def reload(self):
 		pass
 	def start(self):
+		self.log_f = open(self.log_path, "r")
+		self.start_stop = True
 		self.readfile()
 		pass
 	def stop(self):
+		self.log_f.close()
+		self.start_stop = False
 		pass
 	pass
 
@@ -72,4 +73,5 @@ if __name__ == "__main__":
 	root.title("Isaac Debug Helper")
 	root.geometry("650x500")
 	gui = GUI(root)
+	gui.pack()
 	gui.mainloop()
