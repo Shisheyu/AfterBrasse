@@ -2,7 +2,11 @@ local bandals_transfals = {
 						ZODIAC = Sprite(),
 						MAX = Sprite(),
 						LASER = Sprite(),
-						BUBBLES = Sprite()
+						BUBBLES = Sprite(),
+						ZODIAC_counter = 0,
+						MAX_counter = 0,
+						LASER_counter = 0,
+						BUBBLES_counter = 0
 						}
 
 bandals_transfals.ZODIAC:Load("gfx/ui/transformations/ui_transformation_zodiac.anm2", true)
@@ -10,21 +14,29 @@ bandals_transfals.MAX:Load("gfx/ui/transformations/ui_transformation_max.anm2", 
 bandals_transfals.LASER:Load("gfx/ui/transformations/ui_transformation_laser.anm2", true)
 bandals_transfals.BUBBLES:Load("gfx/ui/transformations/ui_transformation_bubbles.anm2", true)
 
+function _Stillbirth:ResetTransfoCountersOnNewRun()
+	bandals_transfals.MAX_counter = 0
+	bandals_transfals.LASER_counter = 0
+	bandals_transfals.ZODIAC_counter = 0
+	bandals_transfals.BUBBLES_counter = 0
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, _Stillbirth.ResetTransfoCountersOnNewRun)
+
 function _Stillbirth:RenderUITransformation() -- Render the transformation name animation
 	local player = Isaac.GetPlayer(0)
-	if g_vars.transcricket_hasTransfo then
+	if g_vars.transcricket_hasTransfo and bandals_transfals.MAX_counter>30 then
 		bandals_transfals.MAX:Update()
 		bandals_transfals.MAX:Render(Vector(250,50), Vector(0,0), Vector(0,0))
 	end
-	if g_vars.translaser_hasTransfo then
+	if g_vars.translaser_hasTransfo and bandals_transfals.LASER_counter>30 then
 		bandals_transfals.LASER:Update()
 		bandals_transfals.LASER:Render(Vector(250,50), Vector(0,0), Vector(0,0))
 	end
-	if g_vars.zodiacTransformed then
+	if g_vars.zodiacTransformed and bandals_transfals.ZODIAC_counter>30 then
 		bandals_transfals.ZODIAC:Update()
 		bandals_transfals.ZODIAC:Render(Vector(250,50), Vector(0,0), Vector(0,0))
 	end
-	if g_vars.bubbles_hasTransfo then
+	if g_vars.bubbles_hasTransfo and bandals_transfals.BUBBLES_counter>30 then
 		bandals_transfals.BUBBLES:Update()
 		bandals_transfals.BUBBLES:Render(Vector(250,50), Vector(0,0), Vector(0,0))
 	end
@@ -56,15 +68,14 @@ function _Stillbirth:transcricket_hasTransformUpdate()
 	local entities = Isaac.GetRoomEntities()
 	local room = Game():GetRoom()
 	if hasTransfo(cricketPool, 3) or g_vars.transcricket_hasTransfo then
+		bandals_transfals.MAX_counter = bandals_transfals.MAX_counter + 1
         g_vars.transcricket_hasTransfo = true
         if not g_vars.transcricket_hasCostume then
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/cricket.anm2"))
-        	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
         	bandals_transfals.MAX:Play("Text", true)
-        	bandals_transfals.MAX:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
+        	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
         	g_vars.transcricket_hasCostume = true
         end
-        bandals_transfals.MAX:Update()
 		player:AddCacheFlags(CacheFlag.CACHE_FLYING)
 		player:EvaluateItems()
 		local grid = room:GetGridSize()-1
@@ -133,29 +144,14 @@ function _Stillbirth:LaserUpdate()
 	local entities = Isaac.GetRoomEntities()
 	if Game():GetFrameCount() % 60 == 0 then random_laser_effect = math.random(1,3) end
 	if (hasTransfo(laserPool, 3) or g_vars.translaser_hasTransfo) then
-		--[[for i=1, #entities do
-			if entities[i]:IsActiveEnemy(false) and entities[i]:HasEntityFlags(1<<5) then
-				if not has_value(laser_frozenEntities, entities[i]) then
-					table.insert(laser_frozenEntities, entities[i])
-				end
-				for j=1, #laser_frozenEntities do
-					if EntityRef(entities[i]) == EntityRef(laser_frozenEntities[j]) then
-						if entities[i].FrameCount - laser_frozenEntities[j].FrameCount >= 75 then
-							entities[i]:ClearEntityFlags(1<<5)
-						end
-					end
-				end
-			end
-		end]]--
+		bandals_transfals.LASER_counter = bandals_transfals.LASER_counter + 1
         g_vars.translaser_hasTransfo = true
         if not g_vars.translaser_hasCostume then
         	SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/laser.anm2"))
         	bandals_transfals.LASER:Play("Text", true)
-        	bandals_transfals.LASER:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
         	g_vars.translaser_hasCostume = true
         end
-        bandals_transfals.LASER:Update()
         if IsShooting(player) then
 			local entities = Isaac.GetRoomEntities()
 			for i=1, #entities do
@@ -228,15 +224,14 @@ function _Stillbirth:BubblesBehavior()
     -- Bubbles transformation behavior
     -----------------------------------
 	if g_vars.bubbles_hasTransfo then
+		bandals_transfals.BUBBLES_counter = bandals_transfals.BUBBLES_counter + 1
       -- Transform if available
       	if not g_vars.bubblesCostume then
       		g_vars.bubblesCostume = true
       		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
       		bandals_transfals.BUBBLES:Play("Text", true)
-      		bandals_transfals.BUBBLES:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
       		player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
       	end
-      	bandals_transfals.BUBBLES:Update()
 		player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 		player:AddCacheFlags(CacheFlag.CACHE_SPEED)
 		player:EvaluateItems()
@@ -298,8 +293,6 @@ end
 
 function _Stillbirth:BubblesCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
-	local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
-	local bubbles_transfo = hasTransfo(bubblesPool, 3)
 	if g_vars.bubbles_hasTransfo then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
 			player.MoveSpeed = player.MoveSpeed + 0.3
@@ -352,16 +345,15 @@ function _Stillbirth:ZodiacTransfoUpdate()
 	local room = Game():GetRoom()
 	local framecount = Game():GetFrameCount()
 	if hasTransfo(zodiacPool, 3) then
+		bandals_transfals.ZODIAC_counter = bandals_transfals.ZODIAC_counter + 1
 		player:AddCacheFlags(CacheFlag.CACHE_ALL)
 		if not g_vars.zodiacTransformed then
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_transfo.anm2"))
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_aura.anm2"))
 			bandals_transfals.ZODIAC:Play("Text", true)
-			bandals_transfals.ZODIAC:Render(Isaac.WorldToRenderPosition(Vector(320,196)),Vector(0,0),Vector(0,0))
 			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
 			g_vars.zodiacTransformed = true
 		end
-		bandals_transfals.ZODIAC:Update()
 		if player:HasCollectible(308) then --aquarius
 			local creepPos = {}
 			for i=1, #entities do

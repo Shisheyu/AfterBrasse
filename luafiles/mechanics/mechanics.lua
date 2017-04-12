@@ -23,7 +23,7 @@ function _Stillbirth:TrackItems()
 		end
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.TrackItems)
+--_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.TrackItems) -- error here
 
 function _Stillbirth:CheckTransformations()
 	if hasTransfo(guppyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_GUPPY) then
