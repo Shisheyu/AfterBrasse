@@ -167,8 +167,8 @@ local resumeAnimationBlessing = true
 function handleTabAndFramerateForBlessings(sprite)
     local player = Isaac.GetPlayer(0)
     local nb = Game():GetFrameCount()-g_vars.newLevelFrameCount
-    local delay = 30 --frames
-    local onScreenTime = 120 --2sec
+    local delay = 0 --frames
+    local onScreenTime = 70 --2sec
     local condition_frames = (nb >= delay  and nb <= delay+onScreenTime)
     if condition_frames then
 	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,196))
@@ -188,7 +188,7 @@ function handleTabAndFramerateForBlessings(sprite)
 	    pressed = not pressed
 	    resumeAnimationBlessing = true
 	end
-	if sprite:GetFrame() == 35 and pressed then resumeAnimationBlessing = false end
+	if sprite:GetFrame() == 59 and pressed then resumeAnimationBlessing = false end
 	--if pressed then
 		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
 		if halftick and resumeAnimationBlessing then
