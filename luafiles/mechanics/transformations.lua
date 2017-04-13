@@ -208,90 +208,42 @@ function BubblesJumpAnimation()
   end
 end
 
-function _Stillbirth:BubblesBehavior()
+function _Stillbirth:BubblesTransfoUpdate()
 	local player = Isaac.GetPlayer(0)
-	local level = Game():GetLevel()
-	local room = level:GetCurrentRoom()
-	local direction = player:GetMovementDirection()
-	local pos = player.Position 
-	local idx = room:GetGridIndex(pos)
-	local nextGridEntity = -1
-	local landing = 0
 	local bubblesPool = {Items.mizaru_i, Items.kikazaru_i, Items.iwazaru_i, Items.golden_idol_i, Items.ExBanana_i, Items.SunWukong_i, Items.BubblesHead_i}
 	g_vars.bubbles_hasTransfo = hasTransfo(bubblesPool, 3)
-
-    -----------------------------------
-    -- Bubbles transformation behavior
-    -----------------------------------
 	if g_vars.bubbles_hasTransfo then
 		bandals_transfals.BUBBLES_counter = bandals_transfals.BUBBLES_counter + 1
-      -- Transform if available
-      	if not g_vars.bubblesCostume then
-      		g_vars.bubblesCostume = true
-      		SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
-      		bandals_transfals.BUBBLES:Play("Text", true)
-      		player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
-      	end
+		if not g_vars.bubblesCostume then
+			g_vars.bubblesCostume = true
+			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1)
+			bandals_transfals.BUBBLES:Play("Text", true)
+			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/transformation_bubbles.anm2"))
+		end
 		player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
 		player:AddCacheFlags(CacheFlag.CACHE_SPEED)
 		player:EvaluateItems()
-        if IsShooting( player ) and player.FrameCount%player.MaxFireDelay == 0 then--rework because that glitches
-            local v = Vector( math.abs( player:GetLastDirection().X ), math.abs( player:GetLastDirection().Y ) )
-            if ( v.X == 1 or v.X == 0 ) and ( v.Y == 1 or v.Y == 0 ) then
-                local tear = GetClosestTear( entities, player, 2, CustomEntities.TearLeaf_Variant )
-                local vel = Vector(7.5*player.ShotSpeed,7.5*player.ShotSpeed)
-                if tear then
-                    vel = tear.Velocity
-                    tear:Remove()
-                end
-                ShootCustomTear( CustomEntities.TearLeaf_Variant, player, player, 1.0, vel:__mul(1.2), true )
-            end
+		if (player.FrameCount - g_vars.BubblesTransfo_oldFrame) <= 0 then
+			g_vars.BubblesTransfo_oldFrame = player.FrameCount
 		end
-      -- Can jump over pit -------code currently crashes the game
-		--[[
-		if direction == 0 and math.abs(player.Velocity.X) < 1 then
-			nextGridEntity = idx - 1
-			landing = idx - 2
-		elseif direction == 1 and math.abs(player.Velocity.Y) < 1 then
-			nextGridEntity = idx - 15
-			landing = idx - 30
-		elseif direction == 2 and math.abs(player.Velocity.X) < 1 then
-			nextGridEntity = idx + 1
-			landing = idx + 2
-		elseif direction == 3 and math.abs(player.Velocity.Y) < 1 then
-			nextGridEntity = idx + 15
-			landing = idx + 30
-		else
-			nextGridEntity = -1
-		end
-		if nextGridEntity ~= -1 then
-			local gridEntity = room:GetGridEntity(nextGridEntity)
-			local landingGridEntity = room:GetGridEntity(landing)
-			if gridEntity ~= nil then
-				local toPit = gridEntity:ToPit()
-				if toPit ~= nil and landingGridEntity == nil then -- Waiting for GetType() to work
-
-					landingVector = room:GetGridPosition(landing)
-
-					timer = -8
-
-					player.ControlsEnabled = false
-
-					player:PlayExtraAnimation("Jump")
-
+		if IsShooting( player ) and (player.FrameCount - g_vars.BubblesTransfo_oldFrame) > player.MaxFireDelay then
+			local v = Vector( math.abs( player:GetLastDirection().X ), math.abs( player:GetLastDirection().Y ) )
+			g_vars.BubblesTransfo_oldFrame = player.FrameCount
+			if ( v.X == 1 or v.X == 0 ) and ( v.Y == 1 or v.Y == 0 ) then
+				local tear = GetClosestTear( entities, player, 2, CustomEntities.TearLeaf_Variant )
+				local vel = Vector(7.5*player.ShotSpeed,7.5*player.ShotSpeed)
+				if tear then
+					vel = tear.Velocity
+					tear:Remove()
 				end
-
+				ShootCustomTear( CustomEntities.TearLeaf_Variant, player, player, 1.0, vel:__mul(1.2), true )
 			end
-
-		end]]--
+		end
 	end
 end
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesTransfoUpdate);
 
-
-
---_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.BubblesBehavior);
-
-function _Stillbirth:BubblesCache(player, cacheFlag)
+function _Stillbirth:BubblesTransfoCache(player, cacheFlag)
 	local player = Isaac.GetPlayer(0)
 	if g_vars.bubbles_hasTransfo then
 		if cacheFlag == CacheFlag.CACHE_SPEED then
@@ -302,7 +254,7 @@ function _Stillbirth:BubblesCache(player, cacheFlag)
 		end
 	end
 end
---_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.BubblesCache);
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.BubblesTransfoCache);
 
 --[[Transfo Zodiac
 Nagachi

@@ -1277,7 +1277,7 @@ _Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.cricketsTailUpd
 
 --[[
 <3+<3 = <3<3
-Soul Extention
+Soul Extension
 --Dogeek
 ]]--
 
@@ -1349,11 +1349,13 @@ function _Stillbirth:SoulExtensionUpdate()
 					heart_sprite:Play("Appear", true)
 					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
 				end
-				if heart.FrameCount > 15 and not heart_sprite:IsPlaying("Idle") then
-					heart_sprite:Play("Idle", true)
+				if heart:HasEntityFlags(1<<25) then
+					if heart.FrameCount > 15 and not heart_sprite:IsPlaying("Idle") then
+						heart_sprite:Play("Idle", true)
+					end
+					DoubleHeartLogic(heart, heart_sprite)
+					heart_sprite:Update()
 				end
-				DoubleHeartLogic(heart, heart_sprite)
-				heart_sprite:Update()
 			end
 		end
 	end

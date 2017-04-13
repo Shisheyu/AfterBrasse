@@ -249,7 +249,8 @@ else
 								newLevelFrameCount = 0,
 								black_candle_replaced = false,
 								gemini_unleashed_has_spawned = false,
-								bubbles_hasTransfo = false
+								bubbles_hasTransfo = false,
+								BubblesTransfo_oldFrame = 0
 							}
 		return g_vars
 	]]

@@ -41,8 +41,7 @@
 	<costume type="passive" id="564" anm2path="whitecandle.anm2" priority="99"/>
 	<costume type="none" id="Zodiac" anm2path="zodiac_transfo.anm2"/> 
 	<costume type="none" id="Zodiac" anm2path="zodiac_aura.anm2"/> 
-	<costume type="none" id="Zodiac" anm2path="zodiac_eyeshoot.anm2"/> 
-	<costume type="none" id="BlackCandle" anm2path="blackcandle.anm2"/> 
+	<costume type="none" id="Bubbles" anm2path="transformation_bubbles.anm2"/> 
 	<costume type="passive" id="565" anm2path="blobby.anm2" priority="99"/>
 	<costume type="none" id="" anm2path="blobby_shoot.anm2" priority="99"/>
 </costumes>

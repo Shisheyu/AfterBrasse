@@ -172,7 +172,10 @@ function handleTabAndFramerateForBlessings(sprite)
     local condition_frames = (nb >= delay  and nb <= delay+onScreenTime)
     if condition_frames then
 	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,196))
-	    sprite:Play("Text", true)
+	    if nb == delay then
+	    	resumeAnimationBlessing = true
+	    	sprite:Play("Text", true)
+	    end
 	end
 	if Input.IsActionTriggered(ButtonAction.ACTION_MAP, player.ControllerIndex) then
 	    spriteBlessing_position = Isaac.WorldToRenderPosition(Vector(320,320))
@@ -186,18 +189,17 @@ function handleTabAndFramerateForBlessings(sprite)
 	    resumeAnimationBlessing = true
 	end
 	if sprite:GetFrame() == 35 and pressed then resumeAnimationBlessing = false end
-	if pressed then
+	--if pressed then
 		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
 		if halftick and resumeAnimationBlessing then
 			sprite:Update() --render and update the sprite at the given position
 		end
-	end
-	if condition_frames then
-		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
-		if halftick then
-			sprite:Update() --render and update the sprite at the given position
-		end
-	end
+	--elseif condition_frames then
+	--	sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
+	--	if halftick then
+	--		sprite:Update() --render and update the sprite at the given position
+	--	end
+	--end
 end
 
 function _Stillbirth:displayBlessing()
