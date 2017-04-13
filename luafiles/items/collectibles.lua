@@ -881,15 +881,15 @@ Date : 2017-03-06
 TODO : superbum ?
 ]]--
 
-local function addMissingItem(pool)
+function addMissingItem(pool)
 	local player = Isaac.GetPlayer(0)
 	local choice = {}
 	for i=1, #pool do
 		if not player:HasCollectible(pool[i]) and pool[i] ~= 81 then
 			table.insert(choice, pool[i])
 		end
-		for i=1, #activeList do
-			if not has_value(activeList, pool[i]) then
+		for i=1, #ItemPools.ACTIVES do
+			if not has_value(ItemPools.ACTIVES, pool[i]) then
 				table.insert(choice, pool[i])
 			end
 		end
@@ -911,7 +911,7 @@ end
 
 function _Stillbirth:OttidUpdate()
 	local player = Isaac.GetPlayer(0)
-	if player:HasCollectible(Items.ottid_i) and (g_vars.ottid_init_check or  player:GetCollectibleCount()>g_vars.ottid_collectible_count)then
+	if (g_vars.ottid_init_check or  player:GetCollectibleCount()>g_vars.ottid_collectible_count) then --player:HasCollectible(Items.ottid_i) and --check unnecessary
 		if not g_vars.ottid_pillGiven then
 			--player:UsePill(PillEffect.PILLEFFECT_PUBERTY, PillColor.PILL_NULL)
 			g_vars.ottid_pillGiven = true
@@ -1518,15 +1518,16 @@ Passive Item: "Blobby"
 Random Isaac's Tears
 -Azqswx-
 --]]
-
+local blobby_shot = false
 function _Stillbirth:blobbyUpdate()
     local player = Isaac.GetPlayer(0);
-    player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/blobby_shoot.anm2"))
     if player:HasCollectible(Items.blobby_i) then
+    	if blobby_shot then player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/blobby_shoot.anm2")); blobby_shot = false end
         local rngProc_blobby = math.random(-10, 50);
         if rngProc_blobby <= player.Luck and player.FireDelay <= 1 and player:GetFireDirection() ~= -1 then
         	player:TryRemoveNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/blobby.anm2"))
         	player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/blobby_shoot.anm2"))
+        	blobby_shot = true
             player.FireDelay = player.MaxFireDelay;
             player:UseActiveItem(CollectibleType.COLLECTIBLE_ISAACS_TEARS ,false,false,false,false);
         end

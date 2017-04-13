@@ -9,59 +9,20 @@ local everyActiveItems = {33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47
 
 function _Stillbirth:TrackItems()
 	local player = Isaac.GetPlayer(0)
-	local TotalItems = CollectibleType.NUM_COLLECTIBLES + 999
+	local TotalItems = 520 + 500
 	if player:GetCollectibleCount() >= g_vars.TRACK_COLLECTIBLES then
 		g_vars.TRACK_COLLECTIBLES = player:GetCollectibleCount()
 		for i=1, TotalItems do
-			if player:HasCollectible(i) and not has_value(g_vars.PICKED_PASSIVE_COLLECTIBLES, i) and not has_value(g_vars.PICKED_ACTIVE_COLLECTIBLES, i) then
-				if has_value(Items.ACTIVES, i) then
-					table.insert(g_vars.PICKED_ACTIVE_COLLECTIBLES, i)
+			if player:HasCollectible(i) then --and not has_value(g_vars.PICKED_PASSIVE_COLLECTIBLES, i) and not has_value(g_vars.PICKED_ACTIVE_COLLECTIBLES, i) then
+				if isActiveCollectible(i) then
+					print("active")
+				--	table.insert(g_vars.PICKED_ACTIVE_COLLECTIBLES, i)
 				else
-					table.insert(g_vars.PICKED_PASSIVE_COLLECTIBLES, i)
+					print("passive")
+				--	table.insert(g_vars.PICKED_PASSIVE_COLLECTIBLES, i)
 				end
 			end
 		end
 	end
 end
---_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.TrackItems) -- error here
-
-function _Stillbirth:CheckTransformations()
-	if hasTransfo(guppyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_GUPPY) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_GUPPY)
-		addMissingItem(guppyPool)
-	elseif hasTransfo(beezlebubPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_LORD_OF_THE_FLIES)
-		addMissingItem(beezlebubPool)
-	elseif hasTransfo(funGuyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MUSHROOM) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MUSHROOM)
-		addMissingItem(funGuyPool)
-	elseif hasTransfo(seraphimPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_ANGEL) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_ANGEL)
-		addMissingItem(seraphimPool)
-	elseif hasTransfo(bobPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOB) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOB)
-		addMissingItem(bobPool)
-	elseif hasTransfo(spunPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_DRUGS) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_DRUGS)
-		addMissingItem(spunPool)
-	elseif hasTransfo(momPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_MOM) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_MOM)
-		addMissingItem(momPool)
-	elseif hasTransfo(conjoinedPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BABY) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BABY)
-		addMissingItem(conjoinedPool)
-	elseif hasTransfo(leviathanPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_EVIL_ANGEL) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_EVIL_ANGEL)
-		addMissingItem(leviathanPool)
-	elseif hasTransfo(poopPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_POOP) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_POOP)
-		addMissingItem(poopPool)
-	elseif hasTransfo(bookWormPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_BOOK_WORM) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_BOOK_WORM)
-		addMissingItem(bookWormPool)
-	elseif hasTransfo(spiderBabyPool, 3) and not player:HasPlayerForm(PlayerForm.PLAYERFORM_SPIDERBABY) then
-		player:AddPlayerFormCostume(PlayerForm.PLAYERFORM_SPIDERBABY)
-		addMissingItem(spiderBabyPool)
-	end
-end
---_Stillbirth:AddCallback(ModCallbacks.MC_POST_UPDATE, _Stillbirth.CheckTransformations)
+_Stillbirth:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, _Stillbirth.TrackItems) -- error here

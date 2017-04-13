@@ -1,5 +1,6 @@
 #-*- encoding:utf8 -*-
 #!/usr/bin/python3
+#By Dogeek - Lead Developper of The Binding Of Isaac - Stillbirth
 import tkinter as tk
 import sys
 import time
@@ -16,7 +17,14 @@ def get_log_path():
 	return p
 	pass
 
-class GUI(tk.Frame):
+class OptionGUI(tk.TopLevel): #TODO : make an option window to pick colors for error highlighting, add new filters
+	def __init__(self, master = None):
+		super(OptionGUI, self).__init__()
+		self.master = master
+		pass
+	pass
+
+class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget to not clutter the text widget, add scroll bar, try to auto reload if the lua file is deleted & add a about/options menu
 	def __init__(self, master=None):
 		super(GUI, self).__init__()
 		self.master = master
@@ -36,6 +44,7 @@ class GUI(tk.Frame):
 		self.output.tag_config("error", foreground="#FF0000")
 		self.output.tag_config("warning", foreground="#00FF00")
 		self.output.tag_config("info", foreground="#0000FF")
+		self.output.tag_config("luadebug", foreground="#000000")
 		self.output.pack()
 		self.readfile()
 		pass
@@ -47,10 +56,12 @@ class GUI(tk.Frame):
 				self.output.config(state=tk.NORMAL)
 				if "err" in tmp or "error" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Error filter to display
 					self.output.insert(tk.END, tmp, "error")
-				elif "lua" in tmp:
+				elif "lua" in tmp and not "debug" in tmp:
 					self.output.insert(tk.END, tmp, "info")
 				elif "warn" in tmp:
 					self.output.insert(tk.END, tmp, "warning")
+				elif "lua debug" in tmp:
+					self.output.insert(tk.END, tmp, "luadebug")
 				self.oldline = tmp
 			self.output.see(tk.END)
 			self.update_idletasks()
