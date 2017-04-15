@@ -2,55 +2,61 @@
 # ![pageres](assets/imgs/logo_stillbirth.png)
 
 # AfterBrasse
-Mod Communautaire du jeu The Binding of Isaac : Afterbirth +
+Community driven mod for The Binding of Isaac : Afterbirth +
 
 http://www.twitch.tv/shisheyu_mayamoto
 
 https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 
-# Membres de la team de Developpement
+# Developpment Team
 
-## Chef de projet
+## Project Manager
 
 - Shisheyu
 
-## Artistes
+## Designers
 
-- Aktraizer
+### Lead Designer
 - Magikwhite
+
+### Senior Designers
+- Aktraizer
 - Illuday
 - Lucyna
 - Mathbou
 - AeroKansaki
 - Asenith
 
-## Développeurs
+### Junior Designers
+- Greninja_San - Sprite Green Cross
+- Botameuh - Toxic Hearts sprites
+
+## Developpers
+
+### Lead Developper
+- Dogeek
 
 ### Senior
-- Dogeek (Co Lead Developper)
-- Krayz (Co Lead Developper)
+- Krayz
 - Azqswx
+- Illuday
 - Sliost
 
 ### Junior
 - Conan_Sempai
-- Illuday
+- Sp4ceCore
 - Solariox
-
-## Animateurs
-
-- Aktraiser
-- Magikwhite
-- Azqswx
-
-## A titre honorifique
-
-- Greninja_San - Sprite Green Cross
+- Alch3my
 - xahos - Brave Shoe Code
 - SlyHawks - Torn Gloves Code
 - Nagachi - Zodiac Transformation Code
 - Drazeb - Dad's Beer, Krampus' Tooth
-- Botameuh - Toxic Hearts sprites
+
+## Animations
+
+- Aktraiser
+- Magikwhite
+- Azqswx
 
 # TO DO
 
@@ -68,28 +74,25 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
     
     - Mac OS : ~/Library/Application Support/Binding of Isaac Afterbirth+ Mods
 
-# Mise en place de git dans le dossier mods du jeu
+# git setup in the "mods" folder
 
 ## Windows
 
-- Téléchargez et installez : http://msysgit.github.io
-- Allez dans votre dossier de mods (cf au dessus)
-- Créez un dossier vide appelé "0stillbirth" (si ce dossier existe déjà, supprimez le et recréez un dossier vide)
-- Ouvrez ce dossier dans un terminal(Shift + clic droit, ouvrir une invite de commande ici)
-- Tapez ces commandes (dans le dossier 0stillbirth):
+- Download and install : http://msysgit.github.io
+- Go into your mods folder
+- Create an empty folder named "0stillbirth"
+- Open a cammand line in this folder (Shift + right click, open a command line here)
+- Enter these commands (in the "0stillbirth" folder):
     - git clone https://github.com/Shisheyu/AfterBrasse .
 
 ## Unix (MacOS & Linux)
 
-- Allez dans votre dossier de mods (cf au dessus)
-- Créez un dossier vide appelé "0stillbirth" (si ce dossier existe déjà, supprimez le et recréez un dossier vide)
-- Ouvrez ce dossier dans un terminal(Clic droit : ouvrir un terminal)
-- Tapez ces commandes (dans le dossier 0stillbirth):
+- Create an empty folder named "0stillbirth"
+- Open a cammand line in this folder (right click, open a terminal here)
+- Enter these commands (in the "0stillbirth" folder):
     - git clone https://github.com/Shisheyu/AfterBrasse .
 
-# Utiliser git
-
-Tapez ces commandes dans l'ordre :
+# Using git
 
 - git pull
 - git add -
