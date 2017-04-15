@@ -365,7 +365,7 @@ end
 function _Stillbirth:onGeminiUnleashUpdate(fam)
 	local player = Isaac.GetPlayer(0)
 	local sprite = fam:GetSprite()
-	local vel_mul = 0.05
+	local vel_mul = 0.06
 	local entities = Isaac.GetRoomEntities()
 	local closest = nil
 	local empty_vec = Vector(0,0)
@@ -384,10 +384,8 @@ function _Stillbirth:onGeminiUnleashUpdate(fam)
 		sprite:Play("Attack01", true)
 		local vel_vector = (closest.Position - fam.Position)*vel_mul
 		fam.Velocity = vel_vector
-		fam:RemoveFromFollowers()
 	else
 		sprite:Play("Walk02", true)
-		fam:AddToFollowers()
 		fam:FollowPosition(player.Position)
 	end
 	sprite:Update()
