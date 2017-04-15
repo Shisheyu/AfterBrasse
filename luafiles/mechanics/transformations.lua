@@ -301,7 +301,6 @@ function _Stillbirth:ZodiacTransfoUpdate()
 		player:AddCacheFlags(CacheFlag.CACHE_ALL)
 		if not g_vars.zodiacTransformed then
 			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_transfo.anm2"))
-			player:AddNullCostume(Isaac.GetCostumeIdByPath("gfx/characters/zodiac_aura.anm2"))
 			bandals_transfals.ZODIAC:Play("Text", true)
 			SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER, 1, 0, false, 1) 
 			g_vars.zodiacTransformed = true
