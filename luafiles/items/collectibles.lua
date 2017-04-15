@@ -1566,8 +1566,18 @@ function _Stillbirth:usePortableRestock()
 end
 _Stillbirth:AddCallback( ModCallbacks.MC_USE_ITEM, _Stillbirth.usePortableRestock, Items.portable_restock_i );
 
+--[[
+Item sans nom : ajoute homing piercing et spectral si full health
+--Dogeek
+]]--
 
-
+function _Stillbirth:ItemPeteDeLaLife(player, cacheFlag)
+	local max_health = playerHasFullHealth()[3]
+	if player:HasCollectible(Items.ItemPeteDeLaLife_i) and max_health and player:GetMaxHearts() >= 2 then
+		player.TearFlags = player.TearFlags | TearFlags.TEAR_SPECTRAL | TearFlags.TEAR_PIERCING | TearFlags.TEAR_HOMING
+	end
+end
+_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.ItemPeteDeLaLife)
 
 --[[--END--]]
 

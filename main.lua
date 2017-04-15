@@ -167,8 +167,6 @@ else
 								PERMANENT_test02 = nil,
 								PERMANENT_test03 = nil,
 								TRACK_COLLECTIBLES = 0,
-								PICKED_PASSIVE_COLLECTIBLES = {},
-								PICKED_ACTIVE_COLLECTIBLES = {},
 								GlobalSeed = 0,
 								MoneyIsPower_OldCoins = 0,
 								hot_pizza_slice_HpUp_Done = false,

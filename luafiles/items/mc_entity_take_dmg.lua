@@ -52,6 +52,8 @@ function _Stillbirth:mc_entity_take_dmg(entity, dmg_amount, dmg_flag, dmg_src, d
 			if player:HasCollectible(Items.brave_shoe_i) then
 				if (dmg_flag == DamageFlag.DAMAGE_SPIKES and roomType ~= RoomType.ROOM_SACRIFICE) then
 					return false
+				elseif dmg_flag == DamageFlag.DAMAGE_ACID then
+					return false
 				end
 			end
 			--[[Zodiac Transform

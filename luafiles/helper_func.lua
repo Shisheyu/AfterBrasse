@@ -126,8 +126,8 @@ function hasTransfo(pool, trigger) -- check if the player transforms with items 
 		trigger = trigger - 1
 	end
 	for i=1, #pool do
-		for j=1, #g_vars.PICKED_ACTIVE_COLLECTIBLES do
-			if pool[i] == g_vars.PICKED_ACTIVE_COLLECTIBLES then
+		for j=1, #PICKED_ACTIVE_COLLECTIBLES do
+			if pool[i] == PICKED_ACTIVE_COLLECTIBLES then
 				cnt = cnt + 1
 			end
 		end
