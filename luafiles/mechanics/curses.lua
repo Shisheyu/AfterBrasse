@@ -188,18 +188,9 @@ function handleTabAndFramerateForBlessings(sprite)
 	    pressed = not pressed
 	    resumeAnimationBlessing = true
 	end
-	if sprite:GetFrame() == 59 and pressed then resumeAnimationBlessing = false end
-	--if pressed then
-		sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
-		if halftick and resumeAnimationBlessing then
-			sprite:Update() --render and update the sprite at the given position
-		end
-	--elseif condition_frames then
-	--	sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
-	--	if halftick then
-	--		sprite:Update() --render and update the sprite at the given position
-	--	end
-	--end
+	if sprite:GetFrame() == 9 and pressed then sprite:SetFrame("Text", 60) ; resumeAnimationBlessing = false end
+	sprite:Render(spriteBlessing_position,empty_vector,empty_vector)
+	if halftick and resumeAnimationBlessing then sprite:Update() end--render and update the sprite at the given position
 end
 
 function _Stillbirth:displayBlessing()
