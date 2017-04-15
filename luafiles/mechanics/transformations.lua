@@ -377,11 +377,11 @@ function _Stillbirth:ZodiacTransfoCache(player, cacheFlag)
 			player.MaxFireDelay = player.MaxFireDelay - 1
 		end
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_CAPRICORN) and cacheFlag == CacheFlag.CACHE_ALL then
-				player.Luck = player.Luck + 1
-				player.MoveSpeed = player.MoveSpeed + 0.1
-				player.MaxFireDelay = player.MaxFireDelay - 1
-				player.TearHeight = player.TearHeight - 1.5
-				player.Damage = player.Damage + 0.5
+				player.Luck = player.Luck + 2
+				player.MoveSpeed = player.MoveSpeed + 0.2
+				player.MaxFireDelay = player.MaxFireDelay - 2
+				player.TearHeight = player.TearHeight - 3
+				player.Damage = player.Damage + 1.5
 		end
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_SAGITTARIUS) then
 			if cacheFlag == CacheFlag.CACHE_TEARFLAG then
