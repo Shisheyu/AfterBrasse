@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <style>
+            body, html {
+                margin: 0; padding: 0;
+            }
+            body {
+                background-color: #C5B09E;
+            }
+
+            form {
+                position: absolute;
+                top: 50%;
+                transform: translate(0 , -50%);
+                background-color: #EEE;
+                padding: 50px 20px;
+                width: 250px;
+                left: 20px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
+
+            }
+
+            input, select {
+                width: 100%;
+                display: block;
+                border: 0;
+                color: #222;
+                padding: 10px;
+                border-radius: 3px;
+                margin: 5px 0;
+            }
+
+            #content {
+                position: absolute;
+                top: 50%;
+                transform: translate(0 , -50%);
+                left: 350px;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+
+        <form>
+            <input type="text" id="text" placeholder="Text"/>
+            <input type="text" id="margin" placeholder="Letter spacing"/>
+
+            <select id="size">
+                <option selected>10</option>
+                <option>12</option>
+                <option>16</option>
+            </select>
+
+            <input type="text" id="bg-color" placeholder="#C5B09E"/>
+
+        </form>
+
+        <div id="content" style="padding: 100px;"></div>
+
+        <script>
+            window.addEventListener('load', function(){
+                $("#margin").keyup(function() {
+                    $("img").css('margin-right', $(this).val()+'px');
+                });
+
+                $("#text").keyup(function(){
+                    writeContent();
+                });
+
+                $("#bg-color").keyup(function(){
+                    $("body").css("background-color", $(this).val());
+                });
+
+                $("#size").change(function(){
+                    writeContent();
+                });
+
+                function writeContent(){
+                    $("#content").html('');
+                    $("#text").val().split("").map(function(a){
+                        switch (a) {
+                            case ':': a = "doubledot"; break;
+                            case ' ': a = "space"; break;
+                            case '.': a = "dot"; break;
+                            case ',': a = "comma"; break;
+                            case '\'': a = "apostrophe"; break;
+                            case '+': a = "plus"; break;
+                            case '-': a = "minus"; break;
+                            case '=': a = "equal"; break;
+                            case '%': a = "percent"; break;
+                            case '[': a = "bracket-left"; break;
+                            case ']': a = "bracket-right"; break;
+                            case '(': a = "left-bracket"; break;
+                            case ')': a = "right-bracket"; break;
+                            case '?': a = "interrogation"; break;
+                            case '!': a = "exclamation"; break;
+                            case '\\': a = "antislash"; break;
+                            case '/': a = "slash"; break;
+                            case '&': a = "ecom"; break;
+                            case '#': a = "diez"; break;
+                            case '\"': a = "quote"; break;
+                            case '<': a = "chevron-left"; break;
+                            case '>': a = "chevron-right"; break;
+                        }
+
+                        if (a == a.toUpperCase() && !Number.isInteger(Number.parseInt(a))) {
+                            a+=a;
+                        }
+
+                        $("#content").html($("#content").html()+'<img src="./font/'+$("#size").find(":selected").text()+'/'+a.toLowerCase()+'.png"/>');
+                    })
+                }
+            });
+        </script>
+    </body>
+</html>
