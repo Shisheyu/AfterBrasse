@@ -161,11 +161,9 @@ function _Stillbirth:LaserUpdate()
 						if Game():GetFrameCount() % 30 == 0 then rand = math.random(1, 3) end
 						laser:AddEntityFlags(EntityFlag.FLAG_NO_BLOOD_SPLASH)
 						if random_laser_effect == 1 then --Damage Up
-							laser.CollisionDamage = laser.CollisionDamage * 1.5
+							laser.CollisionDamage = laser.CollisionDamage * 2
 							laser:SetColor(red, 60, 999, false, false)
 						elseif random_laser_effect == 2 then --paralysis
-							--laser:AddFreeze(EntityRef(player), 180)--180 frames de freeze
-							--laser.TearFlags = bit.bor(laser.TearFlags, 32)
 							LaserFreeze(laser)
 							laser:SetColor(yellow, 60, 999, false, false)
 						else --homing
