@@ -1290,7 +1290,7 @@ function DoubleHeartLogic(heart, sprite)
 	local player_in_range_heart = (getDistance(player.Position, heart.Position)<34)
 	if player_in_range_heart then
 		if heart.SubType == HeartSubType.HEART_HALF_SOUL then
-			if not max_red_soul and max_health then
+			if not max_red_soul then
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
 				player:AddSoulHearts(2)
@@ -1301,7 +1301,7 @@ function DoubleHeartLogic(heart, sprite)
 				heart:AddVelocity(player.Velocity*1.05)
 			end
 		elseif heart.SubType == HeartSubType.HEART_SOUL then
-			if not max_red_soul and max_health then
+			if not max_red_soul then
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
 				player:AddSoulHearts(4)
@@ -1322,6 +1322,8 @@ function DoubleHeartLogic(heart, sprite)
 				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
 				heart:AddVelocity(player.Velocity*1.05)
 			end
+		elseif heart.SubType == HeartSubType.HEART_HALF or heart.SubType == HeartSubType.HEART_FULL then
+			heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
 		end
 	end
 end
