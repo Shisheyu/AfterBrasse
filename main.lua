@@ -38,7 +38,6 @@ else
 	time = Isaac.GetTime
 	table._getn = function(t) local n = 0 if type(t) ~= type({}) then return -1 end for k,v in pairs(t) do n = n + 1 end return n end
 
-	require("luafiles/helper_func")
 	json = require("luafiles/json")
 
 	Items =	{
@@ -256,6 +255,8 @@ else
 	end
 	g_vars = initial_data_init()
 
+	require("luafiles/arrays")
+	require("luafiles/helper_func")
 	require("luafiles/save_load")
 	local s = _load_() -- Load
 	Isaac.DebugString(">>> Save Normal Size:" .. tostring(table._getn(g_vars)) .. " || Current Size:" .. tostring(table._getn(s)))

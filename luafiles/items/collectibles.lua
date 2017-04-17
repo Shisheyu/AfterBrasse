@@ -1579,7 +1579,7 @@ function _Stillbirth:ItemPeteDeLaLife(player, cacheFlag)
 		player.TearFlags = player.TearFlags | TearFlags.TEAR_SPECTRAL | TearFlags.TEAR_PIERCING | TearFlags.TEAR_HOMING
 	end
 end
-_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.ItemPeteDeLaLife)
+--_Stillbirth:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, _Stillbirth.ItemPeteDeLaLife)
 
 --[[--END--]]
 
