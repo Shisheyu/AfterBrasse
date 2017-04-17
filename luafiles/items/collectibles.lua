@@ -1281,108 +1281,50 @@ Soul Extension
 --Dogeek
 ]]--
 
-function HeartEntityBehaviour() --post update : j'essaie de faire des pickups custom plutot que d'arnaquer a finir, c'est quasi la meme que la fonction ci-dessous
-	local entities = Isaac.GetRoomEntities()
-	local player = Isaac.GetPlayer(0)
-	for i=1, #entities do
-		if entities[i].Type == 5 and entities[i].Variant == 10 then
-			local heartEntity = entities[i]:ToPickup()
-			if heartEntity.Touched then
-				if heartEntity.SubType == 11 then --double soul
-		
-				elseif heartEntity.SubType == 12 then -- soul
-	
-				elseif heartEntity.SubType == 13 then -- double black
-	
-				end
-			end
-		end
-	end
+function _Stillbirth:soulExtensionUpdate()
+    local player = Isaac.GetPlayer(0);
+    if player:HasCollectible(Items.double_heart_i) then
+        local entities = Isaac.GetRoomEntities();
+        for i=1,#entities do
+            if entities[i].Type == EntityType.ENTITY_PICKUP and entities[i].Variant == PickupVariant.PICKUP_HEART then
+                local heart = entities[i];
+                if heart.SubType == HeartSubType.HEART_HALF_SOUL then
+                    local sprite_HalfSoul = heart:GetSprite();
+                    if heart.FrameCount == 1 then
+                        sprite_HalfSoul:Load("gfx/items/pickups/soulheart.anm2",true);
+                        sprite_HalfSoul:Play("Appear",true);
+                    end
+                    if sprite_HalfSoul:IsPlaying("Collect") and sprite_HalfSoul:GetFrame() == 2 then
+                        player:AddSoulHearts(1);
+                    end
+                end
+                if heart.SubType == HeartSubType.HEART_SOUL then
+                    local sprite_Soul = heart:GetSprite();
+                    if heart.FrameCount == 1 then
+                        sprite_Soul:Load("gfx/items/pickups/doublesoulheart.anm2",true);
+                        sprite_Soul:Play("Appear",true);
+                    end
+                    if sprite_Soul:IsPlaying("Collect") and sprite_Soul:GetFrame() == 2 then
+                        player:AddSoulHearts(2);
+                    end
+                end
+                if heart.SubType == HeartSubType.HEART_BLACK then
+                    local sprite_Black = heart:GetSprite();
+                    if heart.FrameCount == 1 then
+                        sprite_Black:Load("gfx/items/pickups/doubleblackheart.anm2",true);
+                        sprite_Black:Play("Appear",true);
+                    end
+                    if sprite_Black:IsPlaying("Collect") and sprite_Black:GetFrame() == 2 then
+                        player:AddBlackHearts(2);
+                    end
+                end
+            end
+        end
+    end
 end
 
-function DoubleHeartLogic(heart, sprite)
-	local player = Isaac.GetPlayer(0)
-	local fullhealth = playerHasFullHealth()
-	local max_red_soul = fullhealth[1]
-	local max_black = fullhealth[2]
-	local max_health = fullhealth[3]
-	local player_in_range_heart = (getDistance(player.Position, heart.Position)<34)
-	if player_in_range_heart then
-		if heart.SubType == HeartSubType.HEART_HALF_SOUL then
-			if not max_red_soul then
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
-				player:AddSoulHearts(2)
-				sprite:Play("Collect", true)
-				heart:Remove()
-			else
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.05)
-			end
-		elseif heart.SubType == HeartSubType.HEART_SOUL then
-			if not max_red_soul then
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
-				player:AddSoulHearts(4)
-				sprite:Play("Collect", true)
-				heart:Remove()
-			else
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.05)
-			end
-		elseif heart.SubType == HeartSubType.HEART_BLACK then
-			if player:CanPickBlackHearts() then
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-				SFXManager():Play(185,1.0,1,false,1.0) --pickup heart sound effect
-				player:AddBlackHearts(4)
-				sprite:Play("Collect", true)
-				heart:Remove()
-			else
-				heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_NONE
-				heart:AddVelocity(player.Velocity*1.05)
-			end
-		elseif heart.SubType == HeartSubType.HEART_HALF or heart.SubType == HeartSubType.HEART_FULL then
-			heart.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-		end
-	end
-end
+_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.soulExtensionUpdate)
 
-function _Stillbirth:SoulExtensionUpdate()
-	local player = Isaac.GetPlayer(0)
-	local entities = Isaac.GetRoomEntities()
-	local empty_vector = Vector(0,0)
-	local heart = nil
-	local heart_sprite = nil
-	if player:HasCollectible(Items.double_heart_i) then
-		for i=1, #entities do
-			if entities[i].Type == 5 and entities[i].Variant == 10 then
-				heart = entities[i]
-				heart_sprite = heart:GetSprite()
-				if not heart:HasEntityFlags(1<<25) then
-					heart:AddEntityFlags(1<<25)
-					if heart.SubType == HeartSubType.HEART_HALF_SOUL then
-						heart_sprite:Load("gfx/items/pickups/soulheart.anm2" , true)
-					elseif heart.SubType == HeartSubType.HEART_SOUL then
-						heart_sprite:Load("gfx/items/pickups/doublesoulheart.anm2" , true)
-					elseif heart.SubType == HeartSubType.HEART_BLACK then
-						heart_sprite:Load("gfx/items/pickups/doubleblackheart.anm2" , true)
-					end
-					heart_sprite:Play("Appear", true)
-					heart_sprite:Render(heart.Position, empty_vector, empty_vector)
-				end
-				if heart:HasEntityFlags(1<<25) then
-					if heart.FrameCount > 15 and not heart_sprite:IsPlaying("Idle") then
-						heart_sprite:Play("Idle", true)
-					end
-					DoubleHeartLogic(heart, heart_sprite)
-					heart_sprite:Update()
-				end
-			end
-		end
-	end
-end
-
-_Stillbirth:AddCallback( ModCallbacks.MC_POST_UPDATE, _Stillbirth.SoulExtensionUpdate)
 --[[
 White candle
 
