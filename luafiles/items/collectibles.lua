@@ -1281,6 +1281,25 @@ Soul Extension
 --Dogeek
 ]]--
 
+function HeartEntityBehaviour() --post update : j'essaie de faire des pickups custom plutot que d'arnaquer a finir, c'est quasi la meme que la fonction ci-dessous
+	local entities = Isaac.GetRoomEntities()
+	local player = Isaac.GetPlayer(0)
+	for i=1, #entities do
+		if entities[i].Type == 5 and entities[i].Variant == 10 then
+			local heartEntity = entities[i]:ToPickup()
+			if heartEntity.Touched then
+				if heartEntity.SubType == 11 then --double soul
+		
+				elseif heartEntity.SubType == 12 then -- soul
+	
+				elseif heartEntity.SubType == 13 then -- double black
+	
+				end
+			end
+		end
+	end
+end
+
 function DoubleHeartLogic(heart, sprite)
 	local player = Isaac.GetPlayer(0)
 	local fullhealth = playerHasFullHealth()

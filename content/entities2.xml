@@ -32,13 +32,24 @@
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
     <!-- PICKUP ENTITIES -->
-    <!--entity anm2path="ToxicHeart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="5" name="Toxic Heart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="10" subtype="10">
+    <!--entity anm2path="ToxicHeart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="5" name="Toxic Heart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="10" subtype="20">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity-->
-    
+    <entity anm2path="items/pickups/doublesoulheart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="5" name="DoubleSoulHeart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="10" subtype="11">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="items/pickups/doubleblackheart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="5" name="DoubleBlackHeart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="10" subtype="12">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+    <entity anm2path="items/pickups/soulheart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="2" collisionRadius="6" friction="1" id="5" name="SoulHeart" numGridCollisionPoints="12" shadowSize="16" stageHP="0" variant="10" subtype="13">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
     <!-- NPC ENTITIES -->
+    
     <!-- BOSS ENTITIES -->
+    
     	<!-- Cerberus boss -->
+    
     <entity anm2path="enemies/boss_cerberus_middle.anm2" baseHP="10" boss="1" bossID = "612" champion="0" collisionDamage="1" collisionMass="3" collisionRadius="13" friction="0.9" id="612" name="BossCerberusMiddle" numGridCollisionPoints="12" shadowSize="20" stageHP="0" variant="0">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
