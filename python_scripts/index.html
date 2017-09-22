@@ -1,0 +1,183 @@
+<html>
+    <head>
+        <style>
+            body, html {
+                margin: 0; padding: 0;
+            }
+            body {
+                background-color: #C5B09E;
+            }
+
+            form {
+                position: absolute;
+                top: 50%;
+                transform: translate(0 , -50%);
+                background-color: #EEE;
+                padding: 50px 20px;
+                width: 250px;
+                left: 20px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
+
+            }
+
+            input, select {
+                width: 100%;
+                display: block;
+                border: 0;
+                color: #222;
+                padding: 10px;
+                border-radius: 3px;
+                margin: 5px 0;
+            }
+
+            #content {
+                position: absolute;
+                top: 50%;
+                transform: translate(0 , -50%);
+                left: 350px;
+            }
+            img{
+            	margin:5px
+            	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(0%);
+            	filter: hue-rotate(0deg) saturate(0%) brightness(0%);
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+
+        <form>
+            <input type="text" id="text" placeholder="Text"/>
+            <input type="text" id="margin" placeholder="Letter spacing"/>
+
+            <select id="size">
+                <option>10</option>
+                <option selected>12</option>
+                <option>16</option>
+            </select>
+
+            <select id="font">
+                <option selected>team_meat</option>
+                <option>droid</option>
+                <option>tempesta_7_condensed</option>
+                <option>terminus</option>
+                <option>upheaval</option>
+            </select>
+
+            <input type="text" id="bg-color" placeholder="#C5B09E"/>
+            <input type="text" id="ft-color" placeholder="#000000"/>
+        </form>
+
+        <div id="content" style="padding: 100px;"></div>
+
+        <script>
+         function rgbToHsl(r, g, b) {
+      		var d, h, l, max_, min_, ref, s;
+      		r /= 255;
+      		g /= 255;
+      		b /= 255;
+      		max_ = Math.max(r, g, b);
+      		min_ = Math.min(r, g, b);
+      		l = (max_ + min_) / 2;
+      		if (max_ === min_) {
+        		h = s = 0;
+      		} else {
+        		d = max_ - min_;
+        		s = l > 0.5 ? d / (2 - max_ - min_) : d / (max_ + min_);
+        		switch (max_) {
+          			case r:
+            			h = (g - b) / d + (g < b ? 6 : 0);
+            		break;
+          			case g:
+            			h = (b - r) / d + 2;
+            		break;
+          			case b:
+            			h = (r - g) / d + 4;
+        		}
+        	h = Math.round((h / 6) * 360);
+        	s = Math.round(s * 100);
+        	l = Math.round(l * 100);
+      		}
+      		return h, s, l;
+      		};
+      function hexToRgb(hex) {
+      var rgb, HEX_REGEX;
+      HEX_REGEX = /#(?:[a-f\d]{3}){1,2}\b/;
+      if (!hex.match(HEX_REGEX)) {
+        return;
+      }
+      hex = hex.replace('#', '');
+      if (hex.length === 3) {
+        hex += hex;
+      }
+      rgb = hex.match(/.{1,2}/g).map(function(val) {
+        return parseInt(val, 16);
+      });
+      return rgb[0], rgb[1], rgb[2];
+    };
+            window.addEventListener('load', function(){
+                
+                $("#ft-color").keyup(function() {
+                    var h, s, l;
+                    h,s,l=rgbToHsl(hexToRgb($(this).val()));
+                    s = 'hue-rotate('+h+'deg) saturate('+s+'%) brightness('+l+'%)';
+                    $("img").css('filter', s);
+                    $("img").css('-webkit-filter', s);
+                });
+                
+                $("#margin").keyup(function() {
+                    $("img").css('margin-right', $(this).val()+'px');
+                });
+
+                $("#text").keyup(function(){
+                    writeContent();
+                });
+
+                $("#bg-color").keyup(function(){
+                    $("body").css("background-color", $(this).val());
+                });
+
+                $("#size").change(function(){
+                    writeContent();
+                });
+
+                function writeContent(){
+                    $("#content").html('');
+                    $("#text").val().split("").map(function(a){
+                        switch (a) {
+                            case ':': a = "doubledot"; break;
+                            case ' ': a = "space"; break;
+                            case '.': a = "dot"; break;
+                            case ',': a = "comma"; break;
+                            case '\'': a = "apostrophe"; break;
+                            case '+': a = "plus"; break;
+                            case '-': a = "minus"; break;
+                            case '=': a = "equal"; break;
+                            case '%': a = "percent"; break;
+                            case '[': a = "bracket-left"; break;
+                            case ']': a = "bracket-right"; break;
+                            case '(': a = "left-bracket"; break;
+                            case ')': a = "right-bracket"; break;
+                            case '?': a = "interrogation"; break;
+                            case '!': a = "exclamation"; break;
+                            case '\\': a = "antislash"; break;
+                            case '/': a = "slash"; break;
+                            case '&': a = "ecom"; break;
+                            case '#': a = "diez"; break;
+                            case '\"': a = "quote"; break;
+                            case '<': a = "chevron-left"; break;
+                            case '>': a = "chevron-right"; break;
+                        }
+
+                        if (a == a.toUpperCase() && !Number.isInteger(Number.parseInt(a))) {
+                            a+=a;
+                        }
+
+                        $("#content").html($("#content").html()+'<img src="./font/'+$("#font").val()+'/'+$("#size").find(":selected").text()+'/'+a.toLowerCase()+'.png"/>');
+                    })
+                }
+            });
+        </script>
+    </body>
+</html>

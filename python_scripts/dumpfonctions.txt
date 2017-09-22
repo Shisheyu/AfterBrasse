@@ -1,0 +1,3559 @@
+_GLOBAL__sub_I_ANM2.cpp
+_GLOBAL__sub_I_AnmCache.cpp
+_GLOBAL__sub_I_Backdrop.cpp
+_GLOBAL__sub_I_Common.cpp
+_GLOBAL__sub_I_Entity.cpp
+_GLOBAL__sub_I_Entity_Familiar.cpp
+_GLOBAL__sub_I_Game.cpp
+_GLOBAL__sub_I_ItemConfig.cpp
+_GLOBAL__sub_I_KAGE_FileManager.cpp
+_GLOBAL__sub_I_KAGE_GraphicsManager.cpp
+_GLOBAL__sub_I_KAGE_ImageManager.cpp
+_GLOBAL__sub_I_KAGE_InputManager.cpp
+_GLOBAL__sub_I_KAGE_LeaderboardManager.cpp
+_GLOBAL__sub_I_KAGE_Logger.cpp
+_GLOBAL__sub_I_KAGE_MemoryManager.cpp
+_GLOBAL__sub_I_KAGE_MemoryTracker.cpp
+_GLOBAL__sub_I_KAGE_SaveDataManager.cpp
+_GLOBAL__sub_I_KAGE_ShapeRenderer.cpp
+_GLOBAL__sub_I_KAGE_SoundManager.cpp
+_GLOBAL__sub_I_KAGE_SystemManager.cpp
+_GLOBAL__sub_I_KAGE_TrophyManager.cpp
+_GLOBAL__sub_I_KAGE_UgcManager.cpp
+_GLOBAL__sub_I_KAGE_VideoPlayerUtil.cpp
+_GLOBAL__sub_I_KAGEConfig.cpp
+_GLOBAL__sub_I_LuaEngine.cpp
+_GLOBAL__sub_I_Manager.cpp
+_GLOBAL__sub_I_Menu_SpecialSeed.cpp
+_GLOBAL__sub_I_Room.cpp
+_GLOBAL__sub_I_RoomProfiler.cpp
+_GLOBAL__sub_I_Seeds.cpp
+
+AchievementOverlay::AchievementOverlay()
+AchievementOverlay::AchievementOverlay()
+AchievementOverlay::Init()
+AchievementOverlay::LoadConfig(char const*)
+AchievementOverlay::Render()
+AchievementOverlay::Show(eAchievement)
+AchievementOverlay::Update()
+AchievementOverlay::~AchievementOverlay()
+AchievementOverlay::~AchievementOverlay()
+
+add_image_hook_ARC(mach_header const*, long)
+add_image_hook_ARC(mach_header const*, long)::patches
+add_image_hook_autoreleasepool(mach_header const*, long)
+add_image_hook_autoreleasepool(mach_header const*, long)::patches
+add_image_hook_swiftV1(mach_header const*, long)
+add_image_hook_swiftV1(mach_header const*, long)::patches
+
+AfterbirthPersistentGameData::AfterbirthPersistentGameData()
+AfterbirthPersistentGameData::AfterbirthPersistentGameData()
+AfterbirthPersistentGameData::Clear(bool)
+AfterbirthPersistentGameData::get_backup_filename()
+AfterbirthPersistentGameData::GetAfterbirthPlusEventCounterID(unsigned int)
+AfterbirthPersistentGameData::ImportSteamAchievements()
+AfterbirthPersistentGameData::Load(KAGE::Filesys::StreamBase*)
+AfterbirthPersistentGameData::Reset(bool)
+AfterbirthPersistentGameData::SetGameStateChecksum(unsigned int)
+AfterbirthPersistentGameData::~AfterbirthPersistentGameData()
+AfterbirthPersistentGameData::~AfterbirthPersistentGameData()
+
+Ambush::Ambush()
+Ambush::init_bossrush_pool()
+Ambush::Load(char const*)
+Ambush::RestoreGameState(GameState const&)
+Ambush::spawn_wave()
+Ambush::StartChallenge()
+Ambush::StoreGameState(GameState&)
+Ambush::Update()
+Ambush::~Ambush()
+Ambush::~Ambush()
+
+Backdrop::Backdrop()
+Backdrop::Backdrop()
+Backdrop::dqGrid(int, int, int, int)
+Backdrop::Entry::Entry(Backdrop::Entry const&)
+Backdrop::LoadConfig(char const*)
+Backdrop::LoadGraphics(Backdrop::eBackdrop)
+Backdrop::pre_render_floor()
+Backdrop::pre_render_walls()
+Backdrop::render_black_outside_rect(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+Backdrop::render_water(KAGE::Math::Vector2 const&)
+Backdrop::render_water_quad(KAGE::Graphics::SourceQuad const&, KAGE::Graphics::DestinationQuad const&)
+Backdrop::RenderFloor(KAGE::Math::Vector2 const&, ColorMod)
+Backdrop::RenderWalls(KAGE::Math::Vector2 const&, ColorMod)
+Backdrop::SetSeed(unsigned int)
+Backdrop::Update()
+Backdrop::~Backdrop()
+Backdrop::~Backdrop()
+
+ButtonMapManager::ButtonMapManager()
+ButtonMapManager::ButtonMapManager()
+ButtonMapManager::InputDeviceConnected(unsigned int)
+ButtonMapManager::LoadButtonMaps()
+ButtonMapManager::NotifyButtonRemap(unsigned int)
+ButtonMapManager::SaveButtonMaps()
+ButtonMapManager::~ButtonMapManager()
+ButtonMapManager::~ButtonMapManager()
+
+Camera::Camera(Room*)
+Camera::Camera(Room*)
+Camera::clamped_to_room(KAGE::Math::Vector2)
+Camera::DoUpdate(bool)
+Camera::get_camera_center() const
+Camera::get_coplayer_dir()
+Camera::get_enemy_target()
+Camera::GetPosition()
+Camera::IsPosVisible(KAGE::Math::Vector2 const&)
+Camera::SetCenterWeight(KAGE::Math::Vector2 const&)
+Camera::SetFocusPosition(KAGE::Math::Vector2 const&)
+Camera::slow_stop(KAGE::Math::Vector2)
+Camera::smooth_focus_samples(RingBuffer<KAGE::Math::Vector2> const&, float, KAGE::Math::Vector2)
+Camera::smooth_samples(RingBuffer<KAGE::Math::Vector2> const&, float)
+Camera::Update(bool)
+Camera::update_drag()
+Camera::update_drag2()
+Camera::update_ultrasmooth(bool)
+Camera::~Camera()
+Camera::~Camera()
+
+Capsule::Capsule(KAGE::Math::Vector2 const&, float, KAGE::Math::Vector2 const&, float)
+Capsule::Capsule(KAGE::Math::Vector2 const&, float, KAGE::Math::Vector2 const&, float)
+Capsule::collide(Capsule const&, Capsule const&, KAGE::Math::Vector2&)
+Capsule::pointSegmentVector(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+Capsule::segmentsIntersect(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2&)
+Capsule::test()
+
+CellSpace::CellSpace(EntityList*, float, float, float)
+CellSpace::CellSpace(EntityList*, float, float, float)
+CellSpace::clear()
+CellSpace::collide(CellSpace&)
+CellSpace::collide(Entity*)
+CellSpace::collide_self()
+CellSpace::insert(Entity*)
+CellSpace::query_box(EntityList::EL&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+CellSpace::~CellSpace()
+CellSpace::~CellSpace()
+
+ChallengeParam::ChallengeParam(ChallengeParam const&)
+ChallengeParam::operator=(ChallengeParam&&)
+
+Checksum::Add(void const*, unsigned long)
+Checksum::Add(void const*, unsigned long)::crc_table
+Checksum::add_dword(unsigned int)
+Checksum::add_ubyte_buffered(unsigned char)
+Checksum::Checksum(Checksum::eChecksumType)
+Checksum::Checksum(Checksum::eChecksumType)
+Checksum::Flush()
+Checksum::Generate(Checksum::eChecksumType, KAGE::Filesys::StreamBase*, int, int)
+Checksum::Reset()
+
+CompletionWidget::CompletionWidget()
+CompletionWidget::CompletionWidget()
+CompletionWidget::Init(bool)
+CompletionWidget::Render(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+CompletionWidget::SetCharacter(ePlayerType)
+CompletionWidget::Update()
+CompletionWidget::Update()::EventCntIsaac
+CompletionWidget::Update()::Layer
+CompletionWidget::~CompletionWidget()
+CompletionWidget::~CompletionWidget()
+
+Console::Console()
+Console::Console()
+Console::fill_omnicomplete()
+Console::fill_omnicomplete()::commands_v
+Console::fill_omnicomplete()::curses_v
+Console::fill_omnicomplete()::debugflags_v
+Console::fill_omnicomplete()::gridspawnidx_v
+Console::fill_omnicomplete()::pools_v
+Console::fill_omnicomplete()::roomtypes_v
+Console::get_current_key()
+Console::get_current_key()::shift_numbers_us
+Console::Hide()
+Console::Init()
+Console::ProcessInput()
+Console::Render()
+Console::Show()
+Console::submit_input()
+Console::submit_input()::buf
+Console::submit_input()::buf
+Console::submit_input()::buf
+Console::Update()
+Console::~Console()
+Console::~Console()
+
+ControllerButtonMap::ApplyToDeviceIndex(unsigned int)
+ControllerButtonMap::ControllerButtonMap()
+ControllerButtonMap::ControllerButtonMap()
+ControllerButtonMap::Destroy()
+ControllerButtonMap::Load(rapidxml::xml_node<char>*)
+ControllerButtonMap::RetrieveFromDeviceIndex(unsigned int)
+ControllerButtonMap::Save(rapidxml::xml_document<char>*, rapidxml::xml_node<char>*, std::__1::vector<char*, std::__1::allocator<char*> >*)
+
+Cutscene::ANM2Part::ANM2Part()
+Cutscene::ANM2Part::getHeight() const
+Cutscene::ANM2Part::getWidth() const
+Cutscene::ANM2Part::isFinished() const
+Cutscene::ANM2Part::load()
+Cutscene::ANM2Part::pause()
+Cutscene::ANM2Part::play()
+Cutscene::ANM2Part::render(KAGE::Math::Vector2 const&)
+Cutscene::ANM2Part::resume()
+Cutscene::ANM2Part::unload()
+Cutscene::ANM2Part::update()
+Cutscene::ANM2Part::~ANM2Part()
+Cutscene::ANM2Part::~ANM2Part()
+Cutscene::Entry::Entry()
+Cutscene::Entry::Entry()
+Cutscene::Entry::isFinished() const
+Cutscene::Entry::load()
+Cutscene::Entry::pause()
+Cutscene::Entry::render(KAGE::Math::Vector2 const&)
+Cutscene::Entry::resume()
+Cutscene::Entry::unload()
+Cutscene::Entry::update()
+Cutscene::Entry::~Entry()
+Cutscene::Entry::~Entry()
+Cutscene::GetLetterbox() const
+Cutscene::GetRenderSize(int&, int&) const
+Cutscene::Init(char const*)
+Cutscene::IsActive() const
+Cutscene::IsPlayingVideo() const
+Cutscene::PartBase::renderSubtitles()
+Cutscene::PartBase::rewindSubtitles()
+Cutscene::PartBase::setSubtitlePosition(unsigned int)
+Cutscene::PartBase::~PartBase()
+Cutscene::PartBase::~PartBase()
+Cutscene::Pause()
+Cutscene::Render()
+Cutscene::Resume()
+Cutscene::Show(Cutscene::eCutscene)
+Cutscene::Show(Cutscene::eCutscene)::altLayerIds
+Cutscene::Show(Cutscene::eCutscene)::layerIds
+Cutscene::Subtitle::srt_timestamp_to_frame(char const*)
+Cutscene::TemporaryPart::getHeight() const
+Cutscene::TemporaryPart::getWidth() const
+Cutscene::TemporaryPart::isFinished() const
+Cutscene::TemporaryPart::load()
+Cutscene::TemporaryPart::pause()
+Cutscene::TemporaryPart::play()
+Cutscene::TemporaryPart::render(KAGE::Math::Vector2 const&)
+Cutscene::TemporaryPart::resume()
+Cutscene::TemporaryPart::TemporaryPart(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Cutscene::TemporaryPart::unload()
+Cutscene::TemporaryPart::update()
+Cutscene::TemporaryPart::~TemporaryPart()
+Cutscene::TemporaryPart::~TemporaryPart()
+Cutscene::Unload()
+Cutscene::Update()
+Cutscene::VideoPart::getHeight() const
+Cutscene::VideoPart::getWidth() const
+Cutscene::VideoPart::isFinished() const
+Cutscene::VideoPart::load()
+Cutscene::VideoPart::pause()
+Cutscene::VideoPart::play()
+Cutscene::VideoPart::render(KAGE::Math::Vector2 const&)
+Cutscene::VideoPart::resume()
+Cutscene::VideoPart::unload()
+Cutscene::VideoPart::update()
+Cutscene::VideoPart::~VideoPart()
+Cutscene::VideoPart::~VideoPart()
+Cutscene::~Cutscene()
+
+DailyChallenge::DailyChallenge()
+DailyChallenge::DailyChallenge()
+DailyChallenge::determine_special_run(unsigned int)
+DailyChallenge::GetSeed() const
+DailyChallenge::Init(unsigned int)
+DailyChallenge::RDN(int, int, int)
+DailyChallenge::Reset()
+DailyChallenge::~DailyChallenge()
+
+Entity::AddBurn(Entity::EntityRef const&, int, float)
+Entity::AddCharmed(int)
+Entity::AddConfusion(Entity::EntityRef const&, int, bool)
+Entity::AddEntityFlags(long long)
+Entity::AddFear(Entity::EntityRef const&, int)
+Entity::AddFreeze(Entity::EntityRef const&, int)
+Entity::AddHealth(float)
+Entity::AddMidasFreeze(Entity::EntityRef const&, int)
+Entity::AddPoison(Entity::EntityRef const&, int, float)
+Entity::AddShrink(Entity::EntityRef const&, int)
+Entity::AddSlowing(Entity::EntityRef const&, int, float, ColorMod)
+Entity::AddVelocityWithFriction(KAGE::Math::Vector2 const&)
+Entity::BloodExplode()
+Entity::CanShutDoors() const
+Entity::ClearEntityFlags(long long)
+Entity::ClearReferences()
+Entity::Collide(Entity*, Entity*)
+Entity::collide_capsules(Entity*, Entity*)
+Entity::collide_circles(Entity*, Entity*)
+Entity::CollidesWithGrid()
+Entity::CollideWithGrid(bool)
+Entity::Die()
+Entity::DoesEntityShareStatus()
+Entity::Entity()
+Entity::EntityRef::EntityRef(Entity const*)
+Entity::Exists() const
+Entity::get_movement_direction() const
+Entity::get_movement_direction(KAGE::Math::Vector2 const&)
+Entity::get_special_grid_collision(KAGE::Math::Vector2 const&)
+Entity::GetBossID() const
+Entity::GetChild() const
+Entity::GetCollisionDamage() const
+Entity::GetColor() const
+Entity::GetDepthOffset() const
+Entity::GetDropRNG()
+Entity::GetDropSeed() const
+Entity::GetEntityCollisionClass() const
+Entity::GetEntityFlags() const
+Entity::GetFlipX() const
+Entity::GetFrameCount() const
+Entity::GetGridCollisionClass() const
+Entity::GetHitPoints() const
+Entity::GetIndex() const
+Entity::GetInitSeed() const
+Entity::GetLastChild()
+Entity::GetLastParent()
+Entity::GetLuaData()
+Entity::GetMass() const
+Entity::GetMaxHitPoints() const
+Entity::GetParent() const
+Entity::GetPosition() const
+Entity::GetPositionOffset() const
+Entity::GetRenderZ() const
+Entity::GetRenderZOffset() const
+Entity::GetSizeMulti() const
+Entity::GetSpawnerEntity() const
+Entity::GetSpawnerType() const
+Entity::GetSpawnerVariant() const
+Entity::GetSpawnGridIndex() const
+Entity::GetSplatColor() const
+Entity::GetSprite()
+Entity::GetSpriteOffset() const
+Entity::GetSpriteRotation() const
+Entity::GetSpriteScale() const
+Entity::GetStatusEffectTarget()
+Entity::GetSubType() const
+Entity::GetTarget() const
+Entity::GetTargetPosition() const
+Entity::GetType() const
+Entity::GetVariant() const
+Entity::GetVelocity() const
+Entity::GetVisible() const
+Entity::handle_collisions(Entity*, Entity*)
+Entity::HasCommonParentWithEntity(Entity*)
+Entity::HasEntityFlags(long long) const
+Entity::HasFullHealth()
+Entity::HasMortalDamage()
+Entity::IgnoreEffectFromFriendly(Entity::EntityRef const&) const
+Entity::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity::Interpolate()
+Entity::IsActiveEnemy(bool) const
+Entity::IsBoss() const
+Entity::IsDead() const
+Entity::IsEnemy() const
+Entity::IsEntityConnected(Entity*)
+Entity::IsFlying() const
+Entity::IsFrame(int, int)
+Entity::IsInvincible() const
+Entity::IsVisible() const
+Entity::IsVulnerableEnemy() const
+Entity::Kill()
+Entity::load_entity_config()
+Entity::MultiplyFriction(float)
+Entity::NUM_BOSS_COLORS
+Entity::PlayerCollideWithGrid(bool)
+Entity::PostRender()
+Entity::Remove()
+Entity::RemoveStatusEffects()
+Entity::Render(KAGE::Math::Vector2 const&)
+Entity::RenderShadowLayer(KAGE::Math::Vector2 const&)
+Entity::reset_color()
+Entity::RevertInterpolation()
+Entity::s_BossColors
+Entity::s_ChampionColors
+Entity::set_entity_ref(Entity**, Entity*)
+Entity::SetChild(Entity*)
+Entity::SetCollisionDamage(float)
+Entity::SetColor(ColorMod const&, int, int, bool, bool)
+Entity::SetDepthOffset(float)
+Entity::SetEntityCollisionClass(Entity::eEntityCollisionClass)
+Entity::SetFlipX(bool)
+Entity::SetGridCollisionClass(Entity::eGridCollisionClass)
+Entity::SetHitPoints(float)
+Entity::SetMass(float)
+Entity::SetMaxHitPoints(float)
+Entity::SetParent(Entity*)
+Entity::SetPosition(KAGE::Math::Vector2 const&)
+Entity::SetPositionOffset(KAGE::Math::Vector2 const&)
+Entity::SetRenderZOffset(int)
+Entity::SetSize(float, KAGE::Math::Vector2, int)
+Entity::SetSizeMulti(KAGE::Math::Vector2 const&)
+Entity::SetSpawnerEntity(Entity*)
+Entity::SetSpawnerType(eEntityType)
+Entity::SetSpawnerVariant(unsigned int)
+Entity::SetSplatColor(ColorMod const&)
+Entity::SetSpriteFrame(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)
+Entity::SetSpriteOffset(KAGE::Math::Vector2 const&)
+Entity::SetSpriteOverlayFrame(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)
+Entity::SetSpriteRotation(float)
+Entity::SetSpriteScale(KAGE::Math::Vector2 const&)
+Entity::SetStop(int, KAGE::Math::Vector2 const&)
+Entity::SetSubType(unsigned int)
+Entity::SetTarget(Entity*)
+Entity::SetTargetPosition(KAGE::Math::Vector2)
+Entity::SetVariant(unsigned int)
+Entity::SetVelocity(KAGE::Math::Vector2 const&)
+Entity::SetVisible(bool)
+Entity::ShrinkBegin(Entity*)
+Entity::ShrinkEnd()
+Entity::ShrinkUpdate()
+Entity::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity::Update()
+Entity::Update()::BurnColors
+Entity::UpdateChildStatusEffects()
+Entity::WillPlayerCollideWithGrid(KAGE::Math::Vector2 const&)
+Entity::~Entity()
+Entity::~Entity()
+Entity::~Entity()
+
+Entity_Bomb::AnimatePitfallIn()
+Entity_Bomb::Entity_Bomb()
+Entity_Bomb::Entity_Bomb()
+Entity_Bomb::GetExplosionDamage() const
+Entity_Bomb::GetIsFetus() const
+Entity_Bomb::GetRadiusMultiplier() const
+Entity_Bomb::GetTearFlags() const
+Entity_Bomb::handle_collision(Entity*, bool)
+Entity_Bomb::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Bomb::SetExplosionCountdown(int)
+Entity_Bomb::SetExplosionDamage(float)
+Entity_Bomb::SetIsFetus(bool)
+Entity_Bomb::SetRadiusMultiplier(float)
+Entity_Bomb::SetTearFlags(unsigned long long)
+Entity_Bomb::Update()
+Entity_Bomb::Update()::expArray
+Entity_Bomb::Update()::PlayerBombIndex
+Entity_Bomb::UpdatePitfallState()
+Entity_Bomb::~Entity_Bomb()
+Entity_Bomb::~Entity_Bomb()
+Entity_Bomb::~Entity_Bomb()
+Entity_Dummy::Entity_Dummy()
+Entity_Dummy::Entity_Dummy()
+Entity_Dummy::handle_collision(Entity*, bool)
+Entity_Dummy::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Dummy::Render(KAGE::Math::Vector2 const&)
+Entity_Dummy::Update()
+Entity_Dummy::~Entity_Dummy()
+Entity_Dummy::~Entity_Dummy()
+Entity_Dummy::~Entity_Dummy()
+Entity_Effect::clamp_particle_to_walls()
+Entity_Effect::Entity_Effect()
+Entity_Effect::Entity_Effect()
+Entity_Effect::FollowParent(Entity*)
+Entity_Effect::get_wall_coords(KAGE::Math::Vector2&)
+Entity_Effect::GetFallingAcceleration() const
+Entity_Effect::GetFallingSpeed() const
+Entity_Effect::GetRotationDegrees() const
+Entity_Effect::GetScale() const
+Entity_Effect::handle_collision(Entity*, bool)
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::Anim
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::Anim
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::animNames
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::anims
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::notRandom
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::ParticleAnims
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::sizes
+Entity_Effect::Init(eEntityType, unsigned int, unsigned int, unsigned int)::sizes
+Entity_Effect::Interpolate()
+Entity_Effect::IsPlayerCreep(int)
+Entity_Effect::Render(KAGE::Math::Vector2 const&)
+Entity_Effect::SetDamageSource(eEntityType)
+Entity_Effect::SetFallingAcceleration(float)
+Entity_Effect::SetFallingSpeed(float)
+Entity_Effect::SetRadii(float, float)
+Entity_Effect::SetRotationDegrees(float)
+Entity_Effect::SetScale(float)
+Entity_Effect::SetTimeout(int)
+Entity_Effect::Update()
+Entity_Effect::Update()::AnimName
+Entity_Effect::Update()::blood
+Entity_Effect::Update()::bone
+Entity_Effect::Update()::gut
+Entity_Effect::Update()::gut
+Entity_Effect::~Entity_Effect()
+Entity_Effect::~Entity_Effect()
+Entity_Effect::~Entity_Effect()
+Entity_Familiar::add_to_delayed()
+Entity_Familiar::add_to_followers()
+Entity_Familiar::AddCoins(int)
+Entity_Familiar::AddHearts(int)
+Entity_Familiar::AddKeys(int)
+Entity_Familiar::ai_bird()
+Entity_Familiar::ai_bluebabyfriend()
+Entity_Familiar::ai_bluefly()
+Entity_Familiar::ai_bluespider()
+Entity_Familiar::ai_bumbo()
+Entity_Familiar::ai_bumfriend()
+Entity_Familiar::ai_bumfriend()::Chests
+Entity_Familiar::ai_chubby()
+Entity_Familiar::ai_daddy_legs()
+Entity_Familiar::ai_demonbaby()
+Entity_Familiar::ai_gemini(bool)
+Entity_Familiar::ai_isaacs_body()
+Entity_Familiar::ai_key_full()
+Entity_Familiar::ai_lil_brimstone()
+Entity_Familiar::ai_lil_gurdy()
+Entity_Familiar::ai_lost_fly()
+Entity_Familiar::ai_lost_fly()::MoveSpeed
+Entity_Familiar::ai_meatboy()
+Entity_Familiar::ai_papa_fly()
+Entity_Familiar::ai_punchingbag()
+Entity_Familiar::ai_robobaby2()
+Entity_Familiar::ai_samsons_chain()
+Entity_Familiar::ai_sissy_longlegs()
+Entity_Familiar::ai_smartfly()
+Entity_Familiar::ai_spidermod()
+Entity_Familiar::ai_yo_listen()
+Entity_Familiar::Entity_Familiar()
+Entity_Familiar::Entity_Familiar()
+Entity_Familiar::fire_bombs(KAGE::Math::Vector2 const&)
+Entity_Familiar::fire_brimstone(KAGE::Math::Vector2 const&)
+Entity_Familiar::fire_charging_weapon(KAGE::Math::Vector2 const&)
+Entity_Familiar::fire_laser(KAGE::Math::Vector2 const&)
+Entity_Familiar::fire_projectiles(eDirection)
+Entity_Familiar::fire_projectiles(KAGE::Math::Vector2 const&, bool)
+Entity_Familiar::fire_tech_x(KAGE::Math::Vector2 const&)
+Entity_Familiar::follow_parent()
+Entity_Familiar::follow_position(KAGE::Math::Vector2 const&)
+Entity_Familiar::get_orbit_position(KAGE::Math::Vector2 const&)
+Entity_Familiar::GetCoins() const
+Entity_Familiar::GetHearts() const
+Entity_Familiar::GetKeys() const
+Entity_Familiar::GetPlayer() const
+Entity_Familiar::handle_collision(Entity*, bool)
+Entity_Familiar::HasWeaponType(Entity_Player::eWeaponType)
+Entity_Familiar::increase_mongo_idx()
+Entity_Familiar::increase_mongo_idx()::Baby_Collectibles
+Entity_Familiar::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Familiar::Interpolate()
+Entity_Familiar::is_delayed(unsigned int)
+Entity_Familiar::is_follower(unsigned int)
+Entity_Familiar::move_delayed(int)
+Entity_Familiar::move_diagonally(float)
+Entity_Familiar::move_diagonally(float)::root2
+Entity_Familiar::move_taped()
+Entity_Familiar::pick_enemy_target(float, int)
+Entity_Familiar::play_charge_anim(eDirection)
+Entity_Familiar::play_float_anim(eDirection)
+Entity_Familiar::play_shoot_anim(eDirection)
+Entity_Familiar::recalc_orbit_layer_offsets(int, bool)
+Entity_Familiar::Remove()
+Entity_Familiar::remove_from_delayed()
+Entity_Familiar::remove_from_followers()
+Entity_Familiar::Render(KAGE::Math::Vector2 const&)
+Entity_Familiar::s_OrbitAngleOffset
+Entity_Familiar::s_OrbitDistance
+Entity_Familiar::s_OrbitSpeed
+Entity_Familiar::s_UpgradedOrbitSpeed
+Entity_Familiar::set_fly_ref(Entity*)
+Entity_Familiar::SetCoins(int)
+Entity_Familiar::SetHearts(int)
+Entity_Familiar::SetKeys(int)
+Entity_Familiar::SetPlayer(Entity_Player*)
+Entity_Familiar::shoot()
+Entity_Familiar::shoot_chocolate_milk()
+Entity_Familiar::shoot_knife()
+Entity_Familiar::shoot_monstros_lungs()
+Entity_Familiar::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity_Familiar::TriggerNewRoom()
+Entity_Familiar::TriggerNewStage()
+Entity_Familiar::TriggerPillUsed()
+Entity_Familiar::TriggerPlayerDamaged()
+Entity_Familiar::TriggerRoomClear()
+Entity_Familiar::Update()
+Entity_Familiar::~Entity_Familiar()
+Entity_Familiar::~Entity_Familiar()
+Entity_Familiar::~Entity_Familiar()
+Entity_Knife::Entity_Knife()
+Entity_Knife::Entity_Knife()
+Entity_Knife::GetKnifeDistance() const
+Entity_Knife::GetKnifeVelocity() const
+Entity_Knife::GetRenderZ() const
+Entity_Knife::GetRotation() const
+Entity_Knife::GetRotationOffset() const
+Entity_Knife::GetTearFlags() const
+Entity_Knife::handle_collision(Entity*, bool)
+Entity_Knife::HomeIn()
+Entity_Knife::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Knife::InitHomingPath(KAGE::Math::Vector2, Entity*, float)
+Entity_Knife::Interpolate()
+Entity_Knife::IsFlying() const
+Entity_Knife::m_KnifeBackwardAcceleration
+Entity_Knife::m_KnifeForwardAcceleration
+Entity_Knife::Render(KAGE::Math::Vector2 const&)
+Entity_Knife::Reset()
+Entity_Knife::ScreenWrap()
+Entity_Knife::SetPathFollowSpeed(float)
+Entity_Knife::SetRotation(float)
+Entity_Knife::SetRotationOffset(float)
+Entity_Knife::SetTearFlags(unsigned long long)
+Entity_Knife::Shoot(float, float)
+Entity_Knife::Update()
+Entity_Knife::Wiggle()
+Entity_Knife::~Entity_Knife()
+Entity_Knife::~Entity_Knife()
+Entity_Knife::~Entity_Knife()
+Entity_Laser::CalculateEndPoint(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, Entity const*, float)
+Entity_Laser::ClearReferences()
+Entity_Laser::damage()
+Entity_Laser::damage_entities(float)
+Entity_Laser::damage_grid(int, KAGE::Math::Vector2 const&)
+Entity_Laser::damage_light_ring()
+Entity_Laser::do_damage(Entity*, float, bool)
+Entity_Laser::Entity_Laser()
+Entity_Laser::Entity_Laser()
+Entity_Laser::GetAngleDegrees() const
+Entity_Laser::GetEndPoint() const
+Entity_Laser::GetNonOptimizedSamples()
+Entity_Laser::GetRadius() const
+Entity_Laser::GetRenderZ() const
+Entity_Laser::GetSamples()
+Entity_Laser::GetTearFlags() const
+Entity_Laser::handle_collision(Entity*, bool)
+Entity_Laser::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Laser::init_laser()
+Entity_Laser::Interpolate()
+Entity_Laser::IsCircleLaser() const
+Entity_Laser::IsSampleLaser() const
+Entity_Laser::play_sound()
+Entity_Laser::Remove()
+Entity_Laser::Render(KAGE::Math::Vector2 const&)
+Entity_Laser::RenderShadowLayer(KAGE::Math::Vector2 const&)
+Entity_Laser::SetActiveRotation(unsigned int, float, float, bool)
+Entity_Laser::SetAngleDegrees(float)
+Entity_Laser::SetBlackHpDropChance(float)
+Entity_Laser::SetHomingType(Entity_Laser::eLaserHomingType)
+Entity_Laser::SetMaxDistance(float)
+Entity_Laser::SetMultidimensionalTouched(bool)
+Entity_Laser::SetOneHit(bool)
+Entity_Laser::SetRadius(float)
+Entity_Laser::SetTearFlags(unsigned long long)
+Entity_Laser::SetTimeout(int)
+Entity_Laser::ShootAngle(unsigned int, KAGE::Math::Vector2 const&, float, int, KAGE::Math::Vector2 const&, Entity*)
+Entity_Laser::spawn_impact(bool)
+Entity_Laser::Update()
+Entity_Laser::update_circle_laser()
+Entity_Laser::update_laser()
+Entity_Laser::~Entity_Laser()
+Entity_Laser::~Entity_Laser()
+Entity_Laser::~Entity_Laser()
+Entity_NPC::ai_adversary()
+Entity_NPC::ai_angel()
+Entity_NPC::ai_baby()
+Entity_NPC::ai_baby_long_legs()
+Entity_NPC::ai_big_horn()
+Entity_NPC::ai_black_maw()
+Entity_NPC::ai_blastocyst()
+Entity_NPC::ai_blister()
+Entity_NPC::ai_bluebabyfly()
+Entity_NPC::ai_boil()
+Entity_NPC::ai_bony_skinny()
+Entity_NPC::ai_boomfly()
+Entity_NPC::ai_brain()
+Entity_NPC::ai_brownie()
+Entity_NPC::ai_cage()
+Entity_NPC::ai_chub()
+Entity_NPC::ai_chub()::partSettings
+Entity_NPC::ai_chubber_projectile()
+Entity_NPC::ai_clotty()
+Entity_NPC::ai_cod_worm()
+Entity_NPC::ai_constant_stonehead()
+Entity_NPC::ai_corn_mine()
+Entity_NPC::ai_daddylonglegs()
+Entity_NPC::ai_dark_one()
+Entity_NPC::ai_dart_fly()
+Entity_NPC::ai_death()
+Entity_NPC::ai_deaths_head()
+Entity_NPC::ai_delirium()
+Entity_NPC::ai_delirium()::s_MorphDurations
+Entity_NPC::ai_delirium_aggression()
+Entity_NPC::ai_delirium_bullet_hell()
+Entity_NPC::ai_dingle()
+Entity_NPC::ai_dip()
+Entity_NPC::ai_dople()
+Entity_NPC::ai_duke()
+Entity_NPC::ai_dukie()
+Entity_NPC::ai_dummy()
+Entity_NPC::ai_embryo()
+Entity_NPC::ai_envy()
+Entity_NPC::ai_eternalfly()
+Entity_NPC::ai_eye()
+Entity_NPC::ai_fallen()
+Entity_NPC::ai_famine()
+Entity_NPC::ai_fat_bat()
+Entity_NPC::ai_fat_bat()::Diagonals
+Entity_NPC::ai_fat_sack()
+Entity_NPC::ai_fireplace()
+Entity_NPC::ai_fireplace()::DisappearAnim
+Entity_NPC::ai_fireplace()::FlickerAnim
+Entity_NPC::ai_fireplace()::IdleAnim
+Entity_NPC::ai_fistula()
+Entity_NPC::ai_fly()
+Entity_NPC::ai_forsaken()
+Entity_NPC::ai_fred()
+Entity_NPC::ai_gaper()
+Entity_NPC::ai_gate()
+Entity_NPC::ai_gemini()
+Entity_NPC::ai_gemini_baby()
+Entity_NPC::ai_gemini_main()
+Entity_NPC::ai_globin()
+Entity_NPC::ai_greed()
+Entity_NPC::ai_greed_gaper()
+Entity_NPC::ai_greed_gaper()::headAnims
+Entity_NPC::ai_greed_gaper()::notRandom
+Entity_NPC::ai_gurdy()
+Entity_NPC::ai_gurdy()::Anim
+Entity_NPC::ai_gurdy()::AttackV
+Entity_NPC::ai_gurdy_jr()
+Entity_NPC::ai_gurgle()
+Entity_NPC::ai_gusher()
+Entity_NPC::ai_guts()
+Entity_NPC::ai_guts()::Directions
+Entity_NPC::ai_hanger()
+Entity_NPC::ai_hanger()::AttackAnims
+Entity_NPC::ai_hanger()::IdleAnims
+Entity_NPC::ai_haunt()
+Entity_NPC::ai_headless_horseman()
+Entity_NPC::ai_heart()
+Entity_NPC::ai_heart_of_infamy()
+Entity_NPC::ai_hive()
+Entity_NPC::ai_homunculus()
+Entity_NPC::ai_hopper()
+Entity_NPC::ai_horf()
+Entity_NPC::ai_host()
+Entity_NPC::ai_hush()
+Entity_NPC::ai_hush()::EmergeAnimations
+Entity_NPC::ai_hush()::ShootAnimations
+Entity_NPC::ai_hush()::VanishAnimations
+Entity_NPC::ai_hush_boil()
+Entity_NPC::ai_hush_fly()
+Entity_NPC::ai_hush_gaper()
+Entity_NPC::ai_hush_skinless()
+Entity_NPC::ai_isaac()
+Entity_NPC::ai_isaac()::WaveOffset
+Entity_NPC::ai_knight()
+Entity_NPC::ai_lamb()
+Entity_NPC::ai_larryjr()
+Entity_NPC::ai_larryjr()::ButtlickerAnimations
+Entity_NPC::ai_larryjr()::GrubAttackAnimations
+Entity_NPC::ai_little_horn()
+Entity_NPC::ai_loki()
+Entity_NPC::ai_lump()
+Entity_NPC::ai_lust()
+Entity_NPC::ai_maggot_leech()
+Entity_NPC::ai_mama_gurdy()
+Entity_NPC::ai_mask()
+Entity_NPC::ai_mask_of_infamy()
+Entity_NPC::ai_maw()
+Entity_NPC::ai_meatball()
+Entity_NPC::ai_mega_fatty()
+Entity_NPC::ai_mega_maw()
+Entity_NPC::ai_mega_satan()
+Entity_NPC::ai_mega_satan_hand()
+Entity_NPC::ai_mega_satan_head()
+Entity_NPC::ai_membrain()
+Entity_NPC::ai_mobile_host()
+Entity_NPC::ai_mom()
+Entity_NPC::ai_mom()::DoorPositions
+Entity_NPC::ai_mom()::SpawnList
+Entity_NPC::ai_mom()::SpawnList
+Entity_NPC::ai_moms_guts()
+Entity_NPC::ai_moms_hand()
+Entity_NPC::ai_moms_heart()
+Entity_NPC::ai_monstro()
+Entity_NPC::ai_monstro()::Velocities
+Entity_NPC::ai_movable_tnt()
+Entity_NPC::ai_mr_fred()
+Entity_NPC::ai_mr_maw()
+Entity_NPC::ai_mulligan()
+Entity_NPC::ai_mushroom()
+Entity_NPC::ai_one_tooth()
+Entity_NPC::ai_oob()
+Entity_NPC::ai_para_bite()
+Entity_NPC::ai_peep()
+Entity_NPC::ai_pestilence()
+Entity_NPC::ai_pin()
+Entity_NPC::ai_pin()::AngAnims
+Entity_NPC::ai_pin()::GibTypes
+Entity_NPC::ai_pin()::PinDelays
+Entity_NPC::ai_pin()::ScolexDelays
+Entity_NPC::ai_pitfall()
+Entity_NPC::ai_poky()
+Entity_NPC::ai_polycephalus()
+Entity_NPC::ai_poop()
+Entity_NPC::ai_portal()
+Entity_NPC::ai_portal()::ToSpawn
+Entity_NPC::ai_pride()
+Entity_NPC::ai_rag_man()
+Entity_NPC::ai_rag_mega()
+Entity_NPC::ai_ring_of_flies()
+Entity_NPC::ai_round_worm()
+Entity_NPC::ai_satan()
+Entity_NPC::ai_shopkeeper()
+Entity_NPC::ai_shopkeeper()::AnimName
+Entity_NPC::ai_sisters_vis()
+Entity_NPC::ai_sisters_vis()::LaserEndDirs
+Entity_NPC::ai_sisters_vis()::LaserLoopDirs
+Entity_NPC::ai_sisters_vis()::LaserStartDirs
+Entity_NPC::ai_sloth()
+Entity_NPC::ai_spider()
+Entity_NPC::ai_squirt()
+Entity_NPC::ai_stone_eye()
+Entity_NPC::ai_stonehead()
+Entity_NPC::ai_stonehead()::IdleDir
+Entity_NPC::ai_swarm()
+Entity_NPC::ai_swarmer()
+Entity_NPC::ai_swinger()
+Entity_NPC::ai_ultra_coin()
+Entity_NPC::ai_ultra_door()
+Entity_NPC::ai_ultra_greed()
+Entity_NPC::ai_vis_gluttony()
+Entity_NPC::ai_vis_gluttony()::AttackDown
+Entity_NPC::ai_vis_gluttony()::AttackHoriz
+Entity_NPC::ai_vis_gluttony()::AttackUp
+Entity_NPC::ai_walking_boil()
+Entity_NPC::ai_wall_creeps()
+Entity_NPC::ai_war()
+Entity_NPC::ai_widow()
+Entity_NPC::ai_wizoob()
+Entity_NPC::ai_wizoob()::Anims
+Entity_NPC::ai_wizoob()::Anims
+Entity_NPC::ai_wizoob()::VanishAnims
+Entity_NPC::ai_wrath()
+Entity_NPC::anim_walkframe(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, float)
+Entity_NPC::bighorn_hold_bombs()
+Entity_NPC::bighorn_swallow_bombs()
+Entity_NPC::CalcTargetPosition(float)
+Entity_NPC::CanBeDamagedFromVelocity(KAGE::Math::Vector2&) const
+Entity_NPC::CanReroll() const
+Entity_NPC::CanShutDoors() const
+Entity_NPC::check_circular_dependency_parent(Entity*, Entity*)
+Entity_NPC::child_npc() const
+Entity_NPC::ClearReferences()
+Entity_NPC::create_bling(unsigned int)
+Entity_NPC::create_bling(unsigned int)::timer
+Entity_NPC::create_gold_particles(unsigned int, unsigned int)
+Entity_NPC::create_gold_particles(unsigned int, unsigned int)::timer
+Entity_NPC::deathspawn_champion()
+Entity_NPC::delirium_check_doubletrouble()
+Entity_NPC::delirium_check_doubletrouble()::s_DoubleTroublePairs
+Entity_NPC::delirium_check_multichunk(float)
+Entity_NPC::DeliriumAggro(unsigned char)
+Entity_NPC::DeliriumReplaceGraphics(ANM2*, eEntityType, unsigned int, bool)
+Entity_NPC::Entity_NPC()
+Entity_NPC::Entity_NPC()
+Entity_NPC::fire_boss_projectiles(int, KAGE::Math::Vector2 const&, float, Entity_NPC::ProjectileParams const&)
+Entity_NPC::fire_lamb_projectiles(int, int)
+Entity_NPC::fire_moms_heart_projectiles(int, int)
+Entity_NPC::fire_projectiles(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, Entity_NPC::eProjectilesMode, Entity_NPC::ProjectileParams const&)
+Entity_NPC::get_alive_enemy_count() const
+Entity_NPC::get_opposite_ultra_greed_door(Entity_NPC*, EntityList::EL)
+Entity_NPC::GetBossColorIdx() const
+Entity_NPC::GetPlayerTarget()
+Entity_NPC::GetScale() const
+Entity_NPC::glyph_of_balance_drop(unsigned int&, unsigned int&)
+Entity_NPC::handle_collision(Entity*, bool)
+Entity_NPC::HandlePickup(Entity*)
+Entity_NPC::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_NPC::IsBoss() const
+Entity_NPC::IsChampion() const
+Entity_NPC::Kill()
+Entity_NPC::KillUnique()
+Entity_NPC::load_entity_config()
+Entity_NPC::make_splat(float)
+Entity_NPC::MakeChampion(unsigned int)
+Entity_NPC::moms_heart_begin_bullet_hell()
+Entity_NPC::Morph(eEntityType, unsigned int, unsigned int, int)
+Entity_NPC::parent_npc() const
+Entity_NPC::play_sound(eSoundEffect, float, int, bool, float)
+Entity_NPC::ProjectileParams::ProjectileParams()
+Entity_NPC::query_npcs_group(int)
+Entity_NPC::query_npcs_spawnertype(eEntityType, eEntityType, bool) const
+Entity_NPC::query_npcs_type(eEntityType, int) const
+Entity_NPC::Render(KAGE::Math::Vector2 const&)
+Entity_NPC::reset_color()
+Entity_NPC::ResetPathFinderTarget()
+Entity_NPC::set_hush_fly_formation(int, KAGE::Math::Vector2, KAGE::Math::Vector2, unsigned char, PolyShape::ePolyShape, PolyShape::ePolyShape, unsigned char)
+Entity_NPC::SetCanShutDoors(bool)
+Entity_NPC::SetScale(float)
+Entity_NPC::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity_NPC::ThrowSpider(KAGE::Math::Vector2 const&, KAGE::Math::Vector2, bool, float)
+Entity_NPC::ToEntityDesc(Entity::EntityDesc&) const
+Entity_NPC::transfer_dmg_to_parent()
+Entity_NPC::trigger_death_remove()
+Entity_NPC::try_shoot_player(float, int, int, bool, Entity_NPC::eProjectilesMode, Entity_NPC::ProjectileParams)
+Entity_NPC::ultra_greed_add_coins(int)
+Entity_NPC::ultra_greed_hand_smash(KAGE::Math::Vector2)
+Entity_NPC::ultra_greed_handle_pickup(Entity*)
+Entity_NPC::Update()
+Entity_NPC::update_ai()
+Entity_NPC::update_sprite_scale()
+Entity_NPC::~Entity_NPC()
+Entity_NPC::~Entity_NPC()
+Entity_NPC::~Entity_NPC()
+Entity_Pickup::AppearFast()
+Entity_Pickup::CanReroll() const
+Entity_Pickup::CanReroll(int)
+Entity_Pickup::Entity_Pickup()
+Entity_Pickup::Entity_Pickup()
+Entity_Pickup::GetCharge() const
+Entity_Pickup::GetCoinValue() const
+Entity_Pickup::GetCoinValue() const::CoinValues
+Entity_Pickup::GetKeeperHeartToFlyCount(unsigned int)
+Entity_Pickup::GetPrice() const
+Entity_Pickup::GetShopItemId() const
+Entity_Pickup::GetTheresOptionsPickup() const
+Entity_Pickup::GetTimeout() const
+Entity_Pickup::GetWait() const
+Entity_Pickup::handle_collision(Entity*, bool)
+Entity_Pickup::handle_collision(Entity*, bool)::SpawnVars
+Entity_Pickup::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Pickup::IsShopItem() const
+Entity_Pickup::IsTouched() const
+Entity_Pickup::Morph(eEntityType, unsigned int, unsigned int, bool)
+Entity_Pickup::PlayDropSound()
+Entity_Pickup::PlayPickupSound()
+Entity_Pickup::Render(KAGE::Math::Vector2 const&)
+Entity_Pickup::SetCharge(int)
+Entity_Pickup::SetPrice(int)
+Entity_Pickup::SetShopItemId(int)
+Entity_Pickup::SetTheresOptionsPickup(bool)
+Entity_Pickup::SetTimeout(int)
+Entity_Pickup::SetTouched(bool)
+Entity_Pickup::SetWait(int)
+Entity_Pickup::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity_Pickup::try_open_chest()
+Entity_Pickup::Update()
+Entity_Pickup::Update()::oldSpriteScale
+Entity_Pickup::update_magnet_effect()
+Entity_Pickup::~Entity_Pickup()
+Entity_Pickup::~Entity_Pickup()
+Entity_Pickup::~Entity_Pickup()
+Entity_Player::add_dollar_bill_effect()
+Entity_Player::add_dollar_bill_effect()::Collectibles
+Entity_Player::add_player_form_costume(ePlayerForm)
+Entity_Player::AddBigBabyCountdown(int)
+Entity_Player::AddBlackHearts(int)
+Entity_Player::AddBlueFlies(int, KAGE::Math::Vector2 const&, Entity*)
+Entity_Player::AddBlueSpider(KAGE::Math::Vector2 const&)
+Entity_Player::AddBombs(int)
+Entity_Player::AddBrownBabyCountdown(int)
+Entity_Player::AddCacheFlags(int)
+Entity_Player::AddCard(eCard)
+Entity_Player::AddCoins(int)
+Entity_Player::AddCoins(int)::Checkpoints
+Entity_Player::AddCollectible(eCollectibleType, int, bool)
+Entity_Player::AddCollectible(eCollectibleType, int, bool)::SpawnEntities
+Entity_Player::AddCollectible(eCollectibleType, int, bool)::SpawnEntities
+Entity_Player::AddCostume(ItemConfig::Item const*, bool)
+Entity_Player::AddCryBabyCountdown(int)
+Entity_Player::AddDeadEyeCharge()
+Entity_Player::AddEternalHearts(int)
+Entity_Player::AddGoldenBomb()
+Entity_Player::AddGoldenHearts(int)
+Entity_Player::AddGoldenKey()
+Entity_Player::AddGreenBabyCountdown(int)
+Entity_Player::AddHearts(int)
+Entity_Player::AddJarFlies(int)
+Entity_Player::AddJarHearts(int)
+Entity_Player::AddKeys(int)
+Entity_Player::AddLilBabyCountdown(int)
+Entity_Player::AddLongBabyCountdown(int)
+Entity_Player::AddMaxHearts(int, bool)
+Entity_Player::AddNullCostume(ItemConfig::eNullItemID)
+Entity_Player::AddPickyBabyCountdown(int)
+Entity_Player::AddPill(ePillColor)
+Entity_Player::AddPrettyFly()
+Entity_Player::AddRageBabyCountdown(int)
+Entity_Player::AddSoulHearts(int)
+Entity_Player::AddTrinket(eTrinketType)
+Entity_Player::AddYellowBabyCountdown(int)
+Entity_Player::AdjustBlackHearts()
+Entity_Player::AnimateAppear()
+Entity_Player::AnimateHappy()
+Entity_Player::AnimateLightTravel()
+Entity_Player::AnimatePickup(ANM2 const&, bool)
+Entity_Player::AnimatePickup(eCard, char const*)
+Entity_Player::AnimatePickup(eCollectibleType, char const*, char const*)
+Entity_Player::AnimatePickup(ePillColor, char const*)
+Entity_Player::AnimatePickup(eTrinketType, char const*, char const*)
+Entity_Player::AnimatePitfallIn()
+Entity_Player::AnimatePitfallOut()
+Entity_Player::AnimateSad()
+Entity_Player::AnimateTeleport(bool)
+Entity_Player::AnimateTrapdoor()
+Entity_Player::AreControlsEnabled()
+Entity_Player::AreOpposingShootDirectionsPressed() const
+Entity_Player::can_charge_isaacs_tears()
+Entity_Player::can_turn_head()
+Entity_Player::CanAddCollectible() const
+Entity_Player::CanPickBlackHearts()
+Entity_Player::CanPickGoldenHearts()
+Entity_Player::CanPickupItem() const
+Entity_Player::CanShoot() const
+Entity_Player::check_familiar(unsigned int, int, RNG&)
+Entity_Player::clear_item_anim()
+Entity_Player::clear_item_anim(eCollectibleType)
+Entity_Player::clear_item_anim(ItemConfig::eNullItemID)
+Entity_Player::ClearCostumes()
+Entity_Player::ClearDeadEyeCharge()
+Entity_Player::ClearReferences()
+Entity_Player::ClearTemporaryEffects()
+Entity_Player::control_active_item()
+Entity_Player::control_bombs()
+Entity_Player::control_drop_pocket_items()
+Entity_Player::control_movement()
+Entity_Player::control_pocket_item()
+Entity_Player::control_shooting()
+Entity_Player::Debug_SetHighLuck()
+Entity_Player::DischargeActiveItem()
+Entity_Player::do_zit_effect(KAGE::Math::Vector2 const&)
+Entity_Player::DonateLuck(int)
+Entity_Player::DropTrinket(KAGE::Math::Vector2&, bool)
+Entity_Player::Entity_Player()
+Entity_Player::Entity_Player()
+Entity_Player::EvaluateItems()
+Entity_Player::EvaluateItems()::DmgArray
+Entity_Player::EvaluateItems()::SpeedArray
+Entity_Player::fire(KAGE::Math::Vector2 const&, bool)
+Entity_Player::fire(KAGE::Math::Vector2 const&, bool)::AngleOffsets
+Entity_Player::FireBomb(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+Entity_Player::FireBrimstone(KAGE::Math::Vector2 const&)
+Entity_Player::FireDelayedBrimstone(float, Entity*)
+Entity_Player::FireKnife(Entity*, float, bool, unsigned int)
+Entity_Player::FireTear(KAGE::Math::Vector2 const&, KAGE::Math::Vector2, bool, bool, bool)
+Entity_Player::FireTechLaser(KAGE::Math::Vector2 const&, Entity_Player::eLaserOffset, KAGE::Math::Vector2 const&, bool, bool)
+Entity_Player::FireTechXLaser(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, float)
+Entity_Player::FlushQueueItem()
+Entity_Player::FullCharge()
+Entity_Player::get_animation_from_vector(KAGE::Math::Vector2, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+Entity_Player::get_cambion_level()
+Entity_Player::get_cambion_pregnacy_level()
+Entity_Player::get_costume_null_pos(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool, KAGE::Math::Vector2 const&) const
+Entity_Player::get_glitch_baby_subtype() const
+Entity_Player::get_laser_offset(Entity_Player::eLaserOffset, KAGE::Math::Vector2 const&) const
+Entity_Player::get_movement_input()
+Entity_Player::get_shooting_input()
+Entity_Player::get_tear_movement_inheritance(KAGE::Math::Vector2 const&) const
+Entity_Player::GetActiveCharge() const
+Entity_Player::GetActiveItem() const
+Entity_Player::GetActiveSubCharge() const
+Entity_Player::GetActiveWeaponEntity() const
+Entity_Player::GetAimDirection() const
+Entity_Player::GetBabySkin() const
+Entity_Player::GetBatteryCharge() const
+Entity_Player::GetBlackHearts() const
+Entity_Player::GetBombFlags() const
+Entity_Player::GetBombVariant(unsigned long long, bool) const
+Entity_Player::GetCard(int) const
+Entity_Player::GetCardRNG(eCard)
+Entity_Player::GetCollectibleCount() const
+Entity_Player::GetCollectibleRNG(eCollectibleType)
+Entity_Player::GetControlsEnabled() const
+Entity_Player::GetCurrentRoomIdx() const
+Entity_Player::GetDamageCooldown() const
+Entity_Player::GetEffects()
+Entity_Player::GetEternalHearts() const
+Entity_Player::GetExtraLives() const
+Entity_Player::GetFireDirection() const
+Entity_Player::GetFlyingOffset() const
+Entity_Player::GetFriendBallEnemy() const
+Entity_Player::GetGoldenHearts() const
+Entity_Player::GetGreedDonationBreakChance() const
+Entity_Player::GetHeadDirection() const
+Entity_Player::GetHearts() const
+Entity_Player::GetItemState() const
+Entity_Player::GetJarFlies() const
+Entity_Player::GetJarHearts()
+Entity_Player::GetLastActionTriggers() const
+Entity_Player::GetLastDamageFlags() const
+Entity_Player::GetLastDamageSource() const
+Entity_Player::GetLastDirection() const
+Entity_Player::GetMaxHearts() const
+Entity_Player::GetMaxPoketItems() const
+Entity_Player::GetMaxTrinkets() const
+Entity_Player::GetMovementDirection() const
+Entity_Player::GetMovementVector() const
+Entity_Player::GetMultiShotParams()
+Entity_Player::GetMultiShotPositionVelocity(int, Entity_Player::eWeaponType, KAGE::Math::Vector2, float, Entity_Player::MultiShotParams)
+Entity_Player::GetMusicPitch() const
+Entity_Player::GetName() const
+Entity_Player::GetNPCTarget()
+Entity_Player::GetNumBlueFlies() const
+Entity_Player::GetNumBlueSpiders() const
+Entity_Player::GetNumBombs() const
+Entity_Player::GetNumCoins() const
+Entity_Player::GetNumKeys() const
+Entity_Player::GetPill(int) const
+Entity_Player::GetPillRNG(ePillEffect)
+Entity_Player::GetPlayerSpriteScale() const
+Entity_Player::GetPlayerType() const
+Entity_Player::GetPocketItem(int) const
+Entity_Player::GetRecentMovementVector() const
+Entity_Player::GetSmoothBodyRotation() const
+Entity_Player::GetSoulHearts() const
+Entity_Player::GetSoundPitch() const
+Entity_Player::GetTearHitParams(Entity_Player::eWeaponType, float, int)
+Entity_Player::GetTearPoisonDamage() const
+Entity_Player::GetTearRangeModifier() const
+Entity_Player::GetTearsOffset() const
+Entity_Player::GetTotalDamageTaken() const
+Entity_Player::GetTractorBeam() const
+Entity_Player::GetTrinket(unsigned int) const
+Entity_Player::GetTrinketMultiplier() const
+Entity_Player::GetTrinketRNG(eTrinketType)
+Entity_Player::GetVelocityBeforeUpdate() const
+Entity_Player::GetZodiacEffect() const
+Entity_Player::GetZodiacEffect() const::Zodiacs
+Entity_Player::handle_collision(Entity*, bool)
+Entity_Player::HasCollectible(eCollectibleType) const
+Entity_Player::HasFullHearts()
+Entity_Player::HasFullHeartsSoulHearts()
+Entity_Player::HasGoldenBomb() const
+Entity_Player::HasGoldenKey() const
+Entity_Player::HasInvincibility()
+Entity_Player::HasPlayerForm(ePlayerForm) const
+Entity_Player::HasTimedItem()
+Entity_Player::HasTrinket(eTrinketType) const
+Entity_Player::HasWeaponType(Entity_Player::eWeaponType) const
+Entity_Player::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Player::init_baby_skin()
+Entity_Player::InitBabyStats()
+Entity_Player::InitPlayerSkin()
+Entity_Player::InitPostLevelInitStats()
+Entity_Player::InitPreLevelInitStats()
+Entity_Player::is_item_anim_finished(eCollectibleType, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Entity_Player::is_item_anim_finished(ItemConfig::eNullItemID, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Entity_Player::is_item_anim_finished(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Entity_Player::IsBlackHeart(int)
+Entity_Player::IsExtraAnimationAlmostFinished() const
+Entity_Player::IsExtraAnimationFinished() const
+Entity_Player::IsFootstepFrame(int)
+Entity_Player::IsFullSpriteRendering()
+Entity_Player::IsHeldItemVisible() const
+Entity_Player::IsHoldingItem() const
+Entity_Player::IsItemNullAnimationAlmostFinished() const
+Entity_Player::IsItemQueueEmpty()
+Entity_Player::IsP2Appearing() const
+Entity_Player::IsPosInSpotLight(KAGE::Math::Vector2 const&)
+Entity_Player::NeedsCharge() const
+Entity_Player::NotifyGrabbed()
+Entity_Player::NotifyGrabFinished()
+Entity_Player::NumCollectibleHeld(eCollectibleType) const
+Entity_Player::play_charged_p2_anim()
+Entity_Player::play_delayed_sfx(eSoundEffect, float, int, int)
+Entity_Player::play_item_anim(eCollectibleType, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int, bool)
+Entity_Player::play_item_anim(ItemConfig::eNullItemID, bool, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int, bool)
+Entity_Player::PlayExtraAnimation(char const*)
+Entity_Player::PlayItemNullAnimation(char const*)
+Entity_Player::preload_sounds()
+Entity_Player::QueueExtraAnimation(char const*)
+Entity_Player::QueueItem(ItemConfig::Item const*, int, bool)
+Entity_Player::rebuild_costume_map()
+Entity_Player::RemoveBlackHeart(int)
+Entity_Player::RemoveBlueFly()
+Entity_Player::RemoveBlueSpider()
+Entity_Player::RemoveCollectible(eCollectibleType)
+Entity_Player::RemoveCostume(ItemConfig::Item const*)
+Entity_Player::RemoveSkinCostume()
+Entity_Player::Render(KAGE::Math::Vector2 const&)
+Entity_Player::RenderBody(KAGE::Math::Vector2 const&)
+Entity_Player::RenderGlow(KAGE::Math::Vector2 const&)
+Entity_Player::RenderHead(KAGE::Math::Vector2 const&)
+Entity_Player::RenderTop(KAGE::Math::Vector2 const&)
+Entity_Player::replace_costume_sprite(ItemConfig::Item const*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int)
+Entity_Player::reset_color()
+Entity_Player::reset_item_state()
+Entity_Player::ResetDamageCooldown()
+Entity_Player::RespawnFamiliars()
+Entity_Player::RestoreGameState(GameStatePlayer const&)
+Entity_Player::RestoreGameState_PostLevelInit(GameStatePlayer const&)
+Entity_Player::RestoreGlowingHourglassState()
+Entity_Player::Revive()
+Entity_Player::set_ladder_ref(Entity*)
+Entity_Player::SetActiveCharge(int)
+Entity_Player::SetControlsEnabled(bool)
+Entity_Player::SetFootprintColor(KAGE::Graphics::Color, bool)
+Entity_Player::SetFriendBallEnemy(Entity::EntityDesc const&)
+Entity_Player::SetFullHearts()
+Entity_Player::SetMinDamageCooldown(int)
+Entity_Player::SetPlayerSpriteScale(KAGE::Math::Vector2 const&)
+Entity_Player::SetShootingCooldown(int)
+Entity_Player::SetTargetTrapDoor(GridEntity*)
+Entity_Player::SetTearsOffset(KAGE::Math::Vector2)
+Entity_Player::shoot_red_candle(KAGE::Math::Vector2 const&)
+Entity_Player::spawn_maw_of_void(int)
+Entity_Player::StopExtraAnimation()
+Entity_Player::StoreGameState(GameStatePlayer&)
+Entity_Player::StoreGlowingHourGlassState()
+Entity_Player::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity_Player::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)::PickupVariants
+Entity_Player::trigger_baby_death()
+Entity_Player::TriggerBabyPreRemove()
+Entity_Player::TriggerDeath()
+Entity_Player::TriggerEffectRemoved(ItemConfig::Item const*, int)
+Entity_Player::TriggerEnemyDeath(Entity_NPC const*)
+Entity_Player::TriggerGreedModeStart()
+Entity_Player::TriggerHeartPickedUp()
+Entity_Player::TriggerNewRoom()
+Entity_Player::TriggerNewRoom()::Friends
+Entity_Player::TriggerNewStage()
+Entity_Player::TriggerNonEnemyTearHit()
+Entity_Player::TriggerPreVictoryLap(int)
+Entity_Player::TriggerRestart()
+Entity_Player::TriggerRoomClear()
+Entity_Player::TriggerRoomExit()
+Entity_Player::TriggerTrinketRemoved(eTrinketType)
+Entity_Player::TryHoldTrinket(eTrinketType)
+Entity_Player::TryRemoveCostume(eCollectibleType, bool)
+Entity_Player::TryRemoveCostume(eTrinketType)
+Entity_Player::TryRemoveCostume(ItemConfig::eNullItemID)
+Entity_Player::TryRemoveTrinket(eTrinketType)
+Entity_Player::TryUseKey()
+Entity_Player::Update()
+Entity_Player::update_babies()
+Entity_Player::update_canshoot()
+Entity_Player::update_effects()
+Entity_Player::update_golden_hearts()
+Entity_Player::update_isaac_pregnacy(bool)
+Entity_Player::update_isaac_pregnacy(bool)::cambion_paths
+Entity_Player::update_isaac_pregnacy(bool)::immaculate_paths
+Entity_Player::update_ladder()
+Entity_Player::update_purity_sprite()
+Entity_Player::update_purity_sprite()::purity_paths
+Entity_Player::UpdateFootEffects()
+Entity_Player::UpdateGrabbedState()
+Entity_Player::UpdatePitfallState()
+Entity_Player::UseActiveItem(eCollectibleType, bool, bool, bool, bool)
+Entity_Player::UseActiveItem(eCollectibleType, bool, bool, bool, bool)::Achievements
+Entity_Player::UseActiveItem(eCollectibleType, bool, bool, bool, bool)::Bosses
+Entity_Player::UseActiveItem(eCollectibleType, bool, bool, bool, bool)::CollectibleEffects
+Entity_Player::UseActiveItem(eCollectibleType, bool, bool, bool, bool)::expArray
+Entity_Player::UseCard(eCard)
+Entity_Player::UseCard(eCard)::Variants
+Entity_Player::UsePill(ePillEffect, ePillColor)
+Entity_Player::VoidHasCollectible(eCollectibleType) const
+Entity_Player::WillPlayerRevive()
+Entity_Player::~Entity_Player()
+Entity_Player::~Entity_Player()
+Entity_Player::~Entity_Player()
+Entity_Projectile::ACCELERATE
+Entity_Projectile::ACID_GREEN
+Entity_Projectile::ACID_RED
+Entity_Projectile::ANY_HEIGHT_ENTITY_HIT
+Entity_Projectile::BOOMERANG
+Entity_Projectile::BURST
+Entity_Projectile::BURST3
+Entity_Projectile::CANT_HIT_PLAYER
+Entity_Projectile::CHANGE_FLAGS_AFTER_TIMEOUT
+Entity_Projectile::CHANGE_VELOCITY_AFTER_TIMEOUT
+Entity_Projectile::CONTINUUM
+Entity_Projectile::CREEP_BROWN
+Entity_Projectile::CURVE_LEFT
+Entity_Projectile::CURVE_RIGHT
+Entity_Projectile::DECELERATE
+Entity_Projectile::Entity_Projectile()
+Entity_Projectile::Entity_Projectile()
+Entity_Projectile::EXPLODE
+Entity_Projectile::FIRE
+Entity_Projectile::GHOST
+Entity_Projectile::GOO
+Entity_Projectile::GREED
+Entity_Projectile::handle_collision(Entity*, bool)
+Entity_Projectile::HIT_ENEMIES
+Entity_Projectile::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Projectile::Interpolate()
+Entity_Projectile::MEGA_WIGGLE
+Entity_Projectile::MOVE_TO_PARENT
+Entity_Projectile::NO_WALL_COLLIDE
+Entity_Projectile::ORBIT_CCW
+Entity_Projectile::ORBIT_CW
+Entity_Projectile::RED_CREEP
+Entity_Projectile::SAWTOOTH_WIGGLE
+Entity_Projectile::SINE_VELOCITY
+Entity_Projectile::SLOWED
+Entity_Projectile::SMART
+Entity_Projectile::TRIANGLE
+Entity_Projectile::TURN_HORIZONTAL
+Entity_Projectile::Update()
+Entity_Projectile::WIGGLE
+Entity_Projectile::~Entity_Projectile()
+Entity_Projectile::~Entity_Projectile()
+Entity_Projectile::~Entity_Projectile()
+Entity_Slot::CreateDropsFromExplosion()
+Entity_Slot::Entity_Slot()
+Entity_Slot::Entity_Slot()
+Entity_Slot::get_collectible_spawn_pos()
+Entity_Slot::handle_collision(Entity*, bool)
+Entity_Slot::handle_collision(Entity*, bool)::SkullPrizes
+Entity_Slot::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Slot::RandomCoinJamAnim()
+Entity_Slot::RandomCoinJamAnim()::anims
+Entity_Slot::Render(KAGE::Math::Vector2 const&)
+Entity_Slot::TakeDamage(float, unsigned int, Entity::EntityRef const&, int)
+Entity_Slot::Update()
+Entity_Slot::Update()::Anims
+Entity_Slot::Update()::Chests
+Entity_Slot::~Entity_Slot()
+Entity_Slot::~Entity_Slot()
+Entity_Slot::~Entity_Slot()
+Entity_Tear::ChangeVariant(int)
+Entity_Tear::ClearReferences()
+Entity_Tear::Entity_Tear()
+Entity_Tear::Entity_Tear()
+Entity_Tear::handle_collision(Entity*, bool)
+Entity_Tear::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Tear::Interpolate()
+Entity_Tear::MakeMultidimensionalCopy(Entity*)
+Entity_Tear::offset_big_spiral_tear()
+Entity_Tear::offset_spiral_tear()
+Entity_Tear::Render(KAGE::Math::Vector2 const&)
+Entity_Tear::reset_sprite_scale()
+Entity_Tear::reset_sprite_scale()::RelativeSizes
+Entity_Tear::SetCollisionDamage(float)
+Entity_Tear::SetDeadEyeIntensity(float)
+Entity_Tear::SetFallingAcceleration(float)
+Entity_Tear::SetFallingSpeed(float)
+Entity_Tear::SetHeight(float)
+Entity_Tear::SetHomingFriction(float)
+Entity_Tear::SetScale(float)
+Entity_Tear::SetTearFlags(unsigned long long)
+Entity_Tear::trigger_collision()
+Entity_Tear::Update()
+Entity_Tear::~Entity_Tear()
+Entity_Tear::~Entity_Tear()
+Entity_Tear::~Entity_Tear()
+Entity_Text::Entity_Text()
+Entity_Text::Entity_Text()
+Entity_Text::handle_collision(Entity*, bool)
+Entity_Text::Init(eEntityType, unsigned int, unsigned int, unsigned int)
+Entity_Text::Interpolate()
+Entity_Text::Render(KAGE::Math::Vector2 const&)
+Entity_Text::SetText(char const*)
+Entity_Text::Update()
+Entity_Text::~Entity_Text()
+Entity_Text::~Entity_Text()
+Entity_Text::~Entity_Text()
+EntityConfig::BossColorLess(EntityConfig::BossColor const&, EntityConfig::BossColor const&)
+EntityConfig::Entity::Entity(EntityConfig::Entity const&)
+EntityConfig::Entity::operator=(EntityConfig::Entity const&)
+EntityConfig::EntityConfig()
+EntityConfig::EntityConfig()
+EntityConfig::get_entity(eEntityType, unsigned int, unsigned int)
+EntityConfig::GetEntity(eEntityType, unsigned int, unsigned int) const
+EntityConfig::GetEntityHash(eEntityType, unsigned int, unsigned int)
+EntityConfig::GetEntityVariants(eEntityType) const
+EntityConfig::GetPlayer(ePlayerType) const
+EntityConfig::GetRandomEdenHairSheet(unsigned int) const
+EntityConfig::Load(char const*, bool)
+EntityConfig::LoadBabies(char const*)
+EntityConfig::LoadBossColors(char const*)
+EntityConfig::LoadPlayers(char const*, bool)
+EntityConfig::Player::Player(EntityConfig::Player const&)
+EntityConfig::Preload(eEntityType, unsigned int, unsigned int)
+EntityConfig::Preload(EntityConfig::Entity*)
+EntityConfig::ResetPreloadFlags()
+EntityConfig::Unload()
+EntityConfig::~EntityConfig()
+EntityConfig::~EntityConfig()
+EntityFactory::Create(eEntityType)
+EntityFactory::EntityFactory()
+EntityFactory::Pool<Entity_Bomb, 64ul>::create()
+EntityFactory::Pool<Entity_Bomb, 64ul>::Pool()
+EntityFactory::Pool<Entity_Dummy, 128ul>::Pool()
+EntityFactory::Pool<Entity_Effect, 1024ul>::create()
+EntityFactory::Pool<Entity_Effect, 1024ul>::Pool()
+EntityFactory::Pool<Entity_Familiar, 64ul>::create()
+EntityFactory::Pool<Entity_Familiar, 64ul>::Pool()
+EntityFactory::Pool<Entity_Knife, 64ul>::create()
+EntityFactory::Pool<Entity_Knife, 64ul>::Pool()
+EntityFactory::Pool<Entity_Laser, 128ul>::create()
+EntityFactory::Pool<Entity_Laser, 128ul>::Pool()
+EntityFactory::Pool<Entity_NPC, 512ul>::create()
+EntityFactory::Pool<Entity_NPC, 512ul>::Pool()
+EntityFactory::Pool<Entity_Pickup, 512ul>::create()
+EntityFactory::Pool<Entity_Pickup, 512ul>::Pool()
+EntityFactory::Pool<Entity_Projectile, 512ul>::create()
+EntityFactory::Pool<Entity_Projectile, 512ul>::Pool()
+EntityFactory::Pool<Entity_Slot, 128ul>::create()
+EntityFactory::Pool<Entity_Slot, 128ul>::Pool()
+EntityFactory::Pool<Entity_Tear, 128ul>::create()
+EntityFactory::Pool<Entity_Tear, 128ul>::Pool()
+EntityFactory::Pool<Entity_Text, 128ul>::create()
+EntityFactory::Pool<Entity_Text, 128ul>::Pool()
+EntityFactory::~EntityFactory()
+EntityList::Add(Entity*)
+EntityList::ClearResults()
+EntityList::collide()
+EntityList::CountEntity(Entity*)
+EntityList::CountSpawned(Entity*, eEntityType, int, int)
+EntityList::CountType(eEntityType, int, int)
+EntityList::DiscountEntity(Entity*)
+EntityList::EL::copy(EntityList::EL const&)
+EntityList::EL::EL(EntityList::EL&, unsigned int)
+EntityList::EL::get_nearest(KAGE::Math::Vector2, Entity*)
+EntityList::EL::insert(unsigned int, Entity*)
+EntityList::EL::operator[](unsigned int) const
+EntityList::EL::push_back(Entity*)
+EntityList::EL::remove(Entity*)
+EntityList::EL::remove(unsigned int)
+EntityList::EL::size() const
+EntityList::EL::~EL()
+EntityList::EntityList()
+EntityList::EntityList()
+EntityList::GetResultsList(EntityList::EL const&)
+EntityList::MakePersistent(Entity*)
+EntityList::QueryRadius(KAGE::Math::Vector2 const&, float, unsigned int)
+EntityList::QueryType(eEntityType, int, int, bool, bool)
+EntityList::Remove(Entity*)
+EntityList::RenderEnd(KAGE::Math::Vector2 const&)
+EntityList::RenderShadows(KAGE::Math::Vector2 const&)
+EntityList::RenderSlice(unsigned int, KAGE::Math::Vector2 const&)
+EntityList::rendersort()
+EntityList::RenderStart()
+EntityList::Reset()
+EntityList::Update()
+EntityList::~EntityList()
+EntityList::~EntityList()
+EntityNpcComparator::operator()(Entity_NPC const*, Entity_NPC const*) const
+
+Fortunes::Init(unsigned int)
+Fortunes::load_txt(std::__1::vector<Fortunes::Entry, std::__1::allocator<Fortunes::Entry> >&, char const*)
+Fortunes::show_random(std::__1::vector<Fortunes::Entry, std::__1::allocator<Fortunes::Entry> > const&)
+Fortunes::ShowSeed()
+Fortunes::~Fortunes()
+
+FXLayers::AddPoopFx(ColorMod const&)
+FXLayers::build_vein_tree(FXLayers::Vein*)
+FXLayers::clear_vein_tree(FXLayers::Vein*)
+FXLayers::FX::FX()
+FXLayers::FX::FX()
+FXLayers::FX::operator=(FXLayers::FX const&)
+FXLayers::FXLayers()
+FXLayers::FXLayers()
+FXLayers::FXRay::operator=(FXLayers::FXRay const&)
+FXLayers::Init(char const*, eLevelStage, eStageType)
+FXLayers::Layer::Layer()
+FXLayers::Layer::Layer()
+FXLayers::render(int)
+FXLayers::render_vein(FXLayers::Vein*)
+FXLayers::RenderBackground()
+FXLayers::RenderBehind()
+FXLayers::RenderForeground()
+FXLayers::RenderVeins()
+FXLayers::Unload()
+FXLayers::Update()
+FXLayers::update_vein_tree(FXLayers::Vein*)
+FXLayers::~FXLayers()
+FXLayers::~FXLayers()
+
+Game::AchievementUnlocksDisallowed() const
+Game::AddDevilRoomDeal()
+Game::AddEncounteredBoss(eEntityType, unsigned int)
+Game::AddPixelation(int)
+Game::AddStageWithoutDamage()
+Game::AddStageWithoutHeartsPicked()
+Game::AddTreasureRoomsVisited()
+Game::BombDamage(KAGE::Math::Vector2 const&, float, float, bool, Entity const*, unsigned long long, unsigned int, bool)
+Game::BombExplosionEffects(KAGE::Math::Vector2 const&, float, unsigned long long, ColorMod const&, Entity*, float, bool, bool)
+Game::BombTearflagEffects(KAGE::Math::Vector2 const&, float, unsigned long long, Entity*)
+Game::ButterBeanFart(KAGE::Math::Vector2 const&, float, Entity const*, bool)
+Game::ChangeRoom(int)
+Game::CharmFart(KAGE::Math::Vector2 const&, float, Entity const*)
+Game::ClearDonationModAngel()
+Game::ClearDonationModGreed()
+Game::ClearStagesWithoutDamage()
+Game::ClearStagesWithoutHeartsPicked()
+Game::CreateSurfaces()
+Game::Darken(float, int)
+Game::DEBUG_RenderHud()
+Game::DebugText(KAGE::Math::Vector2 const&, KAGE::Graphics::Color const&, char const*, ...)
+Game::DebugText(KAGE::Math::Vector2 const&, KAGE::Graphics::Color const&, char const*, ...)::buffer
+Game::DestroySurfaces()
+Game::DonateAngel(int)
+Game::DonateGreed(int)
+Game::End(eEnding)
+Game::Exit(bool)
+Game::Fadein(float)
+Game::Fadeout(float, Game::eFadeoutTarget)
+Game::Fart(KAGE::Math::Vector2 const&, float, Entity const*, float, unsigned int)
+Game::FinishChallenge()
+Game::Game()
+Game::Game()
+Game::GetAmbush()
+Game::GetChallenge() const
+Game::GetDarknessModifier()
+Game::GetDevilRoomDeals() const
+Game::GetDifficulty() const
+Game::GetDonationModAngel() const
+Game::GetDonationModGreed() const
+Game::GetEncounteredBoss(int)
+Game::GetFont()
+Game::GetFrameCount()
+Game::GetGreedBossWaveNum() const
+Game::GetGreedWavesNum() const
+Game::GetItemHistory()
+Game::GetItemOverlay()
+Game::GetItemPool()
+Game::GetLastDevilRoomStage() const
+Game::GetLastLevelWithDamage() const
+Game::GetLastLevelWithoutHalfHp() const
+Game::GetLevel()
+Game::GetNearestPlayer(KAGE::Math::Vector2&)
+Game::GetNumEncounteredBosses()
+Game::GetNumPlayers()
+Game::GetPlayer(unsigned int)
+Game::GetRandomPlayer(KAGE::Math::Vector2&, float)
+Game::GetRoom()
+Game::GetScreenShakeCountdown() const
+Game::GetScreenShakeOffset() const
+Game::GetSpecialSeedBannedCurses() const
+Game::GetSpecialSeedPermanentCurses() const
+Game::GetStagesWithoutDamage() const
+Game::GetStagesWithoutHeartsPicked()
+Game::GetStateFlag(eStateFlag) const
+Game::GetTargetDarkness()
+Game::GetTreasureRoomVisitCount() const
+Game::GetVictoryLap() const
+Game::HasEncounteredBoss(eEntityType, unsigned int)
+Game::HasHallucination() const
+Game::Init()
+Game::init_vars()
+Game::InterpolatePositions()
+Game::IsGreedMode() const
+Game::IsPaused() const
+Game::LogPerformanceCounters()
+Game::MoveToRandomRoom(bool)
+Game::NextVictoryLap()
+Game::ProcessInput()
+Game::Render()
+Game::RerollEnemy(Entity*)
+Game::RerollLevelCollectibles()
+Game::RerollLevelPickups(unsigned int)
+Game::resize_window()
+Game::RestoreState(GameState const&)
+Game::RevertInterpolatedPositions()
+Game::s_BloomSurface
+Game::s_HallucinationSnapshot
+Game::s_HallucinationSurface
+Game::s_OldTVSurface
+Game::s_PixelatedSurface
+Game::SaveState(GameState&)
+Game::SetChallenge(eChallenge)
+Game::SetLastDevilRoomStage(eLevelStage)
+Game::SetLastLevelWithDamage(eLevelStage)
+Game::SetLastLevelWithoutHalfHp(eLevelStage)
+Game::SetScreenShakeOffset(KAGE::Math::Vector2)
+Game::SetStateFlag(eStateFlag, bool)
+Game::ShakeScreen(int)
+Game::ShowFortune()
+Game::ShowHallucination(int, Backdrop::eBackdrop)
+Game::ShowHallucination(int, Backdrop::eBackdrop)::s_Backdrops
+Game::ShowRule()
+Game::ShowVictoryLapPrompt()
+Game::Shutdown()
+Game::Spawn(eEntityType, unsigned int, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, Entity const*, unsigned int, unsigned int)
+Game::SpawnEntityDesc(Entity::EntityDesc const&, KAGE::Math::Vector2 const&, Entity const*)
+Game::SpawnParticles(KAGE::Math::Vector2 const&, Entity_Effect::eVariant, int, float, ColorMod const&, float)
+Game::Start(ePlayerType, eChallenge, Seeds, Game::eDifficulty)
+Game::StartDailyChallenge(DailyChallenge const&)
+Game::StartDebug(eLevelStage, eStageType, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Game::StartDebug(eLevelStage, eStageType, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DebugRoom
+Game::StartFromRerunState(GameState&)
+Game::StartFromSavedState(GameState const&)
+Game::StartRoomTransition(int, eDirection, RoomTransition::eAnimation)
+Game::StartStageTransition(bool, StageTransition::eAnimation)
+Game::TriggerBloom(int, float)
+Game::TriggerWindowResize()
+Game::Update()
+Game::UpdateLanguage()
+Game::UpdateStrangeAttractor(KAGE::Math::Vector2 const&)
+Game::~Game()
+Game::~Game()
+GameOver::GameOver()
+GameOver::GameOver()
+GameOver::Hide()
+GameOver::Init()
+GameOver::ProcessInput()
+GameOver::Render()
+GameOver::Show()
+GameOver::Update()
+GameOver::~GameOver()
+GameOver::~GameOver()
+Gamepad_axisMoveCallback
+Gamepad_axisMoveContext
+Gamepad_axisMoveFunc(void (*)(Gamepad_device*, unsigned int, float, float, double, void*), void*)
+Gamepad_buttonDownCallback
+Gamepad_buttonDownContext
+Gamepad_buttonDownFunc(void (*)(Gamepad_device*, unsigned int, double, void*), void*)
+Gamepad_buttonUpCallback
+Gamepad_buttonUpContext
+Gamepad_buttonUpFunc(void (*)(Gamepad_device*, unsigned int, double, void*), void*)
+Gamepad_detectDevices()
+Gamepad_deviceAtIndex(unsigned int)
+Gamepad_deviceAttachCallback
+Gamepad_deviceAttachContext
+Gamepad_deviceAttachFunc(void (*)(Gamepad_device*, void*), void*)
+Gamepad_deviceById(unsigned int)
+Gamepad_deviceRemoveCallback
+Gamepad_deviceRemoveContext
+Gamepad_deviceRemoveFunc(void (*)(Gamepad_device*, void*), void*)
+Gamepad_init()
+Gamepad_numDevices()
+Gamepad_processEvents()
+Gamepad_processEvents()::inProcessEvents
+Gamepad_shutdown()
+GamepadMappingHelper::IncrementAction()
+GamepadMappingHelper::Init()
+GamepadMappingHelper::m_ButtonWait
+GamepadMappingHelper::m_Controller
+GamepadMappingHelper::m_CurrentAction
+GamepadMappingHelper::m_Slot
+GamepadMappingHelper::Save()
+GamepadMappingHelper::Update()
+GameState::Clear()
+GameState::Delete()
+GameState::DeleteRerun()
+GameState::GameState()
+GameState::GameState()
+GameState::Load(char const*)
+GameState::LoadFromSteamCloud()
+GameState::LoadRerun(char const*)
+GameState::LoadRerunFromSteamCloud()
+GameState::read(GameStateIO&)
+GameState::read_EntitySaveState(EntitySaveState&, GameStateIO&)
+GameState::read_rerun(GameStateIO&)
+GameState::read_Room(unsigned int, GameStateIO&)
+GameState::s_CurrentVersion
+GameState::s_MinimumVersion
+GameState::Save()
+GameState::SaveRerun()
+GameState::SaveRerunToSteamCloud()
+GameState::SaveToSteamCloud()
+GameState::write(GameStateIO&)
+GameState::write_EntitySaveState(EntitySaveState const&, GameStateIO&)
+GameState::write_rerun(GameStateIO&)
+GameState::write_Room(unsigned int, GameStateIO&)
+GameState::~GameState()
+GameState::~GameState()
+GameStateItemPool::Init()
+GameStateItemPool::Read(GameStateIO&)
+GameStateItemPool::Write(GameStateIO&)
+GameStatePlayer::Init()
+GameStatePlayer::Read(GameStateIO&)
+GameStatePlayer::ReadRerun(GameStateIO&)
+GameStatePlayer::Write(GameStateIO&)
+GameStatePlayer::WriteRerun(GameStateIO&)
+GameStatePlayer::~GameStatePlayer()
+GameStateScoreSheet::Init()
+GameStateScoreSheet::Read(GameStateIO&)
+GameStateScoreSheet::Write(GameStateIO&)
+GCC and MSVC C++ Demangler
+gContext
+gctm
+gDevice
+generic_reader
+GenericPopup::GenericPopup()
+GenericPopup::GenericPopup()
+GenericPopup::Hide()
+GenericPopup::Initialize()
+GenericPopup::IsActive()
+GenericPopup::IsIdle()
+GenericPopup::LoadFonts()
+GenericPopup::Render()
+GenericPopup::Render()::YOffsets
+GenericPopup::SetImage(char const*)
+GenericPopup::SetShadowEnabled(bool)
+GenericPopup::SetText(char const*, char const*, char const*)
+GenericPopup::SetText(unsigned short const*, unsigned short const*, unsigned short const*)
+GenericPopup::Show()
+GenericPopup::Update()
+GenericPopup::~GenericPopup()
+GenericPopup::~GenericPopup()
+GenericPrompt::GenericPrompt()
+GenericPrompt::GenericPrompt()
+GenericPrompt::Hide()
+GenericPrompt::Initialize(bool)
+GenericPrompt::IsActive() const
+GenericPrompt::IsIdle() const
+GenericPrompt::ProcessInput()
+GenericPrompt::Remove()
+GenericPrompt::Render()
+GenericPrompt::SetImage(char const*)
+GenericPrompt::SetText(char const*, char const*, char const*, char const*, char const*)
+GenericPrompt::SetText(unsigned short const*, unsigned short const*, unsigned short const*, unsigned short const*, unsigned short const*)
+GenericPrompt::Show()
+GenericPrompt::Update(bool)
+GenericPrompt::~GenericPrompt()
+GenericPrompt::~GenericPrompt()
+
+
+GridEntity::BeginBatches()
+GridEntity::Destroy(bool)
+GridEntity::EndBatches()
+GridEntity::GetCollisionClass() const
+GridEntity::GetGridIndex()
+GridEntity::GetPosition() const
+GridEntity::GetRenderPosition() const
+GridEntity::GetSaveState()
+GridEntity::GetState() const
+GridEntity::GetType()
+GridEntity::GetVarData() const
+GridEntity::GetVariant()
+GridEntity::GridCollisionClassCollidesWithGridType(Entity::eGridCollisionClass, GridEntity::eCollisionClass)
+GridEntity::GridEntity()
+GridEntity::Hurt(int)
+GridEntity::hurt_func(Entity*, float, int, unsigned int, bool)
+GridEntity::hurt_surroundings(float, float, float, int, unsigned int, bool)
+GridEntity::hurt_surroundings_rect(float, float, float, int, unsigned int, bool)
+GridEntity::Init(GridEntity::Desc const&)
+GridEntity::Init(unsigned int)
+GridEntity::IsCrushableOrWalkable()
+GridEntity::IsDangerousCrushableOrWalkable()
+GridEntity::IsEasyCrushableOrWalkable()
+GridEntity::PostInit()
+GridEntity::SetState(unsigned int)
+GridEntity::SetType(eGridEntityType)
+GridEntity::SetVarData(int)
+GridEntity::SetVariant(unsigned int)
+GridEntity::~GridEntity()
+GridEntity::~GridEntity()
+GridEntity::~GridEntity()
+GridEntity_Decoration::InitSubclass()
+GridEntity_Decoration::Render(KAGE::Math::Vector2 const&)
+GridEntity_Decoration::Update()
+GridEntity_Decoration::~GridEntity_Decoration()
+GridEntity_Decoration::~GridEntity_Decoration()
+GridEntity_Door::Bar()
+GridEntity_Door::CanBlowOpen()
+GridEntity_Door::Close(bool)
+GridEntity_Door::Destroy(bool)
+GridEntity_Door::GetDirection() const
+GridEntity_Door::GetSlot() const
+GridEntity_Door::GetSpriteOffset()
+GridEntity_Door::GetTargetRoomIndex() const
+GridEntity_Door::InitSubclass()
+GridEntity_Door::IsBusted() const
+GridEntity_Door::IsKeyFamiliarTarget() const
+GridEntity_Door::IsLocked() const
+GridEntity_Door::IsOpen() const
+GridEntity_Door::IsRoomType(eRoomType) const
+GridEntity_Door::IsTargetRoomArcade() const
+GridEntity_Door::load_animation_file()
+GridEntity_Door::Open()
+GridEntity_Door::play_animation()
+GridEntity_Door::Render(KAGE::Math::Vector2 const&)
+GridEntity_Door::SetDirection(eDirection)
+GridEntity_Door::SetLocked(bool)
+GridEntity_Door::SetRoomTypes(eRoomType, eRoomType)
+GridEntity_Door::SetSlot(eDoorSlot)
+GridEntity_Door::SetTargetRoomIndex(int)
+GridEntity_Door::should_bar_greed_door(eRoomType, eRoomType, int)
+GridEntity_Door::SpawnDust()
+GridEntity_Door::TryBlowOpen(bool)
+GridEntity_Door::TryUnlock(bool)
+GridEntity_Door::Update()
+GridEntity_Door::~GridEntity_Door()
+GridEntity_Door::~GridEntity_Door()
+GridEntity_Fire::Hurt(int)
+GridEntity_Fire::InitSubclass()
+GridEntity_Fire::Render(KAGE::Math::Vector2 const&)
+GridEntity_Fire::Update()
+GridEntity_Fire::Update()::Gfx
+GridEntity_Fire::Update()::Gfx
+GridEntity_Fire::~GridEntity_Fire()
+GridEntity_Fire::~GridEntity_Fire()
+GridEntity_Gravity::GridEntity_Gravity()
+GridEntity_Gravity::GridEntity_Gravity()
+GridEntity_Gravity::InitSubclass()
+GridEntity_Gravity::PostInit()
+GridEntity_Gravity::Render(KAGE::Math::Vector2 const&)
+GridEntity_Gravity::Update()
+GridEntity_Gravity::~GridEntity_Gravity()
+GridEntity_Gravity::~GridEntity_Gravity()
+GridEntity_Gravity::~GridEntity_Gravity()
+GridEntity_Lock::GridEntity_Lock()
+GridEntity_Lock::GridEntity_Lock()
+GridEntity_Lock::InitSubclass()
+GridEntity_Lock::Render(KAGE::Math::Vector2 const&)
+GridEntity_Lock::TryUnlock()
+GridEntity_Lock::Update()
+GridEntity_Lock::~GridEntity_Lock()
+GridEntity_Lock::~GridEntity_Lock()
+GridEntity_Lock::~GridEntity_Lock()
+GridEntity_Pit::GridEntity_Pit()
+GridEntity_Pit::GridEntity_Pit()
+GridEntity_Pit::InitSubclass()
+GridEntity_Pit::MakeBridge()
+GridEntity_Pit::PostInit()
+GridEntity_Pit::Render(KAGE::Math::Vector2 const&)
+GridEntity_Pit::SetLadder(bool)
+GridEntity_Pit::Update()
+GridEntity_Pit::update_collision()
+GridEntity_Pit::~GridEntity_Pit()
+GridEntity_Pit::~GridEntity_Pit()
+GridEntity_Pit::~GridEntity_Pit()
+GridEntity_Poop::Hurt(int)
+GridEntity_Poop::InitSubclass()
+GridEntity_Poop::Render(KAGE::Math::Vector2 const&)
+GridEntity_Poop::RespawnRedPoop()
+GridEntity_Poop::Update()
+GridEntity_Poop::~GridEntity_Poop()
+GridEntity_Poop::~GridEntity_Poop()
+GridEntity_PressurePlate::GridEntity_PressurePlate()
+GridEntity_PressurePlate::InitSubclass()
+GridEntity_PressurePlate::is_greed_boss() const
+GridEntity_PressurePlate::is_greed_finalboss() const
+GridEntity_PressurePlate::play_greed_animation(bool)
+GridEntity_PressurePlate::play_normal_animation()
+GridEntity_PressurePlate::Render(KAGE::Math::Vector2 const&)
+GridEntity_PressurePlate::reward()
+GridEntity_PressurePlate::reward()::Chests
+GridEntity_PressurePlate::Update()
+GridEntity_PressurePlate::update_greed()
+GridEntity_PressurePlate::update_greed_animation()
+GridEntity_PressurePlate::update_normal()
+GridEntity_PressurePlate::~GridEntity_PressurePlate()
+GridEntity_PressurePlate::~GridEntity_PressurePlate()
+GridEntity_Rock::Destroy(bool)
+GridEntity_Rock::GetBigRockFrame() const
+GridEntity_Rock::InitSubclass()
+GridEntity_Rock::PostInit()
+GridEntity_Rock::Render(KAGE::Math::Vector2 const&)
+GridEntity_Rock::SetBigRockFrame(int)
+GridEntity_Rock::Update()
+GridEntity_Rock::update_anim_frame()
+GridEntity_Rock::~GridEntity_Rock()
+GridEntity_Rock::~GridEntity_Rock()
+GridEntity_Spikes::GridEntity_Spikes()
+GridEntity_Spikes::GridEntity_Spikes()
+GridEntity_Spikes::InitSubclass()
+GridEntity_Spikes::InitSubclass()::Anim
+GridEntity_Spikes::Render(KAGE::Math::Vector2 const&)
+GridEntity_Spikes::Update()
+GridEntity_Spikes::~GridEntity_Spikes()
+GridEntity_Spikes::~GridEntity_Spikes()
+GridEntity_Spikes::~GridEntity_Spikes()
+GridEntity_Stairs::GridEntity_Stairs()
+GridEntity_Stairs::GridEntity_Stairs()
+GridEntity_Stairs::InitSubclass()
+GridEntity_Stairs::Render(KAGE::Math::Vector2 const&)
+GridEntity_Stairs::Update()
+GridEntity_Stairs::~GridEntity_Stairs()
+GridEntity_Stairs::~GridEntity_Stairs()
+GridEntity_Stairs::~GridEntity_Stairs()
+GridEntity_Statue::Destroy(bool)
+GridEntity_Statue::InitSubclass()
+GridEntity_Statue::PostInit()
+GridEntity_Statue::Render(KAGE::Math::Vector2 const&)
+GridEntity_Statue::Update()
+GridEntity_Statue::~GridEntity_Statue()
+GridEntity_Statue::~GridEntity_Statue()
+GridEntity_TNT::GridEntity_TNT()
+GridEntity_TNT::GridEntity_TNT()
+GridEntity_TNT::Hurt(int)
+GridEntity_TNT::InitSubclass()
+GridEntity_TNT::Render(KAGE::Math::Vector2 const&)
+GridEntity_TNT::Update()
+GridEntity_TNT::~GridEntity_TNT()
+GridEntity_TNT::~GridEntity_TNT()
+GridEntity_TNT::~GridEntity_TNT()
+GridEntity_TrapDoor::GridEntity_TrapDoor()
+GridEntity_TrapDoor::GridEntity_TrapDoor()
+GridEntity_TrapDoor::InitSubclass()
+GridEntity_TrapDoor::Render(KAGE::Math::Vector2 const&)
+GridEntity_TrapDoor::Update()
+GridEntity_TrapDoor::~GridEntity_TrapDoor()
+GridEntity_TrapDoor::~GridEntity_TrapDoor()
+GridEntity_TrapDoor::~GridEntity_TrapDoor()
+GridEntity_Wall::InitSubclass()
+GridEntity_Wall::PostInit()
+GridEntity_Wall::Render(KAGE::Math::Vector2 const&)
+GridEntity_Wall::Update()
+GridEntity_Wall::~GridEntity_Wall()
+GridEntity_Wall::~GridEntity_Wall()
+GridEntity_Web::Destroy(bool)
+GridEntity_Web::GridEntity_Web()
+GridEntity_Web::GridEntity_Web()
+GridEntity_Web::InitSubclass()
+GridEntity_Web::Render(KAGE::Math::Vector2 const&)
+GridEntity_Web::Update()
+GridEntity_Web::~GridEntity_Web()
+GridEntity_Web::~GridEntity_Web()
+GridEntity_Web::~GridEntity_Web()
+
+Hallucinations::Hallucinations()
+Hallucinations::Hallucinations()
+Hallucinations::InitRecording()
+Hallucinations::InitReplay()
+Hallucinations::RecordPlayer(Hallucinations::PlayerRecord const&)
+Hallucinations::Render(KAGE::Math::Vector2 const&)
+Hallucinations::Update()
+Hallucinations::~Hallucinations()
+Hallucinations::~Hallucinations()
+
+History::AddHistoryItem(History::HistoryItem&)
+History::HasCollectible(eCollectibleType) const
+History::History()
+History::History()
+History::HistoryItem::HistoryItem(eCollectibleType, eLevelStage, eStageType, eRoomType, ItemPool::eItemPoolType, int)
+History::HistoryItem::HistoryItem(eCollectibleType, eLevelStage, eStageType, eRoomType, ItemPool::eItemPoolType, int)
+History::Reset()
+History::RestoreGameState(GameState const&)
+History::StoreGameState(GameState&)
+History::~History()
+History::~History()
+HomingLaser::ApplyHook(float)
+HomingLaser::ApplyWiggle()
+HomingLaser::calculate_smooth_tangents(float)
+HomingLaser::calculate_tangents()
+HomingLaser::CalculateSamples(float)
+HomingLaser::Clear()
+HomingLaser::ClipSamplesToMultidimensionalBaby(KAGE::Math::Vector2*, KAGE::Math::Vector2*)
+HomingLaser::ClipSamplesToWall(KAGE::Math::Vector2 const&)
+HomingLaser::CollideWithGrid(KAGE::Math::Vector2 const&, Entity::eGridCollisionClass)
+HomingLaser::CollideWithPlayer()
+HomingLaser::ComputeBezier(HomingLaser::eHomingType, Entity*)
+HomingLaser::ComputeCircleLaser(KAGE::Math::Vector2 const&, float, HomingLaser::eHomingType, Entity*)
+HomingLaser::distance_from_bezier_sq(KAGE::Math::Vector2 const&, HomingLaser::BezierPoint const&, HomingLaser::BezierPoint const&, float*, unsigned int)
+HomingLaser::GetBezierPosition(float, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&)
+HomingLaser::GetPathPos(float) const
+HomingLaser::HomingLaser()
+HomingLaser::HomingLaser()
+HomingLaser::HomingLaser(HomingLaser const&)
+HomingLaser::Init(unsigned int, HomingLaser::eLaserType)
+HomingLaser::operator=(HomingLaser const&)
+HomingLaser::OptimizeSamples(float)
+HomingLaser::Orbit(float)
+HomingLaser::point_segment_distance_sq(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, float*)
+HomingLaser::Reset()
+HomingLaser::UTurn(KAGE::Math::Vector2, float, float, float, KAGE::Math::Vector2)
+HomingLaser::~HomingLaser()
+HomingLaser::~HomingLaser()
+hookf
+hookf.hooknames
+HQX4Shader
+HQX4ShaderData
+HQX4VertexFormat
+HUD::FlashChargeBar()
+HUD::FoundHudData::operator==(HUD::FoundHudData const&) const
+HUD::HideItemText()
+HUD::HUD()
+HUD::Init()
+HUD::LoadGraphics()
+HUD::Render()
+HUD::Render()::NumStrBuf
+HUD::render_streak()
+HUD::Reset()
+HUD::SetBossHealth(float)
+HUD::SetSecondScreenRefresh(HUD::HudRefreshType)
+HUD::ShouldRenderSecondScreen()
+HUD::ShowFortuneText(char const*, char const*, char const*)
+HUD::ShowItemText(char const*, char const*, bool, bool)
+HUD::UnloadGraphics()
+HUD::Update()
+HUD::~HUD()
+HUD::~HUD()
+
+ISAACRNG::init(bool)
+ISAACRNG::isaac()
+ISAACRNG::ISAACRNG(unsigned int)
+ISAACRNG::ISAACRNG(unsigned int)
+ISAACRNG::next()
+IsaacShutdown()
+IsaacStartup(int, char**)
+IsaacUpdate()
+IsShaderInitialized(eShader)
+ItemConfig::GetCard(int) const
+ItemConfig::GetCards() const
+ItemConfig::GetCollectible(int) const
+ItemConfig::GetCollectibles() const
+ItemConfig::GetCostumes() const
+ItemConfig::GetNullItem(int) const
+ItemConfig::GetNullItems() const
+ItemConfig::GetPillEffect(ePillEffect) const
+ItemConfig::GetPillEffects() const
+ItemConfig::GetTrinket(int) const
+ItemConfig::GetTrinkets() const
+ItemConfig::Init()
+ItemConfig::IsValidCollectible(eCollectibleType)
+ItemConfig::Item::GetCostume() const
+ItemConfig::Item::IsCollectible() const
+ItemConfig::Item::IsNull() const
+ItemConfig::Item::IsTrinket() const
+ItemConfig::Item::~Item()
+ItemConfig::ItemConfig()
+ItemConfig::ItemConfig()
+ItemConfig::Load(char const*, ModManager::ItemMap*)
+ItemConfig::LoadCostumes(char const*, ModManager::ItemMap*)
+ItemConfig::LoadPocketItems(char const*, bool)
+ItemConfig::ShouldAddCostumeOnPickup(ItemConfig::Item const*)
+ItemConfig::Unload()
+ItemConfig::~ItemConfig()
+ItemConfig::~ItemConfig()
+ItemOverlay::Init(char const*)
+ItemOverlay::ItemOverlay()
+ItemOverlay::ItemOverlay()
+ItemOverlay::Render()
+ItemOverlay::Reset()
+ItemOverlay::Show(ItemOverlay::eOverlayID, int)
+ItemOverlay::Update()
+ItemOverlay::~ItemOverlay()
+ItemOverlay::~ItemOverlay()
+ItemPool::AddBibleUpgrade(int, ItemPool::eItemPoolType)
+ItemPool::ForceAddPillEffect(ePillEffect)
+ItemPool::get_chaos_pool(RNG&) const
+ItemPool::GetCard(unsigned int, bool, bool, bool) const
+ItemPool::GetCollectible(ItemPool::eItemPoolType, bool, unsigned int)
+ItemPool::GetCollectible(ItemPool::eItemPoolType, bool, unsigned int)::NewYearsPool
+ItemPool::GetCollectible(ItemPool::eItemPoolType, bool, unsigned int)::NintendoPool
+ItemPool::GetPill(unsigned int) const
+ItemPool::GetPillEffect(ePillColor)
+ItemPool::GetPillEffect(ePillColor)::BadPills
+ItemPool::GetPillEffect(ePillColor)::GoodPills
+ItemPool::GetPoolForRoom(eRoomType, unsigned int) const
+ItemPool::GetTrinket()
+ItemPool::Init(unsigned int, char const*)
+ItemPool::ItemPool()
+ItemPool::ItemPool()
+ItemPool::load_pools(char const*)
+ItemPool::load_pools(char const*)::PoolNames
+ItemPool::pick_collectible(float, ItemPool::Pool&, bool)
+ItemPool::Pool::Pool()
+ItemPool::RemoveCollectible(eCollectibleType)
+ItemPool::RemoveTrinket(eTrinketType)
+ItemPool::ResetRoomBlacklist()
+ItemPool::ResetTrinkets()
+ItemPool::RestoreGameState(GameStateItemPool const&)
+ItemPool::s_ItemRNGShiftIdx
+ItemPool::s_TrinketRNGShiftIdx
+ItemPool::StoreGameState(GameStateItemPool&)
+ItemPool::~ItemPool()
+ItemPool::~ItemPool()
+
+Leaderboard::CanGoDown()
+Leaderboard::CanGoLeft()
+Leaderboard::CanGoRight()
+Leaderboard::CanGoUp()
+Leaderboard::DailyChallengeFromDate(KAGE::System::DateTime)
+Leaderboard::DateFromDailyChallenge(unsigned int)
+Leaderboard::get_controller_id()
+Leaderboard::get_goal_icon(eLevelStage, int, bool, bool)
+Leaderboard::get_leaderboard(Leaderboard::eLeaderboardType, Leaderboard::eLeaderboardScope)
+Leaderboard::get_ordinal_suffix(int)
+Leaderboard::GetLeaderboardName(unsigned int, Leaderboard::eLeaderboardType)
+Leaderboard::GetLeaderboardName(unsigned int, Leaderboard::eLeaderboardType)::Name
+Leaderboard::GetMaxEntriesOffset()
+Leaderboard::GetSelectedLeaderboard()
+Leaderboard::Hide()
+Leaderboard::Init()
+Leaderboard::Leaderboard()
+Leaderboard::Leaderboard()
+Leaderboard::OnScoreLeaderboardFound(KAGE::System::LeaderboardData*, void*)
+Leaderboard::OnScoresDownloaded(KAGE::System::LeaderboardEntry*, int, void*)
+Leaderboard::OnScoreUploaded(bool, bool, int, int, void*)
+Leaderboard::OnTimeLeaderboardFound(KAGE::System::LeaderboardData*, void*)
+Leaderboard::OnTimeUploaded(bool, bool, int, int, void*)
+Leaderboard::ProcessInput()
+Leaderboard::ReloadGraphics()
+Leaderboard::Render()
+Leaderboard::render_leaderboard()
+Leaderboard::render_score()
+Leaderboard::render_score_line(KAGE::Math::Vector2&, char const*, int)
+Leaderboard::ScoreToStageTime(unsigned int, eLevelStage*, unsigned int*)
+Leaderboard::Show(unsigned int)
+Leaderboard::Show(unsigned int, ScoreSheet const&, bool)
+Leaderboard::show_leaderboard(Leaderboard::eLeaderboardType, Leaderboard::eLeaderboardScope)
+Leaderboard::StageTimeToScore(eLevelStage, unsigned int)
+Leaderboard::Update()
+Leaderboard::~Leaderboard()
+Leaderboard::~Leaderboard()
+
+Level::AddAngelRoomChance(float)
+Level::AddCurse(eLevelCurse, bool)
+Level::ApplyBlueMapEffect()
+Level::ApplyCompassEffect(bool)
+Level::ApplyMapEffect()
+Level::build_secret_room_index_blacklist()
+Level::can_enter_cell(int, eDirection)
+Level::CanOpenChallengeRoom(int) const
+Level::CanSpawnDevilRoom()
+Level::CanStageHaveCurseOfLabyrinth(eLevelStage)
+Level::ChangeRoom(int)
+Level::choose_boss(eLevelStage)
+Level::choose_double_trouble(eLevelStage)
+Level::ConvertGreedStageToNormal(eLevelStage)
+Level::DEBUG_goto_room(RoomConfig::Room const*)
+Level::DeleteCurrentRoom()
+Level::DisableDevilRoom()
+Level::Exit()
+Level::ForceHorsemanBoss(unsigned int)
+Level::generate_blue_womb()
+Level::generate_dungeon(RNG&)
+Level::generate_greed_dungeon()
+Level::get_near_rooms(int)
+Level::get_similar_room(int, bool)
+Level::get_target_slot(int, eDirection)
+Level::GetAbsoluteStage() const
+Level::GetAddAngelRoomChance() const
+Level::GetCanSeeEverything() const
+Level::GetCurrentRoom()
+Level::GetCurrentRoomDesc()
+Level::GetCurrentRoomIndex() const
+Level::GetCurseName()
+Level::GetCurses() const
+Level::GetDevilAngelRoomRNG()
+Level::GetDungeonPlacementSeed() const
+Level::GetEnterDoor() const
+Level::GetEnterPosition() const
+Level::GetGreedModeWaveSeed() const
+Level::GetHeartPicked() const
+Level::GetLastBossRoomListIndex() const
+Level::GetLastRoomDesc()
+Level::GetLeaveDoor() const
+Level::GetName()
+Level::GetName(eLevelStage, eStageType, int, int, bool)
+Level::GetNonCompleteRoomIndex() const
+Level::GetPreviousRoomIndex() const
+Level::GetRandomRoomIndex(bool) const
+Level::GetRoomByIdx(int)
+Level::GetRoomByIdx(int) const
+Level::GetRoomByIdx(int) const::Null
+Level::GetRoomCount() const
+Level::GetStage() const
+Level::GetStageType() const
+Level::GetStartingRoomIndex() const
+Level::GetStateFlag(Level::eStateFlag) const
+Level::HasBossChallenge() const
+Level::Init()
+Level::InitializeDevilAngelRoom(bool, bool)
+Level::IsAltStage() const
+Level::IsDevilRoomDisabled() const
+Level::IsNextStageAvailable() const
+Level::Level()
+Level::Level()
+Level::load_room()
+Level::place_room(LevelGenerator::Room const&, RoomConfig::Room const*, unsigned int)
+Level::place_rooms(LevelGenerator&, RoomConfig::eDifficulty, RoomConfig::eDifficulty)
+Level::precalc_allowed_doors()
+Level::QueryRoomTypeIndex(eRoomType, bool, RNG&)
+Level::RemoveCompassEffect()
+Level::RemoveCurse(eLevelCurse)
+Level::RemoveCurses()
+Level::Reset()
+Level::reset_room_list()
+Level::RestoreGameState(GameState const&)
+Level::room_index(int, int)
+Level::SetCanSeeEverything(bool)
+Level::SetEnterDoor(int)
+Level::SetHeartPicked()
+Level::SetLeaveDoor(int)
+Level::SetNextStage()
+Level::SetRedHeartDamage()
+Level::SetStage(eLevelStage, eStageType)
+Level::SetStateFlag(Level::eStateFlag, bool)
+Level::ShowMap()
+Level::ShowName(bool)
+Level::StoreGameState(GameState&)
+Level::swap_rooms(int, int)
+Level::UncoverHiddenDoor(int, eDoorSlot)
+Level::Update()
+Level::UpdatePortal(int, int)
+Level::UpdateVisibility()
+Level::~Level()
+Level::~Level()
+
+LevelGenerator::AddEndRoom(LevelGenerator::Room const*)
+LevelGenerator::calc_required_doors()
+LevelGenerator::calc_required_doors(LevelGenerator::Room&)
+LevelGenerator::candidate_sort(LevelGenerator::Room const&, LevelGenerator::Room const&)
+LevelGenerator::count_neighbors(XY const&)
+LevelGenerator::CreateRandomEndRoom(eRoomShape)
+LevelGenerator::CreateRoom(int, int, eRoomShape, int, int, eDirection)
+LevelGenerator::debug_printout()
+LevelGenerator::determine_boss_room(eRoomShape, std::__1::bitset<8ul> const&)
+LevelGenerator::Generate(int, bool, bool, bool, std::__1::bitset<13ul> const&)
+LevelGenerator::get_door_source_position(XY const&, eRoomShape, eDoorSlot, bool)
+LevelGenerator::get_door_target_position(XY const&, eRoomShape, eDoorSlot, bool)
+LevelGenerator::get_neighbor_candidates(unsigned int, bool)
+LevelGenerator::get_neighbor_candidates(unsigned int, bool)::bigroom_chances
+LevelGenerator::get_room_placement_offsets(eRoomShape)
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_1x1
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_1x2
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_2x1
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_2x2
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_lbl
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_lbr
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_ltl
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_ltr
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placement_null
+LevelGenerator::get_room_placement_offsets(eRoomShape)::placements
+LevelGenerator::get_room_size(eRoomShape)
+LevelGenerator::get_room_size(eRoomShape)::sizes
+LevelGenerator::GetNewBossRoom(eRoomShape, std::__1::bitset<8ul> const&, bool)
+LevelGenerator::GetNewEndRoom(eRoomShape, std::__1::bitset<8ul> const&)
+LevelGenerator::GetNewSecretRoom(std::__1::set<int, std::__1::less<int>, std::__1::allocator<int> > const&)
+LevelGenerator::GetRemainingRooms()
+LevelGenerator::has_shape_slot(eRoomShape, eDoorSlot, bool)
+LevelGenerator::index(XY const&)
+LevelGenerator::is_placement_valid(XY const&, eRoomShape)
+LevelGenerator::is_pos_free(XY const&, eRoomShape)
+LevelGenerator::LevelGenerator(unsigned int)
+LevelGenerator::LevelGenerator(unsigned int)
+LevelGenerator::make_new_dead_end()
+LevelGenerator::make_rooms(unsigned int)
+LevelGenerator::mark_dead_ends()
+LevelGenerator::place_room(LevelGenerator::Room const&)
+LevelGenerator::remove_invalid_doors(LevelGenerator::Room&)
+LevelGenerator::sort_dead_ends()
+LevelGenerator::travel(unsigned int)
+LevelGenerator::travel(unsigned int)::travel
+LevelGenerator::try_resize_endroom(LevelGenerator::Room&, eRoomShape, std::__1::bitset<8ul> const&)
+
+LRoomAreaDesc::Expand(float)
+LRoomAreaDesc::Expand(float, float, float, float)
+LRoomAreaDesc::GetRandomPos()
+LRoomTileDesc::GetRandomTile(int)
+
+LZW::BitBuffer::BitBuffer(unsigned char*, unsigned int)
+LZW::BitBuffer::BitBuffer(unsigned char*, unsigned int)
+LZW::BitBuffer::flushRemainingBits()
+LZW::BitBuffer::getBytePos()
+LZW::BitBuffer::isAtEnd()
+LZW::BitBuffer::readBits(unsigned char)
+LZW::BitBuffer::writeBits(unsigned int, unsigned char)
+LZW::decode(unsigned char*, unsigned char const*, unsigned int)
+LZW::Dict::addStr(unsigned int, unsigned char)
+LZW::Dict::Dict()
+LZW::Dict::Dict()
+LZW::Dict::findStr(unsigned int, unsigned char)
+LZW::Dict::init()
+LZW::Dict::reset()
+LZW::Dict::updateCodeSize()
+LZW::Dict::writeStr(unsigned int, unsigned char**, unsigned char*)
+LZW::Dict::writeStr(unsigned int, unsigned char**, unsigned char*)::writebuf
+LZW::Dict::~Dict()
+LZW::Dict::~Dict()
+LZW::init()
+LZW::LZW()
+LZW::LZW()
+
+Manager::AssignTriggeredController()
+Manager::check_game_data_modified()
+Manager::cleanup_current_state()
+Manager::create_surfaces()
+Manager::DeleteGameState()
+Manager::DeleteSaveSlot(Manager::eSaveSlot)
+Manager::execute_show_cutscene()
+Manager::execute_show_nightmare()
+Manager::execute_start_game()
+Manager::execute_start_menu()
+Manager::FreeLoadImage()
+Manager::GetButtonFrame(int, int, int)
+Manager::GetButtonFrame(unsigned int)
+Manager::GetChallengeParams(eChallenge)
+Manager::GetDailyChallengeDate() const
+Manager::GetTranslationString(char const*)
+Manager::handle_gamepad_helper()
+Manager::handle_hotkeys()
+Manager::handle_screenshot()
+Manager::Init()
+Manager::InitDailyChallenge()
+Manager::InitLoadImage(unsigned int)
+Manager::InputDeviceConnected(unsigned int)
+Manager::IsDebuggingConsoleEnabled()
+Manager::IsSteamCloudAvailable()
+Manager::LoadChallenges(char const*, bool)
+Manager::LoadConfigs()
+Manager::LoadGameState(Manager::eSaveSlot)
+Manager::LoadImage(char const*, KAGE::Graphics::VertexAttributeDescriptor*, bool)
+Manager::LoadTranslationStrings(char const*)
+Manager::Manager()
+Manager::Manager()
+Manager::NotifyButtonRemap(unsigned int)
+Manager::PlaySound(eSoundEffect, float, int, bool, float)
+Manager::RecordLoss()
+Manager::RecordWin()
+Manager::ReloadConfigs()
+Manager::Render()
+Manager::RenderButtonIcon(int, int, int, KAGE::Math::Vector2)
+Manager::RenderButtonIcon(int, KAGE::Math::Vector2)
+Manager::RenderLoadImage(float)
+Manager::ResizeCutsceneWindow(int, int, bool)
+Manager::ResizeWindow(int, int)
+Manager::RestartGame(Seeds, bool, bool)
+Manager::s_ColorCorrectionSurface
+Manager::s_HQX4Surface
+Manager::s_RenderSurface
+Manager::SaveGameState()
+Manager::SaveRerun()
+Manager::SetNewGameControllerIndex(int)
+Manager::SetSaveSlot(Manager::eSaveSlot)
+Manager::ShowAchievement(eAchievement)
+Manager::ShowCutscene(Cutscene::eCutscene, bool)
+Manager::ShowNightmareScene(bool)
+Manager::StartDailyChallengeGame(bool)
+Manager::StartDebugGame(eLevelStage, eStageType, char const*)
+Manager::StartMenu(MenuManager::eState, KAGE::Graphics::Color)
+Manager::StartNewGame(ePlayerType, eChallenge, Seeds, Game::eDifficulty)
+Manager::StartRerunGame()
+Manager::StartSavedGame()
+Manager::TriggerFocusGained()
+Manager::TriggerFocusLost()
+Manager::UnloadTranslationStrings()
+Manager::Update()
+Manager::UpdateLanguage()
+Manager::~Manager()
+Manager::~Manager()
+
+Menu_Bestiary::Init(KAGE::Math::Vector2 const&)
+Menu_Bestiary::load_preview()
+Menu_Bestiary::Menu_Bestiary()
+Menu_Bestiary::Menu_Bestiary()
+Menu_Bestiary::ProcessInput()
+Menu_Bestiary::ReloadGraphics()
+Menu_Bestiary::Render()
+Menu_Bestiary::Reset()
+Menu_Bestiary::Unload()
+Menu_Bestiary::Update()
+Menu_Bestiary::~Menu_Bestiary()
+Menu_Bestiary::~Menu_Bestiary()
+Menu_Challenge::Init(KAGE::Math::Vector2 const&)
+Menu_Challenge::Menu_Challenge()
+Menu_Challenge::Menu_Challenge()
+Menu_Challenge::ReloadGraphics()
+Menu_Challenge::Render()
+Menu_Challenge::Reset()
+Menu_Challenge::Update()
+Menu_Challenge::UpdateKeyPress()
+Menu_Challenge::~Menu_Challenge()
+Menu_Challenge::~Menu_Challenge()
+Menu_Character::append_seed_char(char)
+Menu_Character::erase_seed_char()
+Menu_Character::get_playertype_from_selection(Menu_Character::eCharacter)
+Menu_Character::Init(KAGE::Math::Vector2 const&)
+Menu_Character::Menu_Character()
+Menu_Character::Menu_Character()
+Menu_Character::ProcessInput()
+Menu_Character::ProcessSeedEntry()
+Menu_Character::ReloadGraphics()
+Menu_Character::Render()
+Menu_Character::Reset()
+Menu_Character::ResetSeedPopup()
+Menu_Character::SelectRandomChar()
+Menu_Character::Update()
+Menu_Character::UpdateRotations()
+Menu_Character::~Menu_Character()
+Menu_Character::~Menu_Character()
+Menu_Collection::Init(KAGE::Math::Vector2 const&)
+Menu_Collection::Menu_Collection()
+Menu_Collection::Menu_Collection()
+Menu_Collection::ReloadGraphics()
+Menu_Collection::Render()
+Menu_Collection::Reset()
+Menu_Collection::Unload()
+Menu_Collection::Update()
+Menu_Collection::UpdateKeyPress(KAGE::Math::Vector2 const&)
+Menu_Collection::~Menu_Collection()
+Menu_Collection::~Menu_Collection()
+Menu_ControllerSelect::ControllerInfo::ControllerInfo()
+Menu_ControllerSelect::ControllerInfo::ControllerInfo()
+Menu_ControllerSelect::ControllerInfo::ControllerInfo(Menu_ControllerSelect::ControllerInfo const&)
+Menu_ControllerSelect::ControllerInfo::ControllerInfo(Menu_ControllerSelect::ControllerInfo const&)
+Menu_ControllerSelect::ControllerInfo::~ControllerInfo()
+Menu_ControllerSelect::ControllerInfo::~ControllerInfo()
+Menu_ControllerSelect::Init(KAGE::Math::Vector2 const&)
+Menu_ControllerSelect::Menu_ControllerSelect()
+Menu_ControllerSelect::Menu_ControllerSelect()
+Menu_ControllerSelect::ReloadGraphics()
+Menu_ControllerSelect::Render()
+Menu_ControllerSelect::Reset()
+Menu_ControllerSelect::Unload()
+Menu_ControllerSelect::Update()
+Menu_ControllerSelect::UpdateKeyPress()
+Menu_ControllerSelect::~Menu_ControllerSelect()
+Menu_ControllerSelect::~Menu_ControllerSelect()
+Menu_Credits::Init(KAGE::Math::Vector2 const&)
+Menu_Credits::Menu_Credits()
+Menu_Credits::Menu_Credits()
+Menu_Credits::ReloadGraphics()
+Menu_Credits::Render()
+Menu_Credits::Update()
+Menu_Credits::~Menu_Credits()
+Menu_Credits::~Menu_Credits()
+Menu_Custom_Challenge::Init(KAGE::Math::Vector2 const&)
+Menu_Custom_Challenge::Menu_Custom_Challenge()
+Menu_Custom_Challenge::Menu_Custom_Challenge()
+Menu_Custom_Challenge::ReloadGraphics()
+Menu_Custom_Challenge::Render()
+Menu_Custom_Challenge::Reset()
+Menu_Custom_Challenge::Update()
+Menu_Custom_Challenge::UpdateKeyPress()
+Menu_Custom_Challenge::~Menu_Custom_Challenge()
+Menu_Custom_Challenge::~Menu_Custom_Challenge()
+Menu_Cutscenes::Init(KAGE::Math::Vector2 const&)
+Menu_Cutscenes::Menu_Cutscenes()
+Menu_Cutscenes::Menu_Cutscenes()
+Menu_Cutscenes::ReloadGraphics()
+Menu_Cutscenes::Render()
+Menu_Cutscenes::Reset()
+Menu_Cutscenes::Unload()
+Menu_Cutscenes::Update()
+Menu_Cutscenes::UpdateKeyPress()
+Menu_Cutscenes::~Menu_Cutscenes()
+Menu_Cutscenes::~Menu_Cutscenes()
+Menu_DailyChallenge::Init(KAGE::Math::Vector2 const&)
+Menu_DailyChallenge::LbFindCallback(KAGE::System::LeaderboardData*, void*)
+Menu_DailyChallenge::LbScoreCallback(KAGE::System::LeaderboardEntry*, int, void*)
+Menu_DailyChallenge::LbUploadCallback(bool, bool, int, int, void*)
+Menu_DailyChallenge::Menu_DailyChallenge()
+Menu_DailyChallenge::Menu_DailyChallenge()
+Menu_DailyChallenge::ReloadGraphics()
+Menu_DailyChallenge::Render()
+Menu_DailyChallenge::RenderLeaderboard()
+Menu_DailyChallenge::Reset()
+Menu_DailyChallenge::Unload()
+Menu_DailyChallenge::Update()
+Menu_DailyChallenge::update_sprite_layers()
+Menu_DailyChallenge::UpdateKeyPress()
+Menu_DailyChallenge::~Menu_DailyChallenge()
+Menu_DailyChallenge::~Menu_DailyChallenge()
+Menu_Game::Init(KAGE::Math::Vector2 const&)
+Menu_Game::Menu_Game()
+Menu_Game::Menu_Game()
+Menu_Game::prerender_continue_img()
+Menu_Game::ReloadGraphics()
+Menu_Game::Render()
+Menu_Game::Reset()
+Menu_Game::ShowPopup()
+Menu_Game::Unload()
+Menu_Game::Update()
+Menu_Game::UpdateKeyPress()
+Menu_Game::~Menu_Game()
+Menu_Game::~Menu_Game()
+Menu_KeyConfig::CheckButtonConflicts(int)
+Menu_KeyConfig::Init(KAGE::Math::Vector2 const&)
+Menu_KeyConfig::Menu_KeyConfig()
+Menu_KeyConfig::Menu_KeyConfig()
+Menu_KeyConfig::ReloadGraphics()
+Menu_KeyConfig::Render()
+Menu_KeyConfig::RenderUnrecognized()
+Menu_KeyConfig::Reset()
+Menu_KeyConfig::Unload()
+Menu_KeyConfig::Update()
+Menu_KeyConfig::UpdateUnrecognized()
+Menu_KeyConfig::~Menu_KeyConfig()
+Menu_KeyConfig::~Menu_KeyConfig()
+Menu_Mods::Init(KAGE::Math::Vector2 const&)
+Menu_Mods::Menu_Mods()
+Menu_Mods::Menu_Mods()
+Menu_Mods::ReloadGraphics()
+Menu_Mods::Render()
+Menu_Mods::Reset()
+Menu_Mods::Update()
+Menu_Mods::UpdateKeyPress()
+Menu_Mods::~Menu_Mods()
+Menu_Mods::~Menu_Mods()
+Menu_Options::DisplayNum(int, int, KAGE::Math::Vector2)
+Menu_Options::Init(KAGE::Math::Vector2 const&, bool)
+Menu_Options::Menu_Options()
+Menu_Options::Menu_Options()
+Menu_Options::ReloadGraphics()
+Menu_Options::Render()
+Menu_Options::Reset()
+Menu_Options::SetCursor(Menu_Options::eOption)
+Menu_Options::SetLocalRenderOffset(int)
+Menu_Options::Unload()
+Menu_Options::Update()
+Menu_Options::UpdateKeyPressCounts()
+Menu_Options::~Menu_Options()
+Menu_Options::~Menu_Options()
+Menu_Save::Init(KAGE::Math::Vector2 const&)
+Menu_Save::Menu_Save()
+Menu_Save::Menu_Save()
+Menu_Save::refresh_slot(int)
+Menu_Save::ReloadGraphics()
+Menu_Save::Render()
+Menu_Save::replace_slot_graphics(ANM2&)
+Menu_Save::Reset()
+Menu_Save::select_save_slot(int)
+Menu_Save::Update()
+Menu_Save::update_final_achievement_icon()
+Menu_Save::UpdateAnimations()
+Menu_Save::UpdateCurrentSlotGraphics()
+Menu_Save::UpdateKeyPress()
+Menu_Save::~Menu_Save()
+Menu_Save::~Menu_Save()
+Menu_SpecialSeed::GetSeedName(eSeedEffect)
+Menu_SpecialSeed::Init(KAGE::Math::Vector2 const&)
+Menu_SpecialSeed::Menu_SpecialSeed()
+Menu_SpecialSeed::Menu_SpecialSeed()
+Menu_SpecialSeed::ReloadGraphics()
+Menu_SpecialSeed::Render()
+Menu_SpecialSeed::Reset()
+Menu_SpecialSeed::SeedListItem::SeedListItem()
+Menu_SpecialSeed::SeedListItem::SeedListItem()
+Menu_SpecialSeed::SetSelectedSeed(eSeedEffect)
+Menu_SpecialSeed::Update()
+Menu_SpecialSeed::UpdateKeyPress()
+Menu_SpecialSeed::~Menu_SpecialSeed()
+Menu_SpecialSeed::~Menu_SpecialSeed()
+Menu_Stats::Init(KAGE::Math::Vector2 const&)
+Menu_Stats::LoadAchievementConfig()
+Menu_Stats::Menu_Stats()
+Menu_Stats::Menu_Stats()
+Menu_Stats::ReloadGraphics()
+Menu_Stats::Render()
+Menu_Stats::RenderNumber(unsigned int, KAGE::Math::Vector2)
+Menu_Stats::Reset()
+Menu_Stats::Update()
+Menu_Stats::UpdateSecrets()
+Menu_Stats::UpdateStats()
+Menu_Stats::~Menu_Stats()
+Menu_Stats::~Menu_Stats()
+Menu_Title::Init(KAGE::Math::Vector2 const&)
+Menu_Title::Menu_Title()
+Menu_Title::Menu_Title()
+Menu_Title::ReloadGraphics()
+Menu_Title::Render()
+Menu_Title::Reset()
+Menu_Title::Unload()
+Menu_Title::Update()
+Menu_Title::~Menu_Title()
+Menu_Title::~Menu_Title()
+MenuManager::get_target_offset() const
+MenuManager::Init()
+MenuManager::MenuManager()
+MenuManager::MenuManager()
+MenuManager::ReloadGraphics()
+MenuManager::Render()
+MenuManager::RenderButtonOverlay()
+MenuManager::ResetCharacterMenu()
+MenuManager::ResetMenus()
+MenuManager::s_TileHeight
+MenuManager::s_TileWidth
+MenuManager::SetChallengeOffset(int)
+MenuManager::SetCharacterOffset(int)
+MenuManager::SetControllerID(int)
+MenuManager::SetCustomChallengeOffset(int)
+MenuManager::SetGameSeeds(Seeds)
+MenuManager::SetGameSeedStr(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+MenuManager::SetKeyConfigOffset(int, int, int)
+MenuManager::SetModsOffset(int)
+MenuManager::SetOptionsOffset(int)
+MenuManager::SetSpecialSeedOffset(KAGE::Math::Vector2)
+MenuManager::SetState(MenuManager::eState)
+MenuManager::StartFadeIn(KAGE::Graphics::Color)
+MenuManager::StartFadeOut(KAGE::Graphics::Color)
+MenuManager::TriggerCutsceneEnd()
+MenuManager::Update()
+MenuManager::~MenuManager()
+MenuManager::~MenuManager()
+method_setImplementation
+Minimap::ClearDrawing()
+Minimap::Config::createSurface()
+Minimap::Config::render()
+Minimap::Init()
+Minimap::Minimap()
+Minimap::Minimap()
+Minimap::Refresh()
+Minimap::Render()
+Minimap::render_icons(KAGE::Math::Vector2 const&, float)
+Minimap::Shake()
+Minimap::Update()
+Minimap::~Minimap()
+Minimap::~Minimap()
+MiniZ::decode(unsigned char*, unsigned int, unsigned char const*, unsigned int, bool)
+MiniZ::encode(unsigned char*, unsigned int, unsigned char const*, unsigned int, bool)
+MiniZ::init_decode(unsigned int)
+MiniZ::init_encode(unsigned int)
+MiniZ::MiniZ()
+MiniZ::MiniZ()
+MiniZ::scramble(unsigned char*, unsigned int)
+MiniZ::~MiniZ()
+MiniZ::~MiniZ()
+mkdir
+mkstemp
+mktime
+ModCompare(ModManager::ModEntry const*, ModManager::ModEntry const*)
+modeIsGood(CGDisplayMode*)
+modff
+ModManager::ApplyShaders()
+ModManager::CreateSurfaces()
+ModManager::DestroySurfaces()
+ModManager::IsActive() const
+ModManager::ListMods()
+ModManager::load_custom_resources(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+ModManager::LoadConfigs()
+ModManager::LoadShaders()
+ModManager::ModEntry::ModEntry()
+ModManager::ModEntry::WriteMetadata()
+ModManager::ModManager()
+ModManager::ModManager()
+ModManager::PrepareShaders()
+ModManager::ReloadShaders()
+ModManager::RenderCustomCard(int, KAGE::Math::Vector2 const&)
+ModManager::RenderCustomCharacterMenu(int, KAGE::Math::Vector2 const&)
+ModManager::RenderCustomCharacterName(int, KAGE::Math::Vector2 const&)
+ModManager::RenderCustomCharacters(int, KAGE::Math::Vector2 const&, ColorMod const&, float)
+ModManager::Reset()
+ModManager::RunModScript(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&)
+ModManager::SetupShowCardAnimation(int, ANM2&)
+ModManager::ShutdownShaders()
+ModManager::TriggerResize()
+ModManager::TryRedirectPath(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+ModManager::UnloadMods()
+ModManager::~ModManager()
+ModManager::~ModManager()
+ModShaderVertexFormat
+mt
+mti
+Music::Crossfade(eMusic)
+Music::Fadein(eMusic)
+Music::Fadein(eMusic, float)
+Music::Fadeout()
+Music::GetCurrentMusicID() const
+Music::GetQueuedMusicID() const
+Music::LoadConfig(char const*)
+Music::Music()
+Music::Music()
+Music::Pause()
+Music::PitchSlide(float)
+Music::Play(eMusic)
+Music::Play(eMusic, float)
+Music::Queue(eMusic)
+Music::ResetPitch()
+Music::Resume()
+Music::Stream::Pause()
+Music::Stream::Play()
+Music::Stream::PrepareFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool, float, float)
+Music::Stream::QueueFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, bool)
+Music::Stream::Resume()
+Music::Stream::Stop()
+Music::Stream::Update(bool)
+Music::Update()
+Music::UpdateVolume()
+Music::VolumeSlide(float)
+Music::~Music()
+Music::~Music()
+
+NightmareScene::Init(char const*)
+NightmareScene::Render()
+NightmareScene::Reset()
+NightmareScene::RestoreGameState(GameState const&)
+NightmareScene::SetStageAlt(eLevelStage, eStageType)
+NightmareScene::Show(bool)
+NightmareScene::StoreGameState(GameState&)
+NightmareScene::Unload()
+NightmareScene::Update()
+NightmareScene::~NightmareScene()
+
+OptionsConfig::GetColorCorrection() const
+OptionsConfig::GetMusicVolume() const
+OptionsConfig::Load(char const*)
+OptionsConfig::LoadGlobalConfig()
+OptionsConfig::OptionsConfig()
+OptionsConfig::OptionsConfig()
+OptionsConfig::Reset()
+OptionsConfig::Save()
+OptionsConfig::SetAnnouncerVoiceMode(int)
+OptionsConfig::SetBossHpOnBottom(bool)
+OptionsConfig::SetControllerHotplug(bool)
+OptionsConfig::SetFilter(bool)
+OptionsConfig::SetFullscreen(bool)
+OptionsConfig::SetLanguage(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+OptionsConfig::SetMouseControl(bool)
+OptionsConfig::SetMusicVolume(float)
+OptionsConfig::SetSFXVolume(float)
+OptionsConfig::SetVSync(bool)
+OptionsConfig::~OptionsConfig()
+
+PauseScreen::GetBackgroundOpacity()
+PauseScreen::Hide()
+PauseScreen::Init()
+PauseScreen::PauseScreen()
+PauseScreen::PauseScreen()
+PauseScreen::ProcessInput()
+PauseScreen::Render()
+PauseScreen::ReselectController()
+PauseScreen::Reset()
+PauseScreen::Show()
+PauseScreen::Update()
+PauseScreen::update_key_press()
+PauseScreen::~PauseScreen()
+PauseScreen::~PauseScreen()
+
+PersistentGameData::AddBestiaryDeath(unsigned int)
+PersistentGameData::AddBestiaryEncounter(unsigned int)
+PersistentGameData::AddBestiaryEncounter(unsigned int)::BestiaryEntityCount
+PersistentGameData::AddBestiaryHit(unsigned int)
+PersistentGameData::AddBestiaryKill(unsigned int)
+PersistentGameData::AddBoss(eBossId)
+PersistentGameData::AddChallenge(eChallenge)
+PersistentGameData::AddMiniBoss(eMiniBossId)
+PersistentGameData::AddSpecialSeed(eSeedEffect)
+PersistentGameData::AddToCollection(eCollectibleType)
+PersistentGameData::check_platinum_god()
+PersistentGameData::Clear(bool)
+PersistentGameData::DeleteOldBackups(int)
+PersistentGameData::ExportAchievements()
+PersistentGameData::fix_cutscene_unlocks()
+PersistentGameData::Flush(bool)
+PersistentGameData::get_backup_filename()
+PersistentGameData::GetBestiaryDeathCount(unsigned int)
+PersistentGameData::GetBestiaryEncounterCount(unsigned int)
+PersistentGameData::GetBestiaryHitCount(unsigned int)
+PersistentGameData::GetBestiaryKillCount(unsigned int)
+PersistentGameData::GetMostRecentBackupDate()
+PersistentGameData::GetPlayerCompletionCounterID(eEventCounters, ePlayerType)
+PersistentGameData::ImportABSave(KAGE::Filesys::StreamBase*)
+PersistentGameData::ImportRebirthSave(char const*)
+PersistentGameData::ImportRebirthSteamSave(char const*)
+PersistentGameData::ImportSteamAchievements()
+PersistentGameData::IncreaseCutsceneCounter(Cutscene::eCutscene)
+PersistentGameData::IncreaseEventCounter(eEventCounters, int)
+PersistentGameData::IncreaseEventCounter(eEventCounters, int)::Achievements
+PersistentGameData::IncreaseLevelCounter(eLevelStage)
+PersistentGameData::IncreasePlayerCompletionCounter(eEventCounters, ePlayerType, bool)
+PersistentGameData::load()
+PersistentGameData::Load(char const*)
+PersistentGameData::LoadFromSteamCloud()
+PersistentGameData::PersistentGameData()
+PersistentGameData::PersistentGameData()
+PersistentGameData::RemoveSpecialSeed(eSeedEffect)
+PersistentGameData::Reset(bool)
+PersistentGameData::RestoreBackup(int)
+PersistentGameData::Save()
+PersistentGameData::save()
+PersistentGameData::SaveBackup()
+PersistentGameData::SaveToSteamCloud()
+PersistentGameData::SetGameSetting(Game::eGameSettings, int)
+PersistentGameData::SetGameStateChecksum(unsigned int)
+PersistentGameData::SetPlayerWinMask(unsigned int)
+PersistentGameData::SetPuzzleQuestID(unsigned int)
+PersistentGameData::SetReadOnly(bool)
+PersistentGameData::TryImportABSave(char const*)
+PersistentGameData::TryImportABSteamSave()
+PersistentGameData::TryUnlock(eAchievement)
+PersistentGameData::unlock_challenge_achievements()
+PersistentGameData::unlock_psn_achievement(ePSNAchievement)
+PersistentGameData::unlock_steam_achievement(eAchievement)
+PersistentGameData::Unlocked(eAchievement) const
+PersistentGameData::~PersistentGameData()
+PersistentGameData::~PersistentGameData()
+
+PlayerManager::GetPlayer(unsigned int)
+PlayerManager::GetSpawnPosition(KAGE::Math::Vector2)
+PlayerManager::Init(ePlayerType, unsigned int)
+PlayerManager::init_special_baby_selection(unsigned int)
+PlayerManager::InitPostLevelInitStats()
+PlayerManager::NotifyDead(Entity_Player*)
+PlayerManager::PlayerManager()
+PlayerManager::PlayerManager()
+PlayerManager::ProcessInput()
+PlayerManager::RemoveCoPlayer(Entity_Player*, bool)
+PlayerManager::Reset()
+PlayerManager::RestoreGameState(GameState const&)
+PlayerManager::s_RNGShiftIdx
+PlayerManager::spawn_selected_baby(int, int)
+PlayerManager::SpawnCoPlayer(int)
+PlayerManager::StoreGameState(GameState&)
+PlayerManager::TriggerNewRoom()
+PlayerManager::TriggerRoomClear()
+PlayerManager::Update()
+PlayerManager::~PlayerManager()
+PlayerManager::~PlayerManager()
+
+pollJoystickEvents()
+pollJoystickEvents()::directions
+PolyShape::AddPoint(KAGE::Math::Vector2)
+PolyShape::GetPosition(float)
+PolyShape::PolyShape(PolyShape::ePolyShape, float)
+PolyShape::PolyShape(PolyShape::ePolyShape, float)
+
+Preloader::ImageRef::ImageRef(char const*)
+Preloader::Init(char const*)
+Preloader::Load(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Preloader::Unload(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Preloader::UnloadAll()
+Preloader::~Preloader()
+
+RNG::GetSeed() const
+RNG::Next()
+RNG::Random()
+RNG::Random(unsigned int)
+RNG::RNG()
+RNG::RNG()
+RNG::RNG(unsigned int, unsigned int)
+RNG::RNG(unsigned int, unsigned int)
+RNG::s_Shifts
+RNG::SetSeed(unsigned int, unsigned int)
+RNG::Test()
+RNG::~RNG()
+RNG::~RNG()
+Room::AddEntity(Entity*)
+Room::check_player_enter_door()
+Room::check_pressure_plates_triggered()
+Room::CheckLine(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, Room::eLinecheckMode, int, bool, bool) const
+Room::CreateSurfaces()
+Room::DamageGrid(int, int)
+Room::DestroyGrid(int, bool)
+Room::DestroySurfaces()
+Room::EmitBloodFromWalls(int, int)
+Room::FindFreePickupSpawnPosition() const
+Room::FindFreePickupSpawnPosition(KAGE::Math::Vector2 const&, float, bool) const
+Room::FindFreeTilePosition(KAGE::Math::Vector2 const&, float) const
+Room::fix_award_pos(int&)
+Room::fix_award_pos(KAGE::Math::Vector2&)
+Room::fix_spawn_entry(RoomConfig::Entry&, unsigned int)
+Room::GetAliveBossesCount()
+Room::GetAliveEnemiesCount()
+Room::GetAwardSeed() const
+Room::GetBackdropType() const
+Room::GetBossID() const
+Room::GetBottomRightPos() const
+Room::GetBrokenWatchState() const
+Room::GetCenterPos() const
+Room::GetClampedGridIndex(KAGE::Math::Vector2 const&) const
+Room::GetClampedPosition(KAGE::Math::Vector2 const&, float) const
+Room::GetClampedPosition(KAGE::Math::Vector2 const&, float, float, float, float) const
+Room::GetDecorationSeed() const
+Room::GetDeliriumDistance() const
+Room::GetDevilRoomChance()
+Room::GetDoor(eDoorSlot)
+Room::GetDoorGridIndex(eDoorSlot, int, int, eRoomShape)
+Room::GetDoorSlotPosition(eDoorSlot) const
+Room::GetDungeonRockIdx() const
+Room::GetEntities()
+Room::GetFrameCount()
+Room::GetGridCollision(int) const
+Room::GetGridCollision(KAGE::Math::Vector2) const
+Room::GetGridEntity(int) const
+Room::GetGridEntity(int, int) const
+Room::GetGridEntity(KAGE::Math::Vector2 const&) const
+Room::GetGridHeight() const
+Room::GetGridIndex(int, int) const
+Room::GetGridIndex(KAGE::Math::Vector2 const&) const
+Room::GetGridPath(int) const
+Room::GetGridPath(int, int) const
+Room::GetGridPath(KAGE::Math::Vector2 const&) const
+Room::GetGridPosition(int) const
+Room::GetGridSize() const
+Room::GetGridWidth() const
+Room::GetLaserTarget(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&) const
+Room::GetLightingAlpha()
+Room::GetLRoomAreaDesc() const
+Room::GetLRoomTileDesc() const
+Room::GetLRoomTileDesc() const::LTileDesc
+Room::GetNextShockwaveId()
+Room::GetRandomPosition(float)
+Room::GetRandomTileIndex(int)
+Room::GetRedHeartDamage() const
+Room::GetRenderScrollOffset() const
+Room::GetRenderSurfaceTopLeft() const
+Room::GetRoomConfigStage() const
+Room::GetRoomShape() const
+Room::GetScreenUVPos(KAGE::Math::Vector2 const&, SmartPointer<KAGE::Graphics::ImageBase>)
+Room::GetSecondBossID() const
+Room::GetSeededCollectible(unsigned int)
+Room::GetShopItem(int, unsigned int&, unsigned int&, unsigned int)
+Room::GetShopItemPrice(unsigned int, unsigned int)
+Room::GetShopLevel() const
+Room::GetSpawnSeed() const
+Room::GetTintedRockIdx() const
+Room::GetTopLeftPos() const
+Room::GetType() const
+Room::greed_random_shopitem(unsigned int)
+Room::HasSlowDown()
+Room::HasTriggerPressurePlates() const
+Room::HasWater()
+Room::HasWaterPits() const
+Room::Init(RoomConfig::Room const*, RoomDescriptor*)
+Room::init_shop()
+Room::Interpolate()
+Room::IsAmbushActive() const
+Room::IsAmbushDone() const
+Room::IsClear() const
+Room::IsCurrentRoomLastBoss() const
+Room::IsDoorSlotAllowed(eDoorSlot) const
+Room::IsFirstEnemyDead() const
+Room::IsFirstVisit() const
+Room::IsInitialized()
+Room::IsLShapedRoom() const
+Room::IsPositionInRoom(KAGE::Math::Vector2 const&, float) const
+Room::IsSacrificeDone() const
+Room::KeepDoorsClosed()
+Room::LoadBackdropGraphics()
+Room::make_door(eDoorSlot)
+Room::make_wall(int, int)
+Room::make_walls()
+Room::MakeShopItem(unsigned int&, unsigned int&, int&, unsigned int)
+Room::MamaMegaExplossion()
+Room::PlayMusic()
+Room::PreRenderShadows()
+Room::RemoveDoor(eDoorSlot)
+Room::RemoveEntity(Entity*)
+Room::RemoveGridEntity(int, int, bool)
+Room::Render()
+Room::render_caustics()
+Room::RenderDebugGridInfo(KAGE::Math::Vector2 const&)
+Room::RenderDebugInformation(KAGE::Math::Vector2 const&)
+Room::reset()
+Room::RespawnEnemies()
+Room::restore_entity_from_state(unsigned int, GridEntity::Desc const&)
+Room::RestoreState()
+Room::Room()
+Room::Room()
+Room::s_CausticsSurface
+Room::s_LightOverlaySurface
+Room::s_ShadingSurface
+Room::s_ShadowSurface
+Room::s_ShockwaveSurface
+Room::s_WaterFloorSurface
+Room::SaveEffect(EntitySaveState const&)
+Room::SaveState()
+Room::ScreenWrapPosition(KAGE::Math::Vector2 const&, float) const
+Room::ScreenWrapPosition(KAGE::Math::Vector2 const&, float, float, float, float) const
+Room::SetAmbushDone(bool)
+Room::SetBrokenWatchState(int)
+Room::SetCardAgainstHumanity()
+Room::SetClear(bool)
+Room::SetFirstEnemyDead(bool)
+Room::SetFloorColor(ColorMod)
+Room::SetGridPath(int, int)
+Room::SetGridPath(int, int, int)
+Room::SetRedHeartDamage()
+Room::SetSacrificeDone(bool)
+Room::SetShockwaveParam(unsigned int, ShockwaveParams const&)
+Room::SetSlowDown(int)
+Room::SetWallColor(ColorMod)
+Room::ShopReshuffle(bool, bool)
+Room::ShopRestockFull()
+Room::ShopRestockPartial()
+Room::ShouldSaveEntity(eEntityType, unsigned int, eEntityType, bool)
+Room::spawn_entity(unsigned int, RoomConfig::Entry const&, unsigned int)
+Room::SpawnClearAward()
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnClearAward()::Achievements
+Room::SpawnGreedModeWave(bool)
+Room::SpawnGridEntity(int, eGridEntityType, unsigned int, unsigned int, int)
+Room::SpawnGridEntity(int, GridEntity::Desc const&)
+Room::SpawnMomExitDoor()
+Room::TriggerBossDeath(Entity_NPC*)
+Room::TriggerBossSpawn(Entity_NPC*)
+Room::TriggerRestock(int, int)
+Room::TriggerWindowResize()
+Room::TryGetShopDiscount(int, int)
+Room::TryMakeBridge(GridEntity*)
+Room::TryPlaceLadder(KAGE::Math::Vector2 const&, KAGE::Math::Vector2 const&, Entity*)
+Room::TrySpawnBlueWombDoor(bool, bool)
+Room::TrySpawnBossRushDoor(bool)
+Room::TrySpawnDevilRoomDoor(bool)
+Room::TrySpawnMegaSatanRoomDoor()
+Room::TrySpawnTheVoidDoor()
+Room::TurnGold()
+Room::Update()
+Room::update_ambient_sounds()
+Room::update_card_against_humanity()
+Room::update_greed_mode()
+Room::update_shop_restock(bool)
+Room::WorldToScreenPosition(KAGE::Math::Vector2) const
+Room::~Room()
+Room::~Room()
+
+RoomConfig::GetBossSpotGfx(RoomConfig::eStage) const
+RoomConfig::GetCurseName(unsigned int) const
+RoomConfig::GetMinibossName(unsigned int) const
+RoomConfig::GetPlayerSpotGfx(RoomConfig::eStage) const
+RoomConfig::GetRandomRoom(unsigned int, bool, RoomConfig::eStage, eRoomType, eRoomShape, unsigned int, unsigned int, RoomConfig::eDifficulty, RoomConfig::eDifficulty, std::__1::bitset<8ul> const&, unsigned int)
+RoomConfig::GetRoom(RoomConfig::eStage, eRoomType, unsigned int)
+RoomConfig::GetRooms(RoomConfig::eStage, eRoomType, eRoomShape, unsigned int, unsigned int, RoomConfig::eDifficulty, RoomConfig::eDifficulty, std::__1::bitset<8ul> const&, unsigned int)
+RoomConfig::GetRoomTypeFromString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+RoomConfig::GetStageAndTypeFromID(RoomConfig::eStage, eLevelStage&, eStageType&)
+RoomConfig::GetStageID(eLevelStage, eStageType)
+RoomConfig::GetStageName(RoomConfig::eStage) const
+RoomConfig::Load(char const*)
+RoomConfig::LoadCurses(char const*)
+RoomConfig::LoadMinibosses(char const*)
+RoomConfig::LoadSingleRoom(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+RoomConfig::LoadStage(RoomConfig::eStage)
+RoomConfig::LoadStageBinary(RoomConfig::eStage)
+RoomConfig::parse_room_node(rapidxml::xml_node<char>*, RoomConfig::Room&)
+RoomConfig::Reset()
+RoomConfig::ResetRoomWeights(RoomConfig::eStage)
+RoomConfig::ResetRoomWeightsForLoadedStages()
+RoomConfig::Room::Destroy()
+RoomConfig::Room::~Room()
+RoomConfig::RoomConfig()
+RoomConfig::RoomConfig()
+RoomConfig::Spawn::PickEntry(float) const
+RoomConfig::Stage::Unload()
+RoomConfig::UnloadStage(RoomConfig::eStage)
+RoomConfig::~RoomConfig()
+RoomConfig::~RoomConfig()
+
+RoomDescriptor::Reset()
+RoomDescriptor::RoomDescriptor()
+RoomDescriptor::RoomDescriptor(RoomDescriptor const&)
+RoomDescriptor::~RoomDescriptor()
+
+RoomProfiler::RoomProfiler()
+RoomProfiler::RoomProfiler()
+RoomProfiler::Start()
+RoomProfiler::Stop()
+RoomProfiler::Update()
+RoomProfiler::~RoomProfiler()
+RoomProfiler::~RoomProfiler()
+
+RoomTransition::AddMazeEffect()
+RoomTransition::change_room()
+RoomTransition::CreateSurfaces()
+RoomTransition::GetAlpha() const
+RoomTransition::GetFadeColor() const
+RoomTransition::GetFadeValue() const
+RoomTransition::has_teleport_anim()
+RoomTransition::Interpolate()
+RoomTransition::IsActive() const
+RoomTransition::IsRendering() const
+RoomTransition::LoadBossPortraits(char const*)
+RoomTransition::ProcessInput()
+RoomTransition::Render()
+RoomTransition::Reset()
+RoomTransition::RoomTransition()
+RoomTransition::RoomTransition()
+RoomTransition::Start(int, eDirection, RoomTransition::eAnimation)
+RoomTransition::Update()
+RoomTransition::~RoomTransition()
+RoomTransition::~RoomTransition()
+roundf
+ROW_OFFSET
+s_ANM2LoadingTime
+s_EntitySpawnTime
+s_tdefl_large_dist_extra
+s_tdefl_large_dist_sym
+s_tdefl_len_extra
+s_tdefl_len_sym
+s_tdefl_packed_code_size_syms_swizzle
+s_tdefl_small_dist_extra
+s_tdefl_small_dist_sym
+scanMangledField(char const*&, char const*, char const*&, int&)
+ScoreSheet::AddClearedRoom(eRoomType, eRoomShape, int)
+ScoreSheet::AddFinishedStage(eLevelStage, eStageType, unsigned int)
+ScoreSheet::AddKilledEnemy(Entity_NPC const*)
+ScoreSheet::AddPickup(unsigned int, unsigned int)
+ScoreSheet::AddVisitedRoom(eRoomType, eRoomShape, unsigned int)
+ScoreSheet::Calculate()
+ScoreSheet::Calculate()::ExpectedStageTimes
+ScoreSheet::Calculate()::StageBonus
+ScoreSheet::ExportData(unsigned char*, unsigned int)
+ScoreSheet::get_swag_points_bonus() const
+ScoreSheet::ImportData(unsigned char*, unsigned int)
+ScoreSheet::Reset()
+ScoreSheet::RestoreGameState(GameStateScoreSheet const&)
+ScoreSheet::room_shape_value(eRoomShape)
+ScoreSheet::ScoreSheet()
+ScoreSheet::ScoreSheet()
+ScoreSheet::StoreGameState(GameStateScoreSheet&) const
+ScoreSheet::~ScoreSheet()
+ScoreSheet::~ScoreSheet()
+searcher_C
+searcher_Croot
+searcher_Lua
+searcher_preload
+searchpath
+Seeds::AchievementUnlocksDisallowed() const
+Seeds::AddSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::ban_seed_combos(std::__1::set<eSeedEffect, std::__1::less<eSeedEffect>, std::__1::allocator<eSeedEffect> >)
+Seeds::ban_seed_pair(eSeedEffect, eSeedEffect)
+Seeds::CanAddSeedEffect(eSeedEffect)
+Seeds::CanAddSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::CountUnlockedSeedEffects()
+Seeds::DoesAnySpecialSeedEffectBlockAchievements() const
+Seeds::ForgetStageSeed(eLevelStage)
+Seeds::GetNextSeed()
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AllChampionsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AlwaysAfraidStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AlwaysAlternatingFearStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AlwaysCharmedAndAfraidStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AlwaysCharmedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AlwaysConfusedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::AxisAlignedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::BigHeadStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::BlackIsaacStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::BlindImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::BlindStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::BraveryStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CamoEnemiesStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CamoEverythingStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CamoPickupsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CamoStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ChristmasStr1
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ChristmasStr2
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ControlsReversedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CowardiceStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CursedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::CurseImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DamageOnIntervalStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DamageOnTimeLimitStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DamageWhenStoppedStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DarknessImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DarknessStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DyslexicStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DyslexicStr2
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::DyslexicStr3
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::EnemiesInvisibleStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::EnemiesRespawnStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ExtraBloodStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::FartSoundStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::FastMusicStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::GlowingTearsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::HealthPitchStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::HighDmgStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::IcePhysicsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::InfiniteBasementStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::InvincibleStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::IsaacInvisibleStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ItemsCostMoneyStr1
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::ItemsCostMoneyStr2
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::KappaStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::KidsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::LabyrinthImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::LabyrinthStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::LostImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::LostStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::MassiveDmgStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::MazeImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::MazeStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::MovementPitchStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::MysteryTarotCardsStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::NoBossExitStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::NoFaceStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::NoHUDStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PacifistStr1
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PacifistStr2
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PickupsSlideStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PickupsTimeoutStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PillsNeverIdentifyStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::PoopTrailStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::SlowMusicStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::SmallHeadStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::UltraFastMusicStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::UltraSlowMusicStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::UnknownImmunityStr
+Seeds::GetSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)::UnknownStr
+Seeds::GetStartSeedString() const
+Seeds::HasSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const
+Seeds::InitSeedInfo()
+Seeds::IsSpecialSeed(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::IsStringValidSeed(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::operator=(Seeds const&)
+Seeds::RemoveBlockingSeedEffects(eSeedEffect)
+Seeds::RemoveSeedEffect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::Reset()
+Seeds::Restart(eChallenge)
+Seeds::s_BannedSeedCombos
+Seeds::s_SeedsBlockAchievements
+Seeds::Seed2String(unsigned int)
+Seeds::SeedEffectBlocksAchievements(eSeedEffect)
+Seeds::Seeds()
+Seeds::Seeds()
+Seeds::Seeds(Seeds const&)
+Seeds::Seeds(Seeds const&)
+Seeds::SetStartSeed(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+Seeds::SetStartSeed(unsigned int)
+Seeds::String2Seed(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+Seeds::~Seeds()
+Seeds::~Seeds()
+sel_getUid
+semerror
+set_file_offset(stb_vorbis*, unsigned int)
+setallfields
+setjmp
+setlocale
+setLuaPath(luabridge::lua_State*, char const*, bool)
+setModeCursor(_GLFWwindow*, int)
+setpath
+setup_malloc(stb_vorbis*, int)
+setup_temp_malloc(stb_vorbis*, int)
+SetupSaveDirectory()
+setvbuf
+Shaders
+ShockwaveShader
+ShockwaveShaderData
+ShockwaveVertexFormat
+ShutdownShaders()
+sin
+sinf
+singlestep
+singlevar
+singlevaraux
+sinh
+skip(stb_vorbis*, int)
+skip_sep
+skipcomment
+SmartPointer<KAGE::Graphics::ImageBase>& SmartPointer<KAGE::Graphics::ImageBase>::operator=<KAGE::Graphics::ImageBase>(SmartPointer<KAGE::Graphics::ImageBase> const&)
+SmartPointer<KAGE::Graphics::ImageBase>& SmartPointer<KAGE::Graphics::ImageBase>::operator=<KAGE::Graphics::ProceduralImageBase>(SmartPointer<KAGE::Graphics::ProceduralImageBase> const&)
+SmartPointer<KAGE::Graphics::ImageBase>::operator=(SmartPointer<KAGE::Graphics::ImageBase>&)
+SmartPointer<KAGE::Graphics::ImageBase>::Reset(KAGE::Graphics::ImageBase*, ReferenceCountBase*, bool)
+SmartPointer<KAGE::Graphics::ImageBase>::s_DecNotify
+SmartPointer<KAGE::Graphics::ImageBase>::~SmartPointer()
+SmartPointer<KAGE::Graphics::ImageBase>::~SmartPointer()
+SmartPointer<KAGE::Graphics::ProceduralImageBase>& SmartPointer<KAGE::Graphics::ProceduralImageBase>::operator=<KAGE::Graphics::ProceduralImageBase>(SmartPointer<KAGE::Graphics::ProceduralImageBase> const&)
+SmartPointer<KAGE::Graphics::ProceduralImageBase>::Reset(KAGE::Graphics::ProceduralImageBase*, ReferenceCountBase*, bool)
+SmartPointer<KAGE::Graphics::ProceduralImageBase>::s_DecNotify
+SmartPointer<KAGE::Graphics::ProceduralImageBase>::~SmartPointer()
+SmartPointer<KAGE::Sound::SampleSourceBase::SourceData>& SmartPointer<KAGE::Sound::SampleSourceBase::SourceData>::operator=<KAGE::Sound::SampleSourceBase::SourceData>(SmartPointer<KAGE::Sound::SampleSourceBase::SourceData> const&)
+SmartPointer<KAGE::Sound::SampleSourceBase::SourceData>::Reset(KAGE::Sound::SampleSourceBase::SourceData*, ReferenceCountBase*, bool)
+SmartPointer<KAGE::Sound::SampleSourceBase::SourceData>::s_DecNotify
+SmartPointer<KAGE::Sound::SampleSourceBase::SourceData>::~SmartPointer()
+SmartPointer<KAGE::Sound::SoundSourceBase>& SmartPointer<KAGE::Sound::SoundSourceBase>::operator=<KAGE::Sound::SoundSourceBase>(SmartPointer<KAGE::Sound::SoundSourceBase> const&)
+SmartPointer<KAGE::Sound::SoundSourceBase>::operator=(SmartPointer<KAGE::Sound::SoundSourceBase>&)
+SmartPointer<KAGE::Sound::SoundSourceBase>::Reset(KAGE::Sound::SoundSourceBase*, ReferenceCountBase*, bool)
+SmartPointer<KAGE::Sound::SoundSourceBase>::s_DecNotify
+SmartPointer<KAGE::Sound::SoundSourceBase>::~SmartPointer()
+SmartPointer<KAGE::Sound::SoundSourceBase>::~SmartPointer()
+smooth_stop(float, float, float, eCurveType)
+snprintf
+sort
+sort_comp
+SortCharRenders(std::__1::vector<Menu_Character::CharacterRender, std::__1::allocator<Menu_Character::CharacterRender> >&, int, int)
+SoundEffects::AdjustPitch(eSoundEffect, float)
+SoundEffects::AdjustVolume(eSoundEffect, float)
+SoundEffects::GetAmbientSoundVolume(eSoundEffect)
+SoundEffects::IsPlaying(eSoundEffect)
+SoundEffects::LoadConfig(char const*)
+SoundEffects::MarkAllUnused()
+SoundEffects::Play(eSoundEffect, float, int, bool, float)
+SoundEffects::Preload(eSoundEffect)
+SoundEffects::Reset()
+SoundEffects::Sample::Sample()
+SoundEffects::SetAmbientSound(eSoundEffect, float, float)
+SoundEffects::SoundEffect::Load()
+SoundEffects::SoundEffect::SoundEffect()
+SoundEffects::SoundEffect::Unload()
+SoundEffects::SoundEffects()
+SoundEffects::SoundEffects()
+SoundEffects::Stop(eSoundEffect)
+SoundEffects::StopLoopingSounds()
+SoundEffects::UnloadUnused()
+SoundEffects::UpdateVolume()
+SoundEffects::~SoundEffects()
+SoundEffects::~SoundEffects()
+SPACER_OFFSET
+split(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, char)
+split(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, char, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > >&)
+sprintf
+Sprite::AnimationFinished(char const*) const
+Sprite::AnimationPlaying(char const*)
+Sprite::Copy(Sprite const&)
+Sprite::get_animation(char const*)
+Sprite::GetCurrentAnimationName() const
+Sprite::LoadAnimationsFile(char const*, char const*)
+Sprite::NextFrame()
+Sprite::NumFrames() const
+Sprite::PlayAnimation(char const*, int, bool)
+Sprite::PrevFrame()
+Sprite::Render(float, float, KAGE::Graphics::Color const&, KAGE::Graphics::Color const&, KAGE::Math::Vector2 const&, float)
+Sprite::ReplaceSpriteSheet(char const*)
+Sprite::Reset()
+Sprite::SetAnimation(char const*, unsigned int)
+Sprite::SetAnimationFrame(unsigned int)
+Sprite::SkipAnimation()
+Sprite::Sprite()
+Sprite::Sprite()
+Sprite::StopAnimation()
+Sprite::Update()
+Sprite::~Sprite()
+Sprite::~Sprite()
+Sprite::~Sprite()
+srandom
+sscanf
+stageOrder
+StageTransition::GetFadeValue() const
+StageTransition::IsActive() const
+StageTransition::Render()
+StageTransition::Reset()
+StageTransition::s_FadeDuration
+StageTransition::StageTransition()
+StageTransition::StageTransition()
+StageTransition::Start(bool, StageTransition::eAnimation)
+StageTransition::Update()
+StageTransition::~StageTransition()
+StageTransition::~StageTransition()
+start
+start_decoder(stb_vorbis*)
+start_packet(stb_vorbis*)
+start_page(stb_vorbis*)
+start_page_no_capturepattern(stb_vorbis*)
+statement
+SteamAPI_GetHSteamPipe
+SteamAPI_GetHSteamUser
+SteamAPI_Init
+SteamAPI_RegisterCallback
+SteamAPI_RegisterCallResult
+SteamAPI_RunCallbacks
+SteamAPI_Shutdown
+SteamAPI_UnregisterCallback
+SteamAPI_UnregisterCallResult
+SteamCloudFile::Close()
+SteamCloudFile::CloseHandle()
+SteamCloudFile::GetLength() const
+SteamCloudFile::GetPosition() const
+SteamCloudFile::IsEof() const
+SteamCloudFile::OpenRead(char const*)
+SteamCloudFile::OpenWrite(char const*, unsigned int)
+SteamCloudFile::Read(char*, int, int)
+SteamCloudFile::ReadLine(char*)
+SteamCloudFile::SetPosition(int, KAGE::Filesys::StreamBase::ePositionType)
+SteamCloudFile::SteamCloudFile()
+SteamCloudFile::SteamCloudFile()
+SteamCloudFile::Write(char const*, int, int)
+SteamCloudFile::~SteamCloudFile()
+SteamCloudFile::~SteamCloudFile()
+SteamCloudFile::~SteamCloudFile()
+SteamInternal_ContextInit
+SteamInternal_CreateInterface
+SteamInternal_ModuleContext()::s_CallbackCounterAndContext
+SteamInternal_OnContextInit(void*)
+str_byte
+str_char
+str_dump
+str_find
+str_find_aux
+str_format
+str_gsub
+str_len
+str_lower
+str_match
+str_pack
+str_packsize
+str_rep
+str_reverse
+str_sub
+str_unpack
+str_upper
+strcat
+strchr
+strcmp
+strcoll
+strcpy
+strdup
+strerror
+strftime
+string2bool(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)
+strlen
+strlib
+strncasecmp
+strncmp
+strncpy
+strpbrk
+strspn
+strstr
+strtod
+subexpr
+suffixedexp
+swap(ANM2&, ANM2&)
+swap(ANM2::AnimationData&, ANM2::AnimationData&)
+swap(ANM2::AnimationState&, ANM2::AnimationState&)
+sweeplist
+sysconf
+syslib
+system
+tab_funcs
+tan
+tanh
+tconcat
+tdefl_compress
+tdefl_compress_block(tdefl_compressor*, int)
+tdefl_compress_buffer
+tdefl_compress_mem_to_heap
+tdefl_compress_mem_to_mem
+tdefl_compress_mem_to_output
+tdefl_flush_block(tdefl_compressor*, int)
+tdefl_flush_output_buffer(tdefl_compressor*)
+tdefl_get_adler32
+tdefl_get_prev_return_status
+tdefl_init
+tdefl_optimize_huffman_table(tdefl_compressor*, int, int, int, int)
+tdefl_output_buffer_putter(void const*, int, void*)
+TemporaryEffects::AddEffect(eCollectibleType, bool)
+TemporaryEffects::AddEffect(eTrinketType, bool)
+TemporaryEffects::AddEffect(ItemConfig::eNullItemID, bool)
+TemporaryEffects::AddEffect(TemporaryEffects::TemporaryEffect const&, bool)
+TemporaryEffects::ClearEffects()
+TemporaryEffects::GetEffect(eCollectibleType)
+TemporaryEffects::GetEffect(eTrinketType)
+TemporaryEffects::GetEffect(ItemConfig::eNullItemID)
+TemporaryEffects::GetEffect(ItemConfig::Item const*)
+TemporaryEffects::GetEffectNum(eCollectibleType)
+TemporaryEffects::GetEffectNum(eTrinketType)
+TemporaryEffects::GetEffectNum(ItemConfig::eNullItemID)
+TemporaryEffects::GetEffectsList()
+TemporaryEffects::HasEffect(eCollectibleType) const
+TemporaryEffects::HasEffect(eTrinketType) const
+TemporaryEffects::HasEffect(ItemConfig::eNullItemID) const
+TemporaryEffects::HasEffect(ItemConfig::Item const*) const
+TemporaryEffects::HasEffect(TemporaryEffects::TemporaryEffect const&) const
+TemporaryEffects::RemoveEffect(eCollectibleType)
+TemporaryEffects::RemoveEffect(eTrinketType)
+TemporaryEffects::RemoveEffect(ItemConfig::eNullItemID)
+TemporaryEffects::RemoveEffect(TemporaryEffects::TemporaryEffect const&)
+TemporaryEffects::TemporaryEffects(Entity_Player*)
+TemporaryEffects::TemporaryEffects(Entity_Player*)
+TemporaryEffects::Update()
+TemporaryEffects::~TemporaryEffects()
+TemporaryEffects::~TemporaryEffects()
+test_then_block
+TEXT_OFFSET
+TheoraAudioInterface::TheoraAudioInterface(TheoraVideoClip*, int, int)
+TheoraAudioInterface::~TheoraAudioInterface()
+TheoraDataSource::~TheoraDataSource()
+TheoraTimer::getSpeed()
+TheoraTimer::getTime()
+TheoraTimer::isPaused()
+TheoraTimer::pause()
+TheoraTimer::play()
+TheoraTimer::setSpeed(float)
+TheoraTimer::stop()
+TheoraTimer::TheoraTimer()
+TheoraTimer::~TheoraTimer()
+TheoraVideoClip::getDuration()
+TheoraVideoClip::getHeight()
+TheoraVideoClip::getNextFrame()
+TheoraVideoClip::getNumReadyFrames()
+TheoraVideoClip::getWidth()
+TheoraVideoClip::isDone()
+TheoraVideoClip::isPaused()
+TheoraVideoClip::pause()
+TheoraVideoClip::play()
+TheoraVideoClip::popFrame()
+TheoraVideoClip::setTimer(TheoraTimer*)
+TheoraVideoClip::stop()
+TheoraVideoFrame::getBuffer()
+TheoraVideoManager::createVideoClip(TheoraDataSource*, TheoraOutputMode, int, bool)
+TheoraVideoManager::destroyVideoClip(TheoraVideoClip*)
+TheoraVideoManager::setAudioInterfaceFactory(TheoraAudioInterfaceFactory*)
+TheoraVideoManager::TheoraVideoManager(int)
+TheoraVideoManager::update(float)
+TheoraVideoManager::~TheoraVideoManager()
+time
+tinfl_decompress
+tinfl_decompress::s_dist_base
+tinfl_decompress::s_dist_extra
+tinfl_decompress::s_length_base
+tinfl_decompress::s_length_extra
+tinfl_decompress::s_min_table_sizes
+tinfl_decompress_mem_to_callback
+tinfl_decompress_mem_to_heap
+tinfl_decompress_mem_to_mem
+tinsert
+tmove
+tmpfile
+to_roman(int)
+to_roman(int)::romandata
+trailingBytesForUTF8
+transcribeMethods(objc_class*, glue_class_ro_t*)
+transcribeProperties(objc_class*, glue_class_ro_t*)
+transcribeProtocols(objc_class*, glue_class_ro_t*)
+translateKey(unsigned int)::table
+traverseephemeron
+tremove
+trim(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&)
+trim_trailing(char*)
+TrophyManagerInitialized()
+tthread::_pthread_t_to_ID(_opaque_pthread_t* const&)
+tthread::_pthread_t_to_ID(_opaque_pthread_t* const&)::idCount
+tthread::_pthread_t_to_ID(_opaque_pthread_t* const&)::idMap
+tthread::_pthread_t_to_ID(_opaque_pthread_t* const&)::idMapLock
+tthread::lock_guard<tthread::mutex>::~lock_guard()
+tthread::mutex::~mutex()
+tthread::mutex::~mutex()
+tthread::this_thread::get_id()
+tthread::thread::detach()
+tthread::thread::get_id() const
+tthread::thread::hardware_concurrency()
+tthread::thread::join()
+tthread::thread::joinable() const
+tthread::thread::thread(void (*)(void*), void*)
+tthread::thread::thread(void (*)(void*), void*)
+tthread::thread::wrapper_function(void*)
+tthread::thread::~thread()
+tthread::thread::~thread()
+twobppswaptable
+typeerror
+UDActions
+udatatypename
+uint32_compare(void const*, void const*)
+ungetc
+unpack
+unroll
+unsigned int std::__1::__sort3<bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&), EntityConfig::BossColor*>(EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&))
+unsigned int std::__1::__sort3<bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*), KAGE::Filesys::DirectoryEntry**>(KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*))
+unsigned int std::__1::__sort3<bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*), ModManager::ModEntry**>(ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*))
+unsigned int std::__1::__sort3<bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&), RoomConfig::Spawn*>(RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&))
+unsigned int std::__1::__sort3<EntityConfig::HpCompare&, EntityConfig::EntityDesc*>(EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::HpCompare&)
+unsigned int std::__1::__sort4<bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&), EntityConfig::BossColor*>(EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&))
+unsigned int std::__1::__sort4<bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*), KAGE::Filesys::DirectoryEntry**>(KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*))
+unsigned int std::__1::__sort4<bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*), ModManager::ModEntry**>(ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*))
+unsigned int std::__1::__sort4<bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&), RoomConfig::Spawn*>(RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&))
+unsigned int std::__1::__sort4<EntityConfig::HpCompare&, EntityConfig::EntityDesc*>(EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::HpCompare&)
+unsigned int std::__1::__sort5<bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&), EntityConfig::BossColor*>(EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, EntityConfig::BossColor*, bool (*&)(EntityConfig::BossColor const&, EntityConfig::BossColor const&))
+unsigned int std::__1::__sort5<bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*), KAGE::Filesys::DirectoryEntry**>(KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, KAGE::Filesys::DirectoryEntry**, bool (*&)(KAGE::Filesys::DirectoryEntry const*, KAGE::Filesys::DirectoryEntry const*))
+unsigned int std::__1::__sort5<bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*), ModManager::ModEntry**>(ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, ModManager::ModEntry**, bool (*&)(ModManager::ModEntry const*, ModManager::ModEntry const*))
+unsigned int std::__1::__sort5<bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&), RoomConfig::Spawn*>(RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, RoomConfig::Spawn*, bool (*&)(RoomConfig::Spawn const&, RoomConfig::Spawn const&))
+unsigned int std::__1::__sort5<EntityConfig::HpCompare&, EntityConfig::EntityDesc*>(EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::EntityDesc*, EntityConfig::HpCompare&)
+unsigned long std::__1::__tree<Entity**, std::__1::less<Entity**>, std::__1::allocator<Entity**> >::__erase_unique<Entity**>(Entity** const&)
+unsigned long std::__1::__tree<eSeedEffect, std::__1::less<eSeedEffect>, std::__1::allocator<eSeedEffect> >::__erase_unique<eSeedEffect>(eSeedEffect const&)
+UpdateSystemActivity
+UpdateWorkshopMods()
+usleep
+utf8_decode.limits
+utfchar
+utflen
+varinfo
+VertexFormats
+VideoPlayer::Destroy()
+VideoPlayer::GetHeight() const
+VideoPlayer::GetWidth() const
+VideoPlayer::Init()
+VideoPlayer::IsFinished() const
+VideoPlayer::Play(char const*)
+VideoPlayer::Render(KAGE::Math::Vector2 const&)
+VideoPlayer::Update()
+WaterSurfaceShader
+WaterSurfaceShaderData
+WaterSurfaceVertexFormat
+WeightedOutcomePicker::AddOutcomeWeight(int, int)
+WeightedOutcomePicker::GetRandomOutcome(RNG)
+WIDTH
+WindowFocus(bool)
+WindowMoved(int, int)
+WindowResized(int, int)
+WindowResized(int, int)::LastHeight
+WindowResized(int, int)::LastWidth
+writer
+XY::Invalid
