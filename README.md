@@ -34,9 +34,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=864472370
 
 ## Developpers
 
-### Lead Developper
-- Dogeek
-
 ### Senior
 - Krayz
 - Azqswx
